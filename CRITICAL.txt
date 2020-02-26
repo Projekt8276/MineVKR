@@ -1,0 +1,21 @@
+#================[TRIVIA]==============#
+# This file for simpler development... #
+#======================================#
+
+#========[MCP-1.15.2]===========#======[Fabric]=====#===[Reasons]===#
+# GameRenderer.java             #                   #               
+# WorldRenderer.java            #                   #               
+# ChunkRenderDispatcher.java    #                   #               
+# VertexBuffer.java             #                   #               
+# VertexFormat.java             #                   #               
+# VertexFormatElement.java      #                   #               
+# WorldVertexBuilder.java       #                   #               
+# BufferBuilder.java            #                   #               
+# MatrixStack.java              #                   #               
+# [Blaze3D]                     #                   #               
+#===============================#===================#===============#
+
+Also...
+# OLG Matrix Mode
+# Separate Normal (in Stack)
+
