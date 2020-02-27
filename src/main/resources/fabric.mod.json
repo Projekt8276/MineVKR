@@ -3,17 +3,17 @@
   "id": "modid",
   "version": "${version}",
 
-  "name": "Example Mod",
+  "name": "Minecraft RTX Mod",
   "description": "This is an example description! Tell everyone what your mod is about!",
   "authors": [
-    "Me!"
+    "helix.d@IMN"
   ],
   "contact": {
     "homepage": "https://fabricmc.net/",
-    "sources": "https://github.com/FabricMC/fabric-example-mod"
+    "sources": "https://github.com/hyperearth/MineRTX"
   },
 
-  "license": "CC0-1.0",
+  "license": "BSD-3",
   "icon": "assets/modid/icon.png",
 
   "environment": "*",
