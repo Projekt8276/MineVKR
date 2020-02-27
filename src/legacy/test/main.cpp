@@ -191,7 +191,7 @@ int main()
     context->initialize(SCR_WIDTH, SCR_HEIGHT);
 
 	// 
-	auto cpuBuffer = vkt::Vector<glm::vec4>(std::make_shared<vkt::VmaBufferAllocation>(fw->getAllocator(), vkh::VkBufferCreateInfo{
+	/*auto cpuBuffer = vkt::Vector<glm::vec4>(std::make_shared<vkt::VmaBufferAllocation>(fw->getAllocator(), vkh::VkBufferCreateInfo{
         .size = sizeof(glm::vec4) * 3,
         .usage = {.eTransferSrc = 1, .eStorageTexelBuffer = 1, .eStorageBuffer = 1, .eIndexBuffer = 1, .eVertexBuffer = 1 },
     }, VMA_MEMORY_USAGE_CPU_TO_GPU));
@@ -200,6 +200,9 @@ int main()
     cpuBuffer[0] = glm::vec4(-0.5f, -0.5f, 0.f, 1.f);
     cpuBuffer[1] = glm::vec4(0.5f, -0.5f, 0.f, 1.f);
     cpuBuffer[2] = glm::vec4(0.0f, 0.5f, 0.f, 1.f);
+    */
+
+    std::vector<glm::vec4> cpuBuffer = { glm::vec4(-0.5f, -0.5f, 0.f, 1.f), glm::vec4(0.5f, -0.5f, 0.f, 1.f), glm::vec4(0.0f, 0.5f, 0.f, 1.f) };
 
 	// 
 	mesh->addBinding(cpuBuffer, vkh::VkVertexInputBindingDescription{ .stride = sizeof(glm::vec4) });
