@@ -1,6 +1,7 @@
 package net.fabricmc.example;
 
 import net.fabricmc.api.ModInitializer;
+import org.lwjgl.vulkan.*;
 
 public class ExampleMod implements ModInitializer {
 	@Override
