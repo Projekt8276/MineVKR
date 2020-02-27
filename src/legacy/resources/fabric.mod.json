@@ -19,7 +19,7 @@
   "environment": "*",
   "entrypoints": {
     "main": [
-      "net.fabricmc.minertx.MineRTX"
+      "net.fabricmc.example.ExampleMod"
     ]
   },
   "mixins": [
