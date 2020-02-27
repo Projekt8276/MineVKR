@@ -136,9 +136,8 @@ namespace jvx {
             this->vertexInputBindingDescriptions[bindingID].binding = bindingID;
             this->rawBindings[bindingID] = this->vertexInputBindingDescriptions[bindingID];
             const uint8_t* ptr = reinterpret_cast<const uint8_t*>(&rawData[0]);
-            const vk::DeviceSize range = rawData.size() * sizeof(T);
+            const auto& range = this->bindRange[this->lastBindID = bindingID] = rawData.size() * sizeof(T);
             if (rawData.data() && rawData.size() > 0) {
-                this->bindRange[this->lastBindID = bindingID] = range;
                 this->thread->submitOnce([&, this](vk::CommandBuffer& cmd) {
                     for (vk::DeviceSize u = 0; u < range; u += 65536u) {
                         cmd.updateBuffer(this->bindings[bindingID], this->bindings[bindingID].offset() + u, std::min(65536ull, range - u), &ptr[u]);
@@ -155,8 +154,8 @@ namespace jvx {
             this->vertexInputBindingDescriptions[bindingID] = binding;
             this->vertexInputBindingDescriptions[bindingID].binding = bindingID;
             this->rawBindings[bindingID] = this->vertexInputBindingDescriptions[bindingID];
-            if (rawData.has()) {
-                this->bindRange[this->lastBindID = bindingID] = rawData.range();
+            this->bindRange[this->lastBindID = bindingID] = rawData.range();
+            if (rawData.has() && rawData.range() > 0) {
                 this->thread->submitOnce([&, this](vk::CommandBuffer& cmd) {
                     cmd.copyBuffer(rawData, this->bindings[bindingID], { vk::BufferCopy{ rawData.offset(), this->bindings[bindingID].offset(), std::min(this->bindings[bindingID].range(), rawData.range()) } });
                 });
