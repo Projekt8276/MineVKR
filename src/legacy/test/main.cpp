@@ -56,11 +56,12 @@ const char *vertexShaderSource = "#version 460 compatibility\n"
 const char *fragmentShaderSource = "#version 460 compatibility\n"
     "#extension GL_ARB_bindless_texture : require\n"
     "out vec4 FragColor;\n"
-    "layout (location = 0) uniform sampler2D texture0;\n"
+    "layout (location = 0) uniform sampler2D texture0;\n" 
+    "layout (location = 1) uniform sampler2D texture1;\n"
     "void main()\n"
     "{\n"
 	"	vec2 tx = gl_FragCoord.xy/vec2(1600.f,1200.f);\n"
-    "   FragColor = vec4(texture(texture0,tx).xyz,1.f);\n"
+    "   FragColor = vec4(texture(texture0,tx).xyz*texture(texture1,tx).xyz/texture(texture1,tx).w,1.f);\n"
     "}\n\0";
 
 int main()
@@ -191,21 +192,11 @@ int main()
     context->initialize(SCR_WIDTH, SCR_HEIGHT);
 
 	// 
-	/*auto cpuBuffer = vkt::Vector<glm::vec4>(std::make_shared<vkt::VmaBufferAllocation>(fw->getAllocator(), vkh::VkBufferCreateInfo{
-        .size = sizeof(glm::vec4) * 3,
-        .usage = {.eTransferSrc = 1, .eStorageTexelBuffer = 1, .eStorageBuffer = 1, .eIndexBuffer = 1, .eVertexBuffer = 1 },
-    }, VMA_MEMORY_USAGE_CPU_TO_GPU));
-
-    // 
-    cpuBuffer[0] = glm::vec4(-0.5f, -0.5f, 0.f, 1.f);
-    cpuBuffer[1] = glm::vec4(0.5f, -0.5f, 0.f, 1.f);
-    cpuBuffer[2] = glm::vec4(0.0f, 0.5f, 0.f, 1.f);
-    */
-
-    std::vector<glm::vec4> cpuBuffer = { glm::vec4(-0.5f, -0.5f, 0.f, 1.f), glm::vec4(0.5f, -0.5f, 0.f, 1.f), glm::vec4(0.0f, 0.5f, 0.f, 1.f) };
-
-	// 
-	mesh->addBinding(cpuBuffer, vkh::VkVertexInputBindingDescription{ .stride = sizeof(glm::vec4) });
+	mesh->addBinding(std::vector<glm::vec4>{ 
+        glm::vec4(-0.5f, -0.5f, 0.f, 1.f), 
+        glm::vec4(0.5f, -0.5f, 0.f, 1.f), 
+        glm::vec4(0.0f, 0.5f, 0.f, 1.f) 
+    }, vkh::VkVertexInputBindingDescription{ .stride = sizeof(glm::vec4) });
 	mesh->addAttribute(vkh::VkVertexInputAttributeDescription{ .location = 0, .format = VK_FORMAT_R32G32B32A32_SFLOAT, .offset = 0u });
     node->pushInstance(vkh::VsGeometryInstance{
         .instanceId = uint32_t(node->pushMesh(mesh->setMaterialID(0))),
@@ -216,9 +207,10 @@ int main()
 
 	// 
     jvi::MaterialUnit mdk = {};
-    mdk.diffuse = glm::vec4(1.f,0.5f,0.f,1.f);
+    mdk.diffuse = glm::vec4(1.f,0.75f,0.f,1.f);
     mdk.diffuseTexture = -1;
 
+    //
 	material->pushMaterial(mdk);
     renderer->linkMaterial(material)->linkNode(node)->setupCommands();
 
@@ -262,36 +254,32 @@ int main()
     handleError();
 
 
-	// Import memory
-	GLuint color = 0u, mem = 0u;
+	// 
+	GLuint color = 0u, diffuse = 0u, cmem = 0u, dmem = 0u;
 	glCreateTextures(GL_TEXTURE_2D, 1, &color);
-
-    // 
-    glCreateMemoryObjectsEXT(1, &mem);
-    handleError();
-
-
-    glImportMemoryWin32HandleEXT(mem, context->getFrameBuffers()[0]->getAllocationInfo().reqSize, GL_HANDLE_TYPE_OPAQUE_WIN32_EXT, context->getFrameBuffers()[0]->getAllocationInfo().handle);
-    handleError();
-
-    glTextureStorageMem2DEXT(color, 1, GL_RGBA32F, SCR_WIDTH, SCR_HEIGHT, mem, 0);
-    handleError();
-
+    glCreateMemoryObjectsEXT(1, &cmem);
+    glImportMemoryWin32HandleEXT(cmem, context->getFrameBuffers()[0]->getAllocationInfo().reqSize, GL_HANDLE_TYPE_OPAQUE_WIN32_EXT, context->getFrameBuffers()[0]->getAllocationInfo().handle);
+    glTextureStorageMem2DEXT(color, 1, GL_RGBA32F, SCR_WIDTH, SCR_HEIGHT, cmem, 0);
 	glTextureParameteri(color, GL_TEXTURE_WRAP_S, GL_REPEAT);	// set texture wrapping to GL_REPEAT (default wrapping method)
     glTextureParameteri(color, GL_TEXTURE_WRAP_T, GL_REPEAT);
     glTextureParameteri(color, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
     glTextureParameteri(color, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
 
     // 
+    glCreateTextures(GL_TEXTURE_2D, 1, &diffuse);
+    glCreateMemoryObjectsEXT(1, &dmem);
+    glImportMemoryWin32HandleEXT(dmem, context->getFlip1Buffers()[0]->getAllocationInfo().reqSize, GL_HANDLE_TYPE_OPAQUE_WIN32_EXT, context->getFlip1Buffers()[0]->getAllocationInfo().handle);
+    glTextureStorageMem2DEXT(diffuse, 1, GL_RGBA32F, SCR_WIDTH, SCR_HEIGHT, dmem, 0);
+    glTextureParameteri(diffuse, GL_TEXTURE_WRAP_S, GL_REPEAT);	// set texture wrapping to GL_REPEAT (default wrapping method)
+    glTextureParameteri(diffuse, GL_TEXTURE_WRAP_T, GL_REPEAT);
+    glTextureParameteri(diffuse, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+    glTextureParameteri(diffuse, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+
+    // 
     GLenum layoutSignal = GL_LAYOUT_GENERAL_EXT;
     GLenum layoutWait = GL_LAYOUT_GENERAL_EXT;
-    //glSignalSemaphoreEXT(glComplete, 0, nullptr, 1, &color, &layout);
-    handleError();
 
-    // uncomment this call to draw in wireframe polygons.
-    //glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
-
-
+    // 
     GLuint64 colorHandle = 0;
     vk::ImageViewHandleInfoNVX handleInfo = {};
     handleInfo.imageView = context->getFlip1Buffers()[0].getImageView();
@@ -331,16 +319,15 @@ int main()
 		// 
 		glActiveTexture(GL_TEXTURE0);
         glBindTextureUnit(0, color);
-        glUniformHandleui64ARB(0, GLuint64(colorHandle));
+        glActiveTexture(GL_TEXTURE1);
+        glBindTextureUnit(1, diffuse);
+        //glUniformHandleui64ARB(0, GLuint64(colorHandle));
 
         // draw our first triangle
         glUseProgram(shaderProgram);
         glBindVertexArray(VAO); // seeing as we only have a single VAO there's no need to bind it every time, but we'll do so to keep things a bit more organized
         glDrawArrays(GL_TRIANGLE_FAN, 0, 4);
         // glBindVertexArray(0); // no need to unbind it every time 
-
-		// 
-		
 
 		// 
         glfwSwapBuffers(window);
