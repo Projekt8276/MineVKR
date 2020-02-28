@@ -169,7 +169,7 @@ int main()
 
 
 	// initialize Vulkan
-    auto fw = std::make_shared<vkt::GPUFramework>();
+    auto fw = jvx::Driver();
 	auto instance = fw->createInstance();
 	//auto manager = fw->createWindowSurface(SCR_WIDTH, SCR_HEIGHT);
 	auto physicalDevice = fw->getPhysicalDevice(0u);
@@ -181,11 +181,11 @@ int main()
 	auto commandPool = fw->getCommandPool();
 
     // 
-    auto context = std::make_shared<jvx::Context>(fw);
-    auto mesh = std::make_shared<jvx::Mesh>(context);
-    auto node = std::make_shared<jvx::Node>(context);
-    auto material = std::make_shared<jvx::Material>(context);
-    auto renderer = std::make_shared<jvx::Renderer>(context);
+    auto context = jvx::Context(fw);
+    auto mesh = jvx::Mesh(context);
+    auto node = jvx::Node(context);
+    auto material = jvx::Material(context);
+    auto renderer = jvx::Renderer(context);
 
 	// initialize renderer
     context->initialize(SCR_WIDTH, SCR_HEIGHT);
@@ -215,7 +215,7 @@ int main()
     });
 
 	// 
-    jvx::MaterialUnit mdk = {};
+    jvi::MaterialUnit mdk = {};
     mdk.diffuse = glm::vec4(1.f,0.5f,0.f,1.f);
     mdk.diffuseTexture = -1;
 
@@ -271,7 +271,7 @@ int main()
     handleError();
 
 
-    glImportMemoryWin32HandleEXT(mem, context->getFlip1Buffers()[0]->getAllocationInfo().reqSize, GL_HANDLE_TYPE_OPAQUE_WIN32_EXT, context->getFlip1Buffers()[0]->getAllocationInfo().handle);
+    glImportMemoryWin32HandleEXT(mem, context->getFrameBuffers()[0]->getAllocationInfo().reqSize, GL_HANDLE_TYPE_OPAQUE_WIN32_EXT, context->getFrameBuffers()[0]->getAllocationInfo().handle);
     handleError();
 
     glTextureStorageMem2DEXT(color, 1, GL_RGBA32F, SCR_WIDTH, SCR_HEIGHT, mem, 0);
@@ -301,7 +301,7 @@ int main()
         .addressModeU = VK_SAMPLER_ADDRESS_MODE_CLAMP_TO_EDGE,
         .addressModeV = VK_SAMPLER_ADDRESS_MODE_CLAMP_TO_EDGE,
         .unnormalizedCoordinates = false,
-        });
+    });
     handleInfo.descriptorType = vk::DescriptorType::eCombinedImageSampler;
     colorHandle = fw->getDevice().getImageViewHandleNVX(&handleInfo, fw->getDispatch());
 
