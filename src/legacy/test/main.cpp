@@ -59,7 +59,7 @@ const char *fragmentShaderSource = "#version 460 compatibility\n"
     "layout (location = 0) uniform sampler2D texture0;\n"
     "void main()\n"
     "{\n"
-	"	vec2 tx = gl_FragCoord.xy/vec2(1600.f,1200.f); tx.y = 1200.f - tx.y;\n"
+	"	vec2 tx = gl_FragCoord.xy/vec2(1600.f,1200.f);\n"
     "   FragColor = vec4(texture(texture0,tx).xyz,1.f);\n"
     "}\n\0";
 
