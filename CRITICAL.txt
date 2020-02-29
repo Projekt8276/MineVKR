@@ -2,23 +2,26 @@
 # This file for simpler development... #
 #======================================#
 
-#========[MCP-1.15.2]===========#==========[Fabric]=========#===[Reasons]===#
-# GameRenderer.java             # GameRenderer.class        #               #
-# WorldRenderer.java            # WorldRenderer.class       #               #
-# ChunkRenderDispatcher.java    # ChunkBuilder.class        #               #
-# VertexBuffer.java             # N/A, HARDCODED            #               #
-# VertexFormat.java             # VertexFormat.class        #               #
-# VertexFormatElement.java      # VertexFormatElement.class #               #
-# BlockRenderDispatcher.java    # BlockRenderManager.class  #               #           
-# BufferBuilder.java            # BufferBuilder.class       #               #
-# MatrixStack.java              # MatrixStack.class         #               #
-# [Blaze3D]                     # [Blaze3D][client/util...] #               #
-#===============================#===========================#===============#
+#===========[MCP-1.15.2]============#==========[Fabric]=========#====[Location]=====#===[Reasons]===#===[REMARK]====#
+# GameRenderer.java                 # GameRenderer.class        #                   #               #               #
+# WorldRenderer.java                # WorldRenderer.class       #                   #               #               #
+# ChunkRenderDispatcher.java        # ChunkBuilder.class        #                   #               #               #
+# VertexBuffer.java                 # VertexBuffer.class        #                   #               #               #
+# VertexFormat.java                 # VertexFormat.class        #                   #               #               #
+# VertexFormatElement.java          # VertexFormatElement.class #                   #               #               #
+# BlockRenderDispatcher.java        # BlockRenderManager.class  #                   #               #               # 
+# BufferBuilder.java                # BufferBuilder.class       #                   #               #               #
+# WorldVertexBufferUploader.java    # BufferRenderer.class      #                   #               #               #
+# MatrixStack.java                  # MatrixStack.class         #                   #               #               #
+# [Blaze3D]                         # [Blaze3D][client/util...] #                   #               #               #
+#===================================#===========================#===================#===============#===============# 
+
+MOST CRITICAL FOR MINECRAFT RAY-TRACING: `VertexBuffer.class`, `VertexFormat.class`, `BufferRenderer.class`...
+ALSO, NEED SEARCH ENTRY POINTS FOR TEXTURES... (for colorish image)
 
 Also...
 # OLG Matrix Mode
 # Separate Normal (in Stack)
-
 
 # CURRENTLY, NOT FOUND ANYMORE... 
 # WorldVertexBuilder.java
