@@ -15,6 +15,14 @@
 # MatrixStack.java                  # MatrixStack.class         #                   #               #               #
 # [Blaze3D]                         # [Blaze3D][client/util...] #                   #               #               #
 #===================================#===========================#===================#===============#===============# 
+#                                   # TextureUtil.class         #                   #               #               #
+#                                   # TextureManager.class      #                   #               #               #
+#                                   # OverlayTexture.class      #                   #               #               #
+#                                   # AbastractTexture.class    #                   #               #               #
+#                                   # NativeImage.class         #                   #               #               #
+#                                   #                           #                   #               #               #
+#===================================#===========================#===================#===============#===============# 
+
 
 MOST CRITICAL FOR MINECRAFT RAY-TRACING: `VertexBuffer.class`, `VertexFormat.class`, `BufferRenderer.class`...
 ALSO, NEED SEARCH ENTRY POINTS FOR TEXTURES... (for colorish image)
