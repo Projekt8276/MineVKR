@@ -187,6 +187,8 @@ int main()
     auto node = jvx::Node(context);
     auto material = jvx::Material(context);
     auto renderer = jvx::Renderer(context);
+    auto meshTest = jvi::Mesh(context);
+    //auto meshPtr = meshTest.setThread(context->getThread());
 
 	// initialize renderer
     context->initialize(SCR_WIDTH, SCR_HEIGHT);
@@ -197,9 +199,10 @@ int main()
         glm::vec4(0.5f, -0.5f, 0.f, 1.f), 
         glm::vec4(0.0f, 0.5f, 0.f, 1.f) 
     }, vkh::VkVertexInputBindingDescription{ .stride = sizeof(glm::vec4) });
-	mesh->addAttribute(vkh::VkVertexInputAttributeDescription{ .location = 0, .format = VK_FORMAT_R32G32B32A32_SFLOAT, .offset = 0u });
+
+    // 
     node->pushInstance(vkh::VsGeometryInstance{
-        .instanceId = uint32_t(node->pushMesh(mesh->setMaterialID(0))),
+        .instanceId = uint32_t(node->pushMesh(mesh->addAttribute(vkh::VkVertexInputAttributeDescription{.location = 0, .format = VK_FORMAT_R32G32B32A32_SFLOAT, .offset = 0u })->setMaterialID(0)->sharedPtr())),
         .mask = 0xFF,
         .instanceOffset = 0,
         .flags = VK_GEOMETRY_INSTANCE_TRIANGLE_CULL_DISABLE_BIT_NV
@@ -210,7 +213,7 @@ int main()
     mdk.diffuse = glm::vec4(1.f,0.75f,0.f,1.f);
     mdk.diffuseTexture = -1;
 
-    //
+    // TODO: one line
 	material->pushMaterial(mdk);
     renderer->linkMaterial(material)->linkNode(node)->setupCommands();
 
