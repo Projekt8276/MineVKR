@@ -243,36 +243,27 @@ int main()
 		handles.glComplete = device.getSemaphoreWin32HandleKHR({ semaphores.glComplete, handleType }, fw->getDispatch());
 	}
 
-
-	// Import semaphores
-	GLuint glReady = 0, glComplete = 0;
-	glGenSemaphoresEXT(1, &glReady);
-	glGenSemaphoresEXT(1, &glComplete);
-
 	// Platform specific import.  On non-Win32 systems use glImportSemaphoreFdEXT instead
+    GLuint glReady = 0;
+    glGenSemaphoresEXT(1, &glReady);
 	glImportSemaphoreWin32HandleEXT(glReady, GL_HANDLE_TYPE_OPAQUE_WIN32_EXT, handles.glReady);
     handleError();
 
+    // 
+    GLuint glComplete = 0;
+    glGenSemaphoresEXT(1, &glComplete);
 	glImportSemaphoreWin32HandleEXT(glComplete, GL_HANDLE_TYPE_OPAQUE_WIN32_EXT, handles.glComplete);
     handleError();
 
-
 	// 
-	GLuint color = 0u, diffuse = 0u, cmem = 0u, dmem = 0u;
-	glCreateTextures(GL_TEXTURE_2D, 1, &color);
-    glCreateMemoryObjectsEXT(1, &cmem);
-    glImportMemoryWin32HandleEXT(cmem, context->getFrameBuffers()[0]->getAllocationInfo().reqSize, GL_HANDLE_TYPE_OPAQUE_WIN32_EXT, context->getFrameBuffers()[0]->getAllocationInfo().handle);
-    glTextureStorageMem2DEXT(color, 1, GL_RGBA32F, SCR_WIDTH, SCR_HEIGHT, cmem, 0);
+    GLuint color = context->getFrameBuffers()[0].getGL();
 	glTextureParameteri(color, GL_TEXTURE_WRAP_S, GL_REPEAT);	// set texture wrapping to GL_REPEAT (default wrapping method)
     glTextureParameteri(color, GL_TEXTURE_WRAP_T, GL_REPEAT);
     glTextureParameteri(color, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
     glTextureParameteri(color, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
 
     // 
-    glCreateTextures(GL_TEXTURE_2D, 1, &diffuse);
-    glCreateMemoryObjectsEXT(1, &dmem);
-    glImportMemoryWin32HandleEXT(dmem, context->getFlip1Buffers()[0]->getAllocationInfo().reqSize, GL_HANDLE_TYPE_OPAQUE_WIN32_EXT, context->getFlip1Buffers()[0]->getAllocationInfo().handle);
-    glTextureStorageMem2DEXT(diffuse, 1, GL_RGBA32F, SCR_WIDTH, SCR_HEIGHT, dmem, 0);
+    GLuint diffuse = context->getFlip1Buffers()[0].getGL();
     glTextureParameteri(diffuse, GL_TEXTURE_WRAP_S, GL_REPEAT);	// set texture wrapping to GL_REPEAT (default wrapping method)
     glTextureParameteri(diffuse, GL_TEXTURE_WRAP_T, GL_REPEAT);
     glTextureParameteri(diffuse, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
@@ -296,8 +287,7 @@ int main()
     handleInfo.descriptorType = vk::DescriptorType::eCombinedImageSampler;
     colorHandle = fw->getDevice().getImageViewHandleNVX(&handleInfo, fw->getDispatch());
 
-
-
+    // 
     while (!glfwWindowShouldClose(window))
     {
         processInput(window);
