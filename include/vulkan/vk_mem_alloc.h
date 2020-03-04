@@ -29,9 +29,9 @@ extern "C" {
 
 /** \mainpage Vulkan Memory Allocator
 
-<b>Version 2.3.0</b> (2019-12-04)
+<b>Version 2.4.0-development</b> (2020-03-02)
 
-Copyright (c) 2017-2019 Advanced Micro Devices, Inc. All rights reserved. \n
+Copyright (c) 2017-2020 Advanced Micro Devices, Inc. All rights reserved. \n
 License: MIT
 
 Documentation of all members: vk_mem_alloc.h
@@ -1843,7 +1843,9 @@ available through VmaAllocatorCreateInfo::pRecordSettings.
 // where AAA = major, BBB = minor, CCC = patch.
 // If you want to use version > 1.0, it still needs to be enabled via VmaAllocatorCreateInfo::vulkanApiVersion.
 #if !defined(VMA_VULKAN_VERSION)
-    #if defined(VK_VERSION_1_1)
+    #if defined(VK_VERSION_1_2)
+        #define VMA_VULKAN_VERSION 1002000
+    #elif defined(VK_VERSION_1_1)
         #define VMA_VULKAN_VERSION 1001000
     #else
         #define VMA_VULKAN_VERSION 1000000
@@ -2172,6 +2174,34 @@ VMA_CALL_PRE VkResult VMA_CALL_POST vmaCreateAllocator(
 /// Destroys allocator object.
 VMA_CALL_PRE void VMA_CALL_POST vmaDestroyAllocator(
     VmaAllocator allocator);
+
+/** \brief Information about existing #VmaAllocator object.
+*/
+typedef struct VmaAllocatorInfo
+{
+    /** \brief Handle to Vulkan instance object.
+
+    This is the same value as has been passed through VmaAllocatorCreateInfo::instance.
+    */
+    VkInstance instance;
+    /** \brief Handle to Vulkan physical device object.
+
+    This is the same value as has been passed through VmaAllocatorCreateInfo::physicalDevice.
+    */
+    VkPhysicalDevice physicalDevice;
+    /** \brief Handle to Vulkan device object.
+
+    This is the same value as has been passed through VmaAllocatorCreateInfo::device.
+    */
+    VkDevice device;
+} VmaAllocatorInfo;
+
+/** \brief Returns information about existing #VmaAllocator object - handle to Vulkan device etc.
+
+It might be useful if you want to keep just the #VmaAllocator handle and fetch other required handles to
+`VkPhysicalDevice`, `VkDevice` etc. every time using this function.
+*/
+VMA_CALL_PRE void VMA_CALL_POST vmaGetAllocatorInfo(VmaAllocator allocator, VmaAllocatorInfo* pAllocatorInfo);
 
 /**
 PhysicalDeviceProperties are fetched from physicalDevice by the allocator.
@@ -7244,6 +7274,8 @@ public:
     {
         return m_VulkanFunctions;
     }
+
+    VkPhysicalDevice GetPhysicalDevice() const { return m_PhysicalDevice; }
 
     VkDeviceSize GetBufferImageGranularity() const
     {
@@ -15002,6 +15034,12 @@ VmaAllocator_T::VmaAllocator_T(const VmaAllocatorCreateInfo* pCreateInfo) :
         VMA_ASSERT(0 && "VMA_ALLOCATOR_CREATE_EXT_MEMORY_BUDGET_BIT set but required extension is disabled by preprocessor macros.");
     }
 #endif
+#if VMA_VULKAN_VERSION < 1002000
+    if(m_VulkanApiVersion >= VK_MAKE_VERSION(1, 2, 0))
+    {
+        VMA_ASSERT(0 && "vulkanApiVersion >= VK_API_VERSION_1_2 but required Vulkan version is disabled by preprocessor macros.");
+    }
+#endif
 #if VMA_VULKAN_VERSION < 1001000
     if(m_VulkanApiVersion >= VK_MAKE_VERSION(1, 1, 0))
     {
@@ -15178,27 +15216,42 @@ void VmaAllocator_T::ImportVulkanFunctions(const VmaVulkanFunctions* pVulkanFunc
 #if VMA_DEDICATED_ALLOCATION
     if(m_UseKhrDedicatedAllocation)
     {
-        m_VulkanFunctions.vkGetBufferMemoryRequirements2KHR =
-            (PFN_vkGetBufferMemoryRequirements2KHR)vkGetDeviceProcAddr(m_hDevice, "vkGetBufferMemoryRequirements2KHR");
-        m_VulkanFunctions.vkGetImageMemoryRequirements2KHR =
-            (PFN_vkGetImageMemoryRequirements2KHR)vkGetDeviceProcAddr(m_hDevice, "vkGetImageMemoryRequirements2KHR");
+        if(m_VulkanFunctions.vkGetBufferMemoryRequirements2KHR == nullptr)
+        {
+            m_VulkanFunctions.vkGetBufferMemoryRequirements2KHR =
+                (PFN_vkGetBufferMemoryRequirements2KHR)vkGetDeviceProcAddr(m_hDevice, "vkGetBufferMemoryRequirements2KHR");
+        }
+        if(m_VulkanFunctions.vkGetImageMemoryRequirements2KHR == nullptr)
+        {
+            m_VulkanFunctions.vkGetImageMemoryRequirements2KHR =
+                (PFN_vkGetImageMemoryRequirements2KHR)vkGetDeviceProcAddr(m_hDevice, "vkGetImageMemoryRequirements2KHR");
+        }
     }
 #endif
 #if VMA_BIND_MEMORY2
     if(m_UseKhrBindMemory2)
     {
-        m_VulkanFunctions.vkBindBufferMemory2KHR =
-            (PFN_vkBindBufferMemory2KHR)vkGetDeviceProcAddr(m_hDevice, "vkBindBufferMemory2KHR");
-        m_VulkanFunctions.vkBindImageMemory2KHR =
-            (PFN_vkBindImageMemory2KHR)vkGetDeviceProcAddr(m_hDevice, "vkBindImageMemory2KHR");
+        if(m_VulkanFunctions.vkBindBufferMemory2KHR == nullptr)
+        {
+            m_VulkanFunctions.vkBindBufferMemory2KHR =
+                (PFN_vkBindBufferMemory2KHR)vkGetDeviceProcAddr(m_hDevice, "vkBindBufferMemory2KHR");
+        }
+        if(m_VulkanFunctions.vkBindImageMemory2KHR == nullptr)
+        {
+            m_VulkanFunctions.vkBindImageMemory2KHR =
+                (PFN_vkBindImageMemory2KHR)vkGetDeviceProcAddr(m_hDevice, "vkBindImageMemory2KHR");
+        }
     }
 #endif // #if VMA_BIND_MEMORY2
 #if VMA_MEMORY_BUDGET
     if(m_UseExtMemoryBudget && m_VulkanApiVersion < VK_MAKE_VERSION(1, 1, 0))
     {
         VMA_ASSERT(m_hInstance != VK_NULL_HANDLE);
-        m_VulkanFunctions.vkGetPhysicalDeviceMemoryProperties2KHR =
-            (PFN_vkGetPhysicalDeviceMemoryProperties2KHR)vkGetInstanceProcAddr(m_hInstance, "vkGetPhysicalDeviceMemoryProperties2KHR");
+        if(m_VulkanFunctions.vkGetPhysicalDeviceMemoryProperties2KHR == nullptr)
+        {
+            m_VulkanFunctions.vkGetPhysicalDeviceMemoryProperties2KHR =
+                (PFN_vkGetPhysicalDeviceMemoryProperties2KHR)vkGetInstanceProcAddr(m_hInstance, "vkGetPhysicalDeviceMemoryProperties2KHR");
+        }
     }
 #endif // #if VMA_MEMORY_BUDGET
 #endif // #if VMA_STATIC_VULKAN_FUNCTIONS == 1
@@ -16808,7 +16861,7 @@ VMA_CALL_PRE VkResult VMA_CALL_POST vmaCreateAllocator(
 {
     VMA_ASSERT(pCreateInfo && pAllocator);
     VMA_ASSERT(pCreateInfo->vulkanApiVersion == 0 ||
-        (VK_VERSION_MAJOR(pCreateInfo->vulkanApiVersion) == 1 && VK_VERSION_MINOR(pCreateInfo->vulkanApiVersion) <= 1));
+        (VK_VERSION_MAJOR(pCreateInfo->vulkanApiVersion) == 1 && VK_VERSION_MINOR(pCreateInfo->vulkanApiVersion) <= 2));
     VMA_DEBUG_LOG("vmaCreateAllocator");
     *pAllocator = vma_new(pCreateInfo->pAllocationCallbacks, VmaAllocator_T)(pCreateInfo);
     return (*pAllocator)->Init(pCreateInfo);
@@ -16823,6 +16876,14 @@ VMA_CALL_PRE void VMA_CALL_POST vmaDestroyAllocator(
         VkAllocationCallbacks allocationCallbacks = allocator->m_AllocationCallbacks;
         vma_delete(&allocationCallbacks, allocator);
     }
+}
+
+VMA_CALL_PRE void VMA_CALL_POST vmaGetAllocatorInfo(VmaAllocator allocator, VmaAllocatorInfo* pAllocatorInfo)
+{
+    VMA_ASSERT(allocator && pAllocatorInfo);
+    pAllocatorInfo->instance = allocator->m_hInstance;
+    pAllocatorInfo->physicalDevice = allocator->GetPhysicalDevice();
+    pAllocatorInfo->device = allocator->m_hDevice;
 }
 
 VMA_CALL_PRE void VMA_CALL_POST vmaGetPhysicalDeviceProperties(
