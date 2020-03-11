@@ -195,12 +195,14 @@ int main()
 
 	// 
 	mesh->addBinding(std::vector<glm::vec4>{ 
-        glm::vec4(-0.5f, -0.5f, 0.f, 1.f), 
-        glm::vec4(0.5f, -0.5f, 0.f, 1.f), 
-        glm::vec4(0.0f, 0.5f, 0.f, 1.f) 
+        glm::vec4( 0.0f, -0.5f, 0.f, 1.f),
+        glm::vec4(-0.5f, -0.0f, 0.f, 1.f), 
+        glm::vec4( 0.5f, -0.0f, 0.f, 1.f), 
+        glm::vec4( 0.0f,  0.5f, 0.f, 1.f),
     }, vkh::VkVertexInputBindingDescription{ .stride = sizeof(glm::vec4) });
 
     // 
+    mesh->genQuads(1u);
     node->pushInstance(vkh::VsGeometryInstance{
         .instanceId = uint32_t(node->pushMesh(mesh->addAttribute(vkh::VkVertexInputAttributeDescription{.location = 0, .format = VK_FORMAT_R32G32B32A32_SFLOAT, .offset = 0u })->setMaterialID(0)->sharedPtr())),
         .mask = 0xFF,
