@@ -61,7 +61,7 @@ const char *fragmentShaderSource = "#version 460 compatibility\n"
     "void main()\n"
     "{\n"
 	"	vec2 tx = gl_FragCoord.xy/vec2(1600.f,1200.f);\n"
-    "   FragColor = vec4(texture(texture0,tx).xyz*texture(texture1,tx).xyz/texture(texture1,tx).w,1.f);\n"
+    "   FragColor = vec4(pow(texture(texture0,tx).xyz*texture(texture1,tx).xyz/texture(texture1,tx).w,1.f.xxx/2.2.xxx),1.f);\n"
     "}\n\0";
 
 int main()
