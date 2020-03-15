@@ -21,7 +21,11 @@ public class Mesh extends Pointer {
     public native LongPointer getBindingMemoryHandle();
 
     //
-    public native Mesh setMaterialID();
-    public native Mesh addBinding(            ByteVector rawData, @ByRef LongPointer binding);
-    public native Mesh addBinding(@StdVector BytePointer rawData, @ByRef LongPointer binding);
+    public native Mesh setMaterialID(int materialID);
+
+    // mostly based on 64-bit pointers
+    public native Mesh addBinding(                        @ByRef ByteVector  rawData, @Cast("vkh::VkVertexInputBindingDescription*") @ByRef long bindingPtr);
+    public native Mesh addBinding(             @StdVector @ByRef BytePointer rawData, @Cast("vkh::VkVertexInputBindingDescription*") @ByRef long bindingPtr);
+    public native Mesh addBinding(@Cast("GLuint")                       int  rawData, @Cast("vkh::VkVertexInputBindingDescription*") @ByRef long bindingPtr); // OpenGL-Based
+    public native Mesh addBinding(@Cast("vkh::VkDescriptorBufferInfo*") long rawData, @Cast("vkh::VkVertexInputBindingDescription*") @ByRef long bindingPtr); // Vulkan-Object-Less
 }

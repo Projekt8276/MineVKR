@@ -8,7 +8,7 @@ import org.bytedeco.javacpp.annotation.*;
 
 //
 @Platform(include={"../include/vkt2/vector.hpp"}, link="../lib/vulkan-1")
-@Name("vkt::ByteVector")
+@Name("vkt::Vector<uint8_t>")
 public class ByteVector {
     static { Loader.load(); }
 
