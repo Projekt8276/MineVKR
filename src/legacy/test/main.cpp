@@ -2,6 +2,7 @@
 #define VMA_IMPLEMENTATION
 #define TINYOBJLOADER_IMPLEMENTATION
 #define VKT_FORCE_VMA_IMPLEMENTATION
+#define VK_ENABLE_BETA_EXTENSIONS
 //#define VKT_ENABLE_GLFW_SUPPORT
 
 #ifdef WIN32
@@ -56,12 +57,14 @@ const char *vertexShaderSource = "#version 460 compatibility\n"
 const char *fragmentShaderSource = "#version 460 compatibility\n"
     "#extension GL_ARB_bindless_texture : require\n"
     "out vec4 FragColor;\n"
-    "layout (location = 0) uniform sampler2D texture0;\n" 
-    "layout (location = 1) uniform sampler2D texture1;\n"
+    "layout (binding = 0) uniform sampler2D texture0;\n"
+    "layout (binding = 1) uniform sampler2D texture1;\n"
     "void main()\n"
     "{\n"
 	"	vec2 tx = gl_FragCoord.xy/vec2(1600.f,1200.f);\n"
-    "   FragColor = vec4(pow(texture(texture0,tx).xyz*texture(texture1,tx).xyz/texture(texture1,tx).w,1.f.xxx/2.2.xxx),1.f);\n"
+    "   FragColor = vec4(pow(texture(texture1,tx).xyz/texture(texture1,tx).w*texture(texture0,tx).xyz,1.f.xxx/2.2.xxx),1.f);\n"
+    "   //FragColor = vec4(pow(texture(texture1,tx).xyz/texture(texture1,tx).w*vec3(0.5f,0.5f,1.f),1.f.xxx/2.2.xxx),1.f);\n"
+    "   //FragColor = vec4(pow(texture(texture0,tx).xyz,1.f.xxx/2.2.xxx),1.f);\n"
     "}\n\0";
 
 int main()
@@ -257,9 +260,9 @@ int main()
 	glImportSemaphoreWin32HandleEXT(glComplete, GL_HANDLE_TYPE_OPAQUE_WIN32_EXT, handles.glComplete);
     handleError();
 
-	// 
+    // 
     GLuint color = context->getFrameBuffers()[0].getGL();
-	glTextureParameteri(color, GL_TEXTURE_WRAP_S, GL_REPEAT);	// set texture wrapping to GL_REPEAT (default wrapping method)
+    glTextureParameteri(color, GL_TEXTURE_WRAP_S, GL_REPEAT);	// set texture wrapping to GL_REPEAT (default wrapping method)
     glTextureParameteri(color, GL_TEXTURE_WRAP_T, GL_REPEAT);
     glTextureParameteri(color, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
     glTextureParameteri(color, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
@@ -278,7 +281,7 @@ int main()
     // 
     GLuint64 colorHandle = 0;
     vk::ImageViewHandleInfoNVX handleInfo = {};
-    handleInfo.imageView = context->getFlip1Buffers()[0].getImageView();
+    handleInfo.imageView = context->getFrameBuffers()[0].getImageView();
     handleInfo.sampler = fw->device.createSampler(vkh::VkSamplerCreateInfo{
         .magFilter = VK_FILTER_LINEAR,
         .minFilter = VK_FILTER_LINEAR,
@@ -294,11 +297,12 @@ int main()
     {
         processInput(window);
 
+
         // 
         glSignalSemaphoreEXT(glComplete, 0, nullptr, 1, &color, &layoutSignal);
 
 		// 
-		std::vector<vk::PipelineStageFlags> waitStages = { vk::PipelineStageFlagBits::eFragmentShader };
+		std::vector<vk::PipelineStageFlags> waitStages = { vk::PipelineStageFlagBits::eFragmentShader | vk::PipelineStageFlagBits::eComputeShader | vk::PipelineStageFlagBits::eRayTracingShaderKHR };
 		context->getThread()->submitCmd({ renderer->refCommandBuffer() }, vk::SubmitInfo()
             .setPWaitDstStageMask(waitStages.data())
 			.setPWaitSemaphores  (&semaphores.glComplete)  .setWaitSemaphoreCount(1)
@@ -306,15 +310,16 @@ int main()
 
         // 
         glWaitSemaphoreEXT(glReady, 0, nullptr, 1, &color, &layoutWait);
+        
 
 		// 
         glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
         glClear(GL_COLOR_BUFFER_BIT);
 
 		// 
-		glActiveTexture(GL_TEXTURE0);
+		//glActiveTexture(GL_TEXTURE0);
         glBindTextureUnit(0, color);
-        glActiveTexture(GL_TEXTURE1);
+        //glActiveTexture(GL_TEXTURE1);
         glBindTextureUnit(1, diffuse);
         //glUniformHandleui64ARB(0, GLuint64(colorHandle));
 
