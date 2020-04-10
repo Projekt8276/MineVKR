@@ -62,7 +62,7 @@ const char *fragmentShaderSource = "#version 460 compatibility\n"
     "void main()\n"
     "{\n"
 	"	vec2 tx = gl_FragCoord.xy/vec2(1600.f,1200.f);\n"
-    "   FragColor = vec4(pow(texture(texture1,tx).xyz/texture(texture1,tx).w*texture(texture0,tx).xyz,1.f.xxx/2.2.xxx),1.f);\n"
+    "   FragColor = vec4(pow(texture(texture0,tx).xyz,1.f.xxx/2.2.xxx),1.f);\n"
     "   //FragColor = vec4(pow(texture(texture1,tx).xyz/texture(texture1,tx).w*vec3(0.5f,0.5f,1.f),1.f.xxx/2.2.xxx),1.f);\n"
     "   //FragColor = vec4(pow(texture(texture0,tx).xyz,1.f.xxx/2.2.xxx),1.f);\n"
     "}\n\0";
@@ -186,31 +186,37 @@ int main()
 
     // 
     auto context = jvx::Context(fw);
-    auto mesh = jvx::Mesh(context);
     auto node = jvx::Node(context);
     auto material = jvx::Material(context);
     auto renderer = jvx::Renderer(context);
-    auto meshTest = jvi::Mesh(context);
+    auto meshTest = jvx::MeshInput(context);
+    auto meshBinding = jvx::MeshBinding(context);
     //auto meshPtr = meshTest.setThread(context->getThread());
 
 	// initialize renderer
     context->initialize(SCR_WIDTH, SCR_HEIGHT);
 
 	// 
-	mesh->addBinding(std::vector<glm::vec4>{ 
-        glm::vec4( 0.0f, -0.5f, 0.f, 1.f),
-        glm::vec4(-0.5f, -0.0f, 0.f, 1.f), 
-        glm::vec4( 0.5f, -0.0f, 0.f, 1.f), 
-        glm::vec4( 0.0f,  0.5f, 0.f, 1.f),
-    }, vkh::VkVertexInputBindingDescription{ .stride = sizeof(glm::vec4) });
+    auto DMA = vkt::Vector<glm::vec4>(std::make_shared<vkt::VmaBufferAllocation>(fw->getAllocator(), vkh::VkBufferCreateInfo{
+        .size = 128u, .usage = {.eTransferSrc = 1, .eStorageTexelBuffer = 1, .eStorageBuffer = 1, .eIndexBuffer = 1, .eVertexBuffer = 1 },
+    }, VMA_MEMORY_USAGE_CPU_TO_GPU));
 
     // 
-    mesh->genQuads(1u);
+    DMA[0u] = glm::vec4( 1.f, -1.f, -1.f, 1.f);
+    DMA[1u] = glm::vec4(-1.f, -1.f, -1.f, 1.f);
+    DMA[2u] = glm::vec4( 0.f,  1.f, -1.f, 1.f);
+
+    // 
+    meshTest->addBinding(DMA, vkh::VkVertexInputBindingDescription{ .stride = sizeof(glm::vec4) });
+    meshTest->addAttribute(vkh::VkVertexInputAttributeDescription{ .location = 0, .format = VK_FORMAT_R32G32B32A32_SFLOAT, .offset = 0u });
+
+    // 
+    auto meshID = node->pushMesh(meshBinding->bindMeshInput(meshTest)->increaseGeometryCount()->setMaterialID(0)->sharedPtr());
     node->pushInstance(vkh::VsGeometryInstance{
-        .instanceId = uint32_t(node->pushMesh(mesh->addAttribute(vkh::VkVertexInputAttributeDescription{.location = 0, .format = VK_FORMAT_R32G32B32A32_SFLOAT, .offset = 0u })->setMaterialID(0)->sharedPtr())),
+        .instanceId = uint32_t(meshID),
         .mask = 0xFF,
         .instanceOffset = 0,
-        .flags = VK_GEOMETRY_INSTANCE_TRIANGLE_CULL_DISABLE_BIT_NV
+        .flags = {}
     });
 
 	// 
@@ -261,14 +267,14 @@ int main()
     handleError();
 
     // 
-    GLuint color = context->getFrameBuffers()[0].getGL();
+    GLuint color = context->getFrameBuffers()[7].getGL();
     glTextureParameteri(color, GL_TEXTURE_WRAP_S, GL_REPEAT);	// set texture wrapping to GL_REPEAT (default wrapping method)
     glTextureParameteri(color, GL_TEXTURE_WRAP_T, GL_REPEAT);
     glTextureParameteri(color, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
     glTextureParameteri(color, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
 
     // 
-    GLuint diffuse = context->getFlip1Buffers()[0].getGL();
+    GLuint diffuse = context->getFlip1Buffers()[7].getGL();
     glTextureParameteri(diffuse, GL_TEXTURE_WRAP_S, GL_REPEAT);	// set texture wrapping to GL_REPEAT (default wrapping method)
     glTextureParameteri(diffuse, GL_TEXTURE_WRAP_T, GL_REPEAT);
     glTextureParameteri(diffuse, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
@@ -280,6 +286,8 @@ int main()
 
     // 
     GLuint64 colorHandle = 0;
+
+    /*
     vk::ImageViewHandleInfoNVX handleInfo = {};
     handleInfo.imageView = context->getFrameBuffers()[0].getImageView();
     handleInfo.sampler = fw->device.createSampler(vkh::VkSamplerCreateInfo{
@@ -291,6 +299,11 @@ int main()
     });
     handleInfo.descriptorType = vk::DescriptorType::eCombinedImageSampler;
     colorHandle = fw->getDevice().getImageViewHandleNVX(&handleInfo, fw->getDispatch());
+    */
+
+    // 
+    //auto addressProp = fw->getDevice().getImageViewAddressNVX(context->getFrameBuffers()[0].getImageView(), fw->getDispatch());
+    //colorHandle = addressProp.deviceAddress;
 
     // 
     while (!glfwWindowShouldClose(window))
