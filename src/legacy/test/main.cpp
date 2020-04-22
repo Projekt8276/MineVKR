@@ -190,7 +190,7 @@ int main()
     auto material = jvx::Material(context);
     auto renderer = jvx::Renderer(context);
     auto meshTest = jvx::MeshInput(context);
-    auto meshBinding = jvx::MeshBinding(context);
+    auto meshBinding = jvx::MeshBinding(context, 1u);
     auto bufferViewS = jvx::BufferViewSet(context);
     //auto meshPtr = meshTest.setThread(context->getThread());
 

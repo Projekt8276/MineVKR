@@ -10,7 +10,7 @@ import org.bytedeco.javacpp.annotation.*;
 @Platform(include={"../include/vkt2/vector.hpp"}, link="../lib/vulkan-1")
 @Name("vkt::Vector<uint8_t>")
 public class ByteVector {
-    static { Loader.load(); }
+    //static { Loader.load(); }
 
     //
     public native long size();
