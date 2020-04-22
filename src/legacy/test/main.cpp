@@ -191,10 +191,16 @@ int main()
     auto renderer = jvx::Renderer(context);
     auto meshTest = jvx::MeshInput(context);
     auto meshBinding = jvx::MeshBinding(context);
+    auto bufferViewS = jvx::BufferViewSet(context);
     //auto meshPtr = meshTest.setThread(context->getThread());
 
 	// initialize renderer
     context->initialize(SCR_WIDTH, SCR_HEIGHT);
+
+    // 
+    auto DMI = vkt::Vector<uint32_t>(std::make_shared<vkt::VmaBufferAllocation>(fw->getAllocator(), vkh::VkBufferCreateInfo{
+        .size = 24u, .usage = {.eTransferSrc = 1, .eStorageTexelBuffer = 1, .eStorageBuffer = 1, .eIndexBuffer = 1, .eVertexBuffer = 1 },
+    }, VMA_MEMORY_USAGE_GPU_ONLY));
 
 	// 
     auto DMA = vkt::Vector<glm::vec4>(std::make_shared<vkt::VmaBufferAllocation>(fw->getAllocator(), vkh::VkBufferCreateInfo{
@@ -202,16 +208,18 @@ int main()
     }, VMA_MEMORY_USAGE_CPU_TO_GPU));
 
     // 
-    DMA[0u] = glm::vec4( 1.f, -1.f, -1.f, 1.f);
-    DMA[1u] = glm::vec4(-1.f, -1.f, -1.f, 1.f);
+    DMA[0u] = glm::vec4(-1.f, -1.f, -1.f, 1.f);
+    DMA[1u] = glm::vec4( 1.f, -1.f, -1.f, 1.f);
     DMA[2u] = glm::vec4( 0.f,  1.f, -1.f, 1.f);
+    DMA[3u] = glm::vec4( 2.f,  1.f, -1.f, 1.f);
 
     // 
-    meshTest->addBinding(DMA, vkh::VkVertexInputBindingDescription{ .stride = sizeof(glm::vec4) });
+    meshTest->makeQuad()->linkBViewSet(bufferViewS)->addBinding(bufferViewS->pushBufferView(DMA), vkh::VkVertexInputBindingDescription{ .stride = sizeof(glm::vec4) });
     meshTest->addAttribute(vkh::VkVertexInputAttributeDescription{ .location = 0, .format = VK_FORMAT_R32G32B32A32_SFLOAT, .offset = 0u });
+    meshTest->setIndexData(bufferViewS->pushBufferView(DMI), vk::IndexType::eUint32)->setIndexCount(4ull); // For Scratch (мешает леска)
 
     // 
-    auto meshID = node->pushMesh(meshBinding->bindMeshInput(meshTest)->increaseGeometryCount()->setMaterialID(0)->sharedPtr());
+    auto meshID = node->pushMesh(meshBinding->addMeshInput(meshTest->sharedPtr(), 0u)->sharedPtr());
     node->pushInstance(vkh::VsGeometryInstance{
         .instanceId = uint32_t(meshID),
         .mask = 0xFF,
