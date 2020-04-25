@@ -230,18 +230,18 @@ int main()
 
     // 
     DMB[0u] = glm::vec4(-1.f,  1.f, -1.f, 1.f);
-    DMB[2u] = glm::vec4( 1.f,  1.f, -1.f, 1.f);
     DMB[1u] = glm::vec4( 0.f, -1.f, -1.f, 1.f);
+    DMB[2u] = glm::vec4( 1.f,  1.f, -1.f, 1.f);
     DMB[3u] = glm::vec4( 2.f, -1.f, -1.f, 1.f);
 
 
     // 
-    meshTest0->makeQuad()->linkBViewSet(bufferViewS)->addBinding(bufferViewS->pushBufferView(DMB), vkh::VkVertexInputBindingDescription{ .stride = sizeof(glm::vec4) });
+    meshTest0->makeQuad()->linkBViewSet(bufferViewS)->addBinding(bufferViewS->pushBufferView(DMA), vkh::VkVertexInputBindingDescription{ .stride = sizeof(glm::vec4) });
     meshTest0->addAttribute(vkh::VkVertexInputAttributeDescription{ .location = 0, .format = VK_FORMAT_R32G32B32A32_SFLOAT, .offset = 0u });
     meshTest0->setIndexData(bufferViewS->pushBufferView(DMI), vk::IndexType::eUint32)->setIndexCount(4ull); // For Scratch (мешает леска)
 
     // 
-    meshTest1->makeQuad()->linkBViewSet(bufferViewS)->addBinding(bufferViewS->pushBufferView(DMA), vkh::VkVertexInputBindingDescription{ .stride = sizeof(glm::vec4) });
+    meshTest1->makeQuad()->linkBViewSet(bufferViewS)->addBinding(bufferViewS->pushBufferView(DMB), vkh::VkVertexInputBindingDescription{ .stride = sizeof(glm::vec4) });
     meshTest1->addAttribute(vkh::VkVertexInputAttributeDescription{ .location = 0, .format = VK_FORMAT_R32G32B32A32_SFLOAT, .offset = 0u });
     meshTest1->setIndexData(bufferViewS->pushBufferView(DMI), vk::IndexType::eUint32)->setIndexCount(4ull); // For Scratch (мешает леска)
 
