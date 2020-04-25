@@ -3,9 +3,9 @@
 [![License](https://img.shields.io/badge/License-BSD%203--Clause-blue.svg)](https://opensource.org/licenses/BSD-3-Clause)
 
 
-## Minecraft RTX Mod 1.15.2
+## Minecraft RTX Mod 1.16...
 
-Planned REAL ray-tracing for Minecraft 1.15.2 and higher...
+Planned REAL ray-tracing for Minecraft 1.16 and higher...
 
 
 ## Additional Links
