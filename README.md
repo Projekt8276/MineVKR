@@ -3,7 +3,7 @@
 [![License](https://img.shields.io/badge/License-BSD%203--Clause-blue.svg)](https://opensource.org/licenses/BSD-3-Clause)
 
 
-## Minecraft RTX Mod 1.16...
+## Minecraft VKR Mod 1.16...
 
 Planned REAL ray-tracing for Minecraft 1.16 and higher...
 
@@ -66,10 +66,12 @@ Any developer with knowledge of C, C ++, Java, as well as GLSL and EVEN HLSL (th
 
 ### Used Symbolic Links!
 
-Clone with `git clone -c core.symlinks=true https://github.com/hyperearth/MineRTX.git --recursive`
+Clone with `git clone -c core.symlinks=true https://github.com/hyperearth/MineVKR.git --recursive`
 
 
 ## Authors P.S.
 
 - helix.d@IMN
 - RTX@NVIDIA
+- RDNA2@AMD
+

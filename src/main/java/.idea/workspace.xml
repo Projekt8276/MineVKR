@@ -11,34 +11,7 @@
     </configurations>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="4a293efd-8312-4c97-91a1-2e7672f928d8" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/source/glad.c" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/source/volk.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../.idea/runConfigurations/Minecraft_Client.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../../../.idea/runConfigurations/Minecraft_Client.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../.idea/runConfigurations/Minecraft_Server.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../../../.idea/runConfigurations/Minecraft_Server.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CMakeLists.txt" beforeDir="false" afterPath="$PROJECT_DIR$/CMakeLists.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/net/fabricmc/minertx/jivix/ByteVector.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/net/fabricmc/minertx/jivix/ByteVector.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/net/fabricmc/minertx/jivix/Vector.java" beforeDir="false" afterPath="$PROJECT_DIR$/net/fabricmc/minertx/jivix/Vector.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/net/fabricmc/minertx/jivix/jniByteVector.cpp" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/net/fabricmc/minertx/jivix/jniByteVector.h" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/source/jniByteVector.cpp" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/source/jniByteVector.h" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/source/jniVector.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/source/jniVector.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/source/jnijavacpp.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/source/jnijavacpp.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/windows-x86_64/CMakeFiles/JiviX.dir/DependInfo.cmake" beforeDir="false" afterPath="$PROJECT_DIR$/windows-x86_64/CMakeFiles/JiviX.dir/DependInfo.cmake" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/windows-x86_64/CMakeFiles/JiviX.dir/build.make" beforeDir="false" afterPath="$PROJECT_DIR$/windows-x86_64/CMakeFiles/JiviX.dir/build.make" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/windows-x86_64/CMakeFiles/JiviX.dir/cmake_clean.cmake" beforeDir="false" afterPath="$PROJECT_DIR$/windows-x86_64/CMakeFiles/JiviX.dir/cmake_clean.cmake" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/windows-x86_64/CMakeFiles/JiviX.dir/depend.make" beforeDir="false" afterPath="$PROJECT_DIR$/windows-x86_64/CMakeFiles/JiviX.dir/depend.make" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/windows-x86_64/CMakeFiles/JiviX.dir/flags.make" beforeDir="false" afterPath="$PROJECT_DIR$/windows-x86_64/CMakeFiles/JiviX.dir/flags.make" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/windows-x86_64/CMakeFiles/JiviX.dir/objects1.rsp" beforeDir="false" afterPath="$PROJECT_DIR$/windows-x86_64/CMakeFiles/JiviX.dir/objects1.rsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/windows-x86_64/CMakeFiles/JiviX.dir/progress.make" beforeDir="false" afterPath="$PROJECT_DIR$/windows-x86_64/CMakeFiles/JiviX.dir/progress.make" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/windows-x86_64/CMakeFiles/Makefile2" beforeDir="false" afterPath="$PROJECT_DIR$/windows-x86_64/CMakeFiles/Makefile2" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/windows-x86_64/CMakeFiles/progress.marks" beforeDir="false" afterPath="$PROJECT_DIR$/windows-x86_64/CMakeFiles/progress.marks" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/windows-x86_64/JiviX.cbp" beforeDir="false" afterPath="$PROJECT_DIR$/windows-x86_64/JiviX.cbp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/windows-x86_64/Makefile" beforeDir="false" afterPath="$PROJECT_DIR$/windows-x86_64/Makefile" afterDir="false" />
-    </list>
+    <list default="true" id="4a293efd-8312-4c97-91a1-2e7672f928d8" name="Default Changelist" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -99,7 +72,7 @@
       <workItem from="1587794852262" duration="180000" />
       <workItem from="1587795040458" duration="97000" />
       <workItem from="1587796206528" duration="34000" />
-      <workItem from="1587796249307" duration="6956000" />
+      <workItem from="1587796249307" duration="7488000" />
     </task>
     <servers />
   </component>
