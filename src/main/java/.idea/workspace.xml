@@ -12,8 +12,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="4a293efd-8312-4c97-91a1-2e7672f928d8" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/windows-x86_64/CMakeFiles/Makefile.cmake" beforeDir="false" afterPath="$PROJECT_DIR$/windows-x86_64/CMakeFiles/Makefile.cmake" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/windows-x86_64/CMakeFiles/clion-log.txt" beforeDir="false" afterPath="$PROJECT_DIR$/windows-x86_64/CMakeFiles/clion-log.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../../../.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/windows-x86_64/CMakeFiles/JiviX.dir/depend.make" beforeDir="false" afterPath="$PROJECT_DIR$/windows-x86_64/CMakeFiles/JiviX.dir/depend.make" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -27,6 +28,9 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/../../.." />
   </component>
+  <component name="MacroExpansionManager">
+    <option name="directoryName" value="ifhjfuzw" />
+  </component>
   <component name="ProjectId" id="1b18F1oBEd3qnO6uoqWcE6KmeDT" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectViewState">
@@ -38,7 +42,7 @@
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="cf.first.check.clang-format" value="false" />
-    <property name="settings.editor.selected.configurable" value="CMakeSettings" />
+    <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
   </component>
   <component name="RunManager">
     <configuration name="JiviX" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="JiviX" TARGET_NAME="JiviX" CONFIG_NAME="Debug">
@@ -58,6 +62,10 @@
       <option name="presentableId" value="Default" />
       <updated>1587788131931</updated>
       <workItem from="1587788135401" duration="454000" />
+      <workItem from="1587791164095" duration="235000" />
+      <workItem from="1587791560088" duration="257000" />
+      <workItem from="1587794852262" duration="180000" />
+      <workItem from="1587795040458" duration="97000" />
     </task>
     <servers />
   </component>
@@ -65,9 +73,13 @@
     <option name="version" value="2" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="462" y="165" key="SettingsEditor" timestamp="1587788178121">
+    <state x="462" y="165" key="SettingsEditor" timestamp="1587795032847">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="462" y="165" key="SettingsEditor/0.0.1920.1040@0.0.1920.1040" timestamp="1587788178121" />
+    <state x="462" y="165" key="SettingsEditor/0.0.1920.1040@0.0.1920.1040" timestamp="1587795032847" />
+    <state x="656" y="344" key="com.intellij.ide.util.TipDialog" timestamp="1587791539251">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="656" y="344" key="com.intellij.ide.util.TipDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1587791539251" />
   </component>
 </project>
