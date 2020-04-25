@@ -122,10 +122,10 @@
 				</MakeCommands>
 			</Target>
 		</Build>
-		<Unit filename="H:/Data/Projects/MineRTX/src/main/java/source/jniByteVector.cpp">
+		<Unit filename="H:/Data/Projects/MineRTX/src/main/java/source/glad.c">
 			<Option target="JiviX"/>
 		</Unit>
-		<Unit filename="H:/Data/Projects/MineRTX/src/main/java/source/jniByteVector.h">
+		<Unit filename="H:/Data/Projects/MineRTX/src/main/java/source/jniVector.cpp">
 			<Option target="JiviX"/>
 		</Unit>
 		<Unit filename="H:/Data/Projects/MineRTX/src/main/java/source/jnijavacpp.cpp">

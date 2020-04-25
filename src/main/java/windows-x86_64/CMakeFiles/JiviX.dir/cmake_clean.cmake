@@ -1,5 +1,6 @@
 file(REMOVE_RECURSE
-  "CMakeFiles/JiviX.dir/source/jniByteVector.cpp.obj"
+  "CMakeFiles/JiviX.dir/source/glad.c.obj"
+  "CMakeFiles/JiviX.dir/source/jniVector.cpp.obj"
   "CMakeFiles/JiviX.dir/source/jnijavacpp.cpp.obj"
   "JiviX.dll"
   "JiviX.dll.manifest"
@@ -8,6 +9,6 @@ file(REMOVE_RECURSE
 )
 
 # Per-language clean rules from dependency scanning.
-foreach(lang CXX)
+foreach(lang C CXX)
   include(CMakeFiles/JiviX.dir/cmake_clean_${lang}.cmake OPTIONAL)
 endforeach()

@@ -124,32 +124,59 @@ JiviX\fast:
 	$(MAKE) -f CMakeFiles\JiviX.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\JiviX.dir\build
 .PHONY : JiviX\fast
 
-source\jniByteVector.obj: source\jniByteVector.cpp.obj
+source\glad.obj: source\glad.c.obj
 
-.PHONY : source\jniByteVector.obj
+.PHONY : source\glad.obj
 
 # target to build an object file
-source\jniByteVector.cpp.obj:
-	$(MAKE) -f CMakeFiles\JiviX.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\JiviX.dir\source\jniByteVector.cpp.obj
-.PHONY : source\jniByteVector.cpp.obj
+source\glad.c.obj:
+	$(MAKE) -f CMakeFiles\JiviX.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\JiviX.dir\source\glad.c.obj
+.PHONY : source\glad.c.obj
 
-source\jniByteVector.i: source\jniByteVector.cpp.i
+source\glad.i: source\glad.c.i
 
-.PHONY : source\jniByteVector.i
+.PHONY : source\glad.i
 
 # target to preprocess a source file
-source\jniByteVector.cpp.i:
-	$(MAKE) -f CMakeFiles\JiviX.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\JiviX.dir\source\jniByteVector.cpp.i
-.PHONY : source\jniByteVector.cpp.i
+source\glad.c.i:
+	$(MAKE) -f CMakeFiles\JiviX.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\JiviX.dir\source\glad.c.i
+.PHONY : source\glad.c.i
 
-source\jniByteVector.s: source\jniByteVector.cpp.s
+source\glad.s: source\glad.c.s
 
-.PHONY : source\jniByteVector.s
+.PHONY : source\glad.s
 
 # target to generate assembly for a file
-source\jniByteVector.cpp.s:
-	$(MAKE) -f CMakeFiles\JiviX.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\JiviX.dir\source\jniByteVector.cpp.s
-.PHONY : source\jniByteVector.cpp.s
+source\glad.c.s:
+	$(MAKE) -f CMakeFiles\JiviX.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\JiviX.dir\source\glad.c.s
+.PHONY : source\glad.c.s
+
+source\jniVector.obj: source\jniVector.cpp.obj
+
+.PHONY : source\jniVector.obj
+
+# target to build an object file
+source\jniVector.cpp.obj:
+	$(MAKE) -f CMakeFiles\JiviX.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\JiviX.dir\source\jniVector.cpp.obj
+.PHONY : source\jniVector.cpp.obj
+
+source\jniVector.i: source\jniVector.cpp.i
+
+.PHONY : source\jniVector.i
+
+# target to preprocess a source file
+source\jniVector.cpp.i:
+	$(MAKE) -f CMakeFiles\JiviX.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\JiviX.dir\source\jniVector.cpp.i
+.PHONY : source\jniVector.cpp.i
+
+source\jniVector.s: source\jniVector.cpp.s
+
+.PHONY : source\jniVector.s
+
+# target to generate assembly for a file
+source\jniVector.cpp.s:
+	$(MAKE) -f CMakeFiles\JiviX.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\JiviX.dir\source\jniVector.cpp.s
+.PHONY : source\jniVector.cpp.s
 
 source\jnijavacpp.obj: source\jnijavacpp.cpp.obj
 
@@ -187,9 +214,12 @@ help:
 	@echo ... JiviX
 	@echo ... edit_cache
 	@echo ... rebuild_cache
-	@echo ... source/jniByteVector.obj
-	@echo ... source/jniByteVector.i
-	@echo ... source/jniByteVector.s
+	@echo ... source/glad.obj
+	@echo ... source/glad.i
+	@echo ... source/glad.s
+	@echo ... source/jniVector.obj
+	@echo ... source/jniVector.i
+	@echo ... source/jniVector.s
 	@echo ... source/jnijavacpp.obj
 	@echo ... source/jnijavacpp.i
 	@echo ... source/jnijavacpp.s

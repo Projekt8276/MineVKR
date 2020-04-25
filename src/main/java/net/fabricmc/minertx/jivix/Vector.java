@@ -6,17 +6,17 @@ import org.bytedeco.javacpp.Pointer;
 import org.bytedeco.javacpp.PointerPointer;
 import org.bytedeco.javacpp.annotation.*;
 
-@Platform(include={"./include/vkt2/vector.hpp"}, link="./lib/vulkan-1")
+@Platform(include={"./include/vkt2/vector.hpp"}, link="./lib/vulkan-1", define={"ENABLE_OPENGL_INTEROP","WIN32","OS_WIN","VK_ENABLE_BETA_EXTENSIONS","VK_USE_PLATFORM_WIN32_KHR"})
 public class Vector {
 
-    @Name("vkt::Vector<uint8_t>")
+    @Name("vkt::Vector<int8_t>")
     public static class ByteVector extends Pointer {
         static { Loader.load(); }
         public ByteVector()       { allocate();  }
-        public ByteVector(long n) { allocate(n); }
+        //public ByteVector(long n) { allocate(n); } // No Available
         public ByteVector(Pointer p) { super(p); } // this = (vector<vector<void*> >*)p
         private native void allocate();                  // this = new vector<vector<void*> >()
-        private native void allocate(long n);            // this = new vector<vector<void*> >(n)
+        //private native void allocate(long n);            // this = new vector<vector<void*> >(n)
         @Name("operator=")
         public native @ByRef ByteVector put(@ByRef ByteVector x);
 
@@ -36,13 +36,13 @@ public class Vector {
         public native BytePointer map();
 
         //
-        public native @Cast("bool") boolean empty();
-        public native void resize(long n);
-        public native @Index long size(long i);                   // return (*this)[i].size()
-        public native @Index @Cast("bool") boolean empty(long i); // return (*this)[i].empty()
-        public native @Index void resize(long i, long n);         // (*this)[i].resize(n)
+        //public native @Cast("bool") boolean empty(); // No Available
+        //public native void resize(long n); // No Available
+        //public native @Index long size(long i);                   // return (*this)[i].size()
+        //public native @Index @Cast("bool") boolean empty(long i); // return (*this)[i].empty() // No Available
+        //public native @Index void resize(long i, long n);         // (*this)[i].resize(n)  // No Available
 
-        public native @Index Pointer get(long i, long j);  // return (*this)[i][j]
-        public native void put(long i, long j, Pointer p); // (*this)[i][j] = p
+        //public native @Index Pointer get(long i, long j);  // return (*this)[i][j]
+        //public native void put(long i, long j, Pointer p); // (*this)[i][j] = p
     }
 };

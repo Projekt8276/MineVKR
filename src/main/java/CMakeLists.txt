@@ -155,7 +155,7 @@ file (GLOB RSOURCES RELATIVE ${CMAKE_CURRENT_SOURCE_DIR} ${SOURCES_LIST})
 # Compute test 
 set (LIBRARY_NAME "JiviX")
 add_definitions(${DEFINES})
-add_library(${LIBRARY_NAME} SHARED source/jnijavacpp.cpp source/jniByteVector.cpp)
+add_library(${LIBRARY_NAME} SHARED source/jnijavacpp.cpp source/jniVector.cpp source/glad.c)
 target_link_libraries(${LIBRARY_NAME} PRIVATE ${LIBS} Vulkan::Vulkan ${JNI_LIBRARIES})
 #add_executable(${APPLICATION_NAME} src/legacy/test/main.cpp ${RSOURCES})
 #target_link_libraries(${APPLICATION_NAME} PRIVATE ${LIBS} Vulkan::Vulkan)
