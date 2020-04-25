@@ -1,7 +1,6 @@
 package net.fabricmc.minertx;
 
 import net.fabricmc.api.ModInitializer;
-import org.lwjgl.vulkan.*;
 
 public class MineRTX implements ModInitializer {
 	@Override

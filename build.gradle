@@ -21,10 +21,10 @@ dependencies {
 
     // PSA: Some older mods, compiled on Loom 0.2.1, might have outdated Maven POMs.
     // You may need to force-disable transitiveness on them.
-    
-    modCompile "org.lwjgl:lwjgl-vulkan:3.2.2"
-    modCompile "org.lwjgl:lwjgl-vma:3.2.2"
-    modCompile "org.bytedeco:javacpp:1.5.3"
+
+    implementation "org.lwjgl:lwjgl-vulkan:3.2.2"
+    implementation "org.lwjgl:lwjgl-vma:3.2.2"
+    modImplementation "org.bytedeco:javacpp:1.5.3"
 }
 
 processResources {
