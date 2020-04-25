@@ -148,11 +148,11 @@ cmake-build*/*
 */cmake-build*/
 */cmake-build*/*
 
-# Ban IDEA Generated
-#.idea/
-#.idea/*
-#*/.idea/
-#*/.idea/*
+# Ban JavaCPP Generated
+windows-x86_64*/
+windows-x86_64*/*
+*/windows-x86_64*/
+*/windows-x86_64*/*
 
 # Ban CLION Legal
 build-clion/
