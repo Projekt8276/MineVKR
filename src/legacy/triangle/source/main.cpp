@@ -58,7 +58,6 @@ const char *fragmentShaderSource = "#version 460 compatibility\n"
     "#extension GL_ARB_bindless_texture : require\n"
     "out vec4 FragColor;\n"
     "layout (binding = 0) uniform sampler2D texture0;\n"
-    "layout (binding = 1) uniform sampler2D texture1;\n"
     "void main()\n"
     "{\n"
 	"	vec2 tx = gl_FragCoord.xy/vec2(1600.f,1200.f);\n"
@@ -275,18 +274,11 @@ int main()
     handleError();
 
     // 
-    GLuint color = context->getFrameBuffers()[7].getGL();
+    GLuint color = context->getFrameBuffers()[8].getGL();
     glTextureParameteri(color, GL_TEXTURE_WRAP_S, GL_REPEAT);	// set texture wrapping to GL_REPEAT (default wrapping method)
     glTextureParameteri(color, GL_TEXTURE_WRAP_T, GL_REPEAT);
     glTextureParameteri(color, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
     glTextureParameteri(color, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-
-    // 
-    GLuint diffuse = context->getFlip1Buffers()[7].getGL();
-    glTextureParameteri(diffuse, GL_TEXTURE_WRAP_S, GL_REPEAT);	// set texture wrapping to GL_REPEAT (default wrapping method)
-    glTextureParameteri(diffuse, GL_TEXTURE_WRAP_T, GL_REPEAT);
-    glTextureParameteri(diffuse, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-    glTextureParameteri(diffuse, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
 
     // 
     GLenum layoutSignal = GL_LAYOUT_GENERAL_EXT;
@@ -338,10 +330,7 @@ int main()
         glClear(GL_COLOR_BUFFER_BIT);
 
 		// 
-		//glActiveTexture(GL_TEXTURE0);
         glBindTextureUnit(0, color);
-        //glActiveTexture(GL_TEXTURE1);
-        glBindTextureUnit(1, diffuse);
         //glUniformHandleui64ARB(0, GLuint64(colorHandle));
 
         // draw our first triangle
