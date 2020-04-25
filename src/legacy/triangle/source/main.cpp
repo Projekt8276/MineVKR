@@ -190,7 +190,7 @@ int main()
     auto renderer = jvx::Renderer(context);
     auto meshTest0 = jvx::MeshInput(context);
     auto meshTest1 = jvx::MeshInput(context);
-    auto meshBinding = jvx::MeshBinding(context, 1024u, {1024u});
+    auto meshBinding = jvx::MeshBinding(context, 1024u, { 1024u, 1024u });
     auto bufferViewS = jvx::BufferViewSet(context);
     //auto meshPtr = meshTest.setThread(context->getThread());
 
@@ -219,8 +219,8 @@ int main()
     }, VMA_MEMORY_USAGE_CPU_TO_GPU));
 
     // 
-    TRS[0] = glm::mat3x4(1.f);
-    TRS[1] = glm::mat3x4(1.f); //glm::translate(glm::mat4x4(1.f), glm::vec3(0.5f,-0.5f,0.f));
+    TRS[0] = glm::translate(glm::mat4x4(1.f), glm::vec3(0.5f, -0.5f, 0.f));
+    TRS[1] = glm::mat3x4(1.f);
 
     // 
     DMA[0u] = glm::vec4(-1.f, -1.f, -1.f, 1.f);
