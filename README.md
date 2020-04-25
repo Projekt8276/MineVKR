@@ -64,6 +64,11 @@ Any developer with knowledge of C, C ++, Java, as well as GLSL and EVEN HLSL (th
 - Any native pointers in Java are LONG type... 
 
 
+### Used Symbolic Links!
+
+Clone with `git clone -c core.symlinks=true https://github.com/hyperearth/MineRTX.git --recursive`
+
+
 ## Authors P.S.
 
 - helix.d@IMN
