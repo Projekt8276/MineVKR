@@ -188,7 +188,8 @@ int main()
     auto node = jvx::Node(context);
     auto material = jvx::Material(context);
     auto renderer = jvx::Renderer(context);
-    auto meshTest = jvx::MeshInput(context);
+    auto meshTest0 = jvx::MeshInput(context);
+    auto meshTest1 = jvx::MeshInput(context);
     auto meshBinding = jvx::MeshBinding(context, 1024u, {1024u});
     auto bufferViewS = jvx::BufferViewSet(context);
     //auto meshPtr = meshTest.setThread(context->getThread());
@@ -207,32 +208,68 @@ int main()
     }, VMA_MEMORY_USAGE_CPU_TO_GPU));
 
     // 
+    auto DMB = vkt::Vector<glm::vec4>(std::make_shared<vkt::VmaBufferAllocation>(fw->getAllocator(), vkh::VkBufferCreateInfo{
+        .size = 128u, .usage = {.eTransferSrc = 1, .eStorageTexelBuffer = 1, .eStorageBuffer = 1, .eIndexBuffer = 1, .eVertexBuffer = 1 },
+    }, VMA_MEMORY_USAGE_CPU_TO_GPU));
+
+
+    // 
+    auto TRS = vkt::Vector<glm::mat3x4>(std::make_shared<vkt::VmaBufferAllocation>(fw->getAllocator(), vkh::VkBufferCreateInfo{
+        .size = sizeof(glm::mat3x4) * 2ull, .usage = {.eTransferSrc = 1, .eStorageTexelBuffer = 1, .eStorageBuffer = 1, .eIndexBuffer = 1, .eVertexBuffer = 1, .eSharedDeviceAddress = 1 },
+    }, VMA_MEMORY_USAGE_CPU_TO_GPU));
+
+    // 
+    TRS[0] = glm::mat3x4(1.f);
+    TRS[1] = glm::mat3x4(1.f); //glm::translate(glm::mat4x4(1.f), glm::vec3(0.5f,-0.5f,0.f));
+
+    // 
     DMA[0u] = glm::vec4(-1.f, -1.f, -1.f, 1.f);
     DMA[1u] = glm::vec4( 1.f, -1.f, -1.f, 1.f);
     DMA[2u] = glm::vec4( 0.f,  1.f, -1.f, 1.f);
     DMA[3u] = glm::vec4( 2.f,  1.f, -1.f, 1.f);
 
     // 
-    meshTest->makeQuad()->linkBViewSet(bufferViewS)->addBinding(bufferViewS->pushBufferView(DMA), vkh::VkVertexInputBindingDescription{ .stride = sizeof(glm::vec4) });
-    meshTest->addAttribute(vkh::VkVertexInputAttributeDescription{ .location = 0, .format = VK_FORMAT_R32G32B32A32_SFLOAT, .offset = 0u });
-    meshTest->setIndexData(bufferViewS->pushBufferView(DMI), vk::IndexType::eUint32)->setIndexCount(4ull); // For Scratch (мешает леска)
+    DMB[0u] = glm::vec4(-1.f,  1.f, -1.f, 1.f);
+    DMB[2u] = glm::vec4( 1.f,  1.f, -1.f, 1.f);
+    DMB[1u] = glm::vec4( 0.f, -1.f, -1.f, 1.f);
+    DMB[3u] = glm::vec4( 2.f, -1.f, -1.f, 1.f);
+
 
     // 
-    auto meshID = node->pushMesh(meshBinding->addMeshInput(meshTest->sharedPtr(), 0u)->sharedPtr());
+    meshTest0->makeQuad()->linkBViewSet(bufferViewS)->addBinding(bufferViewS->pushBufferView(DMB), vkh::VkVertexInputBindingDescription{ .stride = sizeof(glm::vec4) });
+    meshTest0->addAttribute(vkh::VkVertexInputAttributeDescription{ .location = 0, .format = VK_FORMAT_R32G32B32A32_SFLOAT, .offset = 0u });
+    meshTest0->setIndexData(bufferViewS->pushBufferView(DMI), vk::IndexType::eUint32)->setIndexCount(4ull); // For Scratch (мешает леска)
+
+    // 
+    meshTest1->makeQuad()->linkBViewSet(bufferViewS)->addBinding(bufferViewS->pushBufferView(DMA), vkh::VkVertexInputBindingDescription{ .stride = sizeof(glm::vec4) });
+    meshTest1->addAttribute(vkh::VkVertexInputAttributeDescription{ .location = 0, .format = VK_FORMAT_R32G32B32A32_SFLOAT, .offset = 0u });
+    meshTest1->setIndexData(bufferViewS->pushBufferView(DMI), vk::IndexType::eUint32)->setIndexCount(4ull); // For Scratch (мешает леска)
+
+    // 
+    meshBinding->addMeshInput(meshTest0->sharedPtr(), 0u);
+    meshBinding->addMeshInput(meshTest1->sharedPtr(), 1u);
+    meshBinding->setTransformData(TRS);
+
+    // 
     node->pushInstance(vkh::VsGeometryInstance{
-        .instanceId = uint32_t(meshID),
+        .instanceId = uint32_t(node->pushMesh(meshBinding->sharedPtr())),
         .mask = 0xFF,
         .instanceOffset = 0,
         .flags = {}
     });
 
-	// 
+	// Orange
     jvi::MaterialUnit mdk = {};
     mdk.diffuse = glm::vec4(1.f,0.75f,0.f,1.f);
     mdk.diffuseTexture = -1;
-
-    // TODO: one line
 	material->pushMaterial(mdk);
+
+    // Blue
+    mdk.diffuse = glm::vec4(0.f, 0.75f, 1.f, 1.f);
+    mdk.diffuseTexture = -1;
+    material->pushMaterial(mdk);
+
+    // 
     renderer->linkMaterial(material)->linkNode(node)->setupCommands();
 
 	// 
