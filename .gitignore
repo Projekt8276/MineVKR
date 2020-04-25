@@ -142,6 +142,12 @@ build/*
 */build/
 */build/*
 
+# Ban Runtime
+run/
+run/*
+*/run/
+*/run/*
+
 # Ban CLION Generated
 cmake-build*/
 cmake-build*/*
