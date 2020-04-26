@@ -219,7 +219,7 @@ int main()
     }, VMA_MEMORY_USAGE_CPU_TO_GPU));
 
     // 
-    TRS[0] = glm::translate(glm::mat4x4(1.f), glm::vec3(0.5f, -0.5f, 0.f));
+    TRS[0] = glm::transpose(glm::translate(glm::mat4x4(1.f), glm::vec3(0.5f, -0.5f, 0.f)));
     TRS[1] = glm::mat3x4(1.f);
 
     // 
@@ -229,10 +229,10 @@ int main()
     DMA[3u] = glm::vec4( 2.f,  1.f, -1.f, 1.f);
 
     // 
-    DMB[0u] = glm::vec4(-1.f,  1.f, -1.f, 1.f);
-    DMB[1u] = glm::vec4( 0.f, -1.f, -1.f, 1.f);
-    DMB[2u] = glm::vec4( 1.f,  1.f, -1.f, 1.f);
-    DMB[3u] = glm::vec4( 2.f, -1.f, -1.f, 1.f);
+    DMB[0u] = glm::vec4(-1.f,  1.f, -0.999f, 1.f);
+    DMB[1u] = glm::vec4( 0.f, -1.f, -0.999f, 1.f);
+    DMB[2u] = glm::vec4( 1.f,  1.f, -0.999f, 1.f);
+    DMB[3u] = glm::vec4( 2.f, -1.f, -0.999f, 1.f);
 
 
     // 
