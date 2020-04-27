@@ -173,3 +173,8 @@ build-clion/*
 */include/vkh
 */include/vkt2
 
+# DON'T change anything
+saves/
+saves/*
+*/saves/
+*/saves/*
