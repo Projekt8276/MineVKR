@@ -40,20 +40,21 @@ set (SOURCES_LIST
     "./include/volk/*"
     "./include/spirv/*"
     "./include/spirv/*/*"
-    "./src/*.hpp"
-    "./src/*.h"
-    "./src/*.cpp"
-    "./src/*.c"
-    "./src/*/*.hpp"
-    "./src/*/*.c"
-    "./src/*/*.h"
-    "./src/*/*/*.hpp"
-    "./src/*/*/*.c"
-    "./src/*/*/*.h"
-    "./src/include/*.hpp"
-    "./src/include/*.h"
-    "./src/include/*/*.hpp"
-    "./src/include/*/*.h"
+    
+    #"./src/*.hpp"
+    #"./src/*.h"
+    #"./src/*.cpp"
+    #"./src/*.c"
+    #"./src/*/*.hpp"
+    #"./src/*/*.c"
+    #"./src/*/*.h"
+    #"./src/*/*/*.hpp"
+    #"./src/*/*/*.c"
+    #"./src/*/*/*.h"
+    #"./src/include/*.hpp"
+    #"./src/include/*.h"
+    #"./src/include/*/*.hpp"
+    #"./src/include/*/*.h"
 )
 
 # Find packages (Linux Prior)
@@ -158,7 +159,7 @@ file (GLOB RSOURCES RELATIVE ${CMAKE_CURRENT_SOURCE_DIR} ${SOURCES_LIST})
 # Compute test 
 set (LIBRARY_NAME "JiviX")
 add_definitions(${DEFINES})
-add_library(${LIBRARY_NAME} SHARED source/jnijavacpp.cpp source/jniVector.cpp source/glad.c)
+add_library(${LIBRARY_NAME} SHARED source/jnijavacpp.cpp source/jniJiviXBase.cpp source/glad.c)
 add_custom_command(PRE_BUILD COMMAND "./generate.bat" OUTPUT "./log.txt")
 target_link_libraries(${LIBRARY_NAME} PRIVATE ${LIBS} Vulkan::Vulkan ${JNI_LIBRARIES})
 #add_executable(${APPLICATION_NAME} src/legacy/test/main.cpp ${RSOURCES})

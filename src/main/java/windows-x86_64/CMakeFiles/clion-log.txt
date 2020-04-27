@@ -1,4 +1,0 @@
-"H:\Program Files\JetBrains\CLion 2019.3.4\bin\cmake\win\bin\cmake.exe" -DCMAKE_BUILD_TYPE=Debug -G "CodeBlocks - NMake Makefiles" H:\Data\Projects\MineRTX\src\main\java
--- Configuring done
--- Generating done
--- Build files have been written to: H:/Data/Projects/MineRTX/src/main/java/windows-x86_64
