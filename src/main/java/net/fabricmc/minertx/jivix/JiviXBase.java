@@ -10,13 +10,13 @@ import org.bytedeco.javacpp.annotation.*;
 // TODO: Engine Wrappers for std::shared_ptr, like "vkt::Vector<uint8_t>"
 @Platform(include={
         "./include/vkt2/fw.hpp",
-        "JiviX/JiviX.hpp"
+        "./include/JiviX/JiviX.hpp"
 }, link="./lib/vulkan-1", define={"ENABLE_OPENGL_INTEROP","WIN32","OS_WIN","VK_ENABLE_BETA_EXTENSIONS","VK_USE_PLATFORM_WIN32_KHR"})
 
 @Name("")
 public class JiviXBase extends Pointer {
     static { Loader.load(); }
-    
+
     // int8_t default
     @Name("vkt::Vector<int8_t>")
     public static class ByteVector extends Pointer {
