@@ -16,13 +16,17 @@ public class Vector {
         public ByteVector()       { allocate();  }
         public ByteVector(Pointer p) { super(p); } // this = (vector<vector<void*> >*)p
         private native void allocate();
+
+        //
         @Name("operator=")
         public native @ByRef ByteVector put(@ByRef ByteVector x);
 
+        //
         @Name("operator[]")
         public native @ByRef BytePointer get(long n);
         public native @ByRef BytePointer at(long n);
 
+        //
         public native long size();
         public native long range();
 

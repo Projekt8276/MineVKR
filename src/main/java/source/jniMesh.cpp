@@ -94,22 +94,28 @@
     #define JavaCPP_override
 #endif
 
+#include "./include/JiviX/material.hpp"
 #include "./include/JiviX/mesh.hpp"
+#include "./include/JiviX/node.hpp"
 
 static JavaVM* JavaCPP_vm = NULL;
 static bool JavaCPP_haveAllocObject = false;
 static bool JavaCPP_haveNonvirtual = false;
-static const char* JavaCPP_classNames[9] = {
+static const char* JavaCPP_classNames[13] = {
         "org/bytedeco/javacpp/Pointer",
         "java/lang/String",
         "org/bytedeco/javacpp/Pointer$NativeDeallocator",
         "org/bytedeco/javacpp/Loader",
         "java/nio/Buffer",
         "java/lang/Object",
-        "net/fabricmc/minertx/jivix/Mesh$MeshBinding",
+        "net/fabricmc/minertx/jivix/Mesh$Material",
         "java/lang/RuntimeException",
-        "java/lang/NullPointerException" };
-static jclass JavaCPP_classes[9] = { NULL };
+        "java/lang/NullPointerException",
+        "net/fabricmc/minertx/jivix/Mesh$Node",
+        "net/fabricmc/minertx/jivix/Mesh$MeshBinding",
+        "net/fabricmc/minertx/jivix/Mesh$MeshInput",
+        "net/fabricmc/minertx/jivix/Mesh$BufferViewSet" };
+static jclass JavaCPP_classes[13] = { NULL };
 static jfieldID JavaCPP_addressFID = NULL;
 static jfieldID JavaCPP_positionFID = NULL;
 static jfieldID JavaCPP_limitFID = NULL;
@@ -298,9 +304,13 @@ static JavaCPP_noinline jthrowable JavaCPP_handleException(JNIEnv* env, int i) {
 
 
 
-static void JavaCPP_net_fabricmc_minertx_jivix_Mesh_00024MeshBinding_deallocate(void *p) { delete (jvx::Mesh::MeshBinding*)p; }
+static void JavaCPP_net_fabricmc_minertx_jivix_Mesh_00024Material_deallocate(void *p) { delete (jvx::Mesh::jvx::Material*)p; }
+static void JavaCPP_net_fabricmc_minertx_jivix_Mesh_00024Node_deallocate(void *p) { delete (jvx::Mesh::jvx::Node*)p; }
+static void JavaCPP_net_fabricmc_minertx_jivix_Mesh_00024MeshBinding_deallocate(void *p) { delete (jvx::Mesh::jvx::MeshBinding*)p; }
+static void JavaCPP_net_fabricmc_minertx_jivix_Mesh_00024MeshInput_deallocate(void *p) { delete (jvx::Mesh::jvx::MeshInput*)p; }
+static void JavaCPP_net_fabricmc_minertx_jivix_Mesh_00024BufferViewSet_deallocate(void *p) { delete (jvx::Mesh::jvx::BufferViewSet*)p; }
 
-static const char* JavaCPP_members[9][2] = {
+static const char* JavaCPP_members[13][2] = {
         { NULL },
         { NULL },
         { NULL },
@@ -309,18 +319,26 @@ static const char* JavaCPP_members[9][2] = {
         { NULL },
         { "sizeof" },
         { NULL },
-        { NULL } };
-static int JavaCPP_offsets[9][2] = {
+        { NULL },
+        { "sizeof" },
+        { "sizeof" },
+        { "sizeof" },
+        { "sizeof" } };
+static int JavaCPP_offsets[13][2] = {
         { -1 },
         { -1 },
         { -1 },
         { -1 },
         { -1 },
         { -1 },
-        { sizeof(jvx::Mesh::MeshBinding) },
+        { sizeof(jvx::Mesh::jvx::Material) },
         { -1 },
-        { -1 } };
-static int JavaCPP_memberOffsetSizes[9] = { 1, 1, 1, 1, 1, 1, 1, 1, 1 };
+        { -1 },
+        { sizeof(jvx::Mesh::jvx::Node) },
+        { sizeof(jvx::Mesh::jvx::MeshBinding) },
+        { sizeof(jvx::Mesh::jvx::MeshInput) },
+        { sizeof(jvx::Mesh::jvx::BufferViewSet) } };
+static int JavaCPP_memberOffsetSizes[13] = { 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 };
 
 extern "C" {
 
@@ -346,7 +364,7 @@ JNIEXPORT jint JNICALL JNI_OnLoad(JavaVM* vm, void* reserved) {
     if (putMemberOffsetMID == NULL) {
         return JNI_ERR;
     }
-    for (int i = 0; i < 9 && !env->ExceptionCheck(); i++) {
+    for (int i = 0; i < 13 && !env->ExceptionCheck(); i++) {
         for (int j = 0; j < JavaCPP_memberOffsetSizes[i] && !env->ExceptionCheck(); j++) {
             if (env->PushLocalFrame(3) == 0) {
                 jvalue args[3];
@@ -437,7 +455,7 @@ JNIEXPORT void JNICALL JNI_OnUnload(JavaVM* vm, void* reserved) {
         JavaCPP_log("Could not get JNIEnv for JNI_VERSION_1_6 inside JNI_OnUnLoad().");
         return;
     }
-    for (int i = 0; i < 9; i++) {
+    for (int i = 0; i < 13; i++) {
         env->DeleteWeakGlobalRef((jweak)JavaCPP_classes[i]);
         JavaCPP_classes[i] = NULL;
     }
@@ -445,10 +463,78 @@ JNIEXPORT void JNICALL JNI_OnUnload(JavaVM* vm, void* reserved) {
     JavaCPP_vm = NULL;
 }
 
+JNIEXPORT void JNICALL Java_net_fabricmc_minertx_jivix_Mesh_00024Material_allocate(JNIEnv* env, jobject obj) {
+    jthrowable exc = NULL;
+    try {
+        jvx::Mesh::jvx::Material* rptr = new jvx::Mesh::jvx::Material();
+        jlong rcapacity = 1;
+        JavaCPP_initPointer(env, obj, rptr, rcapacity, rptr, &JavaCPP_net_fabricmc_minertx_jivix_Mesh_00024Material_deallocate);
+    } catch (...) {
+        exc = JavaCPP_handleException(env, 7);
+    }
+
+    if (exc != NULL) {
+        env->Throw(exc);
+    }
+}
+JNIEXPORT void JNICALL Java_net_fabricmc_minertx_jivix_Mesh_00024Material_createDescriptorSet(JNIEnv* env, jobject obj) {
+    jvx::Mesh::jvx::Material* ptr = (jvx::Mesh::jvx::Material*)jlong_to_ptr(env->GetLongField(obj, JavaCPP_addressFID));
+    if (ptr == NULL) {
+        env->ThrowNew(JavaCPP_getClass(env, 8), "This pointer address is NULL.");
+        return;
+    }
+    jlong position = env->GetLongField(obj, JavaCPP_positionFID);
+    ptr += position;
+    jthrowable exc = NULL;
+    try {
+        ptr->createDescriptorSet();
+    } catch (...) {
+        exc = JavaCPP_handleException(env, 7);
+    }
+
+    if (exc != NULL) {
+        env->Throw(exc);
+    }
+}
+
+JNIEXPORT void JNICALL Java_net_fabricmc_minertx_jivix_Mesh_00024Node_allocate(JNIEnv* env, jobject obj) {
+    jthrowable exc = NULL;
+    try {
+        jvx::Mesh::jvx::Node* rptr = new jvx::Mesh::jvx::Node();
+        jlong rcapacity = 1;
+        JavaCPP_initPointer(env, obj, rptr, rcapacity, rptr, &JavaCPP_net_fabricmc_minertx_jivix_Mesh_00024Node_deallocate);
+    } catch (...) {
+        exc = JavaCPP_handleException(env, 7);
+    }
+
+    if (exc != NULL) {
+        env->Throw(exc);
+    }
+}
+JNIEXPORT void JNICALL Java_net_fabricmc_minertx_jivix_Mesh_00024Node_createDescriptorSet(JNIEnv* env, jobject obj) {
+    jvx::Mesh::jvx::Node* ptr = (jvx::Mesh::jvx::Node*)jlong_to_ptr(env->GetLongField(obj, JavaCPP_addressFID));
+    if (ptr == NULL) {
+        env->ThrowNew(JavaCPP_getClass(env, 8), "This pointer address is NULL.");
+        return;
+    }
+    jlong position = env->GetLongField(obj, JavaCPP_positionFID);
+    ptr += position;
+    jthrowable exc = NULL;
+    try {
+        ptr->createDescriptorSet();
+    } catch (...) {
+        exc = JavaCPP_handleException(env, 7);
+    }
+
+    if (exc != NULL) {
+        env->Throw(exc);
+    }
+}
+
 JNIEXPORT void JNICALL Java_net_fabricmc_minertx_jivix_Mesh_00024MeshBinding_allocate(JNIEnv* env, jobject obj) {
     jthrowable exc = NULL;
     try {
-        jvx::Mesh::MeshBinding* rptr = new jvx::Mesh::MeshBinding();
+        jvx::Mesh::jvx::MeshBinding* rptr = new jvx::Mesh::jvx::MeshBinding();
         jlong rcapacity = 1;
         JavaCPP_initPointer(env, obj, rptr, rcapacity, rptr, &JavaCPP_net_fabricmc_minertx_jivix_Mesh_00024MeshBinding_deallocate);
     } catch (...) {
@@ -460,7 +546,75 @@ JNIEXPORT void JNICALL Java_net_fabricmc_minertx_jivix_Mesh_00024MeshBinding_all
     }
 }
 JNIEXPORT void JNICALL Java_net_fabricmc_minertx_jivix_Mesh_00024MeshBinding_createDescriptorSet(JNIEnv* env, jobject obj) {
-    jvx::Mesh::MeshBinding* ptr = (jvx::Mesh::MeshBinding*)jlong_to_ptr(env->GetLongField(obj, JavaCPP_addressFID));
+    jvx::Mesh::jvx::MeshBinding* ptr = (jvx::Mesh::jvx::MeshBinding*)jlong_to_ptr(env->GetLongField(obj, JavaCPP_addressFID));
+    if (ptr == NULL) {
+        env->ThrowNew(JavaCPP_getClass(env, 8), "This pointer address is NULL.");
+        return;
+    }
+    jlong position = env->GetLongField(obj, JavaCPP_positionFID);
+    ptr += position;
+    jthrowable exc = NULL;
+    try {
+        ptr->createDescriptorSet();
+    } catch (...) {
+        exc = JavaCPP_handleException(env, 7);
+    }
+
+    if (exc != NULL) {
+        env->Throw(exc);
+    }
+}
+
+JNIEXPORT void JNICALL Java_net_fabricmc_minertx_jivix_Mesh_00024MeshInput_allocate(JNIEnv* env, jobject obj) {
+    jthrowable exc = NULL;
+    try {
+        jvx::Mesh::jvx::MeshInput* rptr = new jvx::Mesh::jvx::MeshInput();
+        jlong rcapacity = 1;
+        JavaCPP_initPointer(env, obj, rptr, rcapacity, rptr, &JavaCPP_net_fabricmc_minertx_jivix_Mesh_00024MeshInput_deallocate);
+    } catch (...) {
+        exc = JavaCPP_handleException(env, 7);
+    }
+
+    if (exc != NULL) {
+        env->Throw(exc);
+    }
+}
+JNIEXPORT void JNICALL Java_net_fabricmc_minertx_jivix_Mesh_00024MeshInput_createDescriptorSet(JNIEnv* env, jobject obj) {
+    jvx::Mesh::jvx::MeshInput* ptr = (jvx::Mesh::jvx::MeshInput*)jlong_to_ptr(env->GetLongField(obj, JavaCPP_addressFID));
+    if (ptr == NULL) {
+        env->ThrowNew(JavaCPP_getClass(env, 8), "This pointer address is NULL.");
+        return;
+    }
+    jlong position = env->GetLongField(obj, JavaCPP_positionFID);
+    ptr += position;
+    jthrowable exc = NULL;
+    try {
+        ptr->createDescriptorSet();
+    } catch (...) {
+        exc = JavaCPP_handleException(env, 7);
+    }
+
+    if (exc != NULL) {
+        env->Throw(exc);
+    }
+}
+
+JNIEXPORT void JNICALL Java_net_fabricmc_minertx_jivix_Mesh_00024BufferViewSet_allocate(JNIEnv* env, jobject obj) {
+    jthrowable exc = NULL;
+    try {
+        jvx::Mesh::jvx::BufferViewSet* rptr = new jvx::Mesh::jvx::BufferViewSet();
+        jlong rcapacity = 1;
+        JavaCPP_initPointer(env, obj, rptr, rcapacity, rptr, &JavaCPP_net_fabricmc_minertx_jivix_Mesh_00024BufferViewSet_deallocate);
+    } catch (...) {
+        exc = JavaCPP_handleException(env, 7);
+    }
+
+    if (exc != NULL) {
+        env->Throw(exc);
+    }
+}
+JNIEXPORT void JNICALL Java_net_fabricmc_minertx_jivix_Mesh_00024BufferViewSet_createDescriptorSet(JNIEnv* env, jobject obj) {
+    jvx::Mesh::jvx::BufferViewSet* ptr = (jvx::Mesh::jvx::BufferViewSet*)jlong_to_ptr(env->GetLongField(obj, JavaCPP_addressFID));
     if (ptr == NULL) {
         env->ThrowNew(JavaCPP_getClass(env, 8), "This pointer address is NULL.");
         return;
