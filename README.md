@@ -69,6 +69,13 @@ Any developer with knowledge of C, C ++, Java, as well as GLSL and EVEN HLSL (th
 Clone with `git clone -c core.symlinks=true https://github.com/hyperearth/MineVKR.git --recursive`
 
 
+### Intellij Idea Problems...
+
+Use `.\gradlew genIdeaWorkspace` for initialize correctly. 
+After, you can open as project, and see java sources... 
+But for debug or run still needs use `runClient` task...
+
+
 ## Authors P.S.
 
 - helix.d@IMN
