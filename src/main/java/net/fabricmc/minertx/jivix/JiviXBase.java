@@ -41,11 +41,4 @@ public class JiviXBase extends Pointer {
         public native void createDescriptorSet();
     }
 
-    @Name("jvx::Renderer")
-    public static class Renderer extends Pointer {
-        static { Loader.load(); }
-        public Renderer() { allocate(); }
-        private native void allocate();
-        public native void createDescriptorSet();
-    }
 }

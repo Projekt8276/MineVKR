@@ -33,7 +33,11 @@ public class Vector {
         // map buffer data
         public native BytePointer mapped();
         public native BytePointer map();
-    }
+        public native BytePointer data();
+
+        // Java have NOT support `VkDeviceOrHostAddressKHR` or `VkDeviceOrHostAddressConstKHR`, and become rude var...
+        public native @Cast("uintptr_t") long deviceAddress();
+    };
 
     // uint8_t version (C++)
     @Name("vkt::Vector<uint8_t>")
@@ -59,6 +63,9 @@ public class Vector {
         // map buffer data
         public native @Cast("uint8_t*") BytePointer mapped();
         public native @Cast("uint8_t*") BytePointer map();
-    }
+
+        // Java have NOT support `VkDeviceOrHostAddressKHR` or `VkDeviceOrHostAddressConstKHR`, and become rude var...
+        public native @Cast("uintptr_t") long deviceAddress();
+    };
 
 };

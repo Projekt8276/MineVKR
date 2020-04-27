@@ -11,7 +11,21 @@
     </configurations>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="4a293efd-8312-4c97-91a1-2e7672f928d8" name="Default Changelist" comment="" />
+    <list default="true" id="4a293efd-8312-4c97-91a1-2e7672f928d8" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/net/fabricmc/minertx/jivix/JiviXBase$Context.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/net/fabricmc/minertx/jivix/JiviXBase$Driver.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/net/fabricmc/minertx/jivix/JiviXBase$Thread.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/net/fabricmc/minertx/jivix/JiviXBase.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/net/fabricmc/minertx/jivix/Mesh$Renderer.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/net/fabricmc/minertx/jivix/JiviXBase.java" beforeDir="false" afterPath="$PROJECT_DIR$/net/fabricmc/minertx/jivix/JiviXBase.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/net/fabricmc/minertx/jivix/Mesh.java" beforeDir="false" afterPath="$PROJECT_DIR$/net/fabricmc/minertx/jivix/Mesh.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/net/fabricmc/minertx/jivix/RendererJivix.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/net/fabricmc/minertx/jivix/Vector.java" beforeDir="false" afterPath="$PROJECT_DIR$/net/fabricmc/minertx/jivix/Vector.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/source/jniMesh.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/source/jniMesh.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/source/jniVector.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/source/jniVector.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/source/jnijavacpp.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/source/jnijavacpp.cpp" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -74,6 +88,7 @@
       <workItem from="1587796206528" duration="34000" />
       <workItem from="1587796249307" duration="7488000" />
       <workItem from="1587973975778" duration="2576000" />
+      <workItem from="1587991449912" duration="3790000" />
     </task>
     <servers />
   </component>
