@@ -9,20 +9,15 @@ import org.bytedeco.javacpp.annotation.*;
 @Platform(include={"./include/vkt2/vector.hpp"}, link="./lib/vulkan-1", define={"ENABLE_OPENGL_INTEROP","WIN32","OS_WIN","VK_ENABLE_BETA_EXTENSIONS","VK_USE_PLATFORM_WIN32_KHR"})
 public class Vector {
 
+    // int8_t default
     @Name("vkt::Vector<int8_t>")
     public static class ByteVector extends Pointer {
         static { Loader.load(); }
         public ByteVector()       { allocate();  }
-        //public ByteVector(long n) { allocate(n); } // No Available
         public ByteVector(Pointer p) { super(p); } // this = (vector<vector<void*> >*)p
-        private native void allocate();                  // this = new vector<vector<void*> >()
-        //private native void allocate(long n);            // this = new vector<vector<void*> >(n)
+        private native void allocate();
         @Name("operator=")
         public native @ByRef ByteVector put(@ByRef ByteVector x);
-
-        //@Name("operator[]")
-        //public native @StdVector PointerPointer get(long n);
-        //public native @StdVector PointerPointer at(long n);
 
         @Name("operator[]")
         public native @ByRef BytePointer get(long n);
@@ -34,15 +29,32 @@ public class Vector {
         // map buffer data
         public native BytePointer mapped();
         public native BytePointer map();
+    }
+
+    // uint8_t version (C++)
+    @Name("vkt::Vector<uint8_t>")
+    public static class UByteVector extends Pointer {
+        static { Loader.load(); }
+        public UByteVector()       { allocate();  }
+        public UByteVector(Pointer p) { super(p); } // this = (vector<vector<void*> >*)p
+        private native void allocate();
 
         //
-        //public native @Cast("bool") boolean empty(); // No Available
-        //public native void resize(long n); // No Available
-        //public native @Index long size(long i);                   // return (*this)[i].size()
-        //public native @Index @Cast("bool") boolean empty(long i); // return (*this)[i].empty() // No Available
-        //public native @Index void resize(long i, long n);         // (*this)[i].resize(n)  // No Available
+        @Name("operator=")
+        public native @ByRef UByteVector put(@ByRef UByteVector x);
 
-        //public native @Index Pointer get(long i, long j);  // return (*this)[i][j]
-        //public native void put(long i, long j, Pointer p); // (*this)[i][j] = p
+        //
+        @Name("operator[]")
+        public native @Cast("uint8_t*") @ByRef BytePointer get(long n);
+        public native @Cast("uint8_t*") @ByRef BytePointer at(long n);
+
+        //
+        public native long size();
+        public native long range();
+
+        // map buffer data
+        public native @Cast("uint8_t*") BytePointer mapped();
+        public native @Cast("uint8_t*") BytePointer map();
     }
+
 };

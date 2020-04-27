@@ -152,10 +152,14 @@ link_directories(${LIB_DIR})
 include_directories(${INC_DIR} ${JNI_INCLUDE_DIRS})
 file (GLOB RSOURCES RELATIVE ${CMAKE_CURRENT_SOURCE_DIR} ${SOURCES_LIST})
 
+# 
+
+
 # Compute test 
 set (LIBRARY_NAME "JiviX")
 add_definitions(${DEFINES})
 add_library(${LIBRARY_NAME} SHARED source/jnijavacpp.cpp source/jniVector.cpp source/glad.c)
+add_custom_command(PRE_BUILD COMMAND "./generate.bat" OUTPUT "./log.txt")
 target_link_libraries(${LIBRARY_NAME} PRIVATE ${LIBS} Vulkan::Vulkan ${JNI_LIBRARIES})
 #add_executable(${APPLICATION_NAME} src/legacy/test/main.cpp ${RSOURCES})
 #target_link_libraries(${APPLICATION_NAME} PRIVATE ${LIBS} Vulkan::Vulkan)
