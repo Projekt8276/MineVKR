@@ -2,6 +2,7 @@ package net.fabricmc.minertx.jivix;
 
 import org.bytedeco.javacpp.IntPointer;
 import org.bytedeco.javacpp.BytePointer;
+import org.bytedeco.javacpp.FloatPointer;
 import org.bytedeco.javacpp.Loader;
 import org.bytedeco.javacpp.LongPointer;
 import org.bytedeco.javacpp.Pointer;
@@ -111,6 +112,65 @@ public class JiviXCore extends Pointer {
         public Renderer(Context context) { allocate(context); }
         private native void allocate(Context context);
 
+    };
+
+
+    @Name("jvi::MaterialUnit")
+    public static class MaterialUnit extends Pointer {
+        static { Loader.load(); }
+
+        public MaterialUnit() { allocate(); }
+        private native void allocate();
+
+        // Channels
+        private native @Cast("float*") @ByRef FloatPointer diffuse();
+        private native void diffuse(@Cast("glm::vec4&") @ByRef FloatPointer CL);
+
+        // Channels
+        private native @Cast("float*") @ByRef FloatPointer specular();
+        private native void specular(@Cast("glm::vec4&") @ByRef FloatPointer CL);
+
+        // Channels
+        private native @Cast("float*") @ByRef FloatPointer normals();
+        private native void normals(@Cast("glm::vec4&") @ByRef FloatPointer CL);
+
+        // Channels
+        private native @Cast("float*") @ByRef FloatPointer emission();
+        private native void emission(@Cast("glm::vec4&") @ByRef FloatPointer CL);
+
+        // Channels
+        private native @ByVal int diffuseTexture(); private native void diffuseTexture(@ByVal int CL);
+        private native @ByVal int specularTexture(); private native void specularTexture(@ByVal int CL);
+        private native @ByVal int normalsTexture(); private native void normalsTexture(@ByVal int CL);
+        private native @ByVal int emissionTexture(); private native void emissionTexture(@ByVal int CL);
+    };
+
+    @Name("vkh::VsGeometryInstance")
+    public static class VsGeometryInstance extends Pointer {
+        static { Loader.load(); }
+
+        public VsGeometryInstance() { allocate(); }
+        private native void allocate();
+
+        // Transform
+        private native @Cast("float*") @ByRef FloatPointer transform();
+        private native void transform(@Cast("glm::mat3x4&") @ByRef FloatPointer transformPtr);
+
+        // Mask
+        private native @ByVal byte mask();
+        private native void mask(@ByVal byte MS);
+
+        // Flags
+        private native @ByVal byte flags();
+        private native void flags(@ByVal byte FG);
+
+        // Custom Index
+        private native @ByVal int instanceId();
+        private native void instanceId(@ByVal int ID);
+
+        // Native Offset
+        private native @ByVal int instanceOffset();
+        private native void instanceOffset(@ByVal int OF);
     };
 
 };
