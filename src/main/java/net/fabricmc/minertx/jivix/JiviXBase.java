@@ -10,8 +10,9 @@ import org.bytedeco.javacpp.annotation.*;
 // TODO: Engine Wrappers for std::shared_ptr, like "vkt::Vector<uint8_t>"
 @Platform(include={
         "./include/vkt2/fw.hpp",
-        "./include/JiviX/JiviX.hpp"
-}, link="./lib/vulkan-1", define={"ENABLE_OPENGL_INTEROP","WIN32","OS_WIN","VK_ENABLE_BETA_EXTENSIONS","VK_USE_PLATFORM_WIN32_KHR"})
+        "./include/JiviX/JiviX.hpp",
+        "./jniJiviXCore.h"
+}, link="./lib/vulkan-1", define={"ENABLE_OPENGL_INTEROP","WIN32","OS_WIN","VK_ENABLE_BETA_EXTENSIONS","VK_USE_PLATFORM_WIN32_KHR","VMA_IMPLEMENTATION"})
 
 @Name("")
 public class JiviXBase extends Pointer {
@@ -79,27 +80,41 @@ public class JiviXBase extends Pointer {
     @Name("jvx::Context")
     public static class Context extends Pointer {
         static { Loader.load(); }
+
         public Context() { allocate(); }
         private native void allocate();
-        public native void createDescriptorSet();
+
+        public Context(JiviXCore.Context object) { allocate(object); }
+        private native void allocate(JiviXCore.Context object);
+        //public native void createDescriptorSet();
+        public native JiviXCore.Context sharedPtr();
     };
 
     @Name("jvx::Thread")
     public static class Thread extends Pointer {
         static { Loader.load(); }
+
         public Thread() { allocate(); }
         private native void allocate();
-        public native void createDescriptorSet();
+
+        public Thread(JiviXCore.Thread object) { allocate(object); }
+        private native void allocate(JiviXCore.Thread object);
+        //public native void createDescriptorSet();
+        public native JiviXCore.Thread sharedPtr();
     };
 
     @Name("jvx::Driver")
     public static class Driver extends Pointer {
         static { Loader.load(); }
+
         public Driver() { allocate(); }
         private native void allocate();
-        public native void createDescriptorSet();
-    };
 
+        public Driver(JiviXCore.Driver object) { allocate(object); }
+        private native void allocate(JiviXCore.Driver object);
+        //public native void createDescriptorSet();
+        //public native JiviXCore.Driver sharedPtr();
+    };
 
     @Name("jvx::BufferViewSet")
     public static class BufferViewSet extends Pointer {
@@ -108,45 +123,66 @@ public class JiviXBase extends Pointer {
         public BufferViewSet() { allocate(); }
         private native void allocate();
 
-        public BufferViewSet(JiviXBase.Context context) { allocate(context); }
-        private native void allocate(JiviXBase.Context context);
+        public BufferViewSet(Context context) { allocate(context); }
+        private native void allocate(Context context);
+
+        public BufferViewSet(JiviXCore.BufferViewSet object) { allocate(object); }
+        private native void allocate(JiviXCore.BufferViewSet object);
+
+        public native JiviXCore.BufferViewSet sharedPtr();
 
         public native long getBufferCount();
         public native void createDescriptorSet();
-        public native @ByRef JiviXBase.ByteVector get(int id);
-        public native @SharedPtr BufferViewSet pushBufferView(JiviXBase.ByteVector vector);
-        //public native @StdVector @ByRef JiviXBase.ByteVector[] getBufferViewList();
-        public native @ByRef @Cast("vk::DescriptorSet&") LongPointer getDescriptorSet();
-        public native @ByRef @Cast("vk::DescriptorSetLayout&") LongPointer getDescriptorLayout();
+        public native @ByRef UByteVector get(int id);
+        public native long pushBufferView(@ByRef UByteVector vector);
+        //public native @StdVector @ByRef ByteVector[] getBufferViewList();
+
+        // Value based handle
+        public native @Cast("VkDescriptorSet") long getDescriptorSet();
+        public native @Cast("VkDescriptorSetLayout") long getDescriptorLayout();
+
+        // Swinka Tramvaya
+        //public native @Cast("VkDescriptorSet*") @ByRef LongPointer getDescriptorSet();
+        //public native @Cast("VkDescriptorSetLayout*") @ByRef LongPointer getDescriptorLayout();
     };
 
     @Name("jvx::MeshInput")
     public static class MeshInput extends Pointer {
         static { Loader.load(); }
 
-        public MeshInput(JiviXBase.Context context) { allocate(context); }
-        private native void allocate(JiviXBase.Context context);
-
         public MeshInput() { allocate(); }
         private native void allocate();
 
+        public MeshInput(Context context) { allocate(context); }
+        private native void allocate(Context context);
+
+        public MeshInput(JiviXCore.MeshInput object) { allocate(object); }
+        private native void allocate(JiviXCore.MeshInput object);
+
+        public native JiviXCore.MeshInput sharedPtr();
+
         public native void createDescriptorSet();
 
-        public native @SharedPtr MeshInput makeQuad();
-        public native @SharedPtr MeshInput copyMeta(@Cast("vk::CommandBuffer") long commandBuffer);
-        public native @SharedPtr MeshInput manifestIndex(@Cast("vk::IndexType") int indexType);
+        public native JiviXCore.MeshInput makeQuad();
+        public native JiviXCore.MeshInput copyMeta(@Cast("VkCommandBuffer") long commandBuffer);
+        public native JiviXCore.MeshInput manifestIndex(@Cast("vk::IndexType") int indexType);
 
         // Use Address from LWJGL-3 structures
-        public native @SharedPtr MeshInput addBinding(int bufferID, @Cast("vkh::VkVertexInputBindingDescription*") long bindingAddress);
-        public native @SharedPtr MeshInput addAttribute(@Cast("vkh::VkVertexInputAttributeDescription*") long attributeAddress);
+        public native JiviXCore.MeshInput addBinding(int bufferID, @Cast("vkh::VkVertexInputBindingDescription*") long bindingAddress);
+        public native JiviXCore.MeshInput addAttribute(@Cast("vkh::VkVertexInputAttributeDescription*") long attributeAddress);
 
-        public native @SharedPtr MeshInput setIndexOffset(@Cast("vk::DeviceSize") long offset);
-        public native @SharedPtr MeshInput setIndexCount(@Cast("vk::DeviceSize") long count);
-        public native @SharedPtr MeshInput setIndexCount(@Cast("vk::DeviceSize") long count, @Cast("vk::IndexType") int indexType);
-        public native @SharedPtr MeshInput setPrimitiveCount(@Cast("vk::DeviceSize") long count);
-        public native @ByRef @Cast("vk::DeviceSize&") LongPointer getIndexCount(); // Return Reference
+        public native JiviXCore.MeshInput setIndexOffset(@Cast("vk::DeviceSize") long offset);
+        public native JiviXCore.MeshInput setIndexCount(@Cast("vk::DeviceSize") long count);
+        //public native JiviXCore.MeshInput setIndexCount(@Cast("vk::DeviceSize") long count, @Cast("vk::IndexType") int indexType);
+        public native JiviXCore.MeshInput setPrimitiveCount(@Cast("vk::DeviceSize") long count);
 
-        public native @SharedPtr MeshInput linkBViewSet(@Cast("std::shared_ptr<jvx::BufferViewSet>") BufferViewSet bufferViewSet);
+        // Reference Based
+        // public native @Cast("vk::DeviceSize&") @ByRef LongPointer getIndexCount(); // Return Reference
+
+        // Value Based
+        public native long getIndexCount(); // Return Reference
+
+        public native JiviXCore.MeshInput linkBViewSet(JiviXCore.BufferViewSet bufferViewSet);
     };
 
     @Name("jvx::MeshBinding")
@@ -156,29 +192,34 @@ public class JiviXBase extends Pointer {
         public MeshBinding() { allocate(); }
         private native void allocate();
 
-        public MeshBinding(JiviXBase.Context context) { allocate(context); }
-        private native void allocate(JiviXBase.Context context);
+        public MeshBinding(Context context) { allocate(context); }
+        private native void allocate(Context context);
 
-        public native void createDescriptorSet();
+        public MeshBinding(JiviXCore.MeshBinding object) { allocate(object); }
+        private native void allocate(JiviXCore.MeshBinding object);
 
-        public native @SharedPtr MeshBinding setThread(@SharedPtr JiviXBase.Thread thread);
-        public native @SharedPtr MeshBinding setDriver(@SharedPtr JiviXBase.Driver thread);
-        public native JiviXBase.ByteVector getBindingBuffer(long i);
-        public native JiviXBase.ByteVector getIndexBuffer();
+        public native JiviXCore.MeshBinding sharedPtr();
 
-        public native @ByRef IntPointer getBindingBufferGL(long i);
-        public native @ByRef IntPointer getIndexBufferGL();
+        //public native void createDescriptorSet();
 
-        public native @SharedPtr MeshBinding setIndexCount(@Cast("vk::DeviceSize") long count);
-        public native @SharedPtr MeshBinding setPrimitiveCount(@Cast("vk::DeviceSize") long count);
-        public native @SharedPtr MeshBinding setTransformData(long address, int stride);
-        public native @SharedPtr MeshBinding setTransformData(long address);
+        public native JiviXCore.MeshBinding setThread(JiviXCore.Thread thread);
+        public native JiviXCore.MeshBinding setDriver(JiviXCore.Driver thread);
 
-        public native @SharedPtr MeshBinding buildGeometry(@Cast("vk::CommandBuffer") long cmdbufAddress, @Cast("glm::uvec4*") long meshData);
+        public native @ByRef UByteVector getBindingBuffer(long i);
+        public native @ByRef UByteVector getIndexBuffer();
 
-        public native @SharedPtr MeshBinding addMeshInput(@SharedPtr MeshInput input, int materialID, int instances);
-        public native @SharedPtr MeshBinding addMeshInput(@SharedPtr MeshInput input, int materialID);
-        public native @SharedPtr MeshBinding addMeshInput(@SharedPtr MeshInput input, @StdVector int materialIDs[]);
+        public native @ByVal int getBindingBufferGL(long i);
+        public native @ByVal int getIndexBufferGL();
+
+        public native JiviXCore.MeshBinding setIndexCount(@Cast("vk::DeviceSize") long count);
+        public native JiviXCore.MeshBinding setPrimitiveCount(@Cast("vk::DeviceSize") long count);
+        public native JiviXCore.MeshBinding setTransformData(@Cast("vkt::Vector<glm::mat3x4>*") long address, int stride);
+        public native JiviXCore.MeshBinding setTransformData(@Cast("vkt::Vector<glm::mat3x4>*") long address);
+
+        public native JiviXCore.MeshBinding buildGeometry(@Cast("VkCommandBuffer") long cmdbufAddress, @Cast("glm::uvec4*") long meshData);
+        public native JiviXCore.MeshBinding addMeshInput(JiviXCore.MeshInput input, int materialID, int instances);
+        public native JiviXCore.MeshBinding addMeshInput(JiviXCore.MeshInput input, int materialID);
+        //public native JiviXCore.MeshBinding addMeshInput(JiviXCore.MeshInput input, @StdVector int materialIDs[]);
     };
 
     @Name("jvx::Node")
@@ -188,13 +229,18 @@ public class JiviXBase extends Pointer {
         public Node() { allocate(); }
         private native void allocate();
 
-        public Node(JiviXBase.Context context) { allocate(context); }
-        private native void allocate(JiviXBase.Context context);
+        public Node(Context context) { allocate(context); }
+        private native void allocate(Context context);
+
+        public Node(JiviXCore.Node object) { allocate(object); }
+        private native void allocate(JiviXCore.Node object);
+
+        public native JiviXCore.Node sharedPtr();
 
         public native void createDescriptorSet();
 
-        public native @SharedPtr Node pushInstance(@Cast("vkh::VsGeometryInstance*") long address);
-        public native long pushMesh(@SharedPtr MeshBinding binding);
+        public native JiviXCore.Node pushInstance(@Cast("vkh::VsGeometryInstance*") long address);
+        public native long pushMesh(JiviXCore.MeshBinding binding);
     };
 
     @Name("jvx::Material")
@@ -204,17 +250,22 @@ public class JiviXBase extends Pointer {
         public Material() { allocate(); }
         private native void allocate();
 
-        public Material(JiviXBase.Context context) { allocate(context); }
-        private native void allocate(JiviXBase.Context context);
+        public Material(Context context) { allocate(context); }
+        private native void allocate(Context context);
+
+        public Material(JiviXCore.Material object) { allocate(object); }
+        private native void allocate(JiviXCore.Material object);
+
+        public native JiviXCore.Material sharedPtr();
 
         public native void createDescriptorSet();
+        public native long pushMaterial(@Cast("jvi::MaterialUnit*") long materialAddress);
 
-        public native @SharedPtr Material setRawMaterials(@Cast("vkt::Vector<jvx::MaterialUnit>") JiviXBase.ByteVector rawMaterials, long materialCount);
-        public native @SharedPtr Material setGpuMaterials(@Cast("vkt::Vector<jvx::MaterialUnit>") JiviXBase.ByteVector rawMaterials);
-        public native @SharedPtr Material pushMaterial(@Cast("jvx::MaterialUnit") long materialAddress);
-        public native @SharedPtr Material resetMaterials();
-        public native @SharedPtr Material pushSampledImage(@Cast("vkh::VkDescriptorImageInfo") long imageDescAddress);
-        public native @SharedPtr Material resetSampledImages();
+        public native JiviXCore.Material setRawMaterials(@Cast("vkt::Vector<jvi::MaterialUnit>*") UByteVector rawMaterials, long materialCount);
+        public native JiviXCore.Material setGpuMaterials(@Cast("vkt::Vector<jvi::MaterialUnit>*") UByteVector rawMaterials);
+        public native JiviXCore.Material resetMaterials();
+        public native JiviXCore.Material pushSampledImage(@Cast("vkh::VkDescriptorImageInfo*") long imageDescAddress);
+        public native JiviXCore.Material resetSampledImages();
     };
 
     @Name("jvx::Renderer")
@@ -224,10 +275,14 @@ public class JiviXBase extends Pointer {
         public Renderer() { allocate(); }
         private native void allocate();
 
-        public Renderer(JiviXBase.Context context) { allocate(context); }
-        private native void allocate(JiviXBase.Context context);
+        public Renderer(Context context) { allocate(context); }
+        private native void allocate(Context context);
 
-        public native void createDescriptorSet();
+        public Renderer(@ByRef JiviXCore.Renderer object) { allocate(object); }
+        private native void allocate(@ByRef JiviXCore.Renderer object);
+
+        public native JiviXCore.Renderer sharedPtr();
+        //public native void createDescriptorSet();
     };
 
 }

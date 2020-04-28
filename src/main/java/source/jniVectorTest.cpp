@@ -555,6 +555,27 @@ static int JavaCPP_memberOffsetSizes[10] = { 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 };
 
 extern "C" {
 
+JNIEXPORT int JavaCPP_init(int argc, const char *argv[]) {
+#if defined(__ANDROID__) || TARGET_OS_IPHONE
+    return JNI_OK;
+#else
+    if (JavaCPP_vm != NULL) {
+        return JNI_OK;
+    }
+    int err;
+    JavaVM *vm;
+    JNIEnv *env;
+    int nOptions = 1 + (argc > 255 ? 255 : argc);
+    JavaVMOption options[256] = { { NULL } };
+    options[0].optionString = (char*)"-Djava.class.path=javacpp.jar;H:/Data/Projects/MineRTX/src/main/java";
+    for (int i = 1; i < nOptions && argv != NULL; i++) {
+        options[i].optionString = (char*)argv[i - 1];
+    }
+    JavaVMInitArgs vm_args = { JNI_VERSION_1_6, nOptions, options };
+    return (err = JNI_CreateJavaVM(&vm, (void**)&env, &vm_args)) == JNI_OK && vm != NULL && (err = JNI_OnLoad(vm, NULL)) >= 0 ? JNI_OK : err;
+#endif
+}
+
 JNIEXPORT jint JNICALL JNI_OnLoad_jnijavacpp(JavaVM* vm, void* reserved);
 JNIEXPORT void JNICALL JNI_OnUnload_jnijavacpp(JavaVM* vm, void* reserved);
 
@@ -661,6 +682,15 @@ JNIEXPORT jint JNICALL JNI_OnLoad(JavaVM* vm, void* reserved) {
     return env->GetVersion();
 }
 
+JNIEXPORT int JavaCPP_uninit() {
+#if defined(__ANDROID__) || TARGET_OS_IPHONE
+    return JNI_OK;
+#else
+    JavaVM *vm = JavaCPP_vm;
+    JNI_OnUnload(JavaCPP_vm, NULL);
+    return vm->DestroyJavaVM();
+#endif
+}
 
 JNIEXPORT void JNICALL JNI_OnUnload(JavaVM* vm, void* reserved) {
     JNIEnv* env;

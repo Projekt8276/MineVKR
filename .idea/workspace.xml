@@ -3,23 +3,39 @@
   <component name="ChangeListManager">
     <list default="true" id="4b7b64e4-95fe-4605-8caf-f658c6b40341" name="Default Changelist" comment="">
       <change afterPath="$PROJECT_DIR$/.idea/jarRepositories.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/net/fabricmc/minertx/jivix/JiviXBase$BufferViewSet.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/net/fabricmc/minertx/jivix/JiviXBase$ByteVector.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/net/fabricmc/minertx/jivix/JiviXBase$Material.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/net/fabricmc/minertx/jivix/JiviXBase$MeshBinding.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/net/fabricmc/minertx/jivix/JiviXBase$MeshInput.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/net/fabricmc/minertx/jivix/JiviXBase$Node.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/net/fabricmc/minertx/jivix/JiviXBase$Renderer.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/net/fabricmc/minertx/jivix/JiviXBase$UByteVector.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/.vs/CMake Overview" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/.vs/ProjectSettings.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/.vs/VSWorkspaceState.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/.vs/java/v16/.suo" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/.vs/java/v16/Preview/Browse.VC.db" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/.vs/slnx.sqlite" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/CMakeSettings.json" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/src/main/java/net/fabricmc/minertx/jivix/jniJiviXBase.cpp" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/src/main/java/source/jniJiviXBase.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/CMakeLists.txt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/CMakeLists.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/generate.bat" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/generate.bat" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/net/fabricmc/minertx/jivix/JiviXBase$Context.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/net/fabricmc/minertx/jivix/JiviXBase$Driver.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/net/fabricmc/minertx/jivix/JiviXBase$Thread.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/net/fabricmc/minertx/jivix/JiviXBase.class" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/net/fabricmc/minertx/jivix/JiviXBase.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/fabricmc/minertx/jivix/JiviXBase.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/net/fabricmc/minertx/jivix/Mesh$BufferViewSet.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/net/fabricmc/minertx/jivix/Mesh$Material.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/net/fabricmc/minertx/jivix/Mesh$MeshBinding.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/net/fabricmc/minertx/jivix/Mesh$MeshInput.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/net/fabricmc/minertx/jivix/Mesh$Node.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/net/fabricmc/minertx/jivix/Mesh$Renderer.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/net/fabricmc/minertx/jivix/Mesh.class" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/net/fabricmc/minertx/jivix/Mesh.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/net/fabricmc/minertx/jivix/Vector$ByteVector.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/net/fabricmc/minertx/jivix/Vector$UByteVector.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/net/fabricmc/minertx/jivix/Vector.class" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/net/fabricmc/minertx/jivix/Vector.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/net/fabricmc/minertx/jivix/VectorTest$1.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/net/fabricmc/minertx/jivix/VectorTest$PointerVectorVector.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/net/fabricmc/minertx/jivix/VectorTest.class" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/net/fabricmc/minertx/jivix/jniMesh.cpp" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/net/fabricmc/minertx/jivix/jniVector.cpp" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/source/jniMesh.cpp" beforeDir="false" />
@@ -48,8 +64,8 @@
       <change beforePath="$PROJECT_DIR$/src/main/java/windows-x86_64/CMakeFiles/clion-environment.txt" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/windows-x86_64/CMakeFiles/clion-log.txt" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/windows-x86_64/CMakeFiles/progress.marks" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/windows-x86_64/JiviX.cbp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/windows-x86_64/JiviX.cbp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/windows-x86_64/Makefile" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/windows-x86_64/Makefile" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/windows-x86_64/JiviX.cbp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/windows-x86_64/Makefile" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/windows-x86_64/cmake_install.cmake" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/windows-x86_64/cmake_install.cmake" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />

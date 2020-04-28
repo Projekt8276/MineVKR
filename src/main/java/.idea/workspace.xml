@@ -12,8 +12,32 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="4a293efd-8312-4c97-91a1-2e7672f928d8" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/net/fabricmc/minertx/jivix/JiviXCore$BufferViewSet.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/net/fabricmc/minertx/jivix/JiviXCore$Context.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/net/fabricmc/minertx/jivix/JiviXCore$Driver.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/net/fabricmc/minertx/jivix/JiviXCore$Material.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/net/fabricmc/minertx/jivix/JiviXCore$MeshBinding.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/net/fabricmc/minertx/jivix/JiviXCore$MeshInput.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/net/fabricmc/minertx/jivix/JiviXCore$Node.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/net/fabricmc/minertx/jivix/JiviXCore$Renderer.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/net/fabricmc/minertx/jivix/JiviXCore$Thread.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/net/fabricmc/minertx/jivix/JiviXCore.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/net/fabricmc/minertx/jivix/JiviXCore.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/net/fabricmc/minertx/jivix/jniJiviXBase.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/net/fabricmc/minertx/jivix/jniJiviXCore.cpp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/net/fabricmc/minertx/jivix/jniJiviXCore.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/net/fabricmc/minertx/jivix/jniVectorTest.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/source/jniJiviXCore.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../../../.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/generate.bat" beforeDir="false" afterPath="$PROJECT_DIR$/generate.bat" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/net/fabricmc/minertx/jivix/JiviXBase.java" beforeDir="false" afterPath="$PROJECT_DIR$/net/fabricmc/minertx/jivix/JiviXBase.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/source/jniJiviXBase.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/source/jniJiviXBase.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/source/jniVectorTest.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/source/jniVectorTest.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/source/jnijavacpp.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/source/jnijavacpp.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/windows-x86_64/CMakeCache.txt" beforeDir="false" afterPath="$PROJECT_DIR$/windows-x86_64/CMakeCache.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/windows-x86_64/CMakeFiles/TargetDirectories.txt" beforeDir="false" afterPath="$PROJECT_DIR$/windows-x86_64/CMakeFiles/TargetDirectories.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/windows-x86_64/cmake_install.cmake" beforeDir="false" afterPath="$PROJECT_DIR$/windows-x86_64/cmake_install.cmake" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -79,7 +103,10 @@
       <workItem from="1587973975778" duration="2576000" />
       <workItem from="1587991449912" duration="3790000" />
       <workItem from="1588000023608" duration="1456000" />
-      <workItem from="1588002478493" duration="1133000" />
+      <workItem from="1588002478493" duration="1171000" />
+      <workItem from="1588045010313" duration="131000" />
+      <workItem from="1588045151311" duration="4768000" />
+      <workItem from="1588055960537" duration="3428000" />
     </task>
     <servers />
   </component>
@@ -90,10 +117,10 @@
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="553" y="161" key="#Plugins" timestamp="1587796240518">
+    <state x="553" y="161" key="#Plugins" timestamp="1588045164038">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="553" y="161" key="#Plugins/0.0.1920.1040@0.0.1920.1040" timestamp="1587796240518" />
+    <state x="553" y="161" key="#Plugins/0.0.1920.1040@0.0.1920.1040" timestamp="1588045164038" />
     <state x="416" y="175" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1587975472394">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
@@ -106,9 +133,9 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="656" y="344" key="com.intellij.ide.util.TipDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1587791539251" />
-    <state x="620" y="243" key="run.anything.popup" timestamp="1588002532494">
+    <state x="621" y="244" key="run.anything.popup" timestamp="1588047368007">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="620" y="243" key="run.anything.popup/0.0.1920.1040@0.0.1920.1040" timestamp="1588002532494" />
+    <state x="621" y="244" key="run.anything.popup/0.0.1920.1040@0.0.1920.1040" timestamp="1588047368007" />
   </component>
 </project>
