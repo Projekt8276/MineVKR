@@ -23,8 +23,14 @@ public class JiviXBase extends Pointer {
     public static class ByteVector extends Pointer {
         static { Loader.load(); }
         public ByteVector()       { allocate();  }
+
+        //
         public ByteVector(Pointer p) { super(p); } // this = (vector<vector<void*> >*)p
         private native void allocate();
+
+        //
+        //public ByteVector(JiviXCore.VmaBufferAllocation a, long offset, long size) { allocate(a, offset, size); } // this = (vector<vector<void*> >*)p
+        //private native void allocate(JiviXCore.VmaBufferAllocation a, long offset, long size);
 
         //
         @Name("operator=")
@@ -52,9 +58,15 @@ public class JiviXBase extends Pointer {
     @Name("vkt::Vector<uint8_t>")
     public static class UByteVector extends Pointer {
         static { Loader.load(); }
+
+        //
         public UByteVector()       { allocate();  }
         public UByteVector(Pointer p) { super(p); } // this = (vector<vector<void*> >*)p
         private native void allocate();
+
+        //
+        //public UByteVector(JiviXCore.VmaBufferAllocation a, long offset, long size) { allocate(a, offset, size); } // this = (vector<vector<void*> >*)p
+        //private native void allocate(JiviXCore.VmaBufferAllocation a, long offset, long size);
 
         //
         @Name("operator=")
@@ -72,10 +84,14 @@ public class JiviXBase extends Pointer {
         // map buffer data
         public native @Cast("uint8_t*") BytePointer mapped();
         public native @Cast("uint8_t*") BytePointer map();
+        public native @Cast("uint8_t*") BytePointer data();
 
         // Java have NOT support `VkDeviceOrHostAddressKHR` or `VkDeviceOrHostAddressConstKHR`, and become rude var...
         public native @Cast("uintptr_t") long deviceAddress();
     };
+
+    @Name("vkt::MakeVmaVector")
+    public static native UByteVector MakeVmaVector(JiviXCore.VmaBufferAllocation allocation, long offset, long size);
 
     @Name("jvx::Context")
     public static class Context extends Pointer {

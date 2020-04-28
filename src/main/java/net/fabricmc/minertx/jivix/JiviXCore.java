@@ -18,6 +18,28 @@ import org.bytedeco.javacpp.annotation.*;
 public class JiviXCore extends Pointer {
     static { Loader.load(); }
 
+    @Name("vkt::VmaImageAllocation")
+    public static class VmaImagellocation extends Pointer {
+        static { Loader.load(); }
+
+        public VmaImagellocation() { allocate(); }
+        private native void allocate();
+
+        public VmaImagellocation(@Cast("VmaAllocator*") long vmaAllocator, @Cast("vkh::VkImageCreateInfo*") long createInfo, @Cast("VmaMemoryUsage") int vmaUsage) { allocate(vmaAllocator, createInfo, vmaUsage); };
+        private native void allocate(@Cast("VmaAllocator*") long vmaAllocator, @Cast("vkh::VkImageCreateInfo*") long createInfo, @Cast("VmaMemoryUsage") int vmaUsage);
+    };
+
+    @Name("vkt::VmaBufferAllocation")
+    public static class VmaBufferAllocation extends Pointer {
+        static { Loader.load(); }
+
+        public VmaBufferAllocation() { allocate(); }
+        private native void allocate();
+
+        public VmaBufferAllocation(@Cast("VmaAllocator*") long vmaAllocator, @Cast("vkh::VkBufferCreateInfo*") long createInfo, @Cast("VmaMemoryUsage") int vmaUsage) { allocate(vmaAllocator, createInfo, vmaUsage); };
+        private native void allocate(@Cast("VmaAllocator*") long vmaAllocator, @Cast("vkh::VkBufferCreateInfo*") long createInfo, @Cast("VmaMemoryUsage") int vmaUsage);
+    };
+
     @Name("jvi::Context")
     public static class Context extends Pointer {
         static { Loader.load(); }
