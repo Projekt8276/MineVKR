@@ -12,7 +12,7 @@ import org.bytedeco.javacpp.annotation.*;
 @Platform(include={
         "./include/vkt2/fw.hpp",
         "./include/JiviX/JVI/JiviX.hpp"
-}, link="./lib/vulkan-1", define={"ENABLE_OPENGL_INTEROP","WIN32","OS_WIN","VK_ENABLE_BETA_EXTENSIONS","VK_USE_PLATFORM_WIN32_KHR","VMA_IMPLEMENTATION"})
+}, link="./lib/vulkan-1", define={"ENABLE_OPENGL_INTEROP","WIN32","OS_WIN","VK_ENABLE_BETA_EXTENSIONS","VK_USE_PLATFORM_WIN32_KHR","VMA_IMPLEMENTATION","SHARED_PTR_NAMESPACE std", "UNIQUE_PTR_NAMESPACE std"})
 
 @Name("")
 public class JiviXCore extends Pointer {
@@ -135,7 +135,6 @@ public class JiviXCore extends Pointer {
         private native void allocate(Context context);
 
     };
-
 
     @Name("jvi::MaterialUnit")
     public static class MaterialUnit extends Pointer {

@@ -1,20 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="4b7b64e4-95fe-4605-8caf-f658c6b40341" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/net/fabricmc/minertx/jivix/JiviXCore$VmaBufferAllocation.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/net/fabricmc/minertx/jivix/JiviXCore$VmaImagellocation.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/net/fabricmc/minertx/MineRTX.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/fabricmc/minertx/MineRTX.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/net/fabricmc/minertx/jivix/JiviXBase.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/fabricmc/minertx/jivix/JiviXBase.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/net/fabricmc/minertx/jivix/JiviXCore$MaterialUnit.class" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/fabricmc/minertx/jivix/JiviXCore$MaterialUnit.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/net/fabricmc/minertx/jivix/JiviXCore$VsGeometryInstance.class" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/fabricmc/minertx/jivix/JiviXCore$VsGeometryInstance.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/net/fabricmc/minertx/jivix/JiviXCore.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/fabricmc/minertx/jivix/JiviXCore.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/source/jniJiviXBase.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/source/jniJiviXBase.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/source/jniJiviXCore.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/source/jniJiviXCore.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/source/jnijavacpp.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/source/jnijavacpp.cpp" afterDir="false" />
-    </list>
+    <list default="true" id="4b7b64e4-95fe-4605-8caf-f658c6b40341" name="Default Changelist" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />

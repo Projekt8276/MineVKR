@@ -12,14 +12,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="4a293efd-8312-4c97-91a1-2e7672f928d8" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/net/fabricmc/minertx/jivix/JiviXCore$VmaBufferAllocation.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/net/fabricmc/minertx/jivix/JiviXCore$VmaImagellocation.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../../../.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../../../.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/net/fabricmc/minertx/MineRTX.java" beforeDir="false" afterPath="$PROJECT_DIR$/net/fabricmc/minertx/MineRTX.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/net/fabricmc/minertx/jivix/JiviXBase.java" beforeDir="false" afterPath="$PROJECT_DIR$/net/fabricmc/minertx/jivix/JiviXBase.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/net/fabricmc/minertx/jivix/JiviXCore$MaterialUnit.class" beforeDir="false" afterPath="$PROJECT_DIR$/net/fabricmc/minertx/jivix/JiviXCore$MaterialUnit.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/net/fabricmc/minertx/jivix/JiviXCore$VsGeometryInstance.class" beforeDir="false" afterPath="$PROJECT_DIR$/net/fabricmc/minertx/jivix/JiviXCore$VsGeometryInstance.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/net/fabricmc/minertx/jivix/JiviXCore.java" beforeDir="false" afterPath="$PROJECT_DIR$/net/fabricmc/minertx/jivix/JiviXCore.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/source/jniJiviXBase.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/source/jniJiviXBase.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/source/jniJiviXCore.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/source/jniJiviXCore.cpp" afterDir="false" />
@@ -96,6 +91,8 @@
       <workItem from="1588062018896" duration="309000" />
       <workItem from="1588062827012" duration="687000" />
       <workItem from="1588076381440" duration="1555000" />
+      <workItem from="1588110259292" duration="3310000" />
+      <workItem from="1588114317302" duration="1267000" />
     </task>
     <servers />
   </component>
