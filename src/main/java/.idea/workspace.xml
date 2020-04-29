@@ -12,6 +12,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="4a293efd-8312-4c97-91a1-2e7672f928d8" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/net/fabricmc/minertx/jivix/JiviXCore$VmaImageAllocation.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../../../.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../../../.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/net/fabricmc/minertx/jivix/JiviXBase.java" beforeDir="false" afterPath="$PROJECT_DIR$/net/fabricmc/minertx/jivix/JiviXBase.java" afterDir="false" />
@@ -95,7 +96,7 @@
       <workItem from="1588114317302" duration="1267000" />
       <workItem from="1588131191508" duration="115000" />
       <workItem from="1588131319985" duration="39000" />
-      <workItem from="1588131367693" duration="10665000" />
+      <workItem from="1588131367693" duration="11260000" />
     </task>
     <servers />
   </component>

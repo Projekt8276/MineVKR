@@ -37,18 +37,18 @@ public class JiviXCore extends Pointer {
 
 
     @Name("vkt::VmaImageAllocation")
-    public static class VmaImagellocation extends Pointer {
+    public static class VmaImageAllocation extends Pointer {
         static { Loader.load(); }
 
-        public VmaImagellocation(Pointer p) { super(p); }
+        public VmaImageAllocation(Pointer p) { super(p); }
 
-        public VmaImagellocation() { allocate(); }
+        public VmaImageAllocation() { allocate(); }
         private native void allocate();
 
-        public VmaImagellocation(@SharedPtr ImageAllocation alloc) { allocate(alloc); };
+        public VmaImageAllocation(@SharedPtr ImageAllocation alloc) { allocate(alloc); };
         private native void allocate(@SharedPtr ImageAllocation alloc);
 
-        public VmaImagellocation(@Cast("VmaAllocator*") long vmaAllocator, @Cast("vkh::VkImageCreateInfo*") long createInfo, @Cast("VmaMemoryUsage") int vmaUsage) { allocate(vmaAllocator, createInfo, vmaUsage); };
+        public VmaImageAllocation(@Cast("VmaAllocator*") long vmaAllocator, @Cast("vkh::VkImageCreateInfo*") long createInfo, @Cast("VmaMemoryUsage") int vmaUsage) { allocate(vmaAllocator, createInfo, vmaUsage); };
         private native void allocate(@Cast("VmaAllocator*") long vmaAllocator, @Cast("vkh::VkImageCreateInfo*") long createInfo, @Cast("VmaMemoryUsage") int vmaUsage);
 
         private native @SharedPtr ImageAllocation uniPtr();
