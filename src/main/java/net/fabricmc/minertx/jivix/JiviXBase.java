@@ -282,8 +282,18 @@ public class JiviXBase extends Pointer {
         public MeshBinding() { allocate(); }
         private native void allocate();
 
-        public MeshBinding(Context context) { allocate(context); }
-        private native void allocate(Context context);
+        //
+        public MeshBinding(Context context, long maxPrimitiveCount, @StdVector long[] perGeometryCount) { allocate(context, maxPrimitiveCount, perGeometryCount); }
+        private native void allocate(Context context, long maxPrimitiveCount, @StdVector long[] perGeometryCount);
+
+        //
+        public MeshBinding(Context context, long maxPrimitiveCount) { allocate(context, maxPrimitiveCount); }
+        private native void allocate(Context context, long maxPrimitiveCount);
+
+        // Not Prefer...
+        //public MeshBinding(Context context) { allocate(context); }
+        //private native void allocate(Context context);
+
 
         public MeshBinding(@SharedPtr JiviXCore.MeshBinding object) { allocate(object); }
         private native void allocate(@SharedPtr JiviXCore.MeshBinding object);
@@ -305,8 +315,10 @@ public class JiviXBase extends Pointer {
         public native JiviXCore.MeshBinding setTransformData(@Cast("vkt::Vector<glm::mat3x4>*") long address);
 
         public native JiviXCore.MeshBinding buildGeometry(@Cast("VkCommandBuffer") long cmdbufAddress, @Cast("glm::uvec4*") long meshData);
-        public native JiviXCore.MeshBinding addMeshInput(@ByRef MeshInput input, int materialID, int instances);
+        public native JiviXCore.MeshBinding addMeshInput(@ByRef MeshInput input, int materialID, long instances);
         public native JiviXCore.MeshBinding addMeshInput(@ByRef MeshInput input, int materialID);
+        public native JiviXCore.MeshBinding addMeshInput(@ByRef MeshInput input, @StdVector int materialIDs[]);
+
         //public native @ByRef JiviXCore.MeshBinding addMeshInput(@ByRef MeshInput input, @StdVector int materialIDs[]);
     };
 

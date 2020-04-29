@@ -12,43 +12,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="4a293efd-8312-4c97-91a1-2e7672f928d8" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/../../../lib/HLSL.lib" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../../lib/JiviX.lib" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../../lib/OGLCompiler.lib" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../../lib/OSDependent.lib" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../../lib/SPIRV.lib" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../../lib/SPVRemapper.lib" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../../lib/shaderc.lib" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../../lib/shaderc_shared.lib" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../../lib/shaderc_util.lib" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../../lib/spirv-cross-c-shared.lib" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../../lib/spirv-cross-c.lib" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../../lib/spirv-cross-core.lib" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../../lib/spirv-cross-cpp.lib" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../../lib/spirv-cross-glsl.lib" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../../lib/spirv-cross-hlsl.lib" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../../lib/spirv-cross-msl.lib" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../../lib/spirv-cross-reflect.lib" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../../lib/spirv-cross-util.lib" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/bin" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/net/fabricmc/minertx/jivix/JiviXBase$TestClass.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../../../.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/../../../build.gradle" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../lib/VkLayer_utils.lib" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../lib/shaderc_combined.lib" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../lib/vulkan-1.lib" beforeDir="false" afterPath="$PROJECT_DIR$/../../../lib/vulkan-1.lib" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CMakeLists.txt" beforeDir="false" afterPath="$PROJECT_DIR$/CMakeLists.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/net/fabricmc/minertx/MineRTX.java" beforeDir="false" afterPath="$PROJECT_DIR$/net/fabricmc/minertx/MineRTX.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/net/fabricmc/minertx/jivix/JiviXBase.java" beforeDir="false" afterPath="$PROJECT_DIR$/net/fabricmc/minertx/jivix/JiviXBase.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/net/fabricmc/minertx/jivix/JiviXCore$VmaImagellocation.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/net/fabricmc/minertx/jivix/JiviXCore.java" beforeDir="false" afterPath="$PROJECT_DIR$/net/fabricmc/minertx/jivix/JiviXCore.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/net/fabricmc/minertx/mixin/RendererMixin.java" beforeDir="false" afterPath="$PROJECT_DIR$/net/fabricmc/minertx/mixin/RendererMixin.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/source/jniJiviXBase.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/source/jniJiviXBase.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/source/jniJiviXCore.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/source/jniJiviXCore.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/source/jnijavacpp.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/source/jnijavacpp.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/windows-x86_64/CMakeCache.txt" beforeDir="false" afterPath="$PROJECT_DIR$/windows-x86_64/CMakeCache.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/windows-x86_64/CMakeFiles/TargetDirectories.txt" beforeDir="false" afterPath="$PROJECT_DIR$/windows-x86_64/CMakeFiles/TargetDirectories.txt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -126,7 +94,8 @@
       <workItem from="1588131191508" duration="115000" />
       <workItem from="1588131319985" duration="39000" />
       <workItem from="1588131367693" duration="12122000" />
-      <workItem from="1588146270065" duration="5834000" />
+      <workItem from="1588146270065" duration="5929000" />
+      <workItem from="1588153236964" duration="1203000" />
     </task>
     <servers />
   </component>
