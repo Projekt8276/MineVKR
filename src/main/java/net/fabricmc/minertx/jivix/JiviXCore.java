@@ -8,13 +8,11 @@ import org.bytedeco.javacpp.LongPointer;
 import org.bytedeco.javacpp.Pointer;
 import org.bytedeco.javacpp.annotation.*;
 
-// TODO: Engine Wrappers for std::shared_ptr, like "vkt::Vector<uint8_t>"
 @Platform(include={
         "./include/vkt2/fw.hpp",
         "./include/JiviX/JVI/JiviX.hpp"
 }, link="./lib/vulkan-1", define={"ENABLE_OPENGL_INTEROP","WIN32","OS_WIN","VK_ENABLE_BETA_EXTENSIONS","VK_USE_PLATFORM_WIN32_KHR","VMA_IMPLEMENTATION","SHARED_PTR_NAMESPACE std", "UNIQUE_PTR_NAMESPACE std"})
-
-@Name("")
+@Name("") //
 public class JiviXCore extends Pointer {
     static { Loader.load(); }
 
@@ -75,6 +73,7 @@ public class JiviXCore extends Pointer {
         private native @SharedPtr BufferAllocation uniPtr();
     };
 
+
     @Name("vkt::VmaBufferAllocation")
     public static class VmaBufferAllocation extends Pointer {
         static { Loader.load(); }
@@ -94,8 +93,6 @@ public class JiviXCore extends Pointer {
     };
 
 
-
-
     @Name("jvi::Context")
     public static class Context extends Pointer {
         static { Loader.load(); }
@@ -105,6 +102,7 @@ public class JiviXCore extends Pointer {
         public Context() { allocate(); }
         private native void allocate();
     };
+
 
     @Name("jvi::Thread")
     public static class Thread extends Pointer {
@@ -116,6 +114,7 @@ public class JiviXCore extends Pointer {
         private native void allocate();
     };
 
+
     @Name("jvi::Driver")
     public static class Driver extends Pointer {
         static { Loader.load(); }
@@ -125,6 +124,7 @@ public class JiviXCore extends Pointer {
         public Driver() { allocate(); }
         private native void allocate();
     };
+
 
     @Name("jvi::BufferViewSet")
     public static class BufferViewSet extends Pointer {
@@ -139,6 +139,7 @@ public class JiviXCore extends Pointer {
         private native void allocate(Context context);
     };
 
+
     @Name("jvi::MeshInput")
     public static class MeshInput extends Pointer {
         static { Loader.load(); }
@@ -151,6 +152,7 @@ public class JiviXCore extends Pointer {
         public MeshInput() { allocate(); }
         private native void allocate();
     };
+
 
     @Name("jvi::MeshBinding")
     public static class MeshBinding extends Pointer {
@@ -165,6 +167,7 @@ public class JiviXCore extends Pointer {
         private native void allocate(Context context);
     };
 
+
     @Name("jvi::Node")
     public static class Node extends Pointer {
         static { Loader.load(); }
@@ -177,6 +180,7 @@ public class JiviXCore extends Pointer {
         public Node(Context context) { allocate(context); }
         private native void allocate(Context context);
     };
+
 
     @Name("jvi::Material")
     public static class Material extends Pointer {
@@ -191,6 +195,7 @@ public class JiviXCore extends Pointer {
         private native void allocate(Context context);
     };
 
+
     @Name("jvi::Renderer")
     public static class Renderer extends Pointer {
         static { Loader.load(); }
@@ -203,6 +208,7 @@ public class JiviXCore extends Pointer {
         public Renderer(Context context) { allocate(context); }
         private native void allocate(Context context);
     };
+
 
     @Name("jvi::MaterialUnit")
     public static class MaterialUnit extends Pointer {
@@ -235,6 +241,7 @@ public class JiviXCore extends Pointer {
         private native @ByVal int normalsTexture(); private native void normalsTexture(@ByVal int CL);
         private native @ByVal int emissionTexture(); private native void emissionTexture(@ByVal int CL);
     };
+
 
     @Name("vkh::VsGeometryInstance")
     public static class VsGeometryInstance extends Pointer {

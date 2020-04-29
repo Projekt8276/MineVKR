@@ -2,9 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="4b7b64e4-95fe-4605-8caf-f658c6b40341" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/net/fabricmc/minertx/jivix/JiviXBase$ImageRegion.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/net/fabricmc/minertx/jivix/JiviXCore$BufferAllocation.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/net/fabricmc/minertx/jivix/JiviXCore$ImageAllocation.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/net/fabricmc/minertx/jivix/JiviXBase.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/fabricmc/minertx/jivix/JiviXBase.java" afterDir="false" />
@@ -77,7 +74,7 @@
     <property name="project.structure.last.edited" value="Project" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
-    <property name="settings.editor.selected.configurable" value="configurable.group.language" />
+    <property name="settings.editor.selected.configurable" value="preferences.keymap" />
     <property name="show.unlinked.gradle.project.popup" value="true" />
   </component>
   <component name="RunManager" selected="Gradle.MineRTX [genSources]">
@@ -195,13 +192,17 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="541" y="263" key="IDE.errors.dialog/0.0.1920.1040@0.0.1920.1040" timestamp="1587955470833" />
-    <state x="441" y="95" key="SettingsEditor" timestamp="1587960675961">
+    <state x="441" y="95" key="SettingsEditor" timestamp="1588139314962">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="441" y="95" key="SettingsEditor/0.0.1920.1040@0.0.1920.1040" timestamp="1587960675961" />
+    <state x="441" y="95" key="SettingsEditor/0.0.1920.1040@0.0.1920.1040" timestamp="1588139314962" />
     <state x="385" y="141" key="new project wizard" timestamp="1587960686884">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="385" y="141" key="new project wizard/0.0.1920.1040@0.0.1920.1040" timestamp="1587960686884" />
+    <state x="619" y="242" key="run.anything.popup" timestamp="1588139996376">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="619" y="242" key="run.anything.popup/0.0.1920.1040@0.0.1920.1040" timestamp="1588139996376" />
   </component>
 </project>

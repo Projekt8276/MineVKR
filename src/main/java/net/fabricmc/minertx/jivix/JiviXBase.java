@@ -7,14 +7,12 @@ import org.bytedeco.javacpp.LongPointer;
 import org.bytedeco.javacpp.Pointer;
 import org.bytedeco.javacpp.annotation.*;
 
-// TODO: Engine Wrappers for std::shared_ptr, like "vkt::Vector<uint8_t>"
 @Platform(include={
         "./include/vkt2/fw.hpp",
         "./include/JiviX/JiviX.hpp",
         "./jniJiviXCore.h"
 }, link="./lib/vulkan-1", define={"ENABLE_OPENGL_INTEROP","WIN32","OS_WIN","VK_ENABLE_BETA_EXTENSIONS","VK_USE_PLATFORM_WIN32_KHR","VMA_IMPLEMENTATION","SHARED_PTR_NAMESPACE std", "UNIQUE_PTR_NAMESPACE std"})
-
-@Name("")
+@Name("") //
 public class JiviXBase extends Pointer {
     static { Loader.load(); }
 
@@ -124,14 +122,6 @@ public class JiviXBase extends Pointer {
     };
 
 
-    //@Name("vkt::MakeVmaVector<uint8_t>") //
-    //public static native UByteVector MakeVmaVectorU8(JiviXCore.VmaBufferAllocation allocation, long offset, long size);
-
-
-    //@Name("vkt::MakeVmaVector<int8_t>") //
-    //public static native ByteVector MakeVmaVector(JiviXCore.VmaBufferAllocation allocation, long offset, long size);
-
-
     @Name("jvx::Context")
     public static class Context extends Pointer {
         static { Loader.load(); }
@@ -153,6 +143,7 @@ public class JiviXBase extends Pointer {
         //public native void createDescriptorSet();
         public native @SharedPtr JiviXCore.Context sharedPtr();
     };
+
 
     @Name("jvx::Thread")
     public static class Thread extends Pointer {
@@ -245,6 +236,7 @@ public class JiviXBase extends Pointer {
         //public native @Cast("VkDescriptorSetLayout*") @ByRef LongPointer getDescriptorLayout();
     };
 
+
     @Name("jvx::MeshInput")
     public static class MeshInput extends Pointer {
         static { Loader.load(); }
@@ -283,8 +275,9 @@ public class JiviXBase extends Pointer {
         // Value Based
         public native long getIndexCount(); // Return Reference
 
-        public native JiviXCore.MeshInput linkBViewSet(JiviXCore.BufferViewSet bufferViewSet);
+        public native JiviXCore.MeshInput linkBViewSet(@ByRef BufferViewSet bufferViewSet);
     };
+
 
     @Name("jvx::MeshBinding")
     public static class MeshBinding extends Pointer {
@@ -318,10 +311,11 @@ public class JiviXBase extends Pointer {
         public native JiviXCore.MeshBinding setTransformData(@Cast("vkt::Vector<glm::mat3x4>*") long address);
 
         public native JiviXCore.MeshBinding buildGeometry(@Cast("VkCommandBuffer") long cmdbufAddress, @Cast("glm::uvec4*") long meshData);
-        public native JiviXCore.MeshBinding addMeshInput(JiviXCore.MeshInput input, int materialID, int instances);
-        public native JiviXCore.MeshBinding addMeshInput(JiviXCore.MeshInput input, int materialID);
-        //public native JiviXCore.MeshBinding addMeshInput(JiviXCore.MeshInput input, @StdVector int materialIDs[]);
+        public native JiviXCore.MeshBinding addMeshInput(@ByRef MeshInput input, int materialID, int instances);
+        public native JiviXCore.MeshBinding addMeshInput(@ByRef MeshInput input, int materialID);
+        //public native @ByRef JiviXCore.MeshBinding addMeshInput(@ByRef MeshInput input, @StdVector int materialIDs[]);
     };
+
 
     @Name("jvx::Node")
     public static class Node extends Pointer {
@@ -340,11 +334,12 @@ public class JiviXBase extends Pointer {
 
         public native @SharedPtr JiviXCore.Node sharedPtr();
 
-        public native void createDescriptorSet();
-
         public native JiviXCore.Node pushInstance(@Cast("vkh::VsGeometryInstance*") long address);
-        public native long pushMesh(JiviXCore.MeshBinding binding);
+
+        public native long pushMesh(@ByRef MeshBinding binding);
+        public native void createDescriptorSet();
     };
+
 
     @Name("jvx::Material")
     public static class Material extends Pointer {
@@ -373,6 +368,7 @@ public class JiviXBase extends Pointer {
         public native JiviXCore.Material resetSampledImages();
     };
 
+
     @Name("jvx::Renderer")
     public static class Renderer extends Pointer {
         static { Loader.load(); }
@@ -389,6 +385,10 @@ public class JiviXBase extends Pointer {
         private native void allocate(@SharedPtr JiviXCore.Renderer object);
 
         public native @SharedPtr JiviXCore.Renderer sharedPtr();
+
+        //
+        public native JiviXCore.Renderer linkMaterial(@ByRef Material material);
+        public native JiviXCore.Renderer linkNode(@ByRef Node node);
         //public native void createDescriptorSet();
     };
 
