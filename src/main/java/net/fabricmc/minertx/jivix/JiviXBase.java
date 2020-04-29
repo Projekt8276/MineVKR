@@ -29,8 +29,8 @@ public class JiviXBase extends Pointer {
         private native void allocate();
 
         //
-        //public ByteVector(JiviXCore.VmaBufferAllocation a, long offset, long size) { allocate(a, offset, size); } // this = (vector<vector<void*> >*)p
-        //private native void allocate(JiviXCore.VmaBufferAllocation a, long offset, long size);
+        public ByteVector(@SharedPtr JiviXCore.VmaBufferAllocation a, long offset, long size) { allocate(a, offset, size); } // this = (vector<vector<void*> >*)p
+        private native void allocate(@SharedPtr JiviXCore.VmaBufferAllocation a, long offset, long size);
 
         //
         @Name("operator=")
@@ -65,8 +65,8 @@ public class JiviXBase extends Pointer {
         private native void allocate();
 
         //
-        //public UByteVector(JiviXCore.VmaBufferAllocation a, long offset, long size) { allocate(a, offset, size); } // this = (vector<vector<void*> >*)p
-        //private native void allocate(JiviXCore.VmaBufferAllocation a, long offset, long size);
+        public UByteVector(@SharedPtr JiviXCore.VmaBufferAllocation a, long offset, long size) { allocate(a, offset, size); } // this = (vector<vector<void*> >*)p
+        private native void allocate(@SharedPtr JiviXCore.VmaBufferAllocation a, long offset, long size);
 
         //
         @Name("operator=")
@@ -90,8 +90,14 @@ public class JiviXBase extends Pointer {
         public native @Cast("uintptr_t") long deviceAddress();
     };
 
-    @Name("vkt::MakeVmaVector")
-    public static native UByteVector MakeVmaVector(JiviXCore.VmaBufferAllocation allocation, long offset, long size);
+
+    //@Name("vkt::MakeVmaVector<uint8_t>") //
+    //public static native UByteVector MakeVmaVectorU8(JiviXCore.VmaBufferAllocation allocation, long offset, long size);
+
+
+    //@Name("vkt::MakeVmaVector<int8_t>") //
+    //public static native ByteVector MakeVmaVector(JiviXCore.VmaBufferAllocation allocation, long offset, long size);
+
 
     @Name("jvx::Context")
     public static class Context extends Pointer {

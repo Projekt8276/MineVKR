@@ -12,10 +12,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="4a293efd-8312-4c97-91a1-2e7672f928d8" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/../../../.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../../../.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/net/fabricmc/minertx/jivix/JiviXBase.java" beforeDir="false" afterPath="$PROJECT_DIR$/net/fabricmc/minertx/jivix/JiviXBase.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/net/fabricmc/minertx/jivix/JiviXCore.java" beforeDir="false" afterPath="$PROJECT_DIR$/net/fabricmc/minertx/jivix/JiviXCore.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/source/jniJiviXBase.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/source/jniJiviXBase.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/source/jniJiviXCore.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/source/jniJiviXCore.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/source/jnijavacpp.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/source/jnijavacpp.cpp" afterDir="false" />
@@ -55,7 +53,7 @@
     <property name="node.js.path.for.package.tslint" value="project" />
     <property name="node.js.selected.package.eslint" value="(autodetect)" />
     <property name="node.js.selected.package.tslint" value="(autodetect)" />
-    <property name="settings.editor.selected.configurable" value="project.propVCSSupport.Mappings" />
+    <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
   </component>
   <component name="RunManager">
     <configuration name="JiviX" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="JiviX" TARGET_NAME="JiviX" CONFIG_NAME="Debug">
@@ -93,6 +91,9 @@
       <workItem from="1588076381440" duration="1555000" />
       <workItem from="1588110259292" duration="3310000" />
       <workItem from="1588114317302" duration="1267000" />
+      <workItem from="1588131191508" duration="115000" />
+      <workItem from="1588131319985" duration="39000" />
+      <workItem from="1588131367693" duration="1306000" />
     </task>
     <servers />
   </component>
@@ -103,18 +104,22 @@
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
   </component>
   <component name="WindowStateProjectService">
+    <state x="830" y="383" width="665" height="526" key="#Notifications" timestamp="1588131385940">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="830" y="383" width="665" height="526" key="#Notifications/0.0.1920.1040@0.0.1920.1040" timestamp="1588131385940" />
     <state x="553" y="161" key="#Plugins" timestamp="1588045164038">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="553" y="161" key="#Plugins/0.0.1920.1040@0.0.1920.1040" timestamp="1588045164038" />
-    <state x="416" y="175" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1587975472394">
+    <state x="416" y="175" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1588131223283">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="416" y="175" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1587975472394" />
-    <state x="462" y="165" key="SettingsEditor" timestamp="1587975503172">
+    <state x="416" y="175" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1588131223283" />
+    <state x="462" y="165" key="SettingsEditor" timestamp="1588131352409">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="462" y="165" key="SettingsEditor/0.0.1920.1040@0.0.1920.1040" timestamp="1587975503172" />
+    <state x="462" y="165" key="SettingsEditor/0.0.1920.1040@0.0.1920.1040" timestamp="1588131352409" />
     <state x="656" y="344" key="com.intellij.ide.util.TipDialog" timestamp="1587791539251">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
