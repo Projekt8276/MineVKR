@@ -38,6 +38,10 @@ public class JiviXBase extends Pointer {
         //
         public ImageRegion(@SharedPtr JiviXCore.VmaImageAllocation alloc, @Cast("vkh::VkImageViewCreateInfo*") long info, @Cast("vk::ImageLayout") int layout) { allocate(alloc, info, layout);  }
         private native void allocate(@SharedPtr JiviXCore.VmaImageAllocation alloc, @Cast("vkh::VkImageViewCreateInfo*") long info, @Cast("vk::ImageLayout") int layout);
+
+        //
+        public native int getGLBuffer();
+        public native int getGLMemory();
     };
 
 
@@ -78,6 +82,10 @@ public class JiviXBase extends Pointer {
 
         // Java have NOT support `VkDeviceOrHostAddressKHR` or `VkDeviceOrHostAddressConstKHR`, and become rude var...
         public native @Cast("uintptr_t") long deviceAddress();
+
+        //
+        public native int getGLBuffer();
+        public native int getGLMemory();
     };
 
 

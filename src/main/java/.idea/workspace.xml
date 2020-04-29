@@ -14,9 +14,7 @@
     <list default="true" id="4a293efd-8312-4c97-91a1-2e7672f928d8" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/net/fabricmc/minertx/jivix/JiviXBase.java" beforeDir="false" afterPath="$PROJECT_DIR$/net/fabricmc/minertx/jivix/JiviXBase.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/source/jniJiviXBase.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/source/jniJiviXBase.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/source/jniJiviXCore.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/source/jniJiviXCore.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/source/jnijavacpp.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/source/jnijavacpp.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/net/fabricmc/minertx/jivix/JiviXCore.java" beforeDir="false" afterPath="$PROJECT_DIR$/net/fabricmc/minertx/jivix/JiviXCore.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -95,7 +93,7 @@
       <workItem from="1588131319985" duration="39000" />
       <workItem from="1588131367693" duration="12122000" />
       <workItem from="1588146270065" duration="5929000" />
-      <workItem from="1588153236964" duration="1203000" />
+      <workItem from="1588153236964" duration="2944000" />
     </task>
     <servers />
   </component>

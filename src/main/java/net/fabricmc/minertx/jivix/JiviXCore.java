@@ -33,6 +33,9 @@ public class JiviXCore extends Pointer {
         private native void allocate();
 
         private native @SharedPtr ImageAllocation uniPtr();
+
+        public native int getGLBuffer();
+        public native int getGLMemory();
     };
 
 
@@ -51,6 +54,9 @@ public class JiviXCore extends Pointer {
         private native void allocate(@Cast("VmaAllocator*") long vmaAllocator, @Cast("vkh::VkImageCreateInfo*") long createInfo, @Cast("VmaMemoryUsage") int vmaUsage);
 
         private native @SharedPtr ImageAllocation uniPtr();
+
+        public native int getGLBuffer();
+        public native int getGLMemory();
     };
 
 
