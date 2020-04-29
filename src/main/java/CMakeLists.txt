@@ -157,7 +157,7 @@ file (GLOB RSOURCES RELATIVE ${CMAKE_CURRENT_SOURCE_DIR} ${SOURCES_LIST})
 
 
 # Compute test 
-set (LIBRARY_NAME "JiviX")
+set (LIBRARY_NAME "jniJiviXBase") # Changed 29.04.2020, make simpler understand
 add_definitions(${DEFINES})
 add_library(${LIBRARY_NAME} SHARED source/jnijavacpp.cpp source/jniJiviXBase.cpp source/glad.c)
 add_custom_command(PRE_BUILD COMMAND "./generate.bat" OUTPUT "./log.txt")

@@ -258,6 +258,9 @@ Vulkan_INCLUDE_DIR:PATH=H:/Data/Projects/MineRTX/src/main/java/include
 //Path to a library.
 Vulkan_LIBRARY:FILEPATH=H:/Data/Projects/MineRTX/src/main/java/lib/vulkan-1.lib
 
+//Dependencies for the target
+jniJiviXBase_LIB_DEPENDS:STATIC=general;glfw3;general;H:/Data/Projects/MineRTX/src/main/java/lib/vulkan-1.lib;general;Vulkan::Vulkan;general;C:/Program Files/Java/jdk-13.0.2/lib/jawt.lib;general;C:/Program Files/Java/jdk-13.0.2/lib/jvm.lib;
+
 
 ########################
 # INTERNAL cache entries

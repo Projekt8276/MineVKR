@@ -1,5 +1,6 @@
 package net.fabricmc.minertx.mixin;
 
+import net.fabricmc.minertx.jivix.JiviXBase;
 import net.minecraft.client.gui.screen.TitleScreen;
 import org.lwjgl.PointerBuffer;
 import org.lwjgl.vulkan.VkApplicationInfo;
@@ -9,6 +10,8 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
+import net.fabricmc.minertx.*;
+import net.fabricmc.minertx.MineRTX;
 
 import java.nio.ByteBuffer;
 
@@ -19,12 +22,23 @@ import static org.lwjgl.vulkan.VK10.*;
 import static org.lwjgl.vulkan.VK10.VK_SUCCESS;
 import static org.lwjgl.vulkan.VK11.VK_API_VERSION_1_1;
 
+import net.fabricmc.minertx.jivix.*;
+import net.fabricmc.minertx.jivix.JiviXBase;
+import net.fabricmc.minertx.jivix.JiviXCore;
+import net.fabricmc.minertx.jivix.JiviXBase.*;
+import net.fabricmc.minertx.jivix.JiviXCore.*;
+import static net.fabricmc.minertx.jivix.JiviXBase.*;
+import static net.fabricmc.minertx.jivix.JiviXCore.*;
+
 @Mixin(TitleScreen.class)
 public class RendererMixin {
+	//public static JiviXBase.Driver driver;
+
 	@Inject(at = @At("HEAD"), method = "init()V")
 	private void init(CallbackInfo info) {
 
 		/* Look for instance extensions */
+		/*
 		PointerBuffer requiredExtensions = glfwGetRequiredInstanceExtensions();
 		if (requiredExtensions == null) {
 			throw new AssertionError("Failed to find list of required Vulkan extensions");
@@ -60,5 +74,9 @@ public class RendererMixin {
 		VkInstance ret = new VkInstance(instance, pCreateInfo);
 
 		System.out.println("This line is printed by an example mod mixin! With create VkInstance result:" + ret + "...");
+*/
+
+		long instance = MineRTX.driver.createInstance();
+		System.out.println("This line is printed by an example mod mixin! With create VkInstance:" + instance + "...");
 	}
 }

@@ -4,8 +4,8 @@
     <list default="true" id="4b7b64e4-95fe-4605-8caf-f658c6b40341" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/net/fabricmc/minertx/jivix/JiviXBase.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/fabricmc/minertx/jivix/JiviXBase.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/net/fabricmc/minertx/jivix/JiviXCore.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/fabricmc/minertx/jivix/JiviXCore.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/net/fabricmc/minertx/MineRTX.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/fabricmc/minertx/MineRTX.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/net/fabricmc/minertx/mixin/RendererMixin.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/fabricmc/minertx/mixin/RendererMixin.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -74,7 +74,7 @@
     <property name="settings.editor.selected.configurable" value="preferences.keymap" />
     <property name="show.unlinked.gradle.project.popup" value="true" />
   </component>
-  <component name="RunManager" selected="Gradle.MineRTX [genSources]">
+  <component name="RunManager" selected="Gradle.MineRTX [runClient]">
     <configuration name="MineRTX [genSourcesDecompile]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
         <option name="executionName" />
@@ -134,9 +134,9 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Gradle.MineRTX [genSourcesDecompile]" />
-        <item itemvalue="Gradle.MineRTX [genSources]" />
         <item itemvalue="Gradle.MineRTX [runClient]" />
+        <item itemvalue="Gradle.MineRTX [genSources]" />
+        <item itemvalue="Gradle.MineRTX [genSourcesDecompile]" />
       </list>
     </recent_temporary>
   </component>
@@ -169,22 +169,22 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="634" y="231" key="FileChooserDialogImpl/0.0.1920.1040@0.0.1920.1040" timestamp="1587960634350" />
-    <state width="1878" height="282" key="GridCell.Tab.0.bottom" timestamp="1587960687396">
+    <state width="1878" height="348" key="GridCell.Tab.0.bottom" timestamp="1588145886200">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1878" height="282" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1587960687396" />
-    <state width="1878" height="282" key="GridCell.Tab.0.center" timestamp="1587960687396">
+    <state width="1878" height="348" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1588145886200" />
+    <state width="1878" height="348" key="GridCell.Tab.0.center" timestamp="1588145886200">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1878" height="282" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1587960687396" />
-    <state width="1878" height="282" key="GridCell.Tab.0.left" timestamp="1587960687396">
+    <state width="1878" height="348" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1588145886200" />
+    <state width="1878" height="348" key="GridCell.Tab.0.left" timestamp="1588145886200">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1878" height="282" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1587960687396" />
-    <state width="1878" height="282" key="GridCell.Tab.0.right" timestamp="1587960687396">
+    <state width="1878" height="348" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1588145886200" />
+    <state width="1878" height="348" key="GridCell.Tab.0.right" timestamp="1588145886200">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1878" height="282" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1587960687396" />
+    <state width="1878" height="348" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1588145886200" />
     <state x="541" y="263" key="IDE.errors.dialog" timestamp="1587955470833">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>

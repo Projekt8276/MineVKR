@@ -2,10 +2,15 @@ package net.fabricmc.minertx;
 
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.minertx.jivix.*;
+import net.fabricmc.minertx.jivix.JiviXBase;
+import net.fabricmc.minertx.jivix.JiviXCore;
+import net.fabricmc.minertx.jivix.JiviXBase.*;
+import net.fabricmc.minertx.jivix.JiviXCore.*;
+import static net.fabricmc.minertx.jivix.JiviXBase.*;
+import static net.fabricmc.minertx.jivix.JiviXCore.*;
 
 public class MineRTX implements ModInitializer {
-	static JiviXBase.Driver driver;
-
+	public static JiviXBase.Driver driver;
 
 	@Override
 	public void onInitialize() {
@@ -14,7 +19,6 @@ public class MineRTX implements ModInitializer {
 		// Proceed with mild caution.
 
 		driver = new JiviXBase.Driver();
-
 		System.out.println("Hello Fabric world!");
 	}
 }

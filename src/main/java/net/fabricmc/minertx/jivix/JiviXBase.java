@@ -7,25 +7,25 @@ import org.bytedeco.javacpp.LongPointer;
 import org.bytedeco.javacpp.Pointer;
 import org.bytedeco.javacpp.annotation.*;
 
+// "jniJiviXBase", "JiviX"
+
 @Platform(include={
         "./include/vkt2/fw.hpp",
         "./include/JiviX/JiviX.hpp",
         "./jniJiviXCore.h"
-}, link="./lib/vulkan-1", define={"ENABLE_OPENGL_INTEROP","WIN32","OS_WIN","VK_ENABLE_BETA_EXTENSIONS","VK_USE_PLATFORM_WIN32_KHR","VMA_IMPLEMENTATION","SHARED_PTR_NAMESPACE std", "UNIQUE_PTR_NAMESPACE std"})
+}, link={"vulkan-1"}, define={"ENABLE_OPENGL_INTEROP","WIN32","OS_WIN","VK_ENABLE_BETA_EXTENSIONS","VK_USE_PLATFORM_WIN32_KHR","VMA_IMPLEMENTATION","SHARED_PTR_NAMESPACE std", "UNIQUE_PTR_NAMESPACE std"})
 @Name("") //
 public class JiviXBase extends Pointer {
     static { Loader.load(); }
 
-
     @Name("vkt::ImageRegion") //
     public static class ImageRegion extends Pointer {
         static { Loader.load(); }
-
-        public ImageRegion() { allocate();  }
-        private native void allocate();
+        public ImageRegion(Pointer p) { super(p); }
 
         //
-        public ImageRegion(Pointer p) { super(p); } // this = (vector<vector<void*> >*)p
+        public ImageRegion() { allocate();  }
+        private native void allocate();
 
         //
         public ImageRegion(ImageRegion b) { allocate(b);  }
@@ -44,13 +44,11 @@ public class JiviXBase extends Pointer {
     @Name("vkt::Vector<int8_t>") // int8_t default
     public static class ByteVector extends Pointer {
         static { Loader.load(); }
+        public ByteVector(Pointer p) { super(p); }
 
         //
         public ByteVector() { allocate();  }
         private native void allocate();
-
-        //
-        public ByteVector(Pointer p) { super(p); } // this = (vector<vector<void*> >*)p
 
         //
         public ByteVector(@SharedPtr JiviXCore.VmaBufferAllocation a, long offset, long size) { allocate(a, offset, size); } // this = (vector<vector<void*> >*)p
@@ -86,13 +84,11 @@ public class JiviXBase extends Pointer {
     @Name("vkt::Vector<uint8_t>") // uint8_t version (C++)
     public static class UByteVector extends Pointer {
         static { Loader.load(); }
+        public UByteVector(Pointer p) { super(p); } // this = (vector<vector<void*> >*)p
 
         //
         public UByteVector() { allocate();  }
         private native void allocate();
-
-        //
-        public UByteVector(Pointer p) { super(p); } // this = (vector<vector<void*> >*)p
 
         //
         public UByteVector(@SharedPtr JiviXCore.VmaBufferAllocation a, long offset, long size) { allocate(a, offset, size); } // this = (vector<vector<void*> >*)p
@@ -129,7 +125,6 @@ public class JiviXBase extends Pointer {
     @Name("jvx::Context")
     public static class Context extends Pointer {
         static { Loader.load(); }
-
         public Context(Pointer p) { super(p); }
 
         public Context() { allocate(); }
@@ -152,7 +147,6 @@ public class JiviXBase extends Pointer {
     @Name("jvx::Thread")
     public static class Thread extends Pointer {
         static { Loader.load(); }
-
         public Thread(Pointer p) { super(p); }
 
         public Thread() { allocate(); }
@@ -173,7 +167,6 @@ public class JiviXBase extends Pointer {
     @Name("jvx::Driver")
     public static class Driver extends Pointer {
         static { Loader.load(); }
-
         public Driver(Pointer p) { super(p); }
 
         public Driver() { allocate(); }
@@ -211,7 +204,6 @@ public class JiviXBase extends Pointer {
     @Name("jvx::BufferViewSet")
     public static class BufferViewSet extends Pointer {
         static { Loader.load(); }
-
         public BufferViewSet(Pointer p) { super(p); }
 
         public BufferViewSet() { allocate(); }
@@ -244,7 +236,6 @@ public class JiviXBase extends Pointer {
     @Name("jvx::MeshInput")
     public static class MeshInput extends Pointer {
         static { Loader.load(); }
-
         public MeshInput(Pointer p) { super(p); }
 
         public MeshInput() { allocate(); }
@@ -286,7 +277,6 @@ public class JiviXBase extends Pointer {
     @Name("jvx::MeshBinding")
     public static class MeshBinding extends Pointer {
         static { Loader.load(); }
-
         public MeshBinding(Pointer p) { super(p); }
 
         public MeshBinding() { allocate(); }
@@ -324,7 +314,6 @@ public class JiviXBase extends Pointer {
     @Name("jvx::Node")
     public static class Node extends Pointer {
         static { Loader.load(); }
-
         public Node(Pointer p) { super(p); }
 
         public Node() { allocate(); }
@@ -348,7 +337,6 @@ public class JiviXBase extends Pointer {
     @Name("jvx::Material")
     public static class Material extends Pointer {
         static { Loader.load(); }
-
         public Material(Pointer p) { super(p); }
 
         public Material() { allocate(); }
@@ -376,7 +364,6 @@ public class JiviXBase extends Pointer {
     @Name("jvx::Renderer")
     public static class Renderer extends Pointer {
         static { Loader.load(); }
-
         public Renderer(Pointer p) { super(p); }
 
         public Renderer() { allocate(); }
@@ -394,6 +381,15 @@ public class JiviXBase extends Pointer {
         public native JiviXCore.Renderer linkMaterial(@ByRef Material material);
         public native JiviXCore.Renderer linkNode(@ByRef Node node);
         //public native void createDescriptorSet();
+    };
+
+    @Name("jvx::TestClass")
+    public static class TestClass extends Pointer {
+        static { Loader.load(); }
+        public TestClass(Pointer p) { super(p); }
+        public TestClass() { allocate(); }
+        private native void allocate();
+
     };
 
 };

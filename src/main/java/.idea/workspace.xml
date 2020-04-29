@@ -2,7 +2,7 @@
 <project version="4">
   <component name="CMakeRunConfigurationManager" shouldGenerate="true" shouldDeleteObsolete="true">
     <generated>
-      <config projectName="JiviX" targetName="JiviX" />
+      <config projectName="JiviX" targetName="jniJiviXBase" />
     </generated>
   </component>
   <component name="CMakeSettings">
@@ -12,14 +12,49 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="4a293efd-8312-4c97-91a1-2e7672f928d8" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/net/fabricmc/minertx/jivix/JiviXCore$VmaImageAllocation.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../../lib/HLSL.lib" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../../lib/JiviX.lib" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../../lib/OGLCompiler.lib" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../../lib/OSDependent.lib" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../../lib/SPIRV-Tools-link.lib" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../../lib/SPIRV-Tools-opt.lib" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../../lib/SPIRV-Tools-reduce.lib" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../../lib/SPIRV-Tools-shared.lib" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../../lib/SPIRV-Tools.lib" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../../lib/SPIRV.lib" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../../lib/SPVRemapper.lib" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../../lib/glslang.lib" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../../lib/shaderc.lib" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../../lib/shaderc_shared.lib" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../../lib/shaderc_util.lib" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../../lib/spirv-cross-c-shared.lib" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../../lib/spirv-cross-c.lib" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../../lib/spirv-cross-core.lib" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../../lib/spirv-cross-cpp.lib" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../../lib/spirv-cross-glsl.lib" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../../lib/spirv-cross-hlsl.lib" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../../lib/spirv-cross-msl.lib" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../../lib/spirv-cross-reflect.lib" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../../lib/spirv-cross-util.lib" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/bin" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/net/fabricmc/minertx/jivix/JiviXBase$TestClass.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../../../.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../../../.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/../../../build.gradle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../lib/VkLayer_utils.lib" beforeDir="false" afterPath="$PROJECT_DIR$/../../../lib/VkLayer_utils.lib" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../lib/shaderc_combined.lib" beforeDir="false" afterPath="$PROJECT_DIR$/../../../lib/shaderc_combined.lib" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../lib/vulkan-1.lib" beforeDir="false" afterPath="$PROJECT_DIR$/../../../lib/vulkan-1.lib" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CMakeLists.txt" beforeDir="false" afterPath="$PROJECT_DIR$/CMakeLists.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/net/fabricmc/minertx/MineRTX.java" beforeDir="false" afterPath="$PROJECT_DIR$/net/fabricmc/minertx/MineRTX.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/net/fabricmc/minertx/jivix/JiviXBase.java" beforeDir="false" afterPath="$PROJECT_DIR$/net/fabricmc/minertx/jivix/JiviXBase.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/net/fabricmc/minertx/jivix/JiviXCore$VmaImagellocation.class" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/net/fabricmc/minertx/jivix/JiviXCore.java" beforeDir="false" afterPath="$PROJECT_DIR$/net/fabricmc/minertx/jivix/JiviXCore.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/net/fabricmc/minertx/mixin/RendererMixin.java" beforeDir="false" afterPath="$PROJECT_DIR$/net/fabricmc/minertx/mixin/RendererMixin.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/source/jniJiviXBase.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/source/jniJiviXBase.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/source/jniJiviXCore.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/source/jniJiviXCore.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/source/jnijavacpp.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/source/jnijavacpp.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/windows-x86_64/CMakeCache.txt" beforeDir="false" afterPath="$PROJECT_DIR$/windows-x86_64/CMakeCache.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/windows-x86_64/CMakeFiles/TargetDirectories.txt" beforeDir="false" afterPath="$PROJECT_DIR$/windows-x86_64/CMakeFiles/TargetDirectories.txt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -59,7 +94,7 @@
     <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
   </component>
   <component name="RunManager">
-    <configuration name="JiviX" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="JiviX" TARGET_NAME="JiviX" CONFIG_NAME="Debug">
+    <configuration name="jniJiviXBase" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="JiviX" TARGET_NAME="jniJiviXBase" CONFIG_NAME="Debug">
       <method v="2">
         <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
       </method>
@@ -96,7 +131,8 @@
       <workItem from="1588114317302" duration="1267000" />
       <workItem from="1588131191508" duration="115000" />
       <workItem from="1588131319985" duration="39000" />
-      <workItem from="1588131367693" duration="11260000" />
+      <workItem from="1588131367693" duration="12122000" />
+      <workItem from="1588146270065" duration="5512000" />
     </task>
     <servers />
   </component>
@@ -107,6 +143,10 @@
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
   </component>
   <component name="WindowStateProjectService">
+    <state x="669" y="231" key="#JiviX" timestamp="1588149185814">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="669" y="231" key="#JiviX/0.0.1920.1040@0.0.1920.1040" timestamp="1588149185814" />
     <state x="830" y="383" width="665" height="526" key="#Notifications" timestamp="1588131385940">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
@@ -127,9 +167,9 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="656" y="344" key="com.intellij.ide.util.TipDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1587791539251" />
-    <state x="621" y="244" key="run.anything.popup" timestamp="1588047368007">
+    <state x="623" y="246" key="run.anything.popup" timestamp="1588150912504">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="621" y="244" key="run.anything.popup/0.0.1920.1040@0.0.1920.1040" timestamp="1588047368007" />
+    <state x="623" y="246" key="run.anything.popup/0.0.1920.1040@0.0.1920.1040" timestamp="1588150912504" />
   </component>
 </project>

@@ -8,19 +8,19 @@ import org.bytedeco.javacpp.LongPointer;
 import org.bytedeco.javacpp.Pointer;
 import org.bytedeco.javacpp.annotation.*;
 
+// "jniJiviXBase", "JiviX"
+
 @Platform(include={
         "./include/vkt2/fw.hpp",
         "./include/JiviX/JVI/JiviX.hpp"
-}, link="./lib/vulkan-1", define={"ENABLE_OPENGL_INTEROP","WIN32","OS_WIN","VK_ENABLE_BETA_EXTENSIONS","VK_USE_PLATFORM_WIN32_KHR","VMA_IMPLEMENTATION","SHARED_PTR_NAMESPACE std", "UNIQUE_PTR_NAMESPACE std"})
+}, link={"vulkan-1"}, define={"ENABLE_OPENGL_INTEROP","WIN32","OS_WIN","VK_ENABLE_BETA_EXTENSIONS","VK_USE_PLATFORM_WIN32_KHR","VMA_IMPLEMENTATION","SHARED_PTR_NAMESPACE std", "UNIQUE_PTR_NAMESPACE std"})
 @Name("") //
 public class JiviXCore extends Pointer {
     static { Loader.load(); }
 
-
     @Name("vkt::ImageAllocation")
     public static class ImageAllocation extends Pointer {
         static { Loader.load(); }
-
         public ImageAllocation(Pointer p) { super(p); }
 
         public ImageAllocation(@SharedPtr ImageAllocation alloc) { allocate(alloc); };
@@ -39,7 +39,6 @@ public class JiviXCore extends Pointer {
     @Name("vkt::VmaImageAllocation")
     public static class VmaImageAllocation extends Pointer {
         static { Loader.load(); }
-
         public VmaImageAllocation(Pointer p) { super(p); }
 
         public VmaImageAllocation() { allocate(); }
@@ -58,7 +57,6 @@ public class JiviXCore extends Pointer {
     @Name("vkt::BufferAllocation")
     public static class BufferAllocation extends Pointer {
         static { Loader.load(); }
-
         public BufferAllocation(Pointer p) { super(p); }
 
         public BufferAllocation(@SharedPtr BufferAllocation alloc) { allocate(alloc); };
@@ -77,7 +75,6 @@ public class JiviXCore extends Pointer {
     @Name("vkt::VmaBufferAllocation")
     public static class VmaBufferAllocation extends Pointer {
         static { Loader.load(); }
-
         public VmaBufferAllocation(Pointer p) { super(p); }
 
         public VmaBufferAllocation() { allocate(); }
@@ -96,7 +93,6 @@ public class JiviXCore extends Pointer {
     @Name("jvi::Context")
     public static class Context extends Pointer {
         static { Loader.load(); }
-
         public Context(Pointer p) { super(p); }
 
         public Context() { allocate(); }
@@ -107,7 +103,6 @@ public class JiviXCore extends Pointer {
     @Name("jvi::Thread")
     public static class Thread extends Pointer {
         static { Loader.load(); }
-
         public Thread(Pointer p) { super(p); }
 
         public Thread() { allocate(); }
@@ -118,7 +113,6 @@ public class JiviXCore extends Pointer {
     @Name("jvi::Driver")
     public static class Driver extends Pointer {
         static { Loader.load(); }
-
         public Driver(Pointer p) { super(p); }
 
         public Driver() { allocate(); }
@@ -129,7 +123,6 @@ public class JiviXCore extends Pointer {
     @Name("jvi::BufferViewSet")
     public static class BufferViewSet extends Pointer {
         static { Loader.load(); }
-
         public BufferViewSet(Pointer p) { super(p); }
 
         public BufferViewSet() { allocate(); }
@@ -143,7 +136,6 @@ public class JiviXCore extends Pointer {
     @Name("jvi::MeshInput")
     public static class MeshInput extends Pointer {
         static { Loader.load(); }
-
         public MeshInput(Pointer p) { super(p); }
 
         public MeshInput(Context context) { allocate(context); }
@@ -157,7 +149,6 @@ public class JiviXCore extends Pointer {
     @Name("jvi::MeshBinding")
     public static class MeshBinding extends Pointer {
         static { Loader.load(); }
-
         public MeshBinding(Pointer p) { super(p); }
 
         public MeshBinding() { allocate(); }
@@ -171,7 +162,6 @@ public class JiviXCore extends Pointer {
     @Name("jvi::Node")
     public static class Node extends Pointer {
         static { Loader.load(); }
-
         public Node(Pointer p) { super(p); }
 
         public Node() { allocate(); }
@@ -185,7 +175,6 @@ public class JiviXCore extends Pointer {
     @Name("jvi::Material")
     public static class Material extends Pointer {
         static { Loader.load(); }
-
         public Material(Pointer p) { super(p); }
 
         public Material() { allocate(); }
@@ -199,7 +188,6 @@ public class JiviXCore extends Pointer {
     @Name("jvi::Renderer")
     public static class Renderer extends Pointer {
         static { Loader.load(); }
-
         public Renderer(Pointer p) { super(p); }
 
         public Renderer() { allocate(); }
@@ -213,7 +201,6 @@ public class JiviXCore extends Pointer {
     @Name("jvi::MaterialUnit")
     public static class MaterialUnit extends Pointer {
         static { Loader.load(); }
-
         public MaterialUnit(Pointer p) { super(p); }
 
         public MaterialUnit() { allocate(); }
@@ -246,7 +233,6 @@ public class JiviXCore extends Pointer {
     @Name("vkh::VsGeometryInstance")
     public static class VsGeometryInstance extends Pointer {
         static { Loader.load(); }
-
         public VsGeometryInstance(Pointer p) { super(p); }
 
         public VsGeometryInstance() { allocate(); }
