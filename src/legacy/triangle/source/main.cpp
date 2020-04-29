@@ -353,7 +353,7 @@ int main()
 
 		// 
 		std::vector<vk::PipelineStageFlags> waitStages = { vk::PipelineStageFlagBits::eFragmentShader | vk::PipelineStageFlagBits::eComputeShader | vk::PipelineStageFlagBits::eRayTracingShaderKHR };
-		context->getThread()->submitCmd({ renderer->refCommandBuffer() }, vk::SubmitInfo()
+		context->getThread()->submitCmd(std::vector<vk::CommandBuffer>{ renderer->refCommandBuffer() }, vk::SubmitInfo()
             .setPWaitDstStageMask(waitStages.data())
 			.setPWaitSemaphores  (&semaphores.glComplete)  .setWaitSemaphoreCount(1)
             .setPSignalSemaphores(&semaphores.glReady   ).setSignalSemaphoreCount(1));

@@ -16,14 +16,8 @@
       <change afterPath="$PROJECT_DIR$/../../../lib/JiviX.lib" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/../../../lib/OGLCompiler.lib" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/../../../lib/OSDependent.lib" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../../lib/SPIRV-Tools-link.lib" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../../lib/SPIRV-Tools-opt.lib" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../../lib/SPIRV-Tools-reduce.lib" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../../lib/SPIRV-Tools-shared.lib" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../../lib/SPIRV-Tools.lib" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/../../../lib/SPIRV.lib" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/../../../lib/SPVRemapper.lib" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../../lib/glslang.lib" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/../../../lib/shaderc.lib" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/../../../lib/shaderc_shared.lib" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/../../../lib/shaderc_util.lib" afterDir="false" />
@@ -40,8 +34,8 @@
       <change afterPath="$PROJECT_DIR$/net/fabricmc/minertx/jivix/JiviXBase$TestClass.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../../../.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../../../.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../../../build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/../../../build.gradle" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../lib/VkLayer_utils.lib" beforeDir="false" afterPath="$PROJECT_DIR$/../../../lib/VkLayer_utils.lib" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../lib/shaderc_combined.lib" beforeDir="false" afterPath="$PROJECT_DIR$/../../../lib/shaderc_combined.lib" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../lib/VkLayer_utils.lib" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../lib/shaderc_combined.lib" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/../../../lib/vulkan-1.lib" beforeDir="false" afterPath="$PROJECT_DIR$/../../../lib/vulkan-1.lib" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/CMakeLists.txt" beforeDir="false" afterPath="$PROJECT_DIR$/CMakeLists.txt" afterDir="false" />
@@ -132,7 +126,7 @@
       <workItem from="1588131191508" duration="115000" />
       <workItem from="1588131319985" duration="39000" />
       <workItem from="1588131367693" duration="12122000" />
-      <workItem from="1588146270065" duration="5512000" />
+      <workItem from="1588146270065" duration="5834000" />
     </task>
     <servers />
   </component>
