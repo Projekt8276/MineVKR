@@ -18,6 +18,7 @@ import org.bytedeco.javacpp.annotation.*;
 public class JiviXBase extends Pointer {
     static { Loader.load(); }
 
+
     @Name("vkt::ImageRegion") //
     public static class ImageRegion extends Pointer {
         static { Loader.load(); }
@@ -403,13 +404,14 @@ public class JiviXBase extends Pointer {
         //public native void createDescriptorSet();
     };
 
+
     @Name("jvx::TestClass")
     public static class TestClass extends Pointer {
         static { Loader.load(); }
         public TestClass(Pointer p) { super(p); }
+
         public TestClass() { allocate(); }
         private native void allocate();
-
     };
 
 };

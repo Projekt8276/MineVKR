@@ -18,6 +18,7 @@ import org.bytedeco.javacpp.annotation.*;
 public class JiviXCore extends Pointer {
     static { Loader.load(); }
 
+
     @Name("vkt::ImageAllocation")
     public static class ImageAllocation extends Pointer {
         static { Loader.load(); }

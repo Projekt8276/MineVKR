@@ -13,6 +13,11 @@
   <component name="ChangeListManager">
     <list default="true" id="4a293efd-8312-4c97-91a1-2e7672f928d8" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/net/fabricmc/minertx/jivix/JiviXBase.java" beforeDir="false" afterPath="$PROJECT_DIR$/net/fabricmc/minertx/jivix/JiviXBase.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/net/fabricmc/minertx/jivix/JiviXCore.java" beforeDir="false" afterPath="$PROJECT_DIR$/net/fabricmc/minertx/jivix/JiviXCore.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/source/jniJiviXBase.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/source/jniJiviXBase.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/source/jniJiviXCore.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/source/jniJiviXCore.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/source/jnijavacpp.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/source/jnijavacpp.cpp" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -92,6 +97,9 @@
       <workItem from="1588131367693" duration="12122000" />
       <workItem from="1588146270065" duration="5929000" />
       <workItem from="1588153236964" duration="3675000" />
+      <workItem from="1588218063654" duration="33000" />
+      <workItem from="1588218125198" duration="113000" />
+      <workItem from="1588218250895" duration="676000" />
     </task>
     <servers />
   </component>
@@ -118,6 +126,10 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="416" y="175" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1588131223283" />
+    <state x="641" y="256" key="#com.intellij.openapi.updateSettings.impl.PluginUpdateInfoDialog" timestamp="1588218074771">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="641" y="256" key="#com.intellij.openapi.updateSettings.impl.PluginUpdateInfoDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1588218074771" />
     <state x="462" y="165" key="SettingsEditor" timestamp="1588131352409">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
