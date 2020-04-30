@@ -68,20 +68,38 @@ const char *fragmentShaderSource = "#version 460 compatibility\n"
 
 
 const char* vertexTFShaderSource = "#version 460 compatibility\n"
-"layout (location = 0) in vec3 aPos;\n"
+    "layout (location = 0) in vec3 aPos;\n"
+    "layout (location = 0) out vec3 oPos;\n"
 
-"layout (location = 0, xfb_buffer = 0, xfb_stride = 80, xfb_offset = 0) out vec4 fPosition;\n"
-"layout (location = 1, xfb_buffer = 0, xfb_stride = 80, xfb_offset = 16) out vec4 fTexcoord;;\n"
-"layout (location = 2, xfb_buffer = 0, xfb_stride = 80, xfb_offset = 32) out vec4 fNormal;;\n"
-"layout (location = 3, xfb_buffer = 0, xfb_stride = 80, xfb_offset = 48) out vec4 fTangent;;\n"
-"layout (location = 4, xfb_buffer = 0, xfb_stride = 80, xfb_offset = 64) out vec4 fBinormal;;\n"
+    "void main()\n"
+    "{\n"
+    "   gl_Position = vec4(oPos = aPos, 1.f);\n"
+    "}\0";
 
-"void main()\n"
-"{\n"
-"   gl_Position = vec4(aPos.xyz, 1.f);\n"
-"   fNormal = vec4(vec3(0.f,0.f,1.f), 1.f);\n"
-"   fPosition = vec4(aPos.xyz, 1.0f);\n"
-"}\0";
+
+const char* geometryTFShaderSource = "#version 460 compatibility\n"
+    "layout (location = 0) in vec3 oPos[];\n"
+
+    "layout (location = 0, xfb_buffer = 0, xfb_stride = 80, xfb_offset = 0) out vec4 fPosition;\n"
+    "layout (location = 1, xfb_buffer = 0, xfb_stride = 80, xfb_offset = 16) out vec4 fTexcoord;\n"
+    "layout (location = 2, xfb_buffer = 0, xfb_stride = 80, xfb_offset = 32) out vec4 fNormal;\n"
+    "layout (location = 3, xfb_buffer = 0, xfb_stride = 80, xfb_offset = 48) out vec4 fTangent;\n"
+    "layout (location = 4, xfb_buffer = 0, xfb_stride = 80, xfb_offset = 64) out vec4 fBinormal;\n"
+
+    "layout (lines_adjacency) in; \n"
+    "layout (triangle_strip, max_vertices = 4) out; \n"
+
+    "void main()\n"
+    "{\n"
+    "for (int i=0;i<4;i++) {\n"
+    "   gl_Position = vec4(oPos[i].xyz, 1.f);\n"
+    "   fNormal = vec4(vec3(0.f,0.f,1.f), 1.f);\n"
+    "   fPosition = vec4(oPos[i].xyz, 1.0f);\n"
+    "   EmitVertex();\n"
+    "}\n"
+    "EndPrimitive();\n"
+    "}\0";
+
 
 
 struct FDStruct {
@@ -129,8 +147,7 @@ int main()
 
     // build and compile our shader program
     // ------------------------------------
-
-    int vertexTFShader = glCreateShader(GL_VERTEX_SHADER);
+    const int vertexTFShader = glCreateShader(GL_VERTEX_SHADER);
     glShaderSource(vertexTFShader, 1, &vertexTFShaderSource, NULL);
     glCompileShader(vertexTFShader);
     // check for shader compile errors
@@ -142,13 +159,24 @@ int main()
         std::cout << "ERROR::SHADER::VERTEX::COMPILATION_FAILED\n" << infoLog << std::endl;
     }
 
-    // link shaders
-    int shaderTFProgram = glCreateProgram();
+    // 
+    const int geometryTFShader = glCreateShader(GL_GEOMETRY_SHADER);
+    glShaderSource(geometryTFShader, 1, &geometryTFShaderSource, NULL);
+    glCompileShader(geometryTFShader);
+    // check for shader compile errors
+    glGetShaderiv(geometryTFShader, GL_COMPILE_STATUS, &success);
+    if (!success)
+    {
+        glGetShaderInfoLog(geometryTFShader, 512, NULL, infoLog);
+        std::cout << "ERROR::SHADER::VERTEX::COMPILATION_FAILED\n" << infoLog << std::endl;
+    }
 
+    // link shaders
+    const int shaderTFProgram = glCreateProgram();
     const char* varyings[] = { "fPosition", "fTexcoord", "fNormal", "fTangent", "fBinormal" };
     glTransformFeedbackVaryings(shaderTFProgram, 5, varyings, GL_INTERLEAVED_ATTRIBS);
-
     glAttachShader(shaderTFProgram, vertexTFShader);
+    glAttachShader(shaderTFProgram, geometryTFShader);
     glLinkProgram(shaderTFProgram);
     // check for linking errors
     glGetProgramiv(shaderTFProgram, GL_LINK_STATUS, &success);
@@ -161,7 +189,7 @@ int main()
 
 
     // vertex shader
-    int vertexShader = glCreateShader(GL_VERTEX_SHADER);
+    const int vertexShader = glCreateShader(GL_VERTEX_SHADER);
     glShaderSource(vertexShader, 1, &vertexShaderSource, NULL);
     glCompileShader(vertexShader);
     // check for shader compile errors
@@ -173,7 +201,7 @@ int main()
     }
 
     // fragment shader
-    int fragmentShader = glCreateShader(GL_FRAGMENT_SHADER);
+    const int fragmentShader = glCreateShader(GL_FRAGMENT_SHADER);
     glShaderSource(fragmentShader, 1, &fragmentShaderSource, NULL);
     glCompileShader(fragmentShader);
     // check for shader compile errors
@@ -185,7 +213,7 @@ int main()
     }
 
     // link shaders
-    int shaderProgram = glCreateProgram();
+    const int shaderProgram = glCreateProgram();
     glAttachShader(shaderProgram, vertexShader);
     glAttachShader(shaderProgram, fragmentShader);
     glLinkProgram(shaderProgram);
@@ -203,7 +231,8 @@ int main()
     float tf_vertices[] = {
         -1.f, -1.f, -1.f,
          1.f, -1.f, -1.f,
-         0.f,  1.f, -1.f
+         0.f,  1.f, -1.f,
+         2.f,  1.f, -1.f
     };
 
     unsigned int TFVBO, TFVAO;
@@ -238,7 +267,8 @@ int main()
     glEnableVertexAttribArray(0);
     glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), (void*)0);
 
-    std::vector<FDStruct> outScript(3);
+    //std::vector<FDStruct> outScript(3);
+
 
 
 	// initialize Vulkan
@@ -273,7 +303,7 @@ int main()
     TRS[1] = glm::transpose(glm::translate(glm::mat4x4(1.f), glm::vec3(0.5f, -0.5f, 0.f)));
 
     // 
-    meshBinding->setTransformData(TRS)->addRangeInput(1u)->setIndexCount(3u);
+    meshBinding->setTransformData(TRS)->addRangeInput(2u)->setIndexCount(6u);
 
     // 
     node->pushInstance(vkh::VsGeometryInstance{
@@ -369,7 +399,7 @@ int main()
         // 
         glEnable(GL_RASTERIZER_DISCARD);
         glBeginTransformFeedback(GL_TRIANGLES);
-        glDrawArrays(GL_TRIANGLES, 0, 3);
+        glDrawArrays(GL_LINES_ADJACENCY, 0, 4);
         glEndTransformFeedback();
 
         // 

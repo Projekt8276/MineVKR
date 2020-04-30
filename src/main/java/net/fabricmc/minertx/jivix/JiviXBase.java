@@ -186,7 +186,6 @@ public class JiviXBase extends Pointer {
 
         // Get Handle Value
         public native @ByVal @Cast("VkPhysicalDevice")  long getPhysicalDevice();
-        //public native @ByVal @Cast("VkDispatch")        long getDispatch();
         public native @ByVal @Cast("VkDevice")          long getDevice();
         public native @ByVal @Cast("VkQueue")           long getQueue();
         public native @ByVal @Cast("VkFence")           long getFence();
@@ -200,11 +199,13 @@ public class JiviXBase extends Pointer {
         public native @ByVal @Cast("VkDevice")          long createDevice();
 
         // Get Address of Reference... (but needs wrapped as Pointer?)
-        public native @Name("getMemoryProperties") @Cast("int8_t*") @ByRef BytePointer _getMemoryProperties();
-        public native @Name("getAllocator") @Cast("int8_t*") @ByRef BytePointer _getAllocator();
+        public native @Name("getMemoryProperties")  @ByRef @Cast("int8_t*") BytePointer _getMemoryProperties();
+        public native @Name("getAllocator")         @ByRef @Cast("int8_t*") BytePointer _getAllocator();
+        public native @Name("getDispatch")          @ByRef @Cast("int8_t*") BytePointer _getDispatch();
 
         // Get Address from allocator or properties
-        public long getAllocator() { return this._getAllocator().address(); };
+        public long getDispatch()         { return this._getDispatch().address(); };
+        public long getAllocator()        { return this._getAllocator().address(); };
         public long getMemoryProperties() { return this._getMemoryProperties().address(); };
         //
     };
