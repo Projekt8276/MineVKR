@@ -2,6 +2,8 @@ package net.fabricmc.minertx.mixin;
 
 import net.fabricmc.minertx.jivix.JiviXBase;
 import net.minecraft.client.gui.screen.TitleScreen;
+import net.minecraft.client.render.WorldRenderer;
+import net.minecraft.client.util.math.MatrixStack;
 import org.lwjgl.PointerBuffer;
 import org.lwjgl.vulkan.VkApplicationInfo;
 import org.lwjgl.vulkan.VkInstance;
@@ -9,6 +11,7 @@ import org.lwjgl.vulkan.VkInstanceCreateInfo;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
+import org.spongepowered.asm.mixin.injection.Redirect;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import net.fabricmc.minertx.*;
 import net.fabricmc.minertx.MineRTX;
@@ -30,11 +33,19 @@ import net.fabricmc.minertx.jivix.JiviXCore.*;
 import static net.fabricmc.minertx.jivix.JiviXBase.*;
 import static net.fabricmc.minertx.jivix.JiviXCore.*;
 
-@Mixin(TitleScreen.class)
+@Mixin(WorldRenderer.class)
 public class RendererMixin {
 	//public static JiviXBase.Driver driver;
 
-	@Inject(at = @At("HEAD"), method = "init()V")
+	// Will used for rendering chunk in ray-tracing as instance!
+	@Redirect(method = "renderLayer", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/util/math/MatrixStack;pop()V"))
+	private void onRenderLayerPop(MatrixStack matrixStack){
+		//System.out.println("Radio-POP"); For Debug!
+		matrixStack.pop();
+	};
+
+	// It DOESN'T stars, It first method in WorldRenderer initialization (Vulkan Initialize)
+	@Inject(at = @At("HEAD"), method = "renderStars()V")
 	private void init(CallbackInfo info) {
 
 		/* Look for instance extensions */
@@ -76,7 +87,10 @@ public class RendererMixin {
 		System.out.println("This line is printed by an example mod mixin! With create VkInstance result:" + ret + "...");
 */
 
-		long instance = MineRTX.driver.createInstance();
-		System.out.println("This line is printed by an example mod mixin! With create VkInstance:" + instance + "...");
+		if (!MineRTX.vInitialized) { MineRTX.vInitialized = true;
+			MineRTX.vInstance = MineRTX.driver.createInstance();
+			System.out.println("This line is printed by an example mod mixin! With create VkInstance: [" + MineRTX.vInstance + "] ...");
+		}
+
 	}
 }

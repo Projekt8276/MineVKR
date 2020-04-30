@@ -11,6 +11,8 @@ import static net.fabricmc.minertx.jivix.JiviXCore.*;
 
 public class MineRTX implements ModInitializer {
 	public static JiviXBase.Driver driver;
+	public static long vInstance;
+	public static boolean vInitialized;
 
 	@Override
 	public void onInitialize() {
