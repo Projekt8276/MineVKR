@@ -184,19 +184,23 @@ public class JiviXBase extends Pointer {
         public Driver(@SharedPtr JiviXCore.Driver object) { allocate(object); }
         private native void allocate(@SharedPtr JiviXCore.Driver object);
 
+        // LWJGL-3 Compatible
+        public native long getInstanceCreateInfoAddress();
+        public native long getDeviceCreateInfoAddress();
+
         // Get Handle Value
-        public native @ByVal @Cast("VkPhysicalDevice")  long getPhysicalDevice();
-        public native @ByVal @Cast("VkDevice")          long getDevice();
-        public native @ByVal @Cast("VkQueue")           long getQueue();
-        public native @ByVal @Cast("VkFence")           long getFence();
-        public native @ByVal @Cast("VkInstance")        long getInstance();
-        public native @ByVal @Cast("VkCommandPool")     long getCommandPool();
-        public native @ByVal @Cast("VkPipelineCache")   long getPipelineCache();
-        public native @ByVal @Cast("VkDescriptorPool")  long getDescriptorPool();
-        public native @ByVal @Cast("VkImageView")       long getDepthImageView();
-        public native @ByVal @Cast("VkImage")           long getDepthImage();
-        public native @ByVal @Cast("VkInstance")        long createInstance();
-        public native @ByVal @Cast("VkDevice")          long createDevice();
+        public native @Cast("VkPhysicalDevice")  long getPhysicalDevice();
+        public native @Cast("VkDevice")          long getDevice();
+        public native @Cast("VkQueue")           long getQueue();
+        public native @Cast("VkFence")           long getFence();
+        public native @Cast("VkInstance")        long getInstance();
+        public native @Cast("VkCommandPool")     long getCommandPool();
+        public native @Cast("VkPipelineCache")   long getPipelineCache();
+        public native @Cast("VkDescriptorPool")  long getDescriptorPool();
+        public native @Cast("VkImageView")       long getDepthImageView();
+        public native @Cast("VkImage")           long getDepthImage();
+        public native @Cast("VkInstance")        long createInstance();
+        public native @Cast("VkDevice")          long createDevice();
 
         // Get Address of Reference... (but needs wrapped as Pointer?)
         public native @Name("getMemoryProperties")  @ByRef @Cast("int8_t*") BytePointer _getMemoryProperties();
