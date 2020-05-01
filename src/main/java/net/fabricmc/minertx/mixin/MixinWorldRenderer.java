@@ -1,20 +1,31 @@
 package net.fabricmc.minertx.mixin;
 
+import it.unimi.dsi.fastutil.objects.ObjectList;
 import net.fabricmc.minertx.jivix.JiviXBase;
+import net.minecraft.client.gl.VertexBuffer;
 import net.minecraft.client.gui.screen.TitleScreen;
+import net.minecraft.client.render.BuiltChunkStorage;
+import net.minecraft.client.render.RenderLayer;
 import net.minecraft.client.render.WorldRenderer;
+import net.minecraft.client.render.WorldRenderer.*;
+import net.minecraft.client.render.chunk.ChunkBuilder;
+import net.minecraft.client.texture.TextureManager;
 import net.minecraft.client.util.math.MatrixStack;
+import net.minecraft.util.math.BlockPos;
 import org.lwjgl.PointerBuffer;
 import org.lwjgl.vulkan.VkApplicationInfo;
 import org.lwjgl.vulkan.VkInstance;
 import org.lwjgl.vulkan.VkInstanceCreateInfo;
+import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.Redirect;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import net.fabricmc.minertx.*;
 import net.fabricmc.minertx.MineRTX;
+import net.minecraft.client.render.RenderLayer;
 
 import java.nio.ByteBuffer;
 
@@ -32,16 +43,39 @@ import net.fabricmc.minertx.jivix.JiviXBase.*;
 import net.fabricmc.minertx.jivix.JiviXCore.*;
 import static net.fabricmc.minertx.jivix.JiviXBase.*;
 import static net.fabricmc.minertx.jivix.JiviXCore.*;
+import static net.minecraft.client.render.WorldRenderer.*;
+//import static net.minecraft.client.render.WorldRenderer.ChunkInfo;
+
+
 
 @Mixin(WorldRenderer.class)
-public class RendererMixin {
+public class MixinWorldRenderer {
 	//public static JiviXBase.Driver driver;
 
+	@Final
+	@Shadow
+	private TextureManager textureManager;
+
+	@Shadow
+	private BuiltChunkStorage chunks;
+
+	// RESERVED! // ChunkBuilder.BuiltChunk builtChunk
 	// Will used for rendering chunk in ray-tracing as instance!
-	@Redirect(method = "renderLayer", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/util/math/MatrixStack;pop()V"))
-	private void onRenderLayerPop(MatrixStack matrixStack){
-		//System.out.println("Radio-POP"); For Debug!
-		matrixStack.pop();
+	@Inject(method = "renderLayer", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/util/math/MatrixStack;pop()V", shift = At.Shift.AFTER))
+	private void onRenderLayerPop(RenderLayer renderLayer, MatrixStack matrixStack, double d, double e, double f, CallbackInfo ci){
+		//System.out.println("Radio-POP"); // For Debug!
+		//matrixStack.pop();
+	};
+
+	@Redirect(method = "renderLayer", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/render/chunk/ChunkBuilder$BuiltChunk;getOrigin()Lnet/minecraft/util/math/BlockPos;"))
+	private BlockPos onBlockPosGet(ChunkBuilder.BuiltChunk builtChunk) {
+		return (MineRTX.vBlockPos = (MineRTX.vCurrentChunk = builtChunk).getOrigin());
+	};
+
+	// Steal Vertex Buffer for any other injections
+	@Redirect(method = "renderLayer", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/render/chunk/ChunkBuilder$BuiltChunk;getBuffer(Lnet/minecraft/client/render/RenderLayer;)Lnet/minecraft/client/gl/VertexBuffer;"))
+	private VertexBuffer onVertexBufferGet(ChunkBuilder.BuiltChunk builtChunk, RenderLayer layer) {
+		return (MineRTX.vVertexBuffer = (MineRTX.vCurrentChunk = builtChunk).getBuffer(layer));
 	};
 
 	// It DOESN'T stars, It first method in WorldRenderer initialization (Vulkan Initialize)
@@ -88,7 +122,8 @@ public class RendererMixin {
 */
 
 		if (!MineRTX.vInitialized) { MineRTX.vInitialized = true;
-			MineRTX.vInstance = MineRTX.driver.createInstance();
+			MineRTX.vDriver = new JiviXBase.Driver();
+			MineRTX.vInstance = MineRTX.vDriver.createInstance();
 			System.out.println("This line is printed by an example mod mixin! With create VkInstance: [" + MineRTX.vInstance + "] ...");
 		}
 
