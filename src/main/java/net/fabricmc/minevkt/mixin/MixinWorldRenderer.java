@@ -149,7 +149,7 @@ public abstract class MixinWorldRenderer {
 			MineRTX.vDriver = new JiviXBase.Driver();
 			VkInstanceCreateInfo createInfo = VkInstanceCreateInfo.createSafe(MineRTX.vDriver.getInstanceCreateInfoAddress());
 			MineRTX.vInstanceHandle = MineRTX.vDriver.createInstance();
-			//MineRTX.vInstance = new VkInstance(MineRTX.vInstanceHandle, createInfo); // LWJGL-3 still can't read from JavaCPP
+			MineRTX.vInstance = new VkInstance(MineRTX.vInstanceHandle, createInfo); // LWJGL-3 still can't read from JavaCPP
 			System.out.println("This line is printed by an example mod mixin! With create VkInstance: [" + MineRTX.vInstance + "] ...");
 		}
 
