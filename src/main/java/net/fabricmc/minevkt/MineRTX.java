@@ -21,6 +21,7 @@ public class MineRTX implements ModInitializer {
 	public static VertexBuffer vVertexBuffer;
 	public static BlockPos vBlockPos;
 	public static ChunkBuilder.BuiltChunk vCurrentChunk;
+	public static double[] vCPosition;
 
 	@Override
 	public void onInitialize() {
@@ -30,6 +31,7 @@ public class MineRTX implements ModInitializer {
 
 		//driver = new JiviXBase.Driver();
 		System.out.println("Hello Fabric world!");
+		this.vCPosition = new double[3];
 	}
 
 

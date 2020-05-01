@@ -49,7 +49,7 @@ import static net.minecraft.client.render.WorldRenderer.*;
 
 
 @Mixin(WorldRenderer.class)
-public class MixinWorldRenderer {
+public abstract class MixinWorldRenderer {
 	//public static JiviXBase.Driver driver;
 
 	@Final
@@ -58,6 +58,15 @@ public class MixinWorldRenderer {
 
 	@Shadow
 	private BuiltChunkStorage chunks;
+
+	@Shadow
+	protected abstract void renderLayer(
+			RenderLayer renderLayer,
+			MatrixStack matrices,
+			double cameraX,
+			double cameraY,
+			double cameraZ
+	);
 
 	// RESERVED! // ChunkBuilder.BuiltChunk builtChunk
 	// Will used for rendering chunk in ray-tracing as instance!
@@ -76,6 +85,20 @@ public class MixinWorldRenderer {
 	@Redirect(method = "renderLayer", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/render/chunk/ChunkBuilder$BuiltChunk;getBuffer(Lnet/minecraft/client/render/RenderLayer;)Lnet/minecraft/client/gl/VertexBuffer;"))
 	private VertexBuffer onVertexBufferGet(ChunkBuilder.BuiltChunk builtChunk, RenderLayer layer) {
 		return (MineRTX.vVertexBuffer = (MineRTX.vCurrentChunk = builtChunk).getBuffer(layer));
+	};
+
+	//
+	@Redirect(method = "render", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/render/WorldRenderer;renderLayer(Lnet/minecraft/client/render/RenderLayer;Lnet/minecraft/client/util/math/MatrixStack;DDD)V"))
+	private void redirectRenderLayer(
+			WorldRenderer worldRenderer,
+			RenderLayer renderLayer,
+			MatrixStack matrices,
+			double cameraX,
+			double cameraY,
+			double cameraZ
+	) {
+		MineRTX.vCPosition = new double[] {cameraX, cameraY, cameraZ};
+		renderLayer(renderLayer, matrices, cameraX, cameraY, cameraZ);
 	};
 
 	// It DOESN'T stars, It first method in WorldRenderer initialization (Vulkan Initialize)
@@ -127,5 +150,5 @@ public class MixinWorldRenderer {
 			System.out.println("This line is printed by an example mod mixin! With create VkInstance: [" + MineRTX.vInstance + "] ...");
 		}
 
-	}
-}
+	};
+};
