@@ -1,18 +1,18 @@
-package net.fabricmc.minertx;
+package net.fabricmc.minevkt;
 
 import net.fabricmc.api.ModInitializer;
-import net.fabricmc.minertx.jivix.*;
-import net.fabricmc.minertx.jivix.JiviXBase;
-import net.fabricmc.minertx.jivix.JiviXCore;
-import net.fabricmc.minertx.jivix.JiviXBase.*;
-import net.fabricmc.minertx.jivix.JiviXCore.*;
+import net.fabricmc.minevkt.jivix.*;
+import net.fabricmc.minevkt.jivix.JiviXBase;
+import net.fabricmc.minevkt.jivix.JiviXCore;
+import net.fabricmc.minevkt.jivix.JiviXBase.*;
+import net.fabricmc.minevkt.jivix.JiviXCore.*;
 import net.minecraft.client.gl.VertexBuffer;
 import net.minecraft.client.render.chunk.ChunkBuilder;
 import net.minecraft.util.math.BlockPos;
 import org.spongepowered.asm.mixin.Shadow;
 
-import static net.fabricmc.minertx.jivix.JiviXBase.*;
-import static net.fabricmc.minertx.jivix.JiviXCore.*;
+import static net.fabricmc.minevkt.jivix.JiviXBase.*;
+import static net.fabricmc.minevkt.jivix.JiviXCore.*;
 
 public class MineRTX implements ModInitializer {
 	public static JiviXBase.Driver vDriver;

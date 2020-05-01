@@ -118,21 +118,21 @@ static const char* JavaCPP_classNames[24] = {
         "java/lang/NullPointerException",
         "java/lang/RuntimeException",
         "org/bytedeco/javacpp/FloatPointer",
-        "net/fabricmc/minertx/jivix/JiviXCore$VsGeometryInstance",
-        "net/fabricmc/minertx/jivix/JiviXCore$MaterialUnit",
-        "net/fabricmc/minertx/jivix/JiviXCore$Renderer",
-        "net/fabricmc/minertx/jivix/JiviXCore$Material",
-        "net/fabricmc/minertx/jivix/JiviXCore$Node",
-        "net/fabricmc/minertx/jivix/JiviXCore$MeshBinding",
-        "net/fabricmc/minertx/jivix/JiviXCore$MeshInput",
-        "net/fabricmc/minertx/jivix/JiviXCore$BufferViewSet",
-        "net/fabricmc/minertx/jivix/JiviXCore$Driver",
-        "net/fabricmc/minertx/jivix/JiviXCore$Thread",
-        "net/fabricmc/minertx/jivix/JiviXCore$Context",
-        "net/fabricmc/minertx/jivix/JiviXCore$VmaBufferAllocation",
-        "net/fabricmc/minertx/jivix/JiviXCore$BufferAllocation",
-        "net/fabricmc/minertx/jivix/JiviXCore$VmaImageAllocation",
-        "net/fabricmc/minertx/jivix/JiviXCore$ImageAllocation" };
+        "net/fabricmc/minevkt/jivix/JiviXCore$VsGeometryInstance",
+        "net/fabricmc/minevkt/jivix/JiviXCore$MaterialUnit",
+        "net/fabricmc/minevkt/jivix/JiviXCore$Renderer",
+        "net/fabricmc/minevkt/jivix/JiviXCore$Material",
+        "net/fabricmc/minevkt/jivix/JiviXCore$Node",
+        "net/fabricmc/minevkt/jivix/JiviXCore$MeshBinding",
+        "net/fabricmc/minevkt/jivix/JiviXCore$MeshInput",
+        "net/fabricmc/minevkt/jivix/JiviXCore$BufferViewSet",
+        "net/fabricmc/minevkt/jivix/JiviXCore$Driver",
+        "net/fabricmc/minevkt/jivix/JiviXCore$Thread",
+        "net/fabricmc/minevkt/jivix/JiviXCore$Context",
+        "net/fabricmc/minevkt/jivix/JiviXCore$VmaBufferAllocation",
+        "net/fabricmc/minevkt/jivix/JiviXCore$BufferAllocation",
+        "net/fabricmc/minevkt/jivix/JiviXCore$VmaImageAllocation",
+        "net/fabricmc/minevkt/jivix/JiviXCore$ImageAllocation" };
 static jclass JavaCPP_classes[24] = { NULL };
 static jfieldID JavaCPP_addressFID = NULL;
 static jfieldID JavaCPP_positionFID = NULL;
@@ -550,21 +550,21 @@ public:
 
 
 
-static void JavaCPP_net_fabricmc_minertx_jivix_JiviXCore_00024VsGeometryInstance_deallocate(void *p) { delete (::vkh::VsGeometryInstance*)p; }
-static void JavaCPP_net_fabricmc_minertx_jivix_JiviXCore_00024MaterialUnit_deallocate(void *p) { delete (::jvi::MaterialUnit*)p; }
-static void JavaCPP_net_fabricmc_minertx_jivix_JiviXCore_00024Renderer_deallocate(void *p) { delete (::jvi::Renderer*)p; }
-static void JavaCPP_net_fabricmc_minertx_jivix_JiviXCore_00024Material_deallocate(void *p) { delete (::jvi::Material*)p; }
-static void JavaCPP_net_fabricmc_minertx_jivix_JiviXCore_00024Node_deallocate(void *p) { delete (::jvi::Node*)p; }
-static void JavaCPP_net_fabricmc_minertx_jivix_JiviXCore_00024MeshBinding_deallocate(void *p) { delete (::jvi::MeshBinding*)p; }
-static void JavaCPP_net_fabricmc_minertx_jivix_JiviXCore_00024MeshInput_deallocate(void *p) { delete (::jvi::MeshInput*)p; }
-static void JavaCPP_net_fabricmc_minertx_jivix_JiviXCore_00024BufferViewSet_deallocate(void *p) { delete (::jvi::BufferViewSet*)p; }
-static void JavaCPP_net_fabricmc_minertx_jivix_JiviXCore_00024Driver_deallocate(void *p) { delete (::jvi::Driver*)p; }
-static void JavaCPP_net_fabricmc_minertx_jivix_JiviXCore_00024Thread_deallocate(void *p) { delete (::jvi::Thread*)p; }
-static void JavaCPP_net_fabricmc_minertx_jivix_JiviXCore_00024Context_deallocate(void *p) { delete (::jvi::Context*)p; }
-static void JavaCPP_net_fabricmc_minertx_jivix_JiviXCore_00024VmaBufferAllocation_deallocate(void *p) { delete (::vkt::VmaBufferAllocation*)p; }
-static void JavaCPP_net_fabricmc_minertx_jivix_JiviXCore_00024BufferAllocation_deallocate(void *p) { delete (::vkt::BufferAllocation*)p; }
-static void JavaCPP_net_fabricmc_minertx_jivix_JiviXCore_00024VmaImageAllocation_deallocate(void *p) { delete (::vkt::VmaImageAllocation*)p; }
-static void JavaCPP_net_fabricmc_minertx_jivix_JiviXCore_00024ImageAllocation_deallocate(void *p) { delete (::vkt::ImageAllocation*)p; }
+static void JavaCPP_net_fabricmc_minevkt_jivix_JiviXCore_00024VsGeometryInstance_deallocate(void *p) { delete (::vkh::VsGeometryInstance*)p; }
+static void JavaCPP_net_fabricmc_minevkt_jivix_JiviXCore_00024MaterialUnit_deallocate(void *p) { delete (::jvi::MaterialUnit*)p; }
+static void JavaCPP_net_fabricmc_minevkt_jivix_JiviXCore_00024Renderer_deallocate(void *p) { delete (::jvi::Renderer*)p; }
+static void JavaCPP_net_fabricmc_minevkt_jivix_JiviXCore_00024Material_deallocate(void *p) { delete (::jvi::Material*)p; }
+static void JavaCPP_net_fabricmc_minevkt_jivix_JiviXCore_00024Node_deallocate(void *p) { delete (::jvi::Node*)p; }
+static void JavaCPP_net_fabricmc_minevkt_jivix_JiviXCore_00024MeshBinding_deallocate(void *p) { delete (::jvi::MeshBinding*)p; }
+static void JavaCPP_net_fabricmc_minevkt_jivix_JiviXCore_00024MeshInput_deallocate(void *p) { delete (::jvi::MeshInput*)p; }
+static void JavaCPP_net_fabricmc_minevkt_jivix_JiviXCore_00024BufferViewSet_deallocate(void *p) { delete (::jvi::BufferViewSet*)p; }
+static void JavaCPP_net_fabricmc_minevkt_jivix_JiviXCore_00024Driver_deallocate(void *p) { delete (::jvi::Driver*)p; }
+static void JavaCPP_net_fabricmc_minevkt_jivix_JiviXCore_00024Thread_deallocate(void *p) { delete (::jvi::Thread*)p; }
+static void JavaCPP_net_fabricmc_minevkt_jivix_JiviXCore_00024Context_deallocate(void *p) { delete (::jvi::Context*)p; }
+static void JavaCPP_net_fabricmc_minevkt_jivix_JiviXCore_00024VmaBufferAllocation_deallocate(void *p) { delete (::vkt::VmaBufferAllocation*)p; }
+static void JavaCPP_net_fabricmc_minevkt_jivix_JiviXCore_00024BufferAllocation_deallocate(void *p) { delete (::vkt::BufferAllocation*)p; }
+static void JavaCPP_net_fabricmc_minevkt_jivix_JiviXCore_00024VmaImageAllocation_deallocate(void *p) { delete (::vkt::VmaImageAllocation*)p; }
+static void JavaCPP_net_fabricmc_minevkt_jivix_JiviXCore_00024ImageAllocation_deallocate(void *p) { delete (::vkt::ImageAllocation*)p; }
 
 static const char* JavaCPP_members[24][6] = {
         { NULL },
@@ -577,7 +577,7 @@ static const char* JavaCPP_members[24][6] = {
         { NULL },
         { NULL },
         { "sizeof", "flags", "mask", "instanceId", "instanceOffset" },
-        { "sizeof", "specularTexture", "normalsTexture", "emissionTexture", "diffuseTexture" },
+        { "sizeof", "normalsTexture", "diffuseTexture", "emissionTexture", "specularTexture" },
         { "sizeof" },
         { "sizeof" },
         { "sizeof" },
@@ -602,7 +602,7 @@ static int JavaCPP_offsets[24][6] = {
         { -1 },
         { -1 },
         { sizeof(::vkh::VsGeometryInstance), offsetof(::vkh::VsGeometryInstance, flags), offsetof(::vkh::VsGeometryInstance, mask), offsetof(::vkh::VsGeometryInstance, instanceId), offsetof(::vkh::VsGeometryInstance, instanceOffset) },
-        { sizeof(::jvi::MaterialUnit), offsetof(::jvi::MaterialUnit, specularTexture), offsetof(::jvi::MaterialUnit, normalsTexture), offsetof(::jvi::MaterialUnit, emissionTexture), offsetof(::jvi::MaterialUnit, diffuseTexture) },
+        { sizeof(::jvi::MaterialUnit), offsetof(::jvi::MaterialUnit, normalsTexture), offsetof(::jvi::MaterialUnit, diffuseTexture), offsetof(::jvi::MaterialUnit, emissionTexture), offsetof(::jvi::MaterialUnit, specularTexture) },
         { sizeof(::jvi::Renderer) },
         { sizeof(::jvi::Material) },
         { sizeof(::jvi::Node) },
@@ -771,7 +771,7 @@ JNIEXPORT void JNICALL JNI_OnUnload(JavaVM* vm, void* reserved) {
     JavaCPP_vm = NULL;
 }
 
-JNIEXPORT jbyte JNICALL Java_net_fabricmc_minertx_jivix_JiviXCore_00024VsGeometryInstance_flags__(JNIEnv* env, jobject obj) {
+JNIEXPORT jbyte JNICALL Java_net_fabricmc_minevkt_jivix_JiviXCore_00024VsGeometryInstance_flags__(JNIEnv* env, jobject obj) {
     ::vkh::VsGeometryInstance* ptr = (::vkh::VsGeometryInstance*)jlong_to_ptr(env->GetLongField(obj, JavaCPP_addressFID));
     if (ptr == NULL) {
         env->ThrowNew(JavaCPP_getClass(env, 6), "This pointer address is NULL.");
@@ -793,7 +793,7 @@ JNIEXPORT jbyte JNICALL Java_net_fabricmc_minertx_jivix_JiviXCore_00024VsGeometr
     }
     return rarg;
 }
-JNIEXPORT void JNICALL Java_net_fabricmc_minertx_jivix_JiviXCore_00024VsGeometryInstance_flags__B(JNIEnv* env, jobject obj, jbyte arg0) {
+JNIEXPORT void JNICALL Java_net_fabricmc_minevkt_jivix_JiviXCore_00024VsGeometryInstance_flags__B(JNIEnv* env, jobject obj, jbyte arg0) {
     ::vkh::VsGeometryInstance* ptr = (::vkh::VsGeometryInstance*)jlong_to_ptr(env->GetLongField(obj, JavaCPP_addressFID));
     if (ptr == NULL) {
         env->ThrowNew(JavaCPP_getClass(env, 6), "This pointer address is NULL.");
@@ -803,7 +803,7 @@ JNIEXPORT void JNICALL Java_net_fabricmc_minertx_jivix_JiviXCore_00024VsGeometry
     ptr += position;
     ptr->flags = arg0;
 }
-JNIEXPORT jobject JNICALL Java_net_fabricmc_minertx_jivix_JiviXCore_00024VsGeometryInstance_transform__(JNIEnv* env, jobject obj) {
+JNIEXPORT jobject JNICALL Java_net_fabricmc_minevkt_jivix_JiviXCore_00024VsGeometryInstance_transform__(JNIEnv* env, jobject obj) {
     ::vkh::VsGeometryInstance* ptr = (::vkh::VsGeometryInstance*)jlong_to_ptr(env->GetLongField(obj, JavaCPP_addressFID));
     if (ptr == NULL) {
         env->ThrowNew(JavaCPP_getClass(env, 6), "This pointer address is NULL.");
@@ -831,7 +831,7 @@ JNIEXPORT jobject JNICALL Java_net_fabricmc_minertx_jivix_JiviXCore_00024VsGeome
     }
     return rarg;
 }
-JNIEXPORT void JNICALL Java_net_fabricmc_minertx_jivix_JiviXCore_00024VsGeometryInstance_transform__Lorg_bytedeco_javacpp_FloatPointer_2(JNIEnv* env, jobject obj, jobject arg0) {
+JNIEXPORT void JNICALL Java_net_fabricmc_minevkt_jivix_JiviXCore_00024VsGeometryInstance_transform__Lorg_bytedeco_javacpp_FloatPointer_2(JNIEnv* env, jobject obj, jobject arg0) {
     ::vkh::VsGeometryInstance* ptr = (::vkh::VsGeometryInstance*)jlong_to_ptr(env->GetLongField(obj, JavaCPP_addressFID));
     if (ptr == NULL) {
         env->ThrowNew(JavaCPP_getClass(env, 6), "This pointer address is NULL.");
@@ -857,7 +857,7 @@ JNIEXPORT void JNICALL Java_net_fabricmc_minertx_jivix_JiviXCore_00024VsGeometry
         env->Throw(exc);
     }
 }
-JNIEXPORT jbyte JNICALL Java_net_fabricmc_minertx_jivix_JiviXCore_00024VsGeometryInstance_mask__(JNIEnv* env, jobject obj) {
+JNIEXPORT jbyte JNICALL Java_net_fabricmc_minevkt_jivix_JiviXCore_00024VsGeometryInstance_mask__(JNIEnv* env, jobject obj) {
     ::vkh::VsGeometryInstance* ptr = (::vkh::VsGeometryInstance*)jlong_to_ptr(env->GetLongField(obj, JavaCPP_addressFID));
     if (ptr == NULL) {
         env->ThrowNew(JavaCPP_getClass(env, 6), "This pointer address is NULL.");
@@ -879,7 +879,7 @@ JNIEXPORT jbyte JNICALL Java_net_fabricmc_minertx_jivix_JiviXCore_00024VsGeometr
     }
     return rarg;
 }
-JNIEXPORT void JNICALL Java_net_fabricmc_minertx_jivix_JiviXCore_00024VsGeometryInstance_mask__B(JNIEnv* env, jobject obj, jbyte arg0) {
+JNIEXPORT void JNICALL Java_net_fabricmc_minevkt_jivix_JiviXCore_00024VsGeometryInstance_mask__B(JNIEnv* env, jobject obj, jbyte arg0) {
     ::vkh::VsGeometryInstance* ptr = (::vkh::VsGeometryInstance*)jlong_to_ptr(env->GetLongField(obj, JavaCPP_addressFID));
     if (ptr == NULL) {
         env->ThrowNew(JavaCPP_getClass(env, 6), "This pointer address is NULL.");
@@ -889,12 +889,12 @@ JNIEXPORT void JNICALL Java_net_fabricmc_minertx_jivix_JiviXCore_00024VsGeometry
     ptr += position;
     ptr->mask = arg0;
 }
-JNIEXPORT void JNICALL Java_net_fabricmc_minertx_jivix_JiviXCore_00024VsGeometryInstance_allocate(JNIEnv* env, jobject obj) {
+JNIEXPORT void JNICALL Java_net_fabricmc_minevkt_jivix_JiviXCore_00024VsGeometryInstance_allocate(JNIEnv* env, jobject obj) {
     jthrowable exc = NULL;
     try {
         ::vkh::VsGeometryInstance* rptr = new ::vkh::VsGeometryInstance();
         jlong rcapacity = 1;
-        JavaCPP_initPointer(env, obj, rptr, rcapacity, rptr, &JavaCPP_net_fabricmc_minertx_jivix_JiviXCore_00024VsGeometryInstance_deallocate);
+        JavaCPP_initPointer(env, obj, rptr, rcapacity, rptr, &JavaCPP_net_fabricmc_minevkt_jivix_JiviXCore_00024VsGeometryInstance_deallocate);
     } catch (...) {
         exc = JavaCPP_handleException(env, 7);
     }
@@ -903,7 +903,7 @@ JNIEXPORT void JNICALL Java_net_fabricmc_minertx_jivix_JiviXCore_00024VsGeometry
         env->Throw(exc);
     }
 }
-JNIEXPORT jint JNICALL Java_net_fabricmc_minertx_jivix_JiviXCore_00024VsGeometryInstance_instanceId__(JNIEnv* env, jobject obj) {
+JNIEXPORT jint JNICALL Java_net_fabricmc_minevkt_jivix_JiviXCore_00024VsGeometryInstance_instanceId__(JNIEnv* env, jobject obj) {
     ::vkh::VsGeometryInstance* ptr = (::vkh::VsGeometryInstance*)jlong_to_ptr(env->GetLongField(obj, JavaCPP_addressFID));
     if (ptr == NULL) {
         env->ThrowNew(JavaCPP_getClass(env, 6), "This pointer address is NULL.");
@@ -925,7 +925,7 @@ JNIEXPORT jint JNICALL Java_net_fabricmc_minertx_jivix_JiviXCore_00024VsGeometry
     }
     return rarg;
 }
-JNIEXPORT void JNICALL Java_net_fabricmc_minertx_jivix_JiviXCore_00024VsGeometryInstance_instanceId__I(JNIEnv* env, jobject obj, jint arg0) {
+JNIEXPORT void JNICALL Java_net_fabricmc_minevkt_jivix_JiviXCore_00024VsGeometryInstance_instanceId__I(JNIEnv* env, jobject obj, jint arg0) {
     ::vkh::VsGeometryInstance* ptr = (::vkh::VsGeometryInstance*)jlong_to_ptr(env->GetLongField(obj, JavaCPP_addressFID));
     if (ptr == NULL) {
         env->ThrowNew(JavaCPP_getClass(env, 6), "This pointer address is NULL.");
@@ -935,7 +935,7 @@ JNIEXPORT void JNICALL Java_net_fabricmc_minertx_jivix_JiviXCore_00024VsGeometry
     ptr += position;
     ptr->instanceId = arg0;
 }
-JNIEXPORT void JNICALL Java_net_fabricmc_minertx_jivix_JiviXCore_00024VsGeometryInstance_instanceOffset__I(JNIEnv* env, jobject obj, jint arg0) {
+JNIEXPORT void JNICALL Java_net_fabricmc_minevkt_jivix_JiviXCore_00024VsGeometryInstance_instanceOffset__I(JNIEnv* env, jobject obj, jint arg0) {
     ::vkh::VsGeometryInstance* ptr = (::vkh::VsGeometryInstance*)jlong_to_ptr(env->GetLongField(obj, JavaCPP_addressFID));
     if (ptr == NULL) {
         env->ThrowNew(JavaCPP_getClass(env, 6), "This pointer address is NULL.");
@@ -945,7 +945,7 @@ JNIEXPORT void JNICALL Java_net_fabricmc_minertx_jivix_JiviXCore_00024VsGeometry
     ptr += position;
     ptr->instanceOffset = arg0;
 }
-JNIEXPORT jint JNICALL Java_net_fabricmc_minertx_jivix_JiviXCore_00024VsGeometryInstance_instanceOffset__(JNIEnv* env, jobject obj) {
+JNIEXPORT jint JNICALL Java_net_fabricmc_minevkt_jivix_JiviXCore_00024VsGeometryInstance_instanceOffset__(JNIEnv* env, jobject obj) {
     ::vkh::VsGeometryInstance* ptr = (::vkh::VsGeometryInstance*)jlong_to_ptr(env->GetLongField(obj, JavaCPP_addressFID));
     if (ptr == NULL) {
         env->ThrowNew(JavaCPP_getClass(env, 6), "This pointer address is NULL.");
@@ -968,12 +968,12 @@ JNIEXPORT jint JNICALL Java_net_fabricmc_minertx_jivix_JiviXCore_00024VsGeometry
     return rarg;
 }
 
-JNIEXPORT void JNICALL Java_net_fabricmc_minertx_jivix_JiviXCore_00024MaterialUnit_allocate(JNIEnv* env, jobject obj) {
+JNIEXPORT void JNICALL Java_net_fabricmc_minevkt_jivix_JiviXCore_00024MaterialUnit_allocate(JNIEnv* env, jobject obj) {
     jthrowable exc = NULL;
     try {
         ::jvi::MaterialUnit* rptr = new ::jvi::MaterialUnit();
         jlong rcapacity = 1;
-        JavaCPP_initPointer(env, obj, rptr, rcapacity, rptr, &JavaCPP_net_fabricmc_minertx_jivix_JiviXCore_00024MaterialUnit_deallocate);
+        JavaCPP_initPointer(env, obj, rptr, rcapacity, rptr, &JavaCPP_net_fabricmc_minevkt_jivix_JiviXCore_00024MaterialUnit_deallocate);
     } catch (...) {
         exc = JavaCPP_handleException(env, 7);
     }
@@ -982,93 +982,7 @@ JNIEXPORT void JNICALL Java_net_fabricmc_minertx_jivix_JiviXCore_00024MaterialUn
         env->Throw(exc);
     }
 }
-JNIEXPORT jint JNICALL Java_net_fabricmc_minertx_jivix_JiviXCore_00024MaterialUnit_specularTexture__(JNIEnv* env, jobject obj) {
-    ::jvi::MaterialUnit* ptr = (::jvi::MaterialUnit*)jlong_to_ptr(env->GetLongField(obj, JavaCPP_addressFID));
-    if (ptr == NULL) {
-        env->ThrowNew(JavaCPP_getClass(env, 6), "This pointer address is NULL.");
-        return 0;
-    }
-    jlong position = env->GetLongField(obj, JavaCPP_positionFID);
-    ptr += position;
-    jint rarg = 0;
-    jthrowable exc = NULL;
-    try {
-        int rval = ptr->specularTexture;
-        rarg = (jint)rval;
-    } catch (...) {
-        exc = JavaCPP_handleException(env, 7);
-    }
-
-    if (exc != NULL) {
-        env->Throw(exc);
-    }
-    return rarg;
-}
-JNIEXPORT void JNICALL Java_net_fabricmc_minertx_jivix_JiviXCore_00024MaterialUnit_specularTexture__I(JNIEnv* env, jobject obj, jint arg0) {
-    ::jvi::MaterialUnit* ptr = (::jvi::MaterialUnit*)jlong_to_ptr(env->GetLongField(obj, JavaCPP_addressFID));
-    if (ptr == NULL) {
-        env->ThrowNew(JavaCPP_getClass(env, 6), "This pointer address is NULL.");
-        return;
-    }
-    jlong position = env->GetLongField(obj, JavaCPP_positionFID);
-    ptr += position;
-    ptr->specularTexture = arg0;
-}
-JNIEXPORT jobject JNICALL Java_net_fabricmc_minertx_jivix_JiviXCore_00024MaterialUnit_normals__(JNIEnv* env, jobject obj) {
-    ::jvi::MaterialUnit* ptr = (::jvi::MaterialUnit*)jlong_to_ptr(env->GetLongField(obj, JavaCPP_addressFID));
-    if (ptr == NULL) {
-        env->ThrowNew(JavaCPP_getClass(env, 6), "This pointer address is NULL.");
-        return 0;
-    }
-    jlong position = env->GetLongField(obj, JavaCPP_positionFID);
-    ptr += position;
-    jobject rarg = NULL;
-    float* rptr;
-    jthrowable exc = NULL;
-    try {
-        rptr = (float*)&ptr->normals();
-        if (rptr != NULL) {
-            rarg = JavaCPP_createPointer(env, 8);
-            if (rarg != NULL) {
-                env->SetLongField(rarg, JavaCPP_addressFID, ptr_to_jlong(rptr));
-            }
-        }
-    } catch (...) {
-        exc = JavaCPP_handleException(env, 7);
-    }
-
-    if (exc != NULL) {
-        env->Throw(exc);
-    }
-    return rarg;
-}
-JNIEXPORT void JNICALL Java_net_fabricmc_minertx_jivix_JiviXCore_00024MaterialUnit_normals__Lorg_bytedeco_javacpp_FloatPointer_2(JNIEnv* env, jobject obj, jobject arg0) {
-    ::jvi::MaterialUnit* ptr = (::jvi::MaterialUnit*)jlong_to_ptr(env->GetLongField(obj, JavaCPP_addressFID));
-    if (ptr == NULL) {
-        env->ThrowNew(JavaCPP_getClass(env, 6), "This pointer address is NULL.");
-        return;
-    }
-    jlong position = env->GetLongField(obj, JavaCPP_positionFID);
-    ptr += position;
-    float* ptr0 = arg0 == NULL ? NULL : (float*)jlong_to_ptr(env->GetLongField(arg0, JavaCPP_addressFID));
-    if (ptr0 == NULL) {
-        env->ThrowNew(JavaCPP_getClass(env, 6), "Pointer address of argument 0 is NULL.");
-        return;
-    }
-    jlong position0 = arg0 == NULL ? 0 : env->GetLongField(arg0, JavaCPP_positionFID);
-    ptr0 += position0;
-    jthrowable exc = NULL;
-    try {
-        ptr->normals(*(glm::vec4&)ptr0);
-    } catch (...) {
-        exc = JavaCPP_handleException(env, 7);
-    }
-
-    if (exc != NULL) {
-        env->Throw(exc);
-    }
-}
-JNIEXPORT jint JNICALL Java_net_fabricmc_minertx_jivix_JiviXCore_00024MaterialUnit_normalsTexture__(JNIEnv* env, jobject obj) {
+JNIEXPORT jint JNICALL Java_net_fabricmc_minevkt_jivix_JiviXCore_00024MaterialUnit_normalsTexture__(JNIEnv* env, jobject obj) {
     ::jvi::MaterialUnit* ptr = (::jvi::MaterialUnit*)jlong_to_ptr(env->GetLongField(obj, JavaCPP_addressFID));
     if (ptr == NULL) {
         env->ThrowNew(JavaCPP_getClass(env, 6), "This pointer address is NULL.");
@@ -1090,7 +1004,7 @@ JNIEXPORT jint JNICALL Java_net_fabricmc_minertx_jivix_JiviXCore_00024MaterialUn
     }
     return rarg;
 }
-JNIEXPORT void JNICALL Java_net_fabricmc_minertx_jivix_JiviXCore_00024MaterialUnit_normalsTexture__I(JNIEnv* env, jobject obj, jint arg0) {
+JNIEXPORT void JNICALL Java_net_fabricmc_minevkt_jivix_JiviXCore_00024MaterialUnit_normalsTexture__I(JNIEnv* env, jobject obj, jint arg0) {
     ::jvi::MaterialUnit* ptr = (::jvi::MaterialUnit*)jlong_to_ptr(env->GetLongField(obj, JavaCPP_addressFID));
     if (ptr == NULL) {
         env->ThrowNew(JavaCPP_getClass(env, 6), "This pointer address is NULL.");
@@ -1100,151 +1014,7 @@ JNIEXPORT void JNICALL Java_net_fabricmc_minertx_jivix_JiviXCore_00024MaterialUn
     ptr += position;
     ptr->normalsTexture = arg0;
 }
-JNIEXPORT jint JNICALL Java_net_fabricmc_minertx_jivix_JiviXCore_00024MaterialUnit_emissionTexture__(JNIEnv* env, jobject obj) {
-    ::jvi::MaterialUnit* ptr = (::jvi::MaterialUnit*)jlong_to_ptr(env->GetLongField(obj, JavaCPP_addressFID));
-    if (ptr == NULL) {
-        env->ThrowNew(JavaCPP_getClass(env, 6), "This pointer address is NULL.");
-        return 0;
-    }
-    jlong position = env->GetLongField(obj, JavaCPP_positionFID);
-    ptr += position;
-    jint rarg = 0;
-    jthrowable exc = NULL;
-    try {
-        int rval = ptr->emissionTexture;
-        rarg = (jint)rval;
-    } catch (...) {
-        exc = JavaCPP_handleException(env, 7);
-    }
-
-    if (exc != NULL) {
-        env->Throw(exc);
-    }
-    return rarg;
-}
-JNIEXPORT void JNICALL Java_net_fabricmc_minertx_jivix_JiviXCore_00024MaterialUnit_emissionTexture__I(JNIEnv* env, jobject obj, jint arg0) {
-    ::jvi::MaterialUnit* ptr = (::jvi::MaterialUnit*)jlong_to_ptr(env->GetLongField(obj, JavaCPP_addressFID));
-    if (ptr == NULL) {
-        env->ThrowNew(JavaCPP_getClass(env, 6), "This pointer address is NULL.");
-        return;
-    }
-    jlong position = env->GetLongField(obj, JavaCPP_positionFID);
-    ptr += position;
-    ptr->emissionTexture = arg0;
-}
-JNIEXPORT jobject JNICALL Java_net_fabricmc_minertx_jivix_JiviXCore_00024MaterialUnit_specular__(JNIEnv* env, jobject obj) {
-    ::jvi::MaterialUnit* ptr = (::jvi::MaterialUnit*)jlong_to_ptr(env->GetLongField(obj, JavaCPP_addressFID));
-    if (ptr == NULL) {
-        env->ThrowNew(JavaCPP_getClass(env, 6), "This pointer address is NULL.");
-        return 0;
-    }
-    jlong position = env->GetLongField(obj, JavaCPP_positionFID);
-    ptr += position;
-    jobject rarg = NULL;
-    float* rptr;
-    jthrowable exc = NULL;
-    try {
-        rptr = (float*)&ptr->specular();
-        if (rptr != NULL) {
-            rarg = JavaCPP_createPointer(env, 8);
-            if (rarg != NULL) {
-                env->SetLongField(rarg, JavaCPP_addressFID, ptr_to_jlong(rptr));
-            }
-        }
-    } catch (...) {
-        exc = JavaCPP_handleException(env, 7);
-    }
-
-    if (exc != NULL) {
-        env->Throw(exc);
-    }
-    return rarg;
-}
-JNIEXPORT void JNICALL Java_net_fabricmc_minertx_jivix_JiviXCore_00024MaterialUnit_specular__Lorg_bytedeco_javacpp_FloatPointer_2(JNIEnv* env, jobject obj, jobject arg0) {
-    ::jvi::MaterialUnit* ptr = (::jvi::MaterialUnit*)jlong_to_ptr(env->GetLongField(obj, JavaCPP_addressFID));
-    if (ptr == NULL) {
-        env->ThrowNew(JavaCPP_getClass(env, 6), "This pointer address is NULL.");
-        return;
-    }
-    jlong position = env->GetLongField(obj, JavaCPP_positionFID);
-    ptr += position;
-    float* ptr0 = arg0 == NULL ? NULL : (float*)jlong_to_ptr(env->GetLongField(arg0, JavaCPP_addressFID));
-    if (ptr0 == NULL) {
-        env->ThrowNew(JavaCPP_getClass(env, 6), "Pointer address of argument 0 is NULL.");
-        return;
-    }
-    jlong position0 = arg0 == NULL ? 0 : env->GetLongField(arg0, JavaCPP_positionFID);
-    ptr0 += position0;
-    jthrowable exc = NULL;
-    try {
-        ptr->specular(*(glm::vec4&)ptr0);
-    } catch (...) {
-        exc = JavaCPP_handleException(env, 7);
-    }
-
-    if (exc != NULL) {
-        env->Throw(exc);
-    }
-}
-JNIEXPORT void JNICALL Java_net_fabricmc_minertx_jivix_JiviXCore_00024MaterialUnit_diffuseTexture__I(JNIEnv* env, jobject obj, jint arg0) {
-    ::jvi::MaterialUnit* ptr = (::jvi::MaterialUnit*)jlong_to_ptr(env->GetLongField(obj, JavaCPP_addressFID));
-    if (ptr == NULL) {
-        env->ThrowNew(JavaCPP_getClass(env, 6), "This pointer address is NULL.");
-        return;
-    }
-    jlong position = env->GetLongField(obj, JavaCPP_positionFID);
-    ptr += position;
-    ptr->diffuseTexture = arg0;
-}
-JNIEXPORT jint JNICALL Java_net_fabricmc_minertx_jivix_JiviXCore_00024MaterialUnit_diffuseTexture__(JNIEnv* env, jobject obj) {
-    ::jvi::MaterialUnit* ptr = (::jvi::MaterialUnit*)jlong_to_ptr(env->GetLongField(obj, JavaCPP_addressFID));
-    if (ptr == NULL) {
-        env->ThrowNew(JavaCPP_getClass(env, 6), "This pointer address is NULL.");
-        return 0;
-    }
-    jlong position = env->GetLongField(obj, JavaCPP_positionFID);
-    ptr += position;
-    jint rarg = 0;
-    jthrowable exc = NULL;
-    try {
-        int rval = ptr->diffuseTexture;
-        rarg = (jint)rval;
-    } catch (...) {
-        exc = JavaCPP_handleException(env, 7);
-    }
-
-    if (exc != NULL) {
-        env->Throw(exc);
-    }
-    return rarg;
-}
-JNIEXPORT void JNICALL Java_net_fabricmc_minertx_jivix_JiviXCore_00024MaterialUnit_diffuse__Lorg_bytedeco_javacpp_FloatPointer_2(JNIEnv* env, jobject obj, jobject arg0) {
-    ::jvi::MaterialUnit* ptr = (::jvi::MaterialUnit*)jlong_to_ptr(env->GetLongField(obj, JavaCPP_addressFID));
-    if (ptr == NULL) {
-        env->ThrowNew(JavaCPP_getClass(env, 6), "This pointer address is NULL.");
-        return;
-    }
-    jlong position = env->GetLongField(obj, JavaCPP_positionFID);
-    ptr += position;
-    float* ptr0 = arg0 == NULL ? NULL : (float*)jlong_to_ptr(env->GetLongField(arg0, JavaCPP_addressFID));
-    if (ptr0 == NULL) {
-        env->ThrowNew(JavaCPP_getClass(env, 6), "Pointer address of argument 0 is NULL.");
-        return;
-    }
-    jlong position0 = arg0 == NULL ? 0 : env->GetLongField(arg0, JavaCPP_positionFID);
-    ptr0 += position0;
-    jthrowable exc = NULL;
-    try {
-        ptr->diffuse(*(glm::vec4&)ptr0);
-    } catch (...) {
-        exc = JavaCPP_handleException(env, 7);
-    }
-
-    if (exc != NULL) {
-        env->Throw(exc);
-    }
-}
-JNIEXPORT jobject JNICALL Java_net_fabricmc_minertx_jivix_JiviXCore_00024MaterialUnit_diffuse__(JNIEnv* env, jobject obj) {
+JNIEXPORT jobject JNICALL Java_net_fabricmc_minevkt_jivix_JiviXCore_00024MaterialUnit_diffuse__(JNIEnv* env, jobject obj) {
     ::jvi::MaterialUnit* ptr = (::jvi::MaterialUnit*)jlong_to_ptr(env->GetLongField(obj, JavaCPP_addressFID));
     if (ptr == NULL) {
         env->ThrowNew(JavaCPP_getClass(env, 6), "This pointer address is NULL.");
@@ -1272,7 +1042,113 @@ JNIEXPORT jobject JNICALL Java_net_fabricmc_minertx_jivix_JiviXCore_00024Materia
     }
     return rarg;
 }
-JNIEXPORT jobject JNICALL Java_net_fabricmc_minertx_jivix_JiviXCore_00024MaterialUnit_emission__(JNIEnv* env, jobject obj) {
+JNIEXPORT void JNICALL Java_net_fabricmc_minevkt_jivix_JiviXCore_00024MaterialUnit_diffuse__Lorg_bytedeco_javacpp_FloatPointer_2(JNIEnv* env, jobject obj, jobject arg0) {
+    ::jvi::MaterialUnit* ptr = (::jvi::MaterialUnit*)jlong_to_ptr(env->GetLongField(obj, JavaCPP_addressFID));
+    if (ptr == NULL) {
+        env->ThrowNew(JavaCPP_getClass(env, 6), "This pointer address is NULL.");
+        return;
+    }
+    jlong position = env->GetLongField(obj, JavaCPP_positionFID);
+    ptr += position;
+    float* ptr0 = arg0 == NULL ? NULL : (float*)jlong_to_ptr(env->GetLongField(arg0, JavaCPP_addressFID));
+    if (ptr0 == NULL) {
+        env->ThrowNew(JavaCPP_getClass(env, 6), "Pointer address of argument 0 is NULL.");
+        return;
+    }
+    jlong position0 = arg0 == NULL ? 0 : env->GetLongField(arg0, JavaCPP_positionFID);
+    ptr0 += position0;
+    jthrowable exc = NULL;
+    try {
+        ptr->diffuse(*(glm::vec4&)ptr0);
+    } catch (...) {
+        exc = JavaCPP_handleException(env, 7);
+    }
+
+    if (exc != NULL) {
+        env->Throw(exc);
+    }
+}
+JNIEXPORT void JNICALL Java_net_fabricmc_minevkt_jivix_JiviXCore_00024MaterialUnit_specular__Lorg_bytedeco_javacpp_FloatPointer_2(JNIEnv* env, jobject obj, jobject arg0) {
+    ::jvi::MaterialUnit* ptr = (::jvi::MaterialUnit*)jlong_to_ptr(env->GetLongField(obj, JavaCPP_addressFID));
+    if (ptr == NULL) {
+        env->ThrowNew(JavaCPP_getClass(env, 6), "This pointer address is NULL.");
+        return;
+    }
+    jlong position = env->GetLongField(obj, JavaCPP_positionFID);
+    ptr += position;
+    float* ptr0 = arg0 == NULL ? NULL : (float*)jlong_to_ptr(env->GetLongField(arg0, JavaCPP_addressFID));
+    if (ptr0 == NULL) {
+        env->ThrowNew(JavaCPP_getClass(env, 6), "Pointer address of argument 0 is NULL.");
+        return;
+    }
+    jlong position0 = arg0 == NULL ? 0 : env->GetLongField(arg0, JavaCPP_positionFID);
+    ptr0 += position0;
+    jthrowable exc = NULL;
+    try {
+        ptr->specular(*(glm::vec4&)ptr0);
+    } catch (...) {
+        exc = JavaCPP_handleException(env, 7);
+    }
+
+    if (exc != NULL) {
+        env->Throw(exc);
+    }
+}
+JNIEXPORT jobject JNICALL Java_net_fabricmc_minevkt_jivix_JiviXCore_00024MaterialUnit_specular__(JNIEnv* env, jobject obj) {
+    ::jvi::MaterialUnit* ptr = (::jvi::MaterialUnit*)jlong_to_ptr(env->GetLongField(obj, JavaCPP_addressFID));
+    if (ptr == NULL) {
+        env->ThrowNew(JavaCPP_getClass(env, 6), "This pointer address is NULL.");
+        return 0;
+    }
+    jlong position = env->GetLongField(obj, JavaCPP_positionFID);
+    ptr += position;
+    jobject rarg = NULL;
+    float* rptr;
+    jthrowable exc = NULL;
+    try {
+        rptr = (float*)&ptr->specular();
+        if (rptr != NULL) {
+            rarg = JavaCPP_createPointer(env, 8);
+            if (rarg != NULL) {
+                env->SetLongField(rarg, JavaCPP_addressFID, ptr_to_jlong(rptr));
+            }
+        }
+    } catch (...) {
+        exc = JavaCPP_handleException(env, 7);
+    }
+
+    if (exc != NULL) {
+        env->Throw(exc);
+    }
+    return rarg;
+}
+JNIEXPORT void JNICALL Java_net_fabricmc_minevkt_jivix_JiviXCore_00024MaterialUnit_emission__Lorg_bytedeco_javacpp_FloatPointer_2(JNIEnv* env, jobject obj, jobject arg0) {
+    ::jvi::MaterialUnit* ptr = (::jvi::MaterialUnit*)jlong_to_ptr(env->GetLongField(obj, JavaCPP_addressFID));
+    if (ptr == NULL) {
+        env->ThrowNew(JavaCPP_getClass(env, 6), "This pointer address is NULL.");
+        return;
+    }
+    jlong position = env->GetLongField(obj, JavaCPP_positionFID);
+    ptr += position;
+    float* ptr0 = arg0 == NULL ? NULL : (float*)jlong_to_ptr(env->GetLongField(arg0, JavaCPP_addressFID));
+    if (ptr0 == NULL) {
+        env->ThrowNew(JavaCPP_getClass(env, 6), "Pointer address of argument 0 is NULL.");
+        return;
+    }
+    jlong position0 = arg0 == NULL ? 0 : env->GetLongField(arg0, JavaCPP_positionFID);
+    ptr0 += position0;
+    jthrowable exc = NULL;
+    try {
+        ptr->emission(*(glm::vec4&)ptr0);
+    } catch (...) {
+        exc = JavaCPP_handleException(env, 7);
+    }
+
+    if (exc != NULL) {
+        env->Throw(exc);
+    }
+}
+JNIEXPORT jobject JNICALL Java_net_fabricmc_minevkt_jivix_JiviXCore_00024MaterialUnit_emission__(JNIEnv* env, jobject obj) {
     ::jvi::MaterialUnit* ptr = (::jvi::MaterialUnit*)jlong_to_ptr(env->GetLongField(obj, JavaCPP_addressFID));
     if (ptr == NULL) {
         env->ThrowNew(JavaCPP_getClass(env, 6), "This pointer address is NULL.");
@@ -1300,7 +1176,103 @@ JNIEXPORT jobject JNICALL Java_net_fabricmc_minertx_jivix_JiviXCore_00024Materia
     }
     return rarg;
 }
-JNIEXPORT void JNICALL Java_net_fabricmc_minertx_jivix_JiviXCore_00024MaterialUnit_emission__Lorg_bytedeco_javacpp_FloatPointer_2(JNIEnv* env, jobject obj, jobject arg0) {
+JNIEXPORT jint JNICALL Java_net_fabricmc_minevkt_jivix_JiviXCore_00024MaterialUnit_diffuseTexture__(JNIEnv* env, jobject obj) {
+    ::jvi::MaterialUnit* ptr = (::jvi::MaterialUnit*)jlong_to_ptr(env->GetLongField(obj, JavaCPP_addressFID));
+    if (ptr == NULL) {
+        env->ThrowNew(JavaCPP_getClass(env, 6), "This pointer address is NULL.");
+        return 0;
+    }
+    jlong position = env->GetLongField(obj, JavaCPP_positionFID);
+    ptr += position;
+    jint rarg = 0;
+    jthrowable exc = NULL;
+    try {
+        int rval = ptr->diffuseTexture;
+        rarg = (jint)rval;
+    } catch (...) {
+        exc = JavaCPP_handleException(env, 7);
+    }
+
+    if (exc != NULL) {
+        env->Throw(exc);
+    }
+    return rarg;
+}
+JNIEXPORT void JNICALL Java_net_fabricmc_minevkt_jivix_JiviXCore_00024MaterialUnit_diffuseTexture__I(JNIEnv* env, jobject obj, jint arg0) {
+    ::jvi::MaterialUnit* ptr = (::jvi::MaterialUnit*)jlong_to_ptr(env->GetLongField(obj, JavaCPP_addressFID));
+    if (ptr == NULL) {
+        env->ThrowNew(JavaCPP_getClass(env, 6), "This pointer address is NULL.");
+        return;
+    }
+    jlong position = env->GetLongField(obj, JavaCPP_positionFID);
+    ptr += position;
+    ptr->diffuseTexture = arg0;
+}
+JNIEXPORT void JNICALL Java_net_fabricmc_minevkt_jivix_JiviXCore_00024MaterialUnit_emissionTexture__I(JNIEnv* env, jobject obj, jint arg0) {
+    ::jvi::MaterialUnit* ptr = (::jvi::MaterialUnit*)jlong_to_ptr(env->GetLongField(obj, JavaCPP_addressFID));
+    if (ptr == NULL) {
+        env->ThrowNew(JavaCPP_getClass(env, 6), "This pointer address is NULL.");
+        return;
+    }
+    jlong position = env->GetLongField(obj, JavaCPP_positionFID);
+    ptr += position;
+    ptr->emissionTexture = arg0;
+}
+JNIEXPORT jint JNICALL Java_net_fabricmc_minevkt_jivix_JiviXCore_00024MaterialUnit_emissionTexture__(JNIEnv* env, jobject obj) {
+    ::jvi::MaterialUnit* ptr = (::jvi::MaterialUnit*)jlong_to_ptr(env->GetLongField(obj, JavaCPP_addressFID));
+    if (ptr == NULL) {
+        env->ThrowNew(JavaCPP_getClass(env, 6), "This pointer address is NULL.");
+        return 0;
+    }
+    jlong position = env->GetLongField(obj, JavaCPP_positionFID);
+    ptr += position;
+    jint rarg = 0;
+    jthrowable exc = NULL;
+    try {
+        int rval = ptr->emissionTexture;
+        rarg = (jint)rval;
+    } catch (...) {
+        exc = JavaCPP_handleException(env, 7);
+    }
+
+    if (exc != NULL) {
+        env->Throw(exc);
+    }
+    return rarg;
+}
+JNIEXPORT jint JNICALL Java_net_fabricmc_minevkt_jivix_JiviXCore_00024MaterialUnit_specularTexture__(JNIEnv* env, jobject obj) {
+    ::jvi::MaterialUnit* ptr = (::jvi::MaterialUnit*)jlong_to_ptr(env->GetLongField(obj, JavaCPP_addressFID));
+    if (ptr == NULL) {
+        env->ThrowNew(JavaCPP_getClass(env, 6), "This pointer address is NULL.");
+        return 0;
+    }
+    jlong position = env->GetLongField(obj, JavaCPP_positionFID);
+    ptr += position;
+    jint rarg = 0;
+    jthrowable exc = NULL;
+    try {
+        int rval = ptr->specularTexture;
+        rarg = (jint)rval;
+    } catch (...) {
+        exc = JavaCPP_handleException(env, 7);
+    }
+
+    if (exc != NULL) {
+        env->Throw(exc);
+    }
+    return rarg;
+}
+JNIEXPORT void JNICALL Java_net_fabricmc_minevkt_jivix_JiviXCore_00024MaterialUnit_specularTexture__I(JNIEnv* env, jobject obj, jint arg0) {
+    ::jvi::MaterialUnit* ptr = (::jvi::MaterialUnit*)jlong_to_ptr(env->GetLongField(obj, JavaCPP_addressFID));
+    if (ptr == NULL) {
+        env->ThrowNew(JavaCPP_getClass(env, 6), "This pointer address is NULL.");
+        return;
+    }
+    jlong position = env->GetLongField(obj, JavaCPP_positionFID);
+    ptr += position;
+    ptr->specularTexture = arg0;
+}
+JNIEXPORT void JNICALL Java_net_fabricmc_minevkt_jivix_JiviXCore_00024MaterialUnit_normals__Lorg_bytedeco_javacpp_FloatPointer_2(JNIEnv* env, jobject obj, jobject arg0) {
     ::jvi::MaterialUnit* ptr = (::jvi::MaterialUnit*)jlong_to_ptr(env->GetLongField(obj, JavaCPP_addressFID));
     if (ptr == NULL) {
         env->ThrowNew(JavaCPP_getClass(env, 6), "This pointer address is NULL.");
@@ -1317,7 +1289,7 @@ JNIEXPORT void JNICALL Java_net_fabricmc_minertx_jivix_JiviXCore_00024MaterialUn
     ptr0 += position0;
     jthrowable exc = NULL;
     try {
-        ptr->emission(*(glm::vec4&)ptr0);
+        ptr->normals(*(glm::vec4&)ptr0);
     } catch (...) {
         exc = JavaCPP_handleException(env, 7);
     }
@@ -1326,13 +1298,41 @@ JNIEXPORT void JNICALL Java_net_fabricmc_minertx_jivix_JiviXCore_00024MaterialUn
         env->Throw(exc);
     }
 }
+JNIEXPORT jobject JNICALL Java_net_fabricmc_minevkt_jivix_JiviXCore_00024MaterialUnit_normals__(JNIEnv* env, jobject obj) {
+    ::jvi::MaterialUnit* ptr = (::jvi::MaterialUnit*)jlong_to_ptr(env->GetLongField(obj, JavaCPP_addressFID));
+    if (ptr == NULL) {
+        env->ThrowNew(JavaCPP_getClass(env, 6), "This pointer address is NULL.");
+        return 0;
+    }
+    jlong position = env->GetLongField(obj, JavaCPP_positionFID);
+    ptr += position;
+    jobject rarg = NULL;
+    float* rptr;
+    jthrowable exc = NULL;
+    try {
+        rptr = (float*)&ptr->normals();
+        if (rptr != NULL) {
+            rarg = JavaCPP_createPointer(env, 8);
+            if (rarg != NULL) {
+                env->SetLongField(rarg, JavaCPP_addressFID, ptr_to_jlong(rptr));
+            }
+        }
+    } catch (...) {
+        exc = JavaCPP_handleException(env, 7);
+    }
 
-JNIEXPORT void JNICALL Java_net_fabricmc_minertx_jivix_JiviXCore_00024Renderer_allocate__(JNIEnv* env, jobject obj) {
+    if (exc != NULL) {
+        env->Throw(exc);
+    }
+    return rarg;
+}
+
+JNIEXPORT void JNICALL Java_net_fabricmc_minevkt_jivix_JiviXCore_00024Renderer_allocate__(JNIEnv* env, jobject obj) {
     jthrowable exc = NULL;
     try {
         ::jvi::Renderer* rptr = new ::jvi::Renderer();
         jlong rcapacity = 1;
-        JavaCPP_initPointer(env, obj, rptr, rcapacity, rptr, &JavaCPP_net_fabricmc_minertx_jivix_JiviXCore_00024Renderer_deallocate);
+        JavaCPP_initPointer(env, obj, rptr, rcapacity, rptr, &JavaCPP_net_fabricmc_minevkt_jivix_JiviXCore_00024Renderer_deallocate);
     } catch (...) {
         exc = JavaCPP_handleException(env, 7);
     }
@@ -1341,7 +1341,7 @@ JNIEXPORT void JNICALL Java_net_fabricmc_minertx_jivix_JiviXCore_00024Renderer_a
         env->Throw(exc);
     }
 }
-JNIEXPORT void JNICALL Java_net_fabricmc_minertx_jivix_JiviXCore_00024Renderer_allocate__Lnet_fabricmc_minertx_jivix_JiviXCore_00024Context_2(JNIEnv* env, jobject obj, jobject arg0) {
+JNIEXPORT void JNICALL Java_net_fabricmc_minevkt_jivix_JiviXCore_00024Renderer_allocate__Lnet_fabricmc_minevkt_jivix_JiviXCore_00024Context_2(JNIEnv* env, jobject obj, jobject arg0) {
     ::jvi::Context* ptr0 = arg0 == NULL ? NULL : (::jvi::Context*)jlong_to_ptr(env->GetLongField(arg0, JavaCPP_addressFID));
     jlong position0 = arg0 == NULL ? 0 : env->GetLongField(arg0, JavaCPP_positionFID);
     ptr0 += position0;
@@ -1349,7 +1349,7 @@ JNIEXPORT void JNICALL Java_net_fabricmc_minertx_jivix_JiviXCore_00024Renderer_a
     try {
         ::jvi::Renderer* rptr = new ::jvi::Renderer(ptr0);
         jlong rcapacity = 1;
-        JavaCPP_initPointer(env, obj, rptr, rcapacity, rptr, &JavaCPP_net_fabricmc_minertx_jivix_JiviXCore_00024Renderer_deallocate);
+        JavaCPP_initPointer(env, obj, rptr, rcapacity, rptr, &JavaCPP_net_fabricmc_minevkt_jivix_JiviXCore_00024Renderer_deallocate);
     } catch (...) {
         exc = JavaCPP_handleException(env, 7);
     }
@@ -1359,12 +1359,12 @@ JNIEXPORT void JNICALL Java_net_fabricmc_minertx_jivix_JiviXCore_00024Renderer_a
     }
 }
 
-JNIEXPORT void JNICALL Java_net_fabricmc_minertx_jivix_JiviXCore_00024Material_allocate__(JNIEnv* env, jobject obj) {
+JNIEXPORT void JNICALL Java_net_fabricmc_minevkt_jivix_JiviXCore_00024Material_allocate__(JNIEnv* env, jobject obj) {
     jthrowable exc = NULL;
     try {
         ::jvi::Material* rptr = new ::jvi::Material();
         jlong rcapacity = 1;
-        JavaCPP_initPointer(env, obj, rptr, rcapacity, rptr, &JavaCPP_net_fabricmc_minertx_jivix_JiviXCore_00024Material_deallocate);
+        JavaCPP_initPointer(env, obj, rptr, rcapacity, rptr, &JavaCPP_net_fabricmc_minevkt_jivix_JiviXCore_00024Material_deallocate);
     } catch (...) {
         exc = JavaCPP_handleException(env, 7);
     }
@@ -1373,7 +1373,7 @@ JNIEXPORT void JNICALL Java_net_fabricmc_minertx_jivix_JiviXCore_00024Material_a
         env->Throw(exc);
     }
 }
-JNIEXPORT void JNICALL Java_net_fabricmc_minertx_jivix_JiviXCore_00024Material_allocate__Lnet_fabricmc_minertx_jivix_JiviXCore_00024Context_2(JNIEnv* env, jobject obj, jobject arg0) {
+JNIEXPORT void JNICALL Java_net_fabricmc_minevkt_jivix_JiviXCore_00024Material_allocate__Lnet_fabricmc_minevkt_jivix_JiviXCore_00024Context_2(JNIEnv* env, jobject obj, jobject arg0) {
     ::jvi::Context* ptr0 = arg0 == NULL ? NULL : (::jvi::Context*)jlong_to_ptr(env->GetLongField(arg0, JavaCPP_addressFID));
     jlong position0 = arg0 == NULL ? 0 : env->GetLongField(arg0, JavaCPP_positionFID);
     ptr0 += position0;
@@ -1381,7 +1381,7 @@ JNIEXPORT void JNICALL Java_net_fabricmc_minertx_jivix_JiviXCore_00024Material_a
     try {
         ::jvi::Material* rptr = new ::jvi::Material(ptr0);
         jlong rcapacity = 1;
-        JavaCPP_initPointer(env, obj, rptr, rcapacity, rptr, &JavaCPP_net_fabricmc_minertx_jivix_JiviXCore_00024Material_deallocate);
+        JavaCPP_initPointer(env, obj, rptr, rcapacity, rptr, &JavaCPP_net_fabricmc_minevkt_jivix_JiviXCore_00024Material_deallocate);
     } catch (...) {
         exc = JavaCPP_handleException(env, 7);
     }
@@ -1391,12 +1391,12 @@ JNIEXPORT void JNICALL Java_net_fabricmc_minertx_jivix_JiviXCore_00024Material_a
     }
 }
 
-JNIEXPORT void JNICALL Java_net_fabricmc_minertx_jivix_JiviXCore_00024Node_allocate__(JNIEnv* env, jobject obj) {
+JNIEXPORT void JNICALL Java_net_fabricmc_minevkt_jivix_JiviXCore_00024Node_allocate__(JNIEnv* env, jobject obj) {
     jthrowable exc = NULL;
     try {
         ::jvi::Node* rptr = new ::jvi::Node();
         jlong rcapacity = 1;
-        JavaCPP_initPointer(env, obj, rptr, rcapacity, rptr, &JavaCPP_net_fabricmc_minertx_jivix_JiviXCore_00024Node_deallocate);
+        JavaCPP_initPointer(env, obj, rptr, rcapacity, rptr, &JavaCPP_net_fabricmc_minevkt_jivix_JiviXCore_00024Node_deallocate);
     } catch (...) {
         exc = JavaCPP_handleException(env, 7);
     }
@@ -1405,7 +1405,7 @@ JNIEXPORT void JNICALL Java_net_fabricmc_minertx_jivix_JiviXCore_00024Node_alloc
         env->Throw(exc);
     }
 }
-JNIEXPORT void JNICALL Java_net_fabricmc_minertx_jivix_JiviXCore_00024Node_allocate__Lnet_fabricmc_minertx_jivix_JiviXCore_00024Context_2(JNIEnv* env, jobject obj, jobject arg0) {
+JNIEXPORT void JNICALL Java_net_fabricmc_minevkt_jivix_JiviXCore_00024Node_allocate__Lnet_fabricmc_minevkt_jivix_JiviXCore_00024Context_2(JNIEnv* env, jobject obj, jobject arg0) {
     ::jvi::Context* ptr0 = arg0 == NULL ? NULL : (::jvi::Context*)jlong_to_ptr(env->GetLongField(arg0, JavaCPP_addressFID));
     jlong position0 = arg0 == NULL ? 0 : env->GetLongField(arg0, JavaCPP_positionFID);
     ptr0 += position0;
@@ -1413,7 +1413,7 @@ JNIEXPORT void JNICALL Java_net_fabricmc_minertx_jivix_JiviXCore_00024Node_alloc
     try {
         ::jvi::Node* rptr = new ::jvi::Node(ptr0);
         jlong rcapacity = 1;
-        JavaCPP_initPointer(env, obj, rptr, rcapacity, rptr, &JavaCPP_net_fabricmc_minertx_jivix_JiviXCore_00024Node_deallocate);
+        JavaCPP_initPointer(env, obj, rptr, rcapacity, rptr, &JavaCPP_net_fabricmc_minevkt_jivix_JiviXCore_00024Node_deallocate);
     } catch (...) {
         exc = JavaCPP_handleException(env, 7);
     }
@@ -1423,12 +1423,12 @@ JNIEXPORT void JNICALL Java_net_fabricmc_minertx_jivix_JiviXCore_00024Node_alloc
     }
 }
 
-JNIEXPORT void JNICALL Java_net_fabricmc_minertx_jivix_JiviXCore_00024MeshBinding_allocate__(JNIEnv* env, jobject obj) {
+JNIEXPORT void JNICALL Java_net_fabricmc_minevkt_jivix_JiviXCore_00024MeshBinding_allocate__(JNIEnv* env, jobject obj) {
     jthrowable exc = NULL;
     try {
         ::jvi::MeshBinding* rptr = new ::jvi::MeshBinding();
         jlong rcapacity = 1;
-        JavaCPP_initPointer(env, obj, rptr, rcapacity, rptr, &JavaCPP_net_fabricmc_minertx_jivix_JiviXCore_00024MeshBinding_deallocate);
+        JavaCPP_initPointer(env, obj, rptr, rcapacity, rptr, &JavaCPP_net_fabricmc_minevkt_jivix_JiviXCore_00024MeshBinding_deallocate);
     } catch (...) {
         exc = JavaCPP_handleException(env, 7);
     }
@@ -1437,7 +1437,7 @@ JNIEXPORT void JNICALL Java_net_fabricmc_minertx_jivix_JiviXCore_00024MeshBindin
         env->Throw(exc);
     }
 }
-JNIEXPORT void JNICALL Java_net_fabricmc_minertx_jivix_JiviXCore_00024MeshBinding_allocate__Lnet_fabricmc_minertx_jivix_JiviXCore_00024Context_2(JNIEnv* env, jobject obj, jobject arg0) {
+JNIEXPORT void JNICALL Java_net_fabricmc_minevkt_jivix_JiviXCore_00024MeshBinding_allocate__Lnet_fabricmc_minevkt_jivix_JiviXCore_00024Context_2(JNIEnv* env, jobject obj, jobject arg0) {
     ::jvi::Context* ptr0 = arg0 == NULL ? NULL : (::jvi::Context*)jlong_to_ptr(env->GetLongField(arg0, JavaCPP_addressFID));
     jlong position0 = arg0 == NULL ? 0 : env->GetLongField(arg0, JavaCPP_positionFID);
     ptr0 += position0;
@@ -1445,7 +1445,7 @@ JNIEXPORT void JNICALL Java_net_fabricmc_minertx_jivix_JiviXCore_00024MeshBindin
     try {
         ::jvi::MeshBinding* rptr = new ::jvi::MeshBinding(ptr0);
         jlong rcapacity = 1;
-        JavaCPP_initPointer(env, obj, rptr, rcapacity, rptr, &JavaCPP_net_fabricmc_minertx_jivix_JiviXCore_00024MeshBinding_deallocate);
+        JavaCPP_initPointer(env, obj, rptr, rcapacity, rptr, &JavaCPP_net_fabricmc_minevkt_jivix_JiviXCore_00024MeshBinding_deallocate);
     } catch (...) {
         exc = JavaCPP_handleException(env, 7);
     }
@@ -1455,7 +1455,7 @@ JNIEXPORT void JNICALL Java_net_fabricmc_minertx_jivix_JiviXCore_00024MeshBindin
     }
 }
 
-JNIEXPORT void JNICALL Java_net_fabricmc_minertx_jivix_JiviXCore_00024MeshInput_allocate__Lnet_fabricmc_minertx_jivix_JiviXCore_00024Context_2(JNIEnv* env, jobject obj, jobject arg0) {
+JNIEXPORT void JNICALL Java_net_fabricmc_minevkt_jivix_JiviXCore_00024MeshInput_allocate__Lnet_fabricmc_minevkt_jivix_JiviXCore_00024Context_2(JNIEnv* env, jobject obj, jobject arg0) {
     ::jvi::Context* ptr0 = arg0 == NULL ? NULL : (::jvi::Context*)jlong_to_ptr(env->GetLongField(arg0, JavaCPP_addressFID));
     jlong position0 = arg0 == NULL ? 0 : env->GetLongField(arg0, JavaCPP_positionFID);
     ptr0 += position0;
@@ -1463,7 +1463,7 @@ JNIEXPORT void JNICALL Java_net_fabricmc_minertx_jivix_JiviXCore_00024MeshInput_
     try {
         ::jvi::MeshInput* rptr = new ::jvi::MeshInput(ptr0);
         jlong rcapacity = 1;
-        JavaCPP_initPointer(env, obj, rptr, rcapacity, rptr, &JavaCPP_net_fabricmc_minertx_jivix_JiviXCore_00024MeshInput_deallocate);
+        JavaCPP_initPointer(env, obj, rptr, rcapacity, rptr, &JavaCPP_net_fabricmc_minevkt_jivix_JiviXCore_00024MeshInput_deallocate);
     } catch (...) {
         exc = JavaCPP_handleException(env, 7);
     }
@@ -1472,12 +1472,12 @@ JNIEXPORT void JNICALL Java_net_fabricmc_minertx_jivix_JiviXCore_00024MeshInput_
         env->Throw(exc);
     }
 }
-JNIEXPORT void JNICALL Java_net_fabricmc_minertx_jivix_JiviXCore_00024MeshInput_allocate__(JNIEnv* env, jobject obj) {
+JNIEXPORT void JNICALL Java_net_fabricmc_minevkt_jivix_JiviXCore_00024MeshInput_allocate__(JNIEnv* env, jobject obj) {
     jthrowable exc = NULL;
     try {
         ::jvi::MeshInput* rptr = new ::jvi::MeshInput();
         jlong rcapacity = 1;
-        JavaCPP_initPointer(env, obj, rptr, rcapacity, rptr, &JavaCPP_net_fabricmc_minertx_jivix_JiviXCore_00024MeshInput_deallocate);
+        JavaCPP_initPointer(env, obj, rptr, rcapacity, rptr, &JavaCPP_net_fabricmc_minevkt_jivix_JiviXCore_00024MeshInput_deallocate);
     } catch (...) {
         exc = JavaCPP_handleException(env, 7);
     }
@@ -1487,12 +1487,12 @@ JNIEXPORT void JNICALL Java_net_fabricmc_minertx_jivix_JiviXCore_00024MeshInput_
     }
 }
 
-JNIEXPORT void JNICALL Java_net_fabricmc_minertx_jivix_JiviXCore_00024BufferViewSet_allocate__(JNIEnv* env, jobject obj) {
+JNIEXPORT void JNICALL Java_net_fabricmc_minevkt_jivix_JiviXCore_00024BufferViewSet_allocate__(JNIEnv* env, jobject obj) {
     jthrowable exc = NULL;
     try {
         ::jvi::BufferViewSet* rptr = new ::jvi::BufferViewSet();
         jlong rcapacity = 1;
-        JavaCPP_initPointer(env, obj, rptr, rcapacity, rptr, &JavaCPP_net_fabricmc_minertx_jivix_JiviXCore_00024BufferViewSet_deallocate);
+        JavaCPP_initPointer(env, obj, rptr, rcapacity, rptr, &JavaCPP_net_fabricmc_minevkt_jivix_JiviXCore_00024BufferViewSet_deallocate);
     } catch (...) {
         exc = JavaCPP_handleException(env, 7);
     }
@@ -1501,7 +1501,7 @@ JNIEXPORT void JNICALL Java_net_fabricmc_minertx_jivix_JiviXCore_00024BufferView
         env->Throw(exc);
     }
 }
-JNIEXPORT void JNICALL Java_net_fabricmc_minertx_jivix_JiviXCore_00024BufferViewSet_allocate__Lnet_fabricmc_minertx_jivix_JiviXCore_00024Context_2(JNIEnv* env, jobject obj, jobject arg0) {
+JNIEXPORT void JNICALL Java_net_fabricmc_minevkt_jivix_JiviXCore_00024BufferViewSet_allocate__Lnet_fabricmc_minevkt_jivix_JiviXCore_00024Context_2(JNIEnv* env, jobject obj, jobject arg0) {
     ::jvi::Context* ptr0 = arg0 == NULL ? NULL : (::jvi::Context*)jlong_to_ptr(env->GetLongField(arg0, JavaCPP_addressFID));
     jlong position0 = arg0 == NULL ? 0 : env->GetLongField(arg0, JavaCPP_positionFID);
     ptr0 += position0;
@@ -1509,7 +1509,7 @@ JNIEXPORT void JNICALL Java_net_fabricmc_minertx_jivix_JiviXCore_00024BufferView
     try {
         ::jvi::BufferViewSet* rptr = new ::jvi::BufferViewSet(ptr0);
         jlong rcapacity = 1;
-        JavaCPP_initPointer(env, obj, rptr, rcapacity, rptr, &JavaCPP_net_fabricmc_minertx_jivix_JiviXCore_00024BufferViewSet_deallocate);
+        JavaCPP_initPointer(env, obj, rptr, rcapacity, rptr, &JavaCPP_net_fabricmc_minevkt_jivix_JiviXCore_00024BufferViewSet_deallocate);
     } catch (...) {
         exc = JavaCPP_handleException(env, 7);
     }
@@ -1519,12 +1519,12 @@ JNIEXPORT void JNICALL Java_net_fabricmc_minertx_jivix_JiviXCore_00024BufferView
     }
 }
 
-JNIEXPORT void JNICALL Java_net_fabricmc_minertx_jivix_JiviXCore_00024Driver_allocate(JNIEnv* env, jobject obj) {
+JNIEXPORT void JNICALL Java_net_fabricmc_minevkt_jivix_JiviXCore_00024Driver_allocate(JNIEnv* env, jobject obj) {
     jthrowable exc = NULL;
     try {
         ::jvi::Driver* rptr = new ::jvi::Driver();
         jlong rcapacity = 1;
-        JavaCPP_initPointer(env, obj, rptr, rcapacity, rptr, &JavaCPP_net_fabricmc_minertx_jivix_JiviXCore_00024Driver_deallocate);
+        JavaCPP_initPointer(env, obj, rptr, rcapacity, rptr, &JavaCPP_net_fabricmc_minevkt_jivix_JiviXCore_00024Driver_deallocate);
     } catch (...) {
         exc = JavaCPP_handleException(env, 7);
     }
@@ -1534,12 +1534,12 @@ JNIEXPORT void JNICALL Java_net_fabricmc_minertx_jivix_JiviXCore_00024Driver_all
     }
 }
 
-JNIEXPORT void JNICALL Java_net_fabricmc_minertx_jivix_JiviXCore_00024Thread_allocate(JNIEnv* env, jobject obj) {
+JNIEXPORT void JNICALL Java_net_fabricmc_minevkt_jivix_JiviXCore_00024Thread_allocate(JNIEnv* env, jobject obj) {
     jthrowable exc = NULL;
     try {
         ::jvi::Thread* rptr = new ::jvi::Thread();
         jlong rcapacity = 1;
-        JavaCPP_initPointer(env, obj, rptr, rcapacity, rptr, &JavaCPP_net_fabricmc_minertx_jivix_JiviXCore_00024Thread_deallocate);
+        JavaCPP_initPointer(env, obj, rptr, rcapacity, rptr, &JavaCPP_net_fabricmc_minevkt_jivix_JiviXCore_00024Thread_deallocate);
     } catch (...) {
         exc = JavaCPP_handleException(env, 7);
     }
@@ -1549,12 +1549,12 @@ JNIEXPORT void JNICALL Java_net_fabricmc_minertx_jivix_JiviXCore_00024Thread_all
     }
 }
 
-JNIEXPORT void JNICALL Java_net_fabricmc_minertx_jivix_JiviXCore_00024Context_allocate(JNIEnv* env, jobject obj) {
+JNIEXPORT void JNICALL Java_net_fabricmc_minevkt_jivix_JiviXCore_00024Context_allocate(JNIEnv* env, jobject obj) {
     jthrowable exc = NULL;
     try {
         ::jvi::Context* rptr = new ::jvi::Context();
         jlong rcapacity = 1;
-        JavaCPP_initPointer(env, obj, rptr, rcapacity, rptr, &JavaCPP_net_fabricmc_minertx_jivix_JiviXCore_00024Context_deallocate);
+        JavaCPP_initPointer(env, obj, rptr, rcapacity, rptr, &JavaCPP_net_fabricmc_minevkt_jivix_JiviXCore_00024Context_deallocate);
     } catch (...) {
         exc = JavaCPP_handleException(env, 7);
     }
@@ -1564,7 +1564,7 @@ JNIEXPORT void JNICALL Java_net_fabricmc_minertx_jivix_JiviXCore_00024Context_al
     }
 }
 
-JNIEXPORT void JNICALL Java_net_fabricmc_minertx_jivix_JiviXCore_00024VmaBufferAllocation_allocate__Lnet_fabricmc_minertx_jivix_JiviXCore_00024BufferAllocation_2(JNIEnv* env, jobject obj, jobject arg0) {
+JNIEXPORT void JNICALL Java_net_fabricmc_minevkt_jivix_JiviXCore_00024VmaBufferAllocation_allocate__Lnet_fabricmc_minevkt_jivix_JiviXCore_00024BufferAllocation_2(JNIEnv* env, jobject obj, jobject arg0) {
     ::vkt::BufferAllocation* ptr0 = arg0 == NULL ? NULL : (::vkt::BufferAllocation*)jlong_to_ptr(env->GetLongField(arg0, JavaCPP_addressFID));
     jlong size0 = arg0 == NULL ? 0 : env->GetLongField(arg0, JavaCPP_limitFID);
     void* owner0 = JavaCPP_getPointerOwner(env, arg0);
@@ -1576,7 +1576,7 @@ JNIEXPORT void JNICALL Java_net_fabricmc_minertx_jivix_JiviXCore_00024VmaBufferA
     try {
         ::vkt::VmaBufferAllocation* rptr = new ::vkt::VmaBufferAllocation(adapter0);
         jlong rcapacity = 1;
-        JavaCPP_initPointer(env, obj, rptr, rcapacity, rptr, &JavaCPP_net_fabricmc_minertx_jivix_JiviXCore_00024VmaBufferAllocation_deallocate);
+        JavaCPP_initPointer(env, obj, rptr, rcapacity, rptr, &JavaCPP_net_fabricmc_minevkt_jivix_JiviXCore_00024VmaBufferAllocation_deallocate);
     } catch (...) {
         exc = JavaCPP_handleException(env, 7);
     }
@@ -1593,12 +1593,12 @@ JNIEXPORT void JNICALL Java_net_fabricmc_minertx_jivix_JiviXCore_00024VmaBufferA
         env->Throw(exc);
     }
 }
-JNIEXPORT void JNICALL Java_net_fabricmc_minertx_jivix_JiviXCore_00024VmaBufferAllocation_allocate__JJI(JNIEnv* env, jobject obj, jlong arg0, jlong arg1, jint arg2) {
+JNIEXPORT void JNICALL Java_net_fabricmc_minevkt_jivix_JiviXCore_00024VmaBufferAllocation_allocate__JJI(JNIEnv* env, jobject obj, jlong arg0, jlong arg1, jint arg2) {
     jthrowable exc = NULL;
     try {
         ::vkt::VmaBufferAllocation* rptr = new ::vkt::VmaBufferAllocation((VmaAllocator*)arg0, (vkh::VkBufferCreateInfo*)arg1, (VmaMemoryUsage)arg2);
         jlong rcapacity = 1;
-        JavaCPP_initPointer(env, obj, rptr, rcapacity, rptr, &JavaCPP_net_fabricmc_minertx_jivix_JiviXCore_00024VmaBufferAllocation_deallocate);
+        JavaCPP_initPointer(env, obj, rptr, rcapacity, rptr, &JavaCPP_net_fabricmc_minevkt_jivix_JiviXCore_00024VmaBufferAllocation_deallocate);
     } catch (...) {
         exc = JavaCPP_handleException(env, 7);
     }
@@ -1607,12 +1607,12 @@ JNIEXPORT void JNICALL Java_net_fabricmc_minertx_jivix_JiviXCore_00024VmaBufferA
         env->Throw(exc);
     }
 }
-JNIEXPORT void JNICALL Java_net_fabricmc_minertx_jivix_JiviXCore_00024VmaBufferAllocation_allocate__(JNIEnv* env, jobject obj) {
+JNIEXPORT void JNICALL Java_net_fabricmc_minevkt_jivix_JiviXCore_00024VmaBufferAllocation_allocate__(JNIEnv* env, jobject obj) {
     jthrowable exc = NULL;
     try {
         ::vkt::VmaBufferAllocation* rptr = new ::vkt::VmaBufferAllocation();
         jlong rcapacity = 1;
-        JavaCPP_initPointer(env, obj, rptr, rcapacity, rptr, &JavaCPP_net_fabricmc_minertx_jivix_JiviXCore_00024VmaBufferAllocation_deallocate);
+        JavaCPP_initPointer(env, obj, rptr, rcapacity, rptr, &JavaCPP_net_fabricmc_minevkt_jivix_JiviXCore_00024VmaBufferAllocation_deallocate);
     } catch (...) {
         exc = JavaCPP_handleException(env, 7);
     }
@@ -1621,7 +1621,7 @@ JNIEXPORT void JNICALL Java_net_fabricmc_minertx_jivix_JiviXCore_00024VmaBufferA
         env->Throw(exc);
     }
 }
-JNIEXPORT jobject JNICALL Java_net_fabricmc_minertx_jivix_JiviXCore_00024VmaBufferAllocation_uniPtr(JNIEnv* env, jobject obj) {
+JNIEXPORT jobject JNICALL Java_net_fabricmc_minevkt_jivix_JiviXCore_00024VmaBufferAllocation_uniPtr(JNIEnv* env, jobject obj) {
     ::vkt::VmaBufferAllocation* ptr = (::vkt::VmaBufferAllocation*)jlong_to_ptr(env->GetLongField(obj, JavaCPP_addressFID));
     if (ptr == NULL) {
         env->ThrowNew(JavaCPP_getClass(env, 6), "This pointer address is NULL.");
@@ -1654,12 +1654,12 @@ JNIEXPORT jobject JNICALL Java_net_fabricmc_minertx_jivix_JiviXCore_00024VmaBuff
     return rarg;
 }
 
-JNIEXPORT void JNICALL Java_net_fabricmc_minertx_jivix_JiviXCore_00024BufferAllocation_allocate__JJ(JNIEnv* env, jobject obj, jlong arg0, jlong arg1) {
+JNIEXPORT void JNICALL Java_net_fabricmc_minevkt_jivix_JiviXCore_00024BufferAllocation_allocate__JJ(JNIEnv* env, jobject obj, jlong arg0, jlong arg1) {
     jthrowable exc = NULL;
     try {
         ::vkt::BufferAllocation* rptr = new ::vkt::BufferAllocation((MemoryAllocationInfo*)arg0, (vkh::VkBufferCreateInfo)arg1);
         jlong rcapacity = 1;
-        JavaCPP_initPointer(env, obj, rptr, rcapacity, rptr, &JavaCPP_net_fabricmc_minertx_jivix_JiviXCore_00024BufferAllocation_deallocate);
+        JavaCPP_initPointer(env, obj, rptr, rcapacity, rptr, &JavaCPP_net_fabricmc_minevkt_jivix_JiviXCore_00024BufferAllocation_deallocate);
     } catch (...) {
         exc = JavaCPP_handleException(env, 7);
     }
@@ -1668,12 +1668,12 @@ JNIEXPORT void JNICALL Java_net_fabricmc_minertx_jivix_JiviXCore_00024BufferAllo
         env->Throw(exc);
     }
 }
-JNIEXPORT void JNICALL Java_net_fabricmc_minertx_jivix_JiviXCore_00024BufferAllocation_allocate__(JNIEnv* env, jobject obj) {
+JNIEXPORT void JNICALL Java_net_fabricmc_minevkt_jivix_JiviXCore_00024BufferAllocation_allocate__(JNIEnv* env, jobject obj) {
     jthrowable exc = NULL;
     try {
         ::vkt::BufferAllocation* rptr = new ::vkt::BufferAllocation();
         jlong rcapacity = 1;
-        JavaCPP_initPointer(env, obj, rptr, rcapacity, rptr, &JavaCPP_net_fabricmc_minertx_jivix_JiviXCore_00024BufferAllocation_deallocate);
+        JavaCPP_initPointer(env, obj, rptr, rcapacity, rptr, &JavaCPP_net_fabricmc_minevkt_jivix_JiviXCore_00024BufferAllocation_deallocate);
     } catch (...) {
         exc = JavaCPP_handleException(env, 7);
     }
@@ -1682,7 +1682,7 @@ JNIEXPORT void JNICALL Java_net_fabricmc_minertx_jivix_JiviXCore_00024BufferAllo
         env->Throw(exc);
     }
 }
-JNIEXPORT void JNICALL Java_net_fabricmc_minertx_jivix_JiviXCore_00024BufferAllocation_allocate__Lnet_fabricmc_minertx_jivix_JiviXCore_00024BufferAllocation_2(JNIEnv* env, jobject obj, jobject arg0) {
+JNIEXPORT void JNICALL Java_net_fabricmc_minevkt_jivix_JiviXCore_00024BufferAllocation_allocate__Lnet_fabricmc_minevkt_jivix_JiviXCore_00024BufferAllocation_2(JNIEnv* env, jobject obj, jobject arg0) {
     ::vkt::BufferAllocation* ptr0 = arg0 == NULL ? NULL : (::vkt::BufferAllocation*)jlong_to_ptr(env->GetLongField(arg0, JavaCPP_addressFID));
     jlong size0 = arg0 == NULL ? 0 : env->GetLongField(arg0, JavaCPP_limitFID);
     void* owner0 = JavaCPP_getPointerOwner(env, arg0);
@@ -1694,7 +1694,7 @@ JNIEXPORT void JNICALL Java_net_fabricmc_minertx_jivix_JiviXCore_00024BufferAllo
     try {
         ::vkt::BufferAllocation* rptr = new ::vkt::BufferAllocation(adapter0);
         jlong rcapacity = 1;
-        JavaCPP_initPointer(env, obj, rptr, rcapacity, rptr, &JavaCPP_net_fabricmc_minertx_jivix_JiviXCore_00024BufferAllocation_deallocate);
+        JavaCPP_initPointer(env, obj, rptr, rcapacity, rptr, &JavaCPP_net_fabricmc_minevkt_jivix_JiviXCore_00024BufferAllocation_deallocate);
     } catch (...) {
         exc = JavaCPP_handleException(env, 7);
     }
@@ -1711,7 +1711,7 @@ JNIEXPORT void JNICALL Java_net_fabricmc_minertx_jivix_JiviXCore_00024BufferAllo
         env->Throw(exc);
     }
 }
-JNIEXPORT jobject JNICALL Java_net_fabricmc_minertx_jivix_JiviXCore_00024BufferAllocation_uniPtr(JNIEnv* env, jobject obj) {
+JNIEXPORT jobject JNICALL Java_net_fabricmc_minevkt_jivix_JiviXCore_00024BufferAllocation_uniPtr(JNIEnv* env, jobject obj) {
     ::vkt::BufferAllocation* ptr = (::vkt::BufferAllocation*)jlong_to_ptr(env->GetLongField(obj, JavaCPP_addressFID));
     if (ptr == NULL) {
         env->ThrowNew(JavaCPP_getClass(env, 6), "This pointer address is NULL.");
@@ -1746,12 +1746,12 @@ JNIEXPORT jobject JNICALL Java_net_fabricmc_minertx_jivix_JiviXCore_00024BufferA
     return rarg;
 }
 
-JNIEXPORT void JNICALL Java_net_fabricmc_minertx_jivix_JiviXCore_00024VmaImageAllocation_allocate__JJI(JNIEnv* env, jobject obj, jlong arg0, jlong arg1, jint arg2) {
+JNIEXPORT void JNICALL Java_net_fabricmc_minevkt_jivix_JiviXCore_00024VmaImageAllocation_allocate__JJI(JNIEnv* env, jobject obj, jlong arg0, jlong arg1, jint arg2) {
     jthrowable exc = NULL;
     try {
         ::vkt::VmaImageAllocation* rptr = new ::vkt::VmaImageAllocation((VmaAllocator*)arg0, (vkh::VkImageCreateInfo*)arg1, (VmaMemoryUsage)arg2);
         jlong rcapacity = 1;
-        JavaCPP_initPointer(env, obj, rptr, rcapacity, rptr, &JavaCPP_net_fabricmc_minertx_jivix_JiviXCore_00024VmaImageAllocation_deallocate);
+        JavaCPP_initPointer(env, obj, rptr, rcapacity, rptr, &JavaCPP_net_fabricmc_minevkt_jivix_JiviXCore_00024VmaImageAllocation_deallocate);
     } catch (...) {
         exc = JavaCPP_handleException(env, 7);
     }
@@ -1760,12 +1760,12 @@ JNIEXPORT void JNICALL Java_net_fabricmc_minertx_jivix_JiviXCore_00024VmaImageAl
         env->Throw(exc);
     }
 }
-JNIEXPORT void JNICALL Java_net_fabricmc_minertx_jivix_JiviXCore_00024VmaImageAllocation_allocate__(JNIEnv* env, jobject obj) {
+JNIEXPORT void JNICALL Java_net_fabricmc_minevkt_jivix_JiviXCore_00024VmaImageAllocation_allocate__(JNIEnv* env, jobject obj) {
     jthrowable exc = NULL;
     try {
         ::vkt::VmaImageAllocation* rptr = new ::vkt::VmaImageAllocation();
         jlong rcapacity = 1;
-        JavaCPP_initPointer(env, obj, rptr, rcapacity, rptr, &JavaCPP_net_fabricmc_minertx_jivix_JiviXCore_00024VmaImageAllocation_deallocate);
+        JavaCPP_initPointer(env, obj, rptr, rcapacity, rptr, &JavaCPP_net_fabricmc_minevkt_jivix_JiviXCore_00024VmaImageAllocation_deallocate);
     } catch (...) {
         exc = JavaCPP_handleException(env, 7);
     }
@@ -1774,7 +1774,7 @@ JNIEXPORT void JNICALL Java_net_fabricmc_minertx_jivix_JiviXCore_00024VmaImageAl
         env->Throw(exc);
     }
 }
-JNIEXPORT void JNICALL Java_net_fabricmc_minertx_jivix_JiviXCore_00024VmaImageAllocation_allocate__Lnet_fabricmc_minertx_jivix_JiviXCore_00024ImageAllocation_2(JNIEnv* env, jobject obj, jobject arg0) {
+JNIEXPORT void JNICALL Java_net_fabricmc_minevkt_jivix_JiviXCore_00024VmaImageAllocation_allocate__Lnet_fabricmc_minevkt_jivix_JiviXCore_00024ImageAllocation_2(JNIEnv* env, jobject obj, jobject arg0) {
     ::vkt::ImageAllocation* ptr0 = arg0 == NULL ? NULL : (::vkt::ImageAllocation*)jlong_to_ptr(env->GetLongField(arg0, JavaCPP_addressFID));
     jlong size0 = arg0 == NULL ? 0 : env->GetLongField(arg0, JavaCPP_limitFID);
     void* owner0 = JavaCPP_getPointerOwner(env, arg0);
@@ -1786,7 +1786,7 @@ JNIEXPORT void JNICALL Java_net_fabricmc_minertx_jivix_JiviXCore_00024VmaImageAl
     try {
         ::vkt::VmaImageAllocation* rptr = new ::vkt::VmaImageAllocation(adapter0);
         jlong rcapacity = 1;
-        JavaCPP_initPointer(env, obj, rptr, rcapacity, rptr, &JavaCPP_net_fabricmc_minertx_jivix_JiviXCore_00024VmaImageAllocation_deallocate);
+        JavaCPP_initPointer(env, obj, rptr, rcapacity, rptr, &JavaCPP_net_fabricmc_minevkt_jivix_JiviXCore_00024VmaImageAllocation_deallocate);
     } catch (...) {
         exc = JavaCPP_handleException(env, 7);
     }
@@ -1803,29 +1803,7 @@ JNIEXPORT void JNICALL Java_net_fabricmc_minertx_jivix_JiviXCore_00024VmaImageAl
         env->Throw(exc);
     }
 }
-JNIEXPORT jint JNICALL Java_net_fabricmc_minertx_jivix_JiviXCore_00024VmaImageAllocation_getGLMemory(JNIEnv* env, jobject obj) {
-    ::vkt::VmaImageAllocation* ptr = (::vkt::VmaImageAllocation*)jlong_to_ptr(env->GetLongField(obj, JavaCPP_addressFID));
-    if (ptr == NULL) {
-        env->ThrowNew(JavaCPP_getClass(env, 6), "This pointer address is NULL.");
-        return 0;
-    }
-    jlong position = env->GetLongField(obj, JavaCPP_positionFID);
-    ptr += position;
-    jint rarg = 0;
-    jthrowable exc = NULL;
-    try {
-        int rval = ptr->getGLMemory();
-        rarg = (jint)rval;
-    } catch (...) {
-        exc = JavaCPP_handleException(env, 7);
-    }
-
-    if (exc != NULL) {
-        env->Throw(exc);
-    }
-    return rarg;
-}
-JNIEXPORT jint JNICALL Java_net_fabricmc_minertx_jivix_JiviXCore_00024VmaImageAllocation_getGLBuffer(JNIEnv* env, jobject obj) {
+JNIEXPORT jint JNICALL Java_net_fabricmc_minevkt_jivix_JiviXCore_00024VmaImageAllocation_getGLBuffer(JNIEnv* env, jobject obj) {
     ::vkt::VmaImageAllocation* ptr = (::vkt::VmaImageAllocation*)jlong_to_ptr(env->GetLongField(obj, JavaCPP_addressFID));
     if (ptr == NULL) {
         env->ThrowNew(JavaCPP_getClass(env, 6), "This pointer address is NULL.");
@@ -1847,7 +1825,7 @@ JNIEXPORT jint JNICALL Java_net_fabricmc_minertx_jivix_JiviXCore_00024VmaImageAl
     }
     return rarg;
 }
-JNIEXPORT jobject JNICALL Java_net_fabricmc_minertx_jivix_JiviXCore_00024VmaImageAllocation_uniPtr(JNIEnv* env, jobject obj) {
+JNIEXPORT jobject JNICALL Java_net_fabricmc_minevkt_jivix_JiviXCore_00024VmaImageAllocation_uniPtr(JNIEnv* env, jobject obj) {
     ::vkt::VmaImageAllocation* ptr = (::vkt::VmaImageAllocation*)jlong_to_ptr(env->GetLongField(obj, JavaCPP_addressFID));
     if (ptr == NULL) {
         env->ThrowNew(JavaCPP_getClass(env, 6), "This pointer address is NULL.");
@@ -1879,66 +1857,8 @@ JNIEXPORT jobject JNICALL Java_net_fabricmc_minertx_jivix_JiviXCore_00024VmaImag
     }
     return rarg;
 }
-
-JNIEXPORT void JNICALL Java_net_fabricmc_minertx_jivix_JiviXCore_00024ImageAllocation_allocate__(JNIEnv* env, jobject obj) {
-    jthrowable exc = NULL;
-    try {
-        ::vkt::ImageAllocation* rptr = new ::vkt::ImageAllocation();
-        jlong rcapacity = 1;
-        JavaCPP_initPointer(env, obj, rptr, rcapacity, rptr, &JavaCPP_net_fabricmc_minertx_jivix_JiviXCore_00024ImageAllocation_deallocate);
-    } catch (...) {
-        exc = JavaCPP_handleException(env, 7);
-    }
-
-    if (exc != NULL) {
-        env->Throw(exc);
-    }
-}
-JNIEXPORT void JNICALL Java_net_fabricmc_minertx_jivix_JiviXCore_00024ImageAllocation_allocate__Lnet_fabricmc_minertx_jivix_JiviXCore_00024ImageAllocation_2(JNIEnv* env, jobject obj, jobject arg0) {
-    ::vkt::ImageAllocation* ptr0 = arg0 == NULL ? NULL : (::vkt::ImageAllocation*)jlong_to_ptr(env->GetLongField(arg0, JavaCPP_addressFID));
-    jlong size0 = arg0 == NULL ? 0 : env->GetLongField(arg0, JavaCPP_limitFID);
-    void* owner0 = JavaCPP_getPointerOwner(env, arg0);
-    jlong position0 = arg0 == NULL ? 0 : env->GetLongField(arg0, JavaCPP_positionFID);
-    ptr0 += position0;
-    size0 -= position0;
-    SharedPtrAdapter< ::vkt::ImageAllocation > adapter0(ptr0, size0, owner0);
-    jthrowable exc = NULL;
-    try {
-        ::vkt::ImageAllocation* rptr = new ::vkt::ImageAllocation(adapter0);
-        jlong rcapacity = 1;
-        JavaCPP_initPointer(env, obj, rptr, rcapacity, rptr, &JavaCPP_net_fabricmc_minertx_jivix_JiviXCore_00024ImageAllocation_deallocate);
-    } catch (...) {
-        exc = JavaCPP_handleException(env, 7);
-    }
-
-    ::vkt::ImageAllocation* rptr0 = adapter0;
-    jlong rsize0 = (jlong)adapter0.size;
-    void* rowner0 = adapter0.owner;
-    if (rptr0 != ptr0) {
-        JavaCPP_initPointer(env, arg0, rptr0, rsize0, rowner0, &SharedPtrAdapter< ::vkt::ImageAllocation >::deallocate);
-    } else {
-        env->SetLongField(arg0, JavaCPP_limitFID, rsize0 + position0);
-    }
-    if (exc != NULL) {
-        env->Throw(exc);
-    }
-}
-JNIEXPORT void JNICALL Java_net_fabricmc_minertx_jivix_JiviXCore_00024ImageAllocation_allocate__JJ(JNIEnv* env, jobject obj, jlong arg0, jlong arg1) {
-    jthrowable exc = NULL;
-    try {
-        ::vkt::ImageAllocation* rptr = new ::vkt::ImageAllocation((MemoryAllocationInfo*)arg0, (vkh::VkImageCreateInfo)arg1);
-        jlong rcapacity = 1;
-        JavaCPP_initPointer(env, obj, rptr, rcapacity, rptr, &JavaCPP_net_fabricmc_minertx_jivix_JiviXCore_00024ImageAllocation_deallocate);
-    } catch (...) {
-        exc = JavaCPP_handleException(env, 7);
-    }
-
-    if (exc != NULL) {
-        env->Throw(exc);
-    }
-}
-JNIEXPORT jint JNICALL Java_net_fabricmc_minertx_jivix_JiviXCore_00024ImageAllocation_getGLMemory(JNIEnv* env, jobject obj) {
-    ::vkt::ImageAllocation* ptr = (::vkt::ImageAllocation*)jlong_to_ptr(env->GetLongField(obj, JavaCPP_addressFID));
+JNIEXPORT jint JNICALL Java_net_fabricmc_minevkt_jivix_JiviXCore_00024VmaImageAllocation_getGLMemory(JNIEnv* env, jobject obj) {
+    ::vkt::VmaImageAllocation* ptr = (::vkt::VmaImageAllocation*)jlong_to_ptr(env->GetLongField(obj, JavaCPP_addressFID));
     if (ptr == NULL) {
         env->ThrowNew(JavaCPP_getClass(env, 6), "This pointer address is NULL.");
         return 0;
@@ -1959,7 +1879,65 @@ JNIEXPORT jint JNICALL Java_net_fabricmc_minertx_jivix_JiviXCore_00024ImageAlloc
     }
     return rarg;
 }
-JNIEXPORT jint JNICALL Java_net_fabricmc_minertx_jivix_JiviXCore_00024ImageAllocation_getGLBuffer(JNIEnv* env, jobject obj) {
+
+JNIEXPORT void JNICALL Java_net_fabricmc_minevkt_jivix_JiviXCore_00024ImageAllocation_allocate__(JNIEnv* env, jobject obj) {
+    jthrowable exc = NULL;
+    try {
+        ::vkt::ImageAllocation* rptr = new ::vkt::ImageAllocation();
+        jlong rcapacity = 1;
+        JavaCPP_initPointer(env, obj, rptr, rcapacity, rptr, &JavaCPP_net_fabricmc_minevkt_jivix_JiviXCore_00024ImageAllocation_deallocate);
+    } catch (...) {
+        exc = JavaCPP_handleException(env, 7);
+    }
+
+    if (exc != NULL) {
+        env->Throw(exc);
+    }
+}
+JNIEXPORT void JNICALL Java_net_fabricmc_minevkt_jivix_JiviXCore_00024ImageAllocation_allocate__Lnet_fabricmc_minevkt_jivix_JiviXCore_00024ImageAllocation_2(JNIEnv* env, jobject obj, jobject arg0) {
+    ::vkt::ImageAllocation* ptr0 = arg0 == NULL ? NULL : (::vkt::ImageAllocation*)jlong_to_ptr(env->GetLongField(arg0, JavaCPP_addressFID));
+    jlong size0 = arg0 == NULL ? 0 : env->GetLongField(arg0, JavaCPP_limitFID);
+    void* owner0 = JavaCPP_getPointerOwner(env, arg0);
+    jlong position0 = arg0 == NULL ? 0 : env->GetLongField(arg0, JavaCPP_positionFID);
+    ptr0 += position0;
+    size0 -= position0;
+    SharedPtrAdapter< ::vkt::ImageAllocation > adapter0(ptr0, size0, owner0);
+    jthrowable exc = NULL;
+    try {
+        ::vkt::ImageAllocation* rptr = new ::vkt::ImageAllocation(adapter0);
+        jlong rcapacity = 1;
+        JavaCPP_initPointer(env, obj, rptr, rcapacity, rptr, &JavaCPP_net_fabricmc_minevkt_jivix_JiviXCore_00024ImageAllocation_deallocate);
+    } catch (...) {
+        exc = JavaCPP_handleException(env, 7);
+    }
+
+    ::vkt::ImageAllocation* rptr0 = adapter0;
+    jlong rsize0 = (jlong)adapter0.size;
+    void* rowner0 = adapter0.owner;
+    if (rptr0 != ptr0) {
+        JavaCPP_initPointer(env, arg0, rptr0, rsize0, rowner0, &SharedPtrAdapter< ::vkt::ImageAllocation >::deallocate);
+    } else {
+        env->SetLongField(arg0, JavaCPP_limitFID, rsize0 + position0);
+    }
+    if (exc != NULL) {
+        env->Throw(exc);
+    }
+}
+JNIEXPORT void JNICALL Java_net_fabricmc_minevkt_jivix_JiviXCore_00024ImageAllocation_allocate__JJ(JNIEnv* env, jobject obj, jlong arg0, jlong arg1) {
+    jthrowable exc = NULL;
+    try {
+        ::vkt::ImageAllocation* rptr = new ::vkt::ImageAllocation((MemoryAllocationInfo*)arg0, (vkh::VkImageCreateInfo)arg1);
+        jlong rcapacity = 1;
+        JavaCPP_initPointer(env, obj, rptr, rcapacity, rptr, &JavaCPP_net_fabricmc_minevkt_jivix_JiviXCore_00024ImageAllocation_deallocate);
+    } catch (...) {
+        exc = JavaCPP_handleException(env, 7);
+    }
+
+    if (exc != NULL) {
+        env->Throw(exc);
+    }
+}
+JNIEXPORT jint JNICALL Java_net_fabricmc_minevkt_jivix_JiviXCore_00024ImageAllocation_getGLBuffer(JNIEnv* env, jobject obj) {
     ::vkt::ImageAllocation* ptr = (::vkt::ImageAllocation*)jlong_to_ptr(env->GetLongField(obj, JavaCPP_addressFID));
     if (ptr == NULL) {
         env->ThrowNew(JavaCPP_getClass(env, 6), "This pointer address is NULL.");
@@ -1981,7 +1959,7 @@ JNIEXPORT jint JNICALL Java_net_fabricmc_minertx_jivix_JiviXCore_00024ImageAlloc
     }
     return rarg;
 }
-JNIEXPORT jobject JNICALL Java_net_fabricmc_minertx_jivix_JiviXCore_00024ImageAllocation_uniPtr(JNIEnv* env, jobject obj) {
+JNIEXPORT jobject JNICALL Java_net_fabricmc_minevkt_jivix_JiviXCore_00024ImageAllocation_uniPtr(JNIEnv* env, jobject obj) {
     ::vkt::ImageAllocation* ptr = (::vkt::ImageAllocation*)jlong_to_ptr(env->GetLongField(obj, JavaCPP_addressFID));
     if (ptr == NULL) {
         env->ThrowNew(JavaCPP_getClass(env, 6), "This pointer address is NULL.");
@@ -2006,6 +1984,28 @@ JNIEXPORT jobject JNICALL Java_net_fabricmc_minertx_jivix_JiviXCore_00024ImageAl
                 JavaCPP_initPointer(env, rarg, rptr, rcapacity, rowner, deallocator);
             }
         }
+    } catch (...) {
+        exc = JavaCPP_handleException(env, 7);
+    }
+
+    if (exc != NULL) {
+        env->Throw(exc);
+    }
+    return rarg;
+}
+JNIEXPORT jint JNICALL Java_net_fabricmc_minevkt_jivix_JiviXCore_00024ImageAllocation_getGLMemory(JNIEnv* env, jobject obj) {
+    ::vkt::ImageAllocation* ptr = (::vkt::ImageAllocation*)jlong_to_ptr(env->GetLongField(obj, JavaCPP_addressFID));
+    if (ptr == NULL) {
+        env->ThrowNew(JavaCPP_getClass(env, 6), "This pointer address is NULL.");
+        return 0;
+    }
+    jlong position = env->GetLongField(obj, JavaCPP_positionFID);
+    ptr += position;
+    jint rarg = 0;
+    jthrowable exc = NULL;
+    try {
+        int rval = ptr->getGLMemory();
+        rarg = (jint)rval;
     } catch (...) {
         exc = JavaCPP_handleException(env, 7);
     }

@@ -1,4 +1,4 @@
-package net.fabricmc.minertx.jivix;
+package net.fabricmc.minevkt.jivix;
 
 import org.bytedeco.javacpp.*;
 import org.bytedeco.javacpp.annotation.*;

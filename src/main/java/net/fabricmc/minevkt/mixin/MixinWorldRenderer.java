@@ -1,7 +1,7 @@
-package net.fabricmc.minertx.mixin;
+package net.fabricmc.minevkt.mixin;
 
 import it.unimi.dsi.fastutil.objects.ObjectList;
-import net.fabricmc.minertx.jivix.JiviXBase;
+import net.fabricmc.minevkt.jivix.JiviXBase;
 import net.minecraft.client.gl.VertexBuffer;
 import net.minecraft.client.gui.screen.TitleScreen;
 import net.minecraft.client.render.BuiltChunkStorage;
@@ -23,8 +23,8 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.Redirect;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
-import net.fabricmc.minertx.*;
-import net.fabricmc.minertx.MineRTX;
+import net.fabricmc.minevkt.*;
+import net.fabricmc.minevkt.MineRTX;
 import net.minecraft.client.render.RenderLayer;
 
 import java.nio.ByteBuffer;
@@ -36,13 +36,13 @@ import static org.lwjgl.vulkan.VK10.*;
 import static org.lwjgl.vulkan.VK10.VK_SUCCESS;
 import static org.lwjgl.vulkan.VK11.VK_API_VERSION_1_1;
 
-import net.fabricmc.minertx.jivix.*;
-import net.fabricmc.minertx.jivix.JiviXBase;
-import net.fabricmc.minertx.jivix.JiviXCore;
-import net.fabricmc.minertx.jivix.JiviXBase.*;
-import net.fabricmc.minertx.jivix.JiviXCore.*;
-import static net.fabricmc.minertx.jivix.JiviXBase.*;
-import static net.fabricmc.minertx.jivix.JiviXCore.*;
+import net.fabricmc.minevkt.jivix.*;
+import net.fabricmc.minevkt.jivix.JiviXBase;
+import net.fabricmc.minevkt.jivix.JiviXCore;
+import net.fabricmc.minevkt.jivix.JiviXBase.*;
+import net.fabricmc.minevkt.jivix.JiviXCore.*;
+import static net.fabricmc.minevkt.jivix.JiviXBase.*;
+import static net.fabricmc.minevkt.jivix.JiviXCore.*;
 import static net.minecraft.client.render.WorldRenderer.*;
 //import static net.minecraft.client.render.WorldRenderer.ChunkInfo;
 
