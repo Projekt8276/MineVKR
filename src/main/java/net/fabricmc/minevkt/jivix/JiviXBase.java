@@ -201,6 +201,7 @@ public class JiviXBase extends Pointer {
         public native @Cast("VkImage")           long getDepthImage();
         public native @Cast("VkInstance")        long createInstance();
         public native @Cast("VkDevice")          long createDevice();
+        public native @Cast("VkDevice")          long createDevice(@Cast("VkPhysicalDevice") long physicalDeviceHandle);
 
         // Get Address of Reference... (but needs wrapped as Pointer?)
         public native @Name("getMemoryProperties")  @ByRef @Cast("int8_t*") BytePointer _getMemoryProperties();
@@ -211,6 +212,7 @@ public class JiviXBase extends Pointer {
         public long getDispatch()         { return this._getDispatch().address(); };
         public long getAllocator()        { return this._getAllocator().address(); };
         public long getMemoryProperties() { return this._getMemoryProperties().address(); };
+
         //
     };
 

@@ -13,9 +13,7 @@ import net.minecraft.client.texture.TextureManager;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.util.math.BlockPos;
 import org.lwjgl.PointerBuffer;
-import org.lwjgl.vulkan.VkApplicationInfo;
-import org.lwjgl.vulkan.VkInstance;
-import org.lwjgl.vulkan.VkInstanceCreateInfo;
+import org.lwjgl.vulkan.*;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
@@ -144,14 +142,25 @@ public abstract class MixinWorldRenderer {
 		System.out.println("This line is printed by an example mod mixin! With create VkInstance result:" + ret + "...");
 */
 
-		if (!MineRTX.vInitialized) { MineRTX.vInitialized = true;
-			// Needs create before the filling data...
+		// LWJGL-3 can interact with JavaCPP... (i.e. curved interop)
+		if (!MineRTX.vInitialized) { MineRTX.vInitialized = true; // Needs create before the filling data...
 			MineRTX.vDriver = new JiviXBase.Driver();
-			VkInstanceCreateInfo createInfo = VkInstanceCreateInfo.createSafe(MineRTX.vDriver.getInstanceCreateInfoAddress());
+			System.out.println("This line is printed by an example mod mixin!");
+
+			//
 			MineRTX.vInstanceHandle = MineRTX.vDriver.createInstance();
-			MineRTX.vInstance = new VkInstance(MineRTX.vInstanceHandle, createInfo); // LWJGL-3 still can't read from JavaCPP
-			System.out.println("This line is printed by an example mod mixin! With create VkInstance: [" + MineRTX.vInstance + "] ...");
-		}
+			MineRTX.vInstance = new VkInstance(MineRTX.vInstanceHandle, VkInstanceCreateInfo.createSafe(MineRTX.vDriver.getInstanceCreateInfoAddress())); // LWJGL-3 can read from JavaCPP by same address
+			System.out.println("With create VkInstance: [" + MineRTX.vInstanceHandle + "] ...");
+
+			//
+			MineRTX.vPhysicalDeviceHandle = MineRTX.vDriver.getPhysicalDevice();
+			MineRTX.vPhysicalDevice = new VkPhysicalDevice(MineRTX.vPhysicalDeviceHandle, MineRTX.vInstance);
+
+			//
+			MineRTX.vDeviceHandle = MineRTX.vDriver.createDevice(MineRTX.vPhysicalDeviceHandle);
+			MineRTX.vDevice = new VkDevice(MineRTX.vDeviceHandle, MineRTX.vPhysicalDevice, VkDeviceCreateInfo.createSafe(MineRTX.vDriver.getDeviceCreateInfoAddress())); // LWJGL-3 can read from JavaCPP by same address
+			System.out.println("With create VkDevice: [" + MineRTX.vDeviceHandle + "] ...");
+		};
 
 	};
 };

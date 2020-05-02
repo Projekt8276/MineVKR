@@ -9,7 +9,9 @@ import net.fabricmc.minevkt.jivix.JiviXCore.*;
 import net.minecraft.client.gl.VertexBuffer;
 import net.minecraft.client.render.chunk.ChunkBuilder;
 import net.minecraft.util.math.BlockPos;
+import org.lwjgl.vulkan.VkDevice;
 import org.lwjgl.vulkan.VkInstance;
+import org.lwjgl.vulkan.VkPhysicalDevice;
 import org.spongepowered.asm.mixin.Shadow;
 
 import static net.fabricmc.minevkt.jivix.JiviXBase.*;
@@ -17,8 +19,16 @@ import static net.fabricmc.minevkt.jivix.JiviXCore.*;
 
 public class MineRTX implements ModInitializer {
 	public static JiviXBase.Driver vDriver;
+
+	public static long vPhysicalDeviceHandle;
+	public static VkPhysicalDevice vPhysicalDevice;
+
 	public static long vInstanceHandle;
 	public static VkInstance vInstance;
+
+	public static long vDeviceHandle;
+	public static VkDevice vDevice;
+
 	public static boolean vInitialized;
 	public static VertexBuffer vVertexBuffer;
 	public static BlockPos vBlockPos;
