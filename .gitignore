@@ -131,6 +131,8 @@ Cargo.lock
 
 # TOO BIG!
 *.pdb
+*.VC.db
+*.db 
 
 # 
 ipch/*
