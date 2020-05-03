@@ -160,6 +160,14 @@ public abstract class MixinWorldRenderer {
 			MineRTX.vDeviceHandle = MineRTX.vDriver.createDevice(MineRTX.vPhysicalDeviceHandle);
 			MineRTX.vDevice = new VkDevice(MineRTX.vDeviceHandle, MineRTX.vPhysicalDevice, VkDeviceCreateInfo.createSafe(MineRTX.vDriver.getDeviceCreateInfoAddress())); // LWJGL-3 can read from JavaCPP by same address
 			System.out.println("With create VkDevice: [" + MineRTX.vDeviceHandle + "] ...");
+
+			//
+			MineRTX.vContext = new JiviXBase.Context(MineRTX.vDriver);
+			MineRTX.vBufferViewSet = new JiviXBase.BufferViewSet(MineRTX.vContext);
+			MineRTX.vMaterials = new JiviXBase.Material(MineRTX.vContext);
+			MineRTX.vNode = new JiviXBase.Node[]{ new JiviXBase.Node(MineRTX.vContext) };
+			MineRTX.vRenderer = new JiviXBase.Renderer(MineRTX.vContext);
+
 		};
 
 	};

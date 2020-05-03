@@ -18,8 +18,6 @@ import static net.fabricmc.minevkt.jivix.JiviXBase.*;
 import static net.fabricmc.minevkt.jivix.JiviXCore.*;
 
 public class MineRTX implements ModInitializer {
-	public static JiviXBase.Driver vDriver;
-
 	public static long vPhysicalDeviceHandle;
 	public static VkPhysicalDevice vPhysicalDevice;
 
@@ -34,6 +32,15 @@ public class MineRTX implements ModInitializer {
 	public static BlockPos vBlockPos;
 	public static ChunkBuilder.BuiltChunk vCurrentChunk;
 	public static double[] vCPosition;
+
+	public static JiviXBase.Driver vDriver;
+	public static JiviXBase.BufferViewSet vBufferViewSet;
+	public static JiviXBase.Context vContext;
+	public static JiviXBase.Material vMaterials;
+	public static JiviXBase.MeshBinding[] vBindings;
+	public static JiviXBase.MeshInput[] vMeshInput;
+	public static JiviXBase.Node[] vNode;
+	public static JiviXBase.Renderer vRenderer;
 
 	@Override
 	public void onInitialize() {
