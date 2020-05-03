@@ -292,6 +292,7 @@ int main()
 
 	// initialize renderer
     context->initialize(SCR_WIDTH, SCR_HEIGHT);
+    renderer->linkMaterial(material)->linkNode(node);
 
     // 
     auto TRS = vkt::Vector<glm::mat3x4>(std::make_shared<vkt::VmaBufferAllocation>(fw->getAllocator(), vkh::VkBufferCreateInfo{
@@ -325,7 +326,7 @@ int main()
     material->pushMaterial(mdk);
 
     // 
-    renderer->linkMaterial(material)->linkNode(node)->setupCommands();
+    renderer->setupCommands();
 
 	// 
 	struct ShareHandles {

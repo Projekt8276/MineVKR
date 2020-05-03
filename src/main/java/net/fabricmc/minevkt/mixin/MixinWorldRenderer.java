@@ -168,6 +168,10 @@ public abstract class MixinWorldRenderer {
 			MineRTX.vNode = new JiviXBase.Node[]{ new JiviXBase.Node(MineRTX.vContext) };
 			MineRTX.vRenderer = new JiviXBase.Renderer(MineRTX.vContext);
 
+			//
+			MineRTX.vContext.initialize(1600, 1200);
+			MineRTX.vRenderer.linkMaterial(MineRTX.vMaterials.sharedPtr());
+			MineRTX.vRenderer.linkNode(MineRTX.vNode[0].sharedPtr());
 		};
 
 	};
