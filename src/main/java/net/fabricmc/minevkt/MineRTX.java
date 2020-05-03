@@ -9,9 +9,7 @@ import net.fabricmc.minevkt.jivix.JiviXCore.*;
 import net.minecraft.client.gl.VertexBuffer;
 import net.minecraft.client.render.chunk.ChunkBuilder;
 import net.minecraft.util.math.BlockPos;
-import org.lwjgl.vulkan.VkDevice;
-import org.lwjgl.vulkan.VkInstance;
-import org.lwjgl.vulkan.VkPhysicalDevice;
+import org.lwjgl.vulkan.*;
 import org.spongepowered.asm.mixin.Shadow;
 
 import static net.fabricmc.minevkt.jivix.JiviXBase.*;
@@ -53,6 +51,35 @@ public class MineRTX implements ModInitializer {
 		this.vCPosition = new double[3];
 	}
 
+	public static void InitializeRenderer(){
+		MineRTX.vDriver = new JiviXBase.Driver();
+		System.out.println("This line is printed by an example mod mixin!");
 
+		//
+		MineRTX.vInstanceHandle = MineRTX.vDriver.createInstance();
+		MineRTX.vInstance = new VkInstance(MineRTX.vInstanceHandle, VkInstanceCreateInfo.createSafe(MineRTX.vDriver.getInstanceCreateInfoAddress())); // LWJGL-3 can read from JavaCPP by same address
+		System.out.println("With create VkInstance: [" + MineRTX.vInstanceHandle + "] ...");
+
+		//
+		MineRTX.vPhysicalDeviceHandle = MineRTX.vDriver.getPhysicalDevice();
+		MineRTX.vPhysicalDevice = new VkPhysicalDevice(MineRTX.vPhysicalDeviceHandle, MineRTX.vInstance);
+
+		//
+		MineRTX.vDeviceHandle = MineRTX.vDriver.createDevice(MineRTX.vPhysicalDeviceHandle);
+		MineRTX.vDevice = new VkDevice(MineRTX.vDeviceHandle, MineRTX.vPhysicalDevice, VkDeviceCreateInfo.createSafe(MineRTX.vDriver.getDeviceCreateInfoAddress())); // LWJGL-3 can read from JavaCPP by same address
+		System.out.println("With create VkDevice: [" + MineRTX.vDeviceHandle + "] ...");
+
+		//
+		MineRTX.vContext = new JiviXBase.Context(MineRTX.vDriver);
+		MineRTX.vBufferViewSet = new JiviXBase.BufferViewSet(MineRTX.vContext);
+		MineRTX.vMaterials = new JiviXBase.Material(MineRTX.vContext);
+		MineRTX.vNode = new JiviXBase.Node[]{ new JiviXBase.Node(MineRTX.vContext) };
+		MineRTX.vRenderer = new JiviXBase.Renderer(MineRTX.vContext);
+
+		//
+		MineRTX.vContext.initialize(1600, 1200); // UNABLE TO DEBUG!!
+		MineRTX.vRenderer.linkMaterial(MineRTX.vMaterials.sharedPtr());
+		MineRTX.vRenderer.linkNode(MineRTX.vNode[0].sharedPtr());
+	}
 
 }

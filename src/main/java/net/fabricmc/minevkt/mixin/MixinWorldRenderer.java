@@ -142,36 +142,9 @@ public abstract class MixinWorldRenderer {
 		System.out.println("This line is printed by an example mod mixin! With create VkInstance result:" + ret + "...");
 */
 
-		// LWJGL-3 can interact with JavaCPP... (i.e. curved interop)
+		// LWJGL-3 can interact with JavaCPP... (i.e. curved interop), can't to be Debug
 		if (!MineRTX.vInitialized) { MineRTX.vInitialized = true; // Needs create before the filling data...
-			MineRTX.vDriver = new JiviXBase.Driver();
-			System.out.println("This line is printed by an example mod mixin!");
-
-			//
-			MineRTX.vInstanceHandle = MineRTX.vDriver.createInstance();
-			MineRTX.vInstance = new VkInstance(MineRTX.vInstanceHandle, VkInstanceCreateInfo.createSafe(MineRTX.vDriver.getInstanceCreateInfoAddress())); // LWJGL-3 can read from JavaCPP by same address
-			System.out.println("With create VkInstance: [" + MineRTX.vInstanceHandle + "] ...");
-
-			//
-			MineRTX.vPhysicalDeviceHandle = MineRTX.vDriver.getPhysicalDevice();
-			MineRTX.vPhysicalDevice = new VkPhysicalDevice(MineRTX.vPhysicalDeviceHandle, MineRTX.vInstance);
-
-			//
-			MineRTX.vDeviceHandle = MineRTX.vDriver.createDevice(MineRTX.vPhysicalDeviceHandle);
-			MineRTX.vDevice = new VkDevice(MineRTX.vDeviceHandle, MineRTX.vPhysicalDevice, VkDeviceCreateInfo.createSafe(MineRTX.vDriver.getDeviceCreateInfoAddress())); // LWJGL-3 can read from JavaCPP by same address
-			System.out.println("With create VkDevice: [" + MineRTX.vDeviceHandle + "] ...");
-
-			//
-			MineRTX.vContext = new JiviXBase.Context(MineRTX.vDriver);
-			MineRTX.vBufferViewSet = new JiviXBase.BufferViewSet(MineRTX.vContext);
-			MineRTX.vMaterials = new JiviXBase.Material(MineRTX.vContext);
-			MineRTX.vNode = new JiviXBase.Node[]{ new JiviXBase.Node(MineRTX.vContext) };
-			MineRTX.vRenderer = new JiviXBase.Renderer(MineRTX.vContext);
-
-			//
-			MineRTX.vContext.initialize(1600, 1200);
-			MineRTX.vRenderer.linkMaterial(MineRTX.vMaterials.sharedPtr());
-			MineRTX.vRenderer.linkNode(MineRTX.vNode[0].sharedPtr());
+			MineRTX.InitializeRenderer();
 		};
 
 	};

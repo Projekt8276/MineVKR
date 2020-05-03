@@ -1,8 +1,10 @@
 {
   "ExpandedNodes": [
     "",
-    "\\source"
+    "\\include",
+    "\\include\\JiviX",
+    "\\include\\JiviX\\JVI"
   ],
-  "SelectedNode": "\\source\\jniJiviXBase.cpp",
+  "SelectedNode": "\\include\\JiviX\\JVI\\context.hpp",
   "PreviewInSolutionExplorer": false
 }

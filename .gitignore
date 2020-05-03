@@ -129,11 +129,26 @@ Cargo.lock
 *.out
 *.app
 
+# TOO BIG!
+*.pdb
+
 # 
 ipch/*
 */ipch/*
 ipch/
 */ipch/
+
+# ???
+Debug/
+Debug/*
+*/Debug/
+*/Debug/*
+
+# ???
+Release/
+Release/*
+*/Release/
+*/Release/*
 
 # Ban CMAKE Generated
 build/
