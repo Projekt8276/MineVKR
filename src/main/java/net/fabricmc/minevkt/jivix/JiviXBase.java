@@ -8,10 +8,11 @@ import org.bytedeco.javacpp.annotation.*;
 // "jniJiviXBase", "JiviX"
 
 @Platform(include={
+        "./include/GLFW/glfw3.h",
         "./include/vkt2/fw.hpp",
         "./include/JiviX/JiviX.hpp",
         "./jniJiviXCore.h"
-}, link={"vulkan-1"}, define={"ENABLE_OPENGL_INTEROP","WIN32","OS_WIN","VK_ENABLE_BETA_EXTENSIONS","VK_USE_PLATFORM_WIN32_KHR","VMA_IMPLEMENTATION","SHARED_PTR_NAMESPACE std", "UNIQUE_PTR_NAMESPACE std"})
+}, link={"vulkan-1","glfw3"}, define={"ENABLE_OPENGL_INTEROP","WIN32","OS_WIN","VK_ENABLE_BETA_EXTENSIONS","VK_USE_PLATFORM_WIN32_KHR","VMA_IMPLEMENTATION","SHARED_PTR_NAMESPACE std", "UNIQUE_PTR_NAMESPACE std"})
 @Name("") //
 public class JiviXBase extends Pointer {
     static { Loader.load(); }

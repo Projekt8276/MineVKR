@@ -9,6 +9,8 @@
 #define VK_USE_PLATFORM_WIN32_KHR
 #endif
 
+#include <glad/glad.h>
+#include <GLFW/glfw3.h>
 #include <vkt2/fw.hpp>
 #include <JiviX/JiviX.hpp>
 
@@ -17,8 +19,6 @@
 #define STB_IMAGE_WRITE_IMPLEMENTATION
 #include "misc/tiny_gltf.h"
 
-#include <glad/glad.h>
-#include <GLFW/glfw3.h>
 #include <iostream>
 
 
@@ -136,13 +136,14 @@ int main()
     glfwMakeContextCurrent(window);
     glfwSetFramebufferSizeCallback(window, framebuffer_size_callback);
 
-    // glad: load all OpenGL function pointers
-    // ---------------------------------------
-    if (!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress))
-    {
-        std::cout << "Failed to initialize GLAD" << std::endl;
-        return -1;
-    }
+
+
+
+
+
+	// initialize Vulkan
+    auto fw = jvx::Driver();
+
 
 
     // build and compile our shader program
@@ -271,8 +272,6 @@ int main()
 
 
 
-	// initialize Vulkan
-    auto fw = jvx::Driver();
 	auto instance = fw->createInstance();
 	auto physicalDevice = fw->getPhysicalDevice(0u);
 	auto device = fw->createDevice(true,"./",false);
