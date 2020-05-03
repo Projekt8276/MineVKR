@@ -59,6 +59,7 @@ dependencies {
 
 	//
 	compile "org.bytedeco:javacpp:1.5.3"
+	//compile "net.fabricmc:dev-launch-injector:0.2.0"
 }
 
 processResources {

@@ -15,7 +15,7 @@ import org.spongepowered.asm.mixin.Shadow;
 import static net.fabricmc.minevkt.jivix.JiviXBase.*;
 import static net.fabricmc.minevkt.jivix.JiviXCore.*;
 
-public class MineRTX implements ModInitializer {
+public class MineRTX implements ModInitializer  {
 	public static long vPhysicalDeviceHandle;
 	public static VkPhysicalDevice vPhysicalDevice;
 
@@ -51,6 +51,11 @@ public class MineRTX implements ModInitializer {
 		this.vCPosition = new double[3];
 	}
 
+	//@Override
+	//public void onInitializeClient() {
+
+	//}
+
 	public static void InitializeRenderer(){
 		MineRTX.vDriver = new JiviXBase.Driver();
 		System.out.println("This line is printed by an example mod mixin!");
@@ -81,5 +86,4 @@ public class MineRTX implements ModInitializer {
 		MineRTX.vRenderer.linkMaterial(MineRTX.vMaterials.sharedPtr());
 		MineRTX.vRenderer.linkNode(MineRTX.vNode[0].sharedPtr());
 	}
-
 }
