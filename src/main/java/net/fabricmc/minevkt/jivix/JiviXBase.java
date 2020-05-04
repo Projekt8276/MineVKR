@@ -17,9 +17,6 @@ import org.bytedeco.javacpp.annotation.*;
 public class JiviXBase extends Pointer {
     static { Loader.load(); }
 
-
-
-
     @Name("vkt::ImageRegion") //
     public static class ImageRegion extends Pointer {
         static { Loader.load(); }
@@ -397,7 +394,7 @@ public class JiviXBase extends Pointer {
         public native @SharedPtr JiviXCore.Material sharedPtr();
 
         public native void createDescriptorSet();
-        public native long pushMaterial(JiviXCore.MaterialUnit materialAddress);
+        //public native long pushMaterial(JiviXCore.MaterialUnit materialAddress);
 
         public native JiviXCore.Material pushSampledImage(@Cast("vkh::VkDescriptorImageInfo*") long imageDescAddress);
         public native JiviXCore.Material setRawMaterials(@Cast("vkt::Vector<jvi::MaterialUnit>*") UByteVector rawMaterials, long materialCount);

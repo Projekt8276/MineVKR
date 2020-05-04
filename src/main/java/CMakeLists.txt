@@ -156,14 +156,19 @@ link_directories(${LIB_DIR})
 include_directories(${INC_DIR} ${JNI_INCLUDE_DIRS})
 file (GLOB RSOURCES RELATIVE ${CMAKE_CURRENT_SOURCE_DIR} ${SOURCES_LIST})
 
-# Compute test 
-set (LIBRARY_NAME "jniJiviXBase") # Changed 29.04.2020, make simpler understand
+# Base
+set (LIBRARY_NAME "jniJiviXBase") #
 add_definitions(${DEFINES})
 add_library(${LIBRARY_NAME} SHARED source/jnijavacpp.cpp source/jniJiviXBase.cpp)
 add_custom_command(PRE_BUILD COMMAND "./generate.bat" OUTPUT "./log.txt")
 target_link_libraries(${LIBRARY_NAME} PRIVATE ${LIBS} ${JNI_LIBRARIES} Vulkan::Vulkan glbinding::glbinding glbinding::glbinding-aux)
-#add_executable(${APPLICATION_NAME} src/legacy/test/main.cpp ${RSOURCES})
-#target_link_libraries(${APPLICATION_NAME} PRIVATE ${LIBS} Vulkan::Vulkan)
+
+# Core
+set (LIBRARY_NAME "jniJiviXCore") #
+add_definitions(${DEFINES})
+add_library(${LIBRARY_NAME} SHARED source/jnijavacpp.cpp source/jniJiviXCore.cpp)
+add_custom_command(PRE_BUILD COMMAND "./generate.bat" OUTPUT "./log.txt")
+target_link_libraries(${LIBRARY_NAME} PRIVATE ${LIBS} ${JNI_LIBRARIES} Vulkan::Vulkan glbinding::glbinding glbinding::glbinding-aux)
 
 # Add includes to MSVC explorer 
 foreach(source IN LISTS RSOURCES)

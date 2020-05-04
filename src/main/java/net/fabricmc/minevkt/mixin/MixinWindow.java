@@ -27,9 +27,9 @@ import static org.lwjgl.opengl.GL.*;
 @Mixin(Window.class)
 public class MixinWindow {
 
-    //@Redirect( at = @At(value = "INVOKE", target = "Lorg/lwjgl/opengl/GL;createCapabilities()LGLCapabilities;", remap = false), method = "<init>" )
-    //@Inject  ( at = @At(value = "INVOKE", target = "Lorg/lwjgl/opengl/GL;createCapabilities()LGLCapabilities;", remap = false), method = "<init>" )
-    @Inject  ( at = @At("TAIL"), method = "<init>" )
+    //@Redirect( at = @At(value = "INVOKE", target = "Lorg/lwjgl/opengl/GL;createCapabilities()LGLCapabilities;", remap = false), method = "<init>" ) // doesn't work...
+    //@Inject  ( at = @At(value = "INVOKE", target = "Lorg/lwjgl/opengl/GL;createCapabilities()LGLCapabilities;", remap = false), method = "<init>" ) // doesn't work...
+    @Inject  ( at = @At("TAIL"), method = "<init>" ) // Inject before `GL.createCapabilities()` doesn't work...
     public void OnGlCreateCapabilities(WindowEventHandler eventHandler, MonitorTracker monitorTracker, WindowSettings settings, @Nullable String videoMode, String title, CallbackInfo ci) {
         System.out.println("Try Inject Before GL.createCapabilities");
         JiviXBase.initializeGL( GetProcAddress ); // GetProcAddress

@@ -14,11 +14,10 @@ import org.bytedeco.javacpp.annotation.*;
         "./include/GLFW/glfw3.h",
         "./include/vkt2/fw.hpp",
         "./include/JiviX/JiviX.hpp",
-}, link={"vulkan-1","glfw3","glbinding","glbinding-aux"}, define={"ENABLE_OPENGL_INTEROP","WIN32","OS_WIN","VK_ENABLE_BETA_EXTENSIONS","VK_USE_PLATFORM_WIN32_KHR","VMA_IMPLEMENTATION","SHARED_PTR_NAMESPACE std", "UNIQUE_PTR_NAMESPACE std"})
+}, link={"vulkan-1","glfw","glbinding","glbinding-aux"}, define={"ENABLE_OPENGL_INTEROP","WIN32","OS_WIN","VK_ENABLE_BETA_EXTENSIONS","VK_USE_PLATFORM_WIN32_KHR","VMA_IMPLEMENTATION","SHARED_PTR_NAMESPACE std", "UNIQUE_PTR_NAMESPACE std"})
 @Name("") //
 public class JiviXCore extends Pointer {
     static { Loader.load(); }
-
 
     @Name("vkt::ImageAllocation")
     public static class ImageAllocation extends Pointer {
@@ -28,13 +27,13 @@ public class JiviXCore extends Pointer {
         public ImageAllocation(@SharedPtr ImageAllocation alloc) { allocate(alloc); };
         private native void allocate(@SharedPtr ImageAllocation alloc);
 
-        public ImageAllocation(@Cast("MemoryAllocationInfo*") long allocationInfoAddress, @Cast("vkh::VkImageCreateInfo") long createInfoAddress) { allocate(allocationInfoAddress, createInfoAddress); }
-        private native void allocate(@Cast("MemoryAllocationInfo*") long allocationInfoAddress, @Cast("vkh::VkImageCreateInfo") long createInfoAddress);
+        public ImageAllocation(@Cast("vkt::MemoryAllocationInfo*") long allocationInfoAddress, @Cast("vkh::VkImageCreateInfo*") long createInfoAddress) { allocate(allocationInfoAddress, createInfoAddress); }
+        private native void allocate(@Cast("vkt::MemoryAllocationInfo*") long allocationInfoAddress, @Cast("vkh::VkImageCreateInfo*") long createInfoAddress);
 
         public ImageAllocation() { allocate(); };
         private native void allocate();
 
-        private native @SharedPtr ImageAllocation uniPtr();
+        //private native @SharedPtr ImageAllocation uniPtr();
 
         public native int getGLBuffer();
         public native int getGLMemory();
@@ -55,7 +54,7 @@ public class JiviXCore extends Pointer {
         public VmaImageAllocation(@Cast("VmaAllocator*") long vmaAllocator, @Cast("vkh::VkImageCreateInfo*") long createInfo, @Cast("VmaMemoryUsage") int vmaUsage) { allocate(vmaAllocator, createInfo, vmaUsage); };
         private native void allocate(@Cast("VmaAllocator*") long vmaAllocator, @Cast("vkh::VkImageCreateInfo*") long createInfo, @Cast("VmaMemoryUsage") int vmaUsage);
 
-        private native @SharedPtr ImageAllocation uniPtr();
+        //private native @SharedPtr ImageAllocation uniPtr();
 
         public native int getGLBuffer();
         public native int getGLMemory();
@@ -70,13 +69,13 @@ public class JiviXCore extends Pointer {
         public BufferAllocation(@SharedPtr BufferAllocation alloc) { allocate(alloc); };
         private native void allocate(@SharedPtr BufferAllocation alloc);
 
-        public BufferAllocation(@Cast("MemoryAllocationInfo*") long allocationInfoAddress, @Cast("vkh::VkBufferCreateInfo") long createInfoAddress) { allocate(allocationInfoAddress, createInfoAddress); }
-        private native void allocate(@Cast("MemoryAllocationInfo*") long allocationInfoAddress, @Cast("vkh::VkBufferCreateInfo") long createInfoAddress);
+        public BufferAllocation(@Cast("vkt::MemoryAllocationInfo*") long allocationInfoAddress, @Cast("vkh::VkBufferCreateInfo*") long createInfoAddress) { allocate(allocationInfoAddress, createInfoAddress); }
+        private native void allocate(@Cast("vkt::MemoryAllocationInfo*") long allocationInfoAddress, @Cast("vkh::VkBufferCreateInfo*") long createInfoAddress);
 
         public BufferAllocation() { allocate(); };
         private native void allocate();
 
-        private native @SharedPtr BufferAllocation uniPtr();
+        //private native @SharedPtr BufferAllocation uniPtr();
     };
 
 
@@ -94,7 +93,7 @@ public class JiviXCore extends Pointer {
         public VmaBufferAllocation(@Cast("VmaAllocator*") long vmaAllocator, @Cast("vkh::VkBufferCreateInfo*") long createInfo, @Cast("VmaMemoryUsage") int vmaUsage) { allocate(vmaAllocator, createInfo, vmaUsage); };
         private native void allocate(@Cast("VmaAllocator*") long vmaAllocator, @Cast("vkh::VkBufferCreateInfo*") long createInfo, @Cast("VmaMemoryUsage") int vmaUsage);
 
-        private native @SharedPtr BufferAllocation uniPtr();
+        //private native @SharedPtr BufferAllocation uniPtr();
     };
 
 
@@ -205,7 +204,7 @@ public class JiviXCore extends Pointer {
         private native void allocate(Context context);
     };
 
-
+/*
     @Name("jvi::MaterialUnit")
     public static class MaterialUnit extends Pointer {
         static { Loader.load(); }
@@ -236,8 +235,9 @@ public class JiviXCore extends Pointer {
         private native @ByVal int normalsTexture(); private native void normalsTexture(@ByVal int CL);
         private native @ByVal int emissionTexture(); private native void emissionTexture(@ByVal int CL);
     };
+*/
 
-
+/*
     @Name("vkh::VsGeometryInstance")
     public static class VsGeometryInstance extends Pointer {
         static { Loader.load(); }
@@ -266,5 +266,5 @@ public class JiviXCore extends Pointer {
         private native @ByVal int instanceOffset();
         private native void instanceOffset(@ByVal int OF);
     };
-
+*/
 };
