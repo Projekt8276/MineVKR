@@ -2,11 +2,10 @@ package net.fabricmc.minevkt.mixin;
 
 import it.unimi.dsi.fastutil.objects.ObjectList;
 import net.fabricmc.minevkt.jivix.JiviXBase;
+import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gl.VertexBuffer;
 import net.minecraft.client.gui.screen.TitleScreen;
-import net.minecraft.client.render.BuiltChunkStorage;
-import net.minecraft.client.render.RenderLayer;
-import net.minecraft.client.render.WorldRenderer;
+import net.minecraft.client.render.*;
 import net.minecraft.client.render.WorldRenderer.*;
 import net.minecraft.client.render.chunk.ChunkBuilder;
 import net.minecraft.client.texture.TextureManager;
@@ -104,9 +103,9 @@ public abstract class MixinWorldRenderer {
 		renderLayer(renderLayer, matrices, cameraX, cameraY, cameraZ);
 	};
 
-	// It DOESN'T stars, It first method in WorldRenderer initialization (Vulkan Initialize)
-	@Inject(at = @At("HEAD"), method = "renderStars()V")
-	private void init(CallbackInfo info) {
+	// Vulkan Initialize
+	@Inject(at = @At("TAIL"), method = "<init>")
+	private void init(MinecraftClient client, BufferBuilderStorage bufferBuilders, CallbackInfo info) {
 
 		/* Look for instance extensions */
 		/*

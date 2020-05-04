@@ -3,15 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="4b7b64e4-95fe-4605-8caf-f658c6b40341" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/CMakeLists.txt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/CMakeLists.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/net/fabricmc/minevkt/jivix/JiviXBase.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/fabricmc/minevkt/jivix/JiviXBase.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/net/fabricmc/minevkt/jivix/JiviXCore.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/fabricmc/minevkt/jivix/JiviXCore.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/net/fabricmc/minevkt/mixin/MixinWindow.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/fabricmc/minevkt/mixin/MixinWindow.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/source/jniJiviXBase.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/source/jniJiviXBase.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/source/jniJiviXCore.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/source/jniJiviXCore.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/source/jnijavacpp.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/source/jnijavacpp.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/windows-x86_64/CMakeCache.txt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/windows-x86_64/CMakeCache.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/windows-x86_64/CMakeFiles/TargetDirectories.txt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/windows-x86_64/CMakeFiles/TargetDirectories.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/net/fabricmc/minevkt/mixin/MixinWorldRenderer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/fabricmc/minevkt/mixin/MixinWorldRenderer.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -142,22 +134,22 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="634" y="231" key="FileChooserDialogImpl/0.0.1920.1040@0.0.1920.1040" timestamp="1587960634350" />
-    <state width="1878" height="358" key="GridCell.Tab.0.bottom" timestamp="1588583178608">
+    <state width="1878" height="358" key="GridCell.Tab.0.bottom" timestamp="1588583390403">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1878" height="358" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1588583178608" />
-    <state width="1878" height="358" key="GridCell.Tab.0.center" timestamp="1588583178608">
+    <state width="1878" height="358" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1588583390403" />
+    <state width="1878" height="358" key="GridCell.Tab.0.center" timestamp="1588583390403">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1878" height="358" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1588583178608" />
-    <state width="1878" height="358" key="GridCell.Tab.0.left" timestamp="1588583178608">
+    <state width="1878" height="358" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1588583390403" />
+    <state width="1878" height="358" key="GridCell.Tab.0.left" timestamp="1588583390403">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1878" height="358" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1588583178608" />
-    <state width="1878" height="358" key="GridCell.Tab.0.right" timestamp="1588583178608">
+    <state width="1878" height="358" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1588583390403" />
+    <state width="1878" height="358" key="GridCell.Tab.0.right" timestamp="1588583390403">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1878" height="358" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1588583178608" />
+    <state width="1878" height="358" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1588583390403" />
     <state x="541" y="263" key="IDE.errors.dialog" timestamp="1587955470833">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
