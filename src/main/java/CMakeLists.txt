@@ -60,7 +60,7 @@ set (SOURCES_LIST
 )
 
 # Find packages (Linux Prior)
-find_package (Vulkan QUIET)
+find_package (Vulkan REQUIRED)
 find_package (GLFW3 QUIET)
 find_package (PkgConfig QUIET)
 find_package (glbinding REQUIRED) # if it is really required in your project
@@ -155,9 +155,6 @@ find_package(JNI REQUIRED)
 link_directories(${LIB_DIR})
 include_directories(${INC_DIR} ${JNI_INCLUDE_DIRS})
 file (GLOB RSOURCES RELATIVE ${CMAKE_CURRENT_SOURCE_DIR} ${SOURCES_LIST})
-
-# 
-
 
 # Compute test 
 set (LIBRARY_NAME "jniJiviXBase") # Changed 29.04.2020, make simpler understand

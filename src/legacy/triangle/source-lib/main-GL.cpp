@@ -142,7 +142,7 @@ int main()
 
 	// initialize Vulkan
     auto fw = jvx::Driver();
-    fw->initializeGL(glfwGetProcAddress);
+    vkt::initializeGL(glfwGetProcAddress);
 
 
     // build and compile our shader program

@@ -59,7 +59,7 @@ set (SOURCES_LIST
 )
 
 # Find packages (Linux Prior)
-find_package (Vulkan QUIET)
+find_package (Vulkan REQUIRED)
 find_package (GLFW3 QUIET)
 find_package (PkgConfig QUIET)
 find_package (glbinding REQUIRED) # if it is really required in your project

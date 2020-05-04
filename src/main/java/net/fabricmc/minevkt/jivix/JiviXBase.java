@@ -12,10 +12,12 @@ import org.bytedeco.javacpp.annotation.*;
         "./include/vkt2/fw.hpp",
         "./include/JiviX/JiviX.hpp",
         "./jniJiviXCore.h"
-}, link={"vulkan-1","glfw3","glbinding"}, define={"ENABLE_OPENGL_INTEROP","WIN32","OS_WIN","VK_ENABLE_BETA_EXTENSIONS","VK_USE_PLATFORM_WIN32_KHR","VMA_IMPLEMENTATION","SHARED_PTR_NAMESPACE std", "UNIQUE_PTR_NAMESPACE std"})
+}, link={"vulkan-1","glfw","glbinding"}, define={"ENABLE_OPENGL_INTEROP","WIN32","OS_WIN","VK_ENABLE_BETA_EXTENSIONS","VK_USE_PLATFORM_WIN32_KHR","VMA_IMPLEMENTATION","SHARED_PTR_NAMESPACE std", "UNIQUE_PTR_NAMESPACE std"})
 @Name("") //
 public class JiviXBase extends Pointer {
     static { Loader.load(); }
+
+
 
 
     @Name("vkt::ImageRegion") //
@@ -221,9 +223,12 @@ public class JiviXBase extends Pointer {
         public long getAllocator()        { return this._getAllocator().address(); };
         public long getMemoryProperties() { return this._getMemoryProperties().address(); };
 
-        //
-        public native @ByRef JiviXCore.Driver initializeGL(@Cast("GLFWglproc(*)(const char*)") long GetProcAddress);
+
     };
+
+    //
+    public static native @Name("vkt::initializeGL") void initializeGL(@Cast("GLFWglproc(*)(const char*)") long GetProcAddress);
+    public static native @Name("vkt::initializeGL") void initializeGL();
 
 
     @Name("jvx::BufferViewSet")

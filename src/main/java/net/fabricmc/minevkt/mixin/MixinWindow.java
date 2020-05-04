@@ -2,6 +2,7 @@ package net.fabricmc.minevkt.mixin;
 
 
 import net.fabricmc.minevkt.MineRTX;
+import net.fabricmc.minevkt.jivix.JiviXBase;
 import net.minecraft.client.WindowEventHandler;
 import net.minecraft.client.WindowSettings;
 import net.minecraft.client.render.WorldRenderer;
@@ -31,7 +32,7 @@ public class MixinWindow {
     @Inject  ( at = @At("TAIL"), method = "<init>" )
     public void OnGlCreateCapabilities(WindowEventHandler eventHandler, MonitorTracker monitorTracker, WindowSettings settings, @Nullable String videoMode, String title, CallbackInfo ci) {
         System.out.println("Try Inject Before GL.createCapabilities");
-        MineRTX.vDriver.initializeGL( GetProcAddress );
+        JiviXBase.initializeGL( GetProcAddress ); // GetProcAddress
     };
 
     // F.U.C.K, Damn IT!
