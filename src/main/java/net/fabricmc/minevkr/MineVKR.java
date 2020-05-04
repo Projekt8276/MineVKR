@@ -37,13 +37,21 @@ public class MineVKR implements ModInitializer  {
 	public static double[] vCPosition;
 
 	public static JiviXBase.Driver vDriver;
-	public static JiviXBase.BufferViewSet vBufferViewSet;
+	//public static JiviXBase.BufferViewSet vBufferViewSet; // Un-Used, due OpenGL transform feedback input into Vulkan Memory!
 	public static JiviXBase.Context vContext;
 	public static JiviXBase.Material vMaterials;
-	public static JiviXBase.MeshBinding[] vBindings;
-	public static JiviXBase.MeshInput[] vMeshInput;
+	public static JiviXBase.MeshBinding[] vBindingsEntity;
+	public static JiviXBase.MeshBinding[] vBindingsChunksOpaque;
+	public static JiviXBase.MeshBinding[] vBindingsChunksTranslucent;
+	public static JiviXBase.MeshBinding[] vBindingsChunksCutout;
+	//public static JiviXBase.MeshBinding[] vBindings;
+	//public static JiviXBase.MeshInput[] vMeshInput; // No Idea!
 	public static JiviXBase.Node[] vNode;
 	public static JiviXBase.Renderer vRenderer;
+
+	//
+	public static int MaxChunkBindings = 16;
+	public static int MaxEntityBindings = 16;
 
 	@Override
 	public void onInitialize() {
@@ -78,7 +86,7 @@ public class MineVKR implements ModInitializer  {
 
 		//
 		MineVKR.vContext = new JiviXBase.Context(MineVKR.vDriver);
-		MineVKR.vBufferViewSet = new JiviXBase.BufferViewSet(MineVKR.vContext);
+		//MineVKR.vBufferViewSet = new JiviXBase.BufferViewSet(MineVKR.vContext);
 		MineVKR.vMaterials = new JiviXBase.Material(MineVKR.vContext);
 		MineVKR.vNode = new JiviXBase.Node[]{ new JiviXBase.Node(MineVKR.vContext) };
 		MineVKR.vRenderer = new JiviXBase.Renderer(MineVKR.vContext);
@@ -87,5 +95,34 @@ public class MineVKR implements ModInitializer  {
 		MineVKR.vContext.initialize(1600, 1200); // UNABLE TO DEBUG!!
 		MineVKR.vRenderer.linkMaterial(MineVKR.vMaterials.sharedPtr());
 		MineVKR.vRenderer.linkNode(MineVKR.vNode[0].sharedPtr());
+
+		// Declare all chunks to be ray-traced!
+		MineVKR.vBindingsChunksOpaque = new JiviXBase.MeshBinding[MaxChunkBindings]; // for chunk range = 4
+		MineVKR.vBindingsChunksCutout = new JiviXBase.MeshBinding[MaxChunkBindings]; // for chunk range = 4
+		MineVKR.vBindingsChunksTranslucent = new JiviXBase.MeshBinding[MaxChunkBindings]; // for chunk range = 4
+
+		// Create bindings per every chunks!
+		for (int i=0;i<MaxChunkBindings;i++) { // Reserve per chunk 2048 faces, and 16 chunks possible...
+			MineVKR.vBindingsChunksOpaque[i] = new JiviXBase.MeshBinding(MineVKR.vContext, 2048);
+			MineVKR.vBindingsChunksCutout[i] = new JiviXBase.MeshBinding(MineVKR.vContext, 2048);
+			MineVKR.vBindingsChunksTranslucent[i] = new JiviXBase.MeshBinding(MineVKR.vContext, 2048);
+		}
+
+		//
+		for (int i=0;i<MaxChunkBindings;i++) MineVKR.vNode[0].pushMesh(MineVKR.vBindingsChunksOpaque[i]);
+		for (int i=0;i<MaxChunkBindings;i++) MineVKR.vNode[0].pushMesh(MineVKR.vBindingsChunksCutout[i]);
+		for (int i=0;i<MaxChunkBindings;i++) MineVKR.vNode[0].pushMesh(MineVKR.vBindingsChunksTranslucent[i]);
+
+		// Declare entity bindings
+		MineVKR.vBindingsEntity = new JiviXBase.MeshBinding[MaxEntityBindings];
+
+		// Needs 16 Parts of Entity, with 16th cube vertices
+		long PartsSize[] = new long[] { 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32 };
+
+		// Create bindings per every entity!
+		for (int i=0;i<MaxEntityBindings;i++) {
+			MineVKR.vBindingsEntity[i] = new JiviXBase.MeshBinding(MineVKR.vContext, 512, PartsSize);
+			MineVKR.vNode[0].pushMesh(MineVKR.vBindingsEntity[i]);
+		};
 	}
 }

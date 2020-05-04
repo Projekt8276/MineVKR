@@ -2,116 +2,16 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="4b7b64e4-95fe-4605-8caf-f658c6b40341" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/net/fabricmc/minevkr/MineVKR.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/net/fabricmc/minevkr/jivix/JiviXBase$BufferViewSet.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/net/fabricmc/minevkr/jivix/JiviXBase$ByteVector.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/net/fabricmc/minevkr/jivix/JiviXBase$Context.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/net/fabricmc/minevkr/jivix/JiviXBase$Driver.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/net/fabricmc/minevkr/jivix/JiviXBase$ImageRegion.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/net/fabricmc/minevkr/jivix/JiviXBase$Material.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/net/fabricmc/minevkr/jivix/JiviXBase$MeshBinding.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/net/fabricmc/minevkr/jivix/JiviXBase$MeshInput.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/net/fabricmc/minevkr/jivix/JiviXBase$Node.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/net/fabricmc/minevkr/jivix/JiviXBase$Renderer.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/net/fabricmc/minevkr/jivix/JiviXBase$TestClass.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/net/fabricmc/minevkr/jivix/JiviXBase$Thread.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/net/fabricmc/minevkr/jivix/JiviXBase$UByteVector.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/net/fabricmc/minevkr/jivix/JiviXBase.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/net/fabricmc/minevkr/jivix/JiviXBase.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/net/fabricmc/minevkr/jivix/JiviXCore$BufferAllocation.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/net/fabricmc/minevkr/jivix/JiviXCore$BufferViewSet.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/net/fabricmc/minevkr/jivix/JiviXCore$Context.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/net/fabricmc/minevkr/jivix/JiviXCore$Driver.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/net/fabricmc/minevkr/jivix/JiviXCore$ImageAllocation.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/net/fabricmc/minevkr/jivix/JiviXCore$Material.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/net/fabricmc/minevkr/jivix/JiviXCore$MeshBinding.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/net/fabricmc/minevkr/jivix/JiviXCore$MeshInput.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/net/fabricmc/minevkr/jivix/JiviXCore$Node.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/net/fabricmc/minevkr/jivix/JiviXCore$Renderer.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/net/fabricmc/minevkr/jivix/JiviXCore$Thread.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/net/fabricmc/minevkr/jivix/JiviXCore$VmaBufferAllocation.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/net/fabricmc/minevkr/jivix/JiviXCore$VmaImageAllocation.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/net/fabricmc/minevkr/jivix/JiviXCore.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/net/fabricmc/minevkr/jivix/JiviXCore.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/net/fabricmc/minevkr/jivix/TODO.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/net/fabricmc/minevkr/jivix/VectorTest$1.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/net/fabricmc/minevkr/jivix/VectorTest$PointerVectorVector.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/net/fabricmc/minevkr/jivix/VectorTest.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/net/fabricmc/minevkr/jivix/VectorTest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/net/fabricmc/minevkr/jivix/bin" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/net/fabricmc/minevkr/jivix/include" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/net/fabricmc/minevkr/jivix/jniJiviXBase.cpp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/net/fabricmc/minevkr/jivix/jniJiviXBase.h" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/net/fabricmc/minevkr/jivix/jniJiviXCore.cpp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/net/fabricmc/minevkr/jivix/jniJiviXCore.h" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/net/fabricmc/minevkr/jivix/jniVectorTest.cpp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/net/fabricmc/minevkr/jivix/jniVectorTest.h" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/net/fabricmc/minevkr/jivix/jnijavacpp.cpp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/net/fabricmc/minevkr/jivix/lib" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/net/fabricmc/minevkr/jivix/source" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/net/fabricmc/minevkr/jivix/windows-x86_64" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/net/fabricmc/minevkr/mixin/MixinWindow.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/net/fabricmc/minevkr/mixin/MixinWorldRenderer.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/native/bin/jniJiviXBase.dll" beforeDir="false" afterPath="$PROJECT_DIR$/native/bin/jniJiviXBase.dll" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/native/bin/jniJiviXCore.dll" beforeDir="false" afterPath="$PROJECT_DIR$/native/bin/jniJiviXCore.dll" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/generate.bat" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/generate.bat" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/net/fabricmc/minevkt/MineRTX.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/net/fabricmc/minevkt/jivix/JiviXBase$BufferViewSet.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/net/fabricmc/minevkt/jivix/JiviXBase$ByteVector.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/net/fabricmc/minevkt/jivix/JiviXBase$Context.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/net/fabricmc/minevkt/jivix/JiviXBase$Driver.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/net/fabricmc/minevkt/jivix/JiviXBase$ImageRegion.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/net/fabricmc/minevkt/jivix/JiviXBase$Material.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/net/fabricmc/minevkt/jivix/JiviXBase$MeshBinding.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/net/fabricmc/minevkt/jivix/JiviXBase$MeshInput.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/net/fabricmc/minevkt/jivix/JiviXBase$Node.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/net/fabricmc/minevkt/jivix/JiviXBase$Renderer.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/net/fabricmc/minevkt/jivix/JiviXBase$TestClass.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/net/fabricmc/minevkt/jivix/JiviXBase$Thread.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/net/fabricmc/minevkt/jivix/JiviXBase$UByteVector.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/net/fabricmc/minevkt/jivix/JiviXBase.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/net/fabricmc/minevkt/jivix/JiviXBase.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/net/fabricmc/minevkt/jivix/JiviXCore$BufferAllocation.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/net/fabricmc/minevkt/jivix/JiviXCore$BufferViewSet.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/net/fabricmc/minevkt/jivix/JiviXCore$Context.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/net/fabricmc/minevkt/jivix/JiviXCore$Driver.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/net/fabricmc/minevkt/jivix/JiviXCore$ImageAllocation.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/net/fabricmc/minevkt/jivix/JiviXCore$Material.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/net/fabricmc/minevkt/jivix/JiviXCore$MeshBinding.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/net/fabricmc/minevkt/jivix/JiviXCore$MeshInput.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/net/fabricmc/minevkt/jivix/JiviXCore$Node.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/net/fabricmc/minevkt/jivix/JiviXCore$Renderer.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/net/fabricmc/minevkt/jivix/JiviXCore$Thread.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/net/fabricmc/minevkt/jivix/JiviXCore$VmaBufferAllocation.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/net/fabricmc/minevkt/jivix/JiviXCore$VmaImageAllocation.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/net/fabricmc/minevkt/jivix/JiviXCore.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/net/fabricmc/minevkt/jivix/JiviXCore.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/net/fabricmc/minevkt/jivix/TODO.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/net/fabricmc/minevkt/jivix/VectorTest$1.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/net/fabricmc/minevkt/jivix/VectorTest$PointerVectorVector.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/net/fabricmc/minevkt/jivix/VectorTest.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/net/fabricmc/minevkt/jivix/VectorTest.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/net/fabricmc/minevkt/jivix/bin" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/net/fabricmc/minevkt/jivix/include" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/net/fabricmc/minevkt/jivix/jniJiviXBase.cpp" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/net/fabricmc/minevkt/jivix/jniJiviXBase.h" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/net/fabricmc/minevkt/jivix/jniJiviXCore.cpp" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/net/fabricmc/minevkt/jivix/jniJiviXCore.h" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/net/fabricmc/minevkt/jivix/jniVectorTest.cpp" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/net/fabricmc/minevkt/jivix/jniVectorTest.h" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/net/fabricmc/minevkt/jivix/lib" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/net/fabricmc/minevkt/jivix/source" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/net/fabricmc/minevkt/jivix/windows-x86_64" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/net/fabricmc/minevkt/mixin/MixinWindow.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/net/fabricmc/minevkt/mixin/MixinWorldRenderer.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/source/jniJiviXBase.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/source/jniJiviXBase.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/source/jniJiviXCore.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/source/jniJiviXCore.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/source/jniVectorTest.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/source/jniVectorTest.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/source/jnijavacpp.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/source/jnijavacpp.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/assets/modid/icon.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/assets/modid/icon.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/fabric.mod.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/fabric.mod.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/modid.mixins.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/modid.mixins.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/native/bin/jniJiviXCore.exp" beforeDir="false" afterPath="$PROJECT_DIR$/native/bin/jniJiviXCore.exp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/native/include/JiviX/JVI/bview-set.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/native/include/JiviX/JVI/bview-set.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/native/include/JiviX/JVI/context.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/native/include/JiviX/JVI/context.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/native/include/JiviX/JVI/material.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/native/include/JiviX/JVI/material.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/native/include/JiviX/JVI/mesh-binding.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/native/include/JiviX/JVI/mesh-binding.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/native/include/JiviX/JVI/node.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/native/include/JiviX/JVI/node.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/native/include/JiviX/JVI/renderer.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/native/include/JiviX/JVI/renderer.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/native/include/JiviX/node.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/native/include/JiviX/node.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/net/fabricmc/minevkr/MineVKR.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/fabricmc/minevkr/MineVKR.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -242,22 +142,22 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="634" y="231" key="FileChooserDialogImpl/0.0.1920.1040@0.0.1920.1040" timestamp="1587960634350" />
-    <state width="1878" height="284" key="GridCell.Tab.0.bottom" timestamp="1588593422342">
+    <state width="1878" height="358" key="GridCell.Tab.0.bottom" timestamp="1588600206052">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1878" height="284" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1588593422342" />
-    <state width="1878" height="284" key="GridCell.Tab.0.center" timestamp="1588593422342">
+    <state width="1878" height="358" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1588600206052" />
+    <state width="1878" height="358" key="GridCell.Tab.0.center" timestamp="1588600206052">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1878" height="284" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1588593422342" />
-    <state width="1878" height="284" key="GridCell.Tab.0.left" timestamp="1588593422342">
+    <state width="1878" height="358" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1588600206052" />
+    <state width="1878" height="358" key="GridCell.Tab.0.left" timestamp="1588600206052">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1878" height="284" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1588593422342" />
-    <state width="1878" height="284" key="GridCell.Tab.0.right" timestamp="1588593422342">
+    <state width="1878" height="358" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1588600206052" />
+    <state width="1878" height="358" key="GridCell.Tab.0.right" timestamp="1588600206052">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1878" height="284" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1588593422342" />
+    <state width="1878" height="358" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1588600206052" />
     <state x="541" y="263" key="IDE.errors.dialog" timestamp="1588591926832">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
