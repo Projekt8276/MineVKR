@@ -371,6 +371,7 @@ public class JiviXBase extends Pointer {
         public native @SharedPtr JiviXCore.Node sharedPtr();
 
         public native JiviXCore.Node pushInstance(@Cast("vkh::VsGeometryInstance*") long address);
+        public native JiviXCore.Node pushInstance(JiviXCore.VsGeometryInstance geometry);
 
         public native long pushMesh(@ByRef MeshBinding binding);
         public native void createDescriptorSet();
@@ -394,7 +395,7 @@ public class JiviXBase extends Pointer {
         public native @SharedPtr JiviXCore.Material sharedPtr();
 
         public native void createDescriptorSet();
-        //public native long pushMaterial(JiviXCore.MaterialUnit materialAddress);
+        public native long pushMaterial(JiviXCore.MaterialUnit materialAddress);
 
         public native JiviXCore.Material pushSampledImage(@Cast("vkh::VkDescriptorImageInfo*") long imageDescAddress);
         public native JiviXCore.Material setRawMaterials(@Cast("vkt::Vector<jvi::MaterialUnit>*") UByteVector rawMaterials, long materialCount);

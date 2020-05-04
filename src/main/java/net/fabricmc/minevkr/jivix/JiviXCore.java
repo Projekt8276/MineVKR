@@ -204,67 +204,47 @@ public class JiviXCore extends Pointer {
         private native void allocate(Context context);
     };
 
-/*
     @Name("jvi::MaterialUnit")
     public static class MaterialUnit extends Pointer {
         static { Loader.load(); }
         public MaterialUnit(Pointer p) { super(p); }
 
+        // 
         public MaterialUnit() { allocate(); }
         private native void allocate();
 
         // Channels
-        private native @Cast("float*") @ByRef FloatPointer diffuse();
-        private native void diffuse(@Cast("glm::vec4&") @ByRef FloatPointer CL);
+        private native @Cast("float*") @ValueGetter @ByRef FloatPointer diffuse();
+        private native @Cast("float*") @ValueGetter @ByRef FloatPointer specular();
+        private native @Cast("float*") @ValueGetter @ByRef FloatPointer normals();
+        private native @Cast("float*") @ValueGetter @ByRef FloatPointer emission();
 
         // Channels
-        private native @Cast("float*") @ByRef FloatPointer specular();
-        private native void specular(@Cast("glm::vec4&") @ByRef FloatPointer CL);
-
-        // Channels
-        private native @Cast("float*") @ByRef FloatPointer normals();
-        private native void normals(@Cast("glm::vec4&") @ByRef FloatPointer CL);
-
-        // Channels
-        private native @Cast("float*") @ByRef FloatPointer emission();
-        private native void emission(@Cast("glm::vec4&") @ByRef FloatPointer CL);
-
-        // Channels
-        private native @ByVal int diffuseTexture(); private native void diffuseTexture(@ByVal int CL);
-        private native @ByVal int specularTexture(); private native void specularTexture(@ByVal int CL);
-        private native @ByVal int normalsTexture(); private native void normalsTexture(@ByVal int CL);
-        private native @ByVal int emissionTexture(); private native void emissionTexture(@ByVal int CL);
+        private native @Cast("int*") @ValueGetter @ByRef IntPointer diffuseTexture();
+        private native @Cast("int*") @ValueGetter @ByRef IntPointer specularTexture(); 
+        private native @Cast("int*") @ValueGetter @ByRef IntPointer normalsTexture();
+        private native @Cast("int*") @ValueGetter @ByRef IntPointer emissionTexture();
     };
-*/
 
-/*
     @Name("vkh::VsGeometryInstance")
     public static class VsGeometryInstance extends Pointer {
         static { Loader.load(); }
         public VsGeometryInstance(Pointer p) { super(p); }
 
+        // 
         public VsGeometryInstance() { allocate(); }
         private native void allocate();
 
         // Transform
-        private native @Cast("float*") @ByRef FloatPointer transform();
-        private native void transform(@Cast("glm::mat3x4&") @ByRef FloatPointer transformPtr);
+        private native @Cast("float*") @ValueGetter @ByRef FloatPointer transform();
 
-        // Mask
-        private native @ByVal byte mask();
-        private native void mask(@ByVal byte MS);
+        // 
+        private native @Cast("byte*") @ValueGetter @ByRef BytePointer mask();
+        private native @Cast("byte*") @ValueGetter @ByRef BytePointer flags();
+        private native @Cast("int*") @ValueGetter @ByRef IntPointer instanceId();
+        private native @Cast("int*") @ValueGetter @ByRef IntPointer instanceOffset();
 
-        // Flags
-        private native @ByVal byte flags();
-        private native void flags(@ByVal byte FG);
-
-        // Custom Index
-        private native @ByVal int instanceId();
-        private native void instanceId(@ByVal int ID);
-
-        // Native Offset
-        private native @ByVal int instanceOffset();
-        private native void instanceOffset(@ByVal int OF);
+        // 
+        private native @Cast("int64_t*") @ValueGetter @ByRef LongPointer accelerationStructureHandle();
     };
-*/
 };
