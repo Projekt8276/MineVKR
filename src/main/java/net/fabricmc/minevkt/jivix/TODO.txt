@@ -1,1 +1,0 @@
-TODO: Move `.class` into `$ProjectName$\build\classes\java\main\net\fabricmc\minertx\jivix`

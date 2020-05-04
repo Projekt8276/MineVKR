@@ -19,7 +19,7 @@
   "environment": "*",
   "entrypoints": {
     "main": [
-      "net.fabricmc.minevkt.MineRTX"
+      "net.fabricmc.minevkr.MineVKR"
     ]
   },
   "mixins": [
