@@ -3,7 +3,9 @@
   <component name="ChangeListManager">
     <list default="true" id="4b7b64e4-95fe-4605-8caf-f658c6b40341" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/net/fabricmc/minevkt/mixin/MixinWorldRenderer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/fabricmc/minevkt/mixin/MixinWorldRenderer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/net/fabricmc/minevkt/jivix/JiviXCore$MaterialUnit.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/net/fabricmc/minevkt/jivix/JiviXCore$VsGeometryInstance.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/net/fabricmc/minevkt/mixin/MixinWindow.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/fabricmc/minevkt/mixin/MixinWindow.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -134,22 +136,22 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="634" y="231" key="FileChooserDialogImpl/0.0.1920.1040@0.0.1920.1040" timestamp="1587960634350" />
-    <state width="1878" height="358" key="GridCell.Tab.0.bottom" timestamp="1588583390403">
+    <state width="1878" height="284" key="GridCell.Tab.0.bottom" timestamp="1588587720209">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1878" height="358" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1588583390403" />
-    <state width="1878" height="358" key="GridCell.Tab.0.center" timestamp="1588583390403">
+    <state width="1878" height="284" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1588587720209" />
+    <state width="1878" height="284" key="GridCell.Tab.0.center" timestamp="1588587720209">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1878" height="358" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1588583390403" />
-    <state width="1878" height="358" key="GridCell.Tab.0.left" timestamp="1588583390403">
+    <state width="1878" height="284" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1588587720209" />
+    <state width="1878" height="284" key="GridCell.Tab.0.left" timestamp="1588587720209">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1878" height="358" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1588583390403" />
-    <state width="1878" height="358" key="GridCell.Tab.0.right" timestamp="1588583390403">
+    <state width="1878" height="284" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1588587720209" />
+    <state width="1878" height="284" key="GridCell.Tab.0.right" timestamp="1588587720209">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1878" height="358" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1588583390403" />
+    <state width="1878" height="284" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1588587720209" />
     <state x="541" y="263" key="IDE.errors.dialog" timestamp="1587955470833">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
@@ -158,6 +160,10 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="441" y="95" key="SettingsEditor/0.0.1920.1040@0.0.1920.1040" timestamp="1588139314962" />
+    <state width="1829" height="1038" key="com.intellij.byteCodeViewer.ShowByteCodeAction" timestamp="1588587232359">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1829" height="1038" key="com.intellij.byteCodeViewer.ShowByteCodeAction/0.0.1920.1040@0.0.1920.1040" timestamp="1588587232359" />
     <state x="670" y="252" width="779" height="534" key="find.popup" timestamp="1588561040101">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
@@ -170,9 +176,9 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="621" y="244" key="run.anything.popup/0.0.1920.1040@0.0.1920.1040" timestamp="1588561570939" />
-    <state x="623" y="226" width="672" height="678" key="search.everywhere.popup" timestamp="1588568036842">
+    <state x="624" y="227" width="672" height="678" key="search.everywhere.popup" timestamp="1588587296773">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="623" y="226" width="672" height="678" key="search.everywhere.popup/0.0.1920.1040@0.0.1920.1040" timestamp="1588568036842" />
+    <state x="624" y="227" width="672" height="678" key="search.everywhere.popup/0.0.1920.1040@0.0.1920.1040" timestamp="1588587296773" />
   </component>
 </project>
