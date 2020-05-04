@@ -1,11 +1,7 @@
 {
   "ExpandedNodes": [
-    "",
-    "\\include",
-    "\\include\\JiviX",
-    "\\include\\JiviX\\JVI",
-    "\\include\\vkt2"
+    ""
   ],
-  "SelectedNode": "\\include\\vkt2\\fw.hpp",
+  "SelectedNode": "\\javacpp-platform.jar",
   "PreviewInSolutionExplorer": false
 }

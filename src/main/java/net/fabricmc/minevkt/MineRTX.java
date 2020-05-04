@@ -10,10 +10,15 @@ import net.minecraft.client.gl.VertexBuffer;
 import net.minecraft.client.render.chunk.ChunkBuilder;
 import net.minecraft.util.math.BlockPos;
 import org.lwjgl.vulkan.*;
+import org.lwjgl.glfw.*;
+import org.lwjgl.glfw.GLFW.*;
 import org.spongepowered.asm.mixin.Shadow;
 
 import static net.fabricmc.minevkt.jivix.JiviXBase.*;
 import static net.fabricmc.minevkt.jivix.JiviXCore.*;
+//import static org.lwjgl.glfw.*;
+import static org.lwjgl.glfw.GLFW.*;
+import static org.lwjgl.glfw.GLFW.Functions.*;
 
 public class MineRTX implements ModInitializer  {
 	public static long vPhysicalDeviceHandle;
@@ -48,16 +53,13 @@ public class MineRTX implements ModInitializer  {
 
 		//driver = new JiviXBase.Driver();
 		System.out.println("Hello Fabric world!");
+		MineRTX.vDriver = new JiviXBase.Driver();
 		this.vCPosition = new double[3];
 	}
 
-	//@Override
-	//public void onInitializeClient() {
-
-	//}
-
 	public static void InitializeRenderer(){
-		MineRTX.vDriver = new JiviXBase.Driver();
+
+		//MineRTX.vDriver.initializeGL( GetProcAddress ); // NOT POSSIBLE!
 		System.out.println("This line is printed by an example mod mixin!");
 
 		//

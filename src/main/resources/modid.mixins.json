@@ -6,7 +6,8 @@
   "mixins": [
   ],
   "client": [
-    "MixinWorldRenderer"
+    "MixinWorldRenderer",
+    "MixinWindow"
   ],
   "injectors": {
     "defaultRequire": 1

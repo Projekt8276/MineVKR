@@ -9,7 +9,6 @@
 #define VK_USE_PLATFORM_WIN32_KHR
 #endif
 
-#include <glad/glad.h>
 #include <GLFW/glfw3.h>
 #include <vkt2/fw.hpp>
 #include <JiviX/JiviX.hpp>
@@ -21,6 +20,7 @@
 
 #include <iostream>
 
+using namespace gl;
 
 class RayTracer : public std::enable_shared_from_this<RayTracer> { public: 
 	 ~RayTracer() {};
@@ -140,10 +140,9 @@ int main()
 
 
 
-
 	// initialize Vulkan
     auto fw = jvx::Driver();
-
+    fw->initializeGL(glfwGetProcAddress);
 
 
     // build and compile our shader program

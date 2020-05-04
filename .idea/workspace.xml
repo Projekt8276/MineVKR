@@ -2,17 +2,105 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="4b7b64e4-95fe-4605-8caf-f658c6b40341" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/.vs/java/v16/Preview/Browse.VC.db-shm" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/.vs/java/v16/Preview/Browse.VC.db-wal" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/dyncall_license.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/glfw_license.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/include/glbinding" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/jar/javacpp-platform.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/jar/javacpp-windows-x86_64.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/jar/javacpp.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/jar/lwjgl-glfw-javadoc.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/jar/lwjgl-glfw-natives-linux.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/jar/lwjgl-glfw-natives-macos.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/jar/lwjgl-glfw-natives-windows.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/jar/lwjgl-glfw-sources.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/jar/lwjgl-glfw.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/jar/lwjgl-javadoc.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/jar/lwjgl-natives-linux.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/jar/lwjgl-natives-macos.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/jar/lwjgl-natives-windows.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/jar/lwjgl-sources.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/jar/lwjgl-vma-javadoc.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/jar/lwjgl-vma-natives-linux.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/jar/lwjgl-vma-natives-macos.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/jar/lwjgl-vma-natives-windows.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/jar/lwjgl-vma-sources.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/jar/lwjgl-vma.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/jar/lwjgl-vulkan-javadoc.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/jar/lwjgl-vulkan-natives-macos.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/jar/lwjgl-vulkan-sources.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/jar/lwjgl-vulkan.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/jar/lwjgl.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/khronos_license.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/lib/cmake" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/lib/glbinding.exp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/lib/glbinding.lib" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/lib/pkgconfig" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/lib/vulkan-1.exp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/net/fabricmc/minevkt/jivix/bin" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/net/fabricmc/minevkt/mixin/MixinWindow.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/vma_license.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/legacy/triangle/CMakeLists.txt" beforeDir="false" afterPath="$PROJECT_DIR$/src/legacy/triangle/CMakeLists.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/legacy/triangle/source-lib/main-GL.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/legacy/triangle/source-lib/main-GL.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/legacy/triangle/source/glad.c" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/legacy/triangle/source/volk.c" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/.vs/VSWorkspaceState.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/.vs/VSWorkspaceState.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/.vs/java/v16/.suo" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/.vs/java/v16/.suo" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/.vs/java/v16/Preview/Browse.VC.db" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/.vs/java/v16/Preview/Browse.VC.db" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/.vs/slnx.sqlite" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/.vs/slnx.sqlite" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/CMakeLists.txt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/CMakeLists.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/include/glad" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/include/volk" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/lib-mingw-w64/glfw3.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/lib-mingw-w64/libglfw3.a" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/lib-mingw-w64/libglfw3dll.a" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/lib-vc2019/glfw3.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/lib-vc2019/glfw3.lib" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/lib-vc2019/glfw3dll.lib" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/lib/HLSL.lib" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/lib/OGLCompiler.lib" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/lib/OSDependent.lib" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/lib/SPIRV.lib" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/lib/SPVRemapper.lib" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/lib/cmake/glfw3/glfw3Config.cmake" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/lib/cmake/glfw3/glfw3ConfigVersion.cmake" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/lib/cmake/glfw3/glfw3Targets-relwithdebinfo.cmake" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/lib/cmake/glfw3/glfw3Targets.cmake" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/lib/glfw3.lib" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/lib/glfw3.lib" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/lib/glfw3dll.lib" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/lib/glfw3dll.lib" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/lib/libglfw3.a" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/lib/libglfw3.a" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/lib/libglfw3dll.a" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/lib/libglfw3dll.a" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/lib/pkgconfig/glfw3.pc" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/lib/shaderc.lib" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/lib/shaderc_shared.lib" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/lib/shaderc_util.lib" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/lib/spirv-cross-c-shared.lib" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/lib/spirv-cross-c.lib" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/lib/spirv-cross-core.lib" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/lib/spirv-cross-cpp.lib" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/lib/spirv-cross-glsl.lib" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/lib/spirv-cross-hlsl.lib" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/lib/spirv-cross-msl.lib" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/lib/spirv-cross-reflect.lib" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/lib/spirv-cross-util.lib" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/lib/vulkan-1.lib" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/lib/vulkan-1.lib" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/net/fabricmc/minevkt/MineRTX.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/fabricmc/minevkt/MineRTX.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/net/fabricmc/minevkt/jivix/JiviXBase.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/fabricmc/minevkt/jivix/JiviXBase.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/net/fabricmc/minevkt/jivix/JiviXCore.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/fabricmc/minevkt/jivix/JiviXCore.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/net/fabricmc/minevkt/jivix/include" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/fabricmc/minevkt/jivix/include" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/net/fabricmc/minevkt/jivix/lib" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/fabricmc/minevkt/jivix/lib" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/net/fabricmc/minevkt/jivix/lib-mingw64" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/net/fabricmc/minevkt/jivix/lib-vc2019" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/net/fabricmc/minevkt/mixin/MixinWorldRenderer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/fabricmc/minevkt/mixin/MixinWorldRenderer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/source/glad.c" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/source/jniJiviXBase.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/source/jniJiviXBase.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/source/jniJiviXCore.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/source/jniJiviXCore.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/source/jniJiviXCore.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/source/jniJiviXCore.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/source/jnijavacpp.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/source/jnijavacpp.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/source/volk.c" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/windows-x86_64/CMakeCache.txt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/windows-x86_64/CMakeCache.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/windows-x86_64/cmake_install.cmake" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/windows-x86_64/cmake_install.cmake" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/modid.mixins.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/modid.mixins.json" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -45,6 +133,12 @@
               <path>
                 <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
                 <item name="MineRTX" type="f1a62948:ProjectNode" />
+                <item name="Tasks" type="e4a08cd1:TasksNode" />
+                <item name="build" type="c8890929:TasksNode$1" />
+              </path>
+              <path>
+                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
+                <item name="MineRTX" type="f1a62948:ProjectNode" />
                 <item name="Dependencies" type="6de06a37:ExternalSystemViewDefaultContributor$MyDependenciesNode" />
               </path>
             </expand>
@@ -53,6 +147,13 @@
         </projects_view>
       </state>
     </system>
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Class" />
+      </list>
+    </option>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -76,7 +177,27 @@
     <property name="settings.editor.selected.configurable" value="preferences.keymap" />
     <property name="show.unlinked.gradle.project.popup" value="true" />
   </component>
-  <component name="RunManager" selected="Application.Minecraft Client" />
+  <component name="RunManager" selected="Application.Minecraft Client">
+    <configuration name="MineRTX [build]" type="GradleRunConfiguration" factoryName="Gradle">
+      <ExternalSystemSettings>
+        <option name="executionName" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list>
+            <option value="build" />
+          </list>
+        </option>
+        <option name="vmOptions" />
+      </ExternalSystemSettings>
+      <GradleScriptDebugEnabled>true</GradleScriptDebugEnabled>
+      <method v="2" />
+    </configuration>
+  </component>
   <component name="SvnConfiguration">
     <configuration />
   </component>
@@ -102,26 +223,30 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="416" y="175" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1588517083984" />
+    <state x="678" y="338" key="#com.intellij.refactoring.move.moveMembers.MoveMembersDialog" timestamp="1588562522005">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="678" y="338" key="#com.intellij.refactoring.move.moveMembers.MoveMembersDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1588562522005" />
     <state x="634" y="231" key="FileChooserDialogImpl" timestamp="1587960634350">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="634" y="231" key="FileChooserDialogImpl/0.0.1920.1040@0.0.1920.1040" timestamp="1587960634350" />
-    <state width="1878" height="348" key="GridCell.Tab.0.bottom" timestamp="1588521971785">
+    <state width="1878" height="283" key="GridCell.Tab.0.bottom" timestamp="1588573356629">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1878" height="348" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1588521971785" />
-    <state width="1878" height="348" key="GridCell.Tab.0.center" timestamp="1588521971784">
+    <state width="1878" height="283" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1588573356629" />
+    <state width="1878" height="283" key="GridCell.Tab.0.center" timestamp="1588573356628">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1878" height="348" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1588521971784" />
-    <state width="1878" height="348" key="GridCell.Tab.0.left" timestamp="1588521971784">
+    <state width="1878" height="283" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1588573356628" />
+    <state width="1878" height="283" key="GridCell.Tab.0.left" timestamp="1588573356628">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1878" height="348" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1588521971784" />
-    <state width="1878" height="348" key="GridCell.Tab.0.right" timestamp="1588521971784">
+    <state width="1878" height="283" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1588573356628" />
+    <state width="1878" height="283" key="GridCell.Tab.0.right" timestamp="1588573356628">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1878" height="348" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1588521971784" />
+    <state width="1878" height="283" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1588573356628" />
     <state x="541" y="263" key="IDE.errors.dialog" timestamp="1587955470833">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
@@ -130,13 +255,21 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="441" y="95" key="SettingsEditor/0.0.1920.1040@0.0.1920.1040" timestamp="1588139314962" />
+    <state x="670" y="252" width="779" height="534" key="find.popup" timestamp="1588561040101">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="670" y="252" width="779" height="534" key="find.popup/0.0.1920.1040@0.0.1920.1040" timestamp="1588561040101" />
     <state x="385" y="141" key="new project wizard" timestamp="1587960686884">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="385" y="141" key="new project wizard/0.0.1920.1040@0.0.1920.1040" timestamp="1587960686884" />
-    <state x="620" y="243" key="run.anything.popup" timestamp="1588520997183">
+    <state x="621" y="244" key="run.anything.popup" timestamp="1588561570939">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="620" y="243" key="run.anything.popup/0.0.1920.1040@0.0.1920.1040" timestamp="1588520997183" />
+    <state x="621" y="244" key="run.anything.popup/0.0.1920.1040@0.0.1920.1040" timestamp="1588561570939" />
+    <state x="623" y="226" width="672" height="678" key="search.everywhere.popup" timestamp="1588568036842">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="623" y="226" width="672" height="678" key="search.everywhere.popup/0.0.1920.1040@0.0.1920.1040" timestamp="1588568036842" />
   </component>
 </project>

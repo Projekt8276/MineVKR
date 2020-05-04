@@ -44,6 +44,11 @@ import static net.fabricmc.minevkt.jivix.JiviXCore.*;
 import static net.minecraft.client.render.WorldRenderer.*;
 //import static net.minecraft.client.render.WorldRenderer.ChunkInfo;
 
+import org.lwjgl.glfw.*;
+import org.lwjgl.glfw.GLFW.*;
+
+import static org.lwjgl.glfw.GLFW.*;
+import static org.lwjgl.glfw.GLFW.Functions.*;
 
 
 @Mixin(WorldRenderer.class)

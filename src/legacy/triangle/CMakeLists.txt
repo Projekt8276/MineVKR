@@ -40,6 +40,8 @@ set (SOURCES_LIST
     "./include/volk/*"
     "./include/spirv/*"
     "./include/spirv/*/*"
+    "./include/glbinding/*"
+    "./include/glbinding/*/*"
     "./source/*.hpp"
     "./source/*.h"
     "./source/*.cpp"
@@ -60,6 +62,7 @@ set (SOURCES_LIST
 find_package (Vulkan QUIET)
 find_package (GLFW3 QUIET)
 find_package (PkgConfig QUIET)
+find_package (glbinding REQUIRED) # if it is really required in your project
 pkg_search_module(GLFW QUIET glfw3)
 pkg_search_module(GLFW QUIET renderdoc)
 
@@ -151,7 +154,7 @@ file (GLOB RSOURCES RELATIVE ${CMAKE_CURRENT_SOURCE_DIR} ${SOURCES_LIST})
 set (APPLICATION_NAME test-app)
 add_definitions(${DEFINES})
 add_executable(${APPLICATION_NAME} source/main.cpp ${RSOURCES})
-target_link_libraries(${APPLICATION_NAME} PRIVATE ${LIBS} Vulkan::Vulkan)
+target_link_libraries(${APPLICATION_NAME} PRIVATE ${LIBS} Vulkan::Vulkan glbinding::glbinding glbinding::glbinding-aux)
 
 # Add includes to MSVC explorer 
 foreach(source IN LISTS RSOURCES)

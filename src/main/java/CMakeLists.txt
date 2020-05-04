@@ -40,6 +40,8 @@ set (SOURCES_LIST
     "./include/volk/*"
     "./include/spirv/*"
     "./include/spirv/*/*"
+    "./include/glbinding/*"
+    "./include/glbinding/*/*"
     
     #"./src/*.hpp"
     #"./src/*.h"
@@ -61,6 +63,7 @@ set (SOURCES_LIST
 find_package (Vulkan QUIET)
 find_package (GLFW3 QUIET)
 find_package (PkgConfig QUIET)
+find_package (glbinding REQUIRED) # if it is really required in your project
 pkg_search_module(GLFW QUIET glfw3)
 pkg_search_module(GLFW QUIET renderdoc)
 
@@ -159,9 +162,9 @@ file (GLOB RSOURCES RELATIVE ${CMAKE_CURRENT_SOURCE_DIR} ${SOURCES_LIST})
 # Compute test 
 set (LIBRARY_NAME "jniJiviXBase") # Changed 29.04.2020, make simpler understand
 add_definitions(${DEFINES})
-add_library(${LIBRARY_NAME} SHARED source/jnijavacpp.cpp source/jniJiviXBase.cpp source/glad.c)
+add_library(${LIBRARY_NAME} SHARED source/jnijavacpp.cpp source/jniJiviXBase.cpp)
 add_custom_command(PRE_BUILD COMMAND "./generate.bat" OUTPUT "./log.txt")
-target_link_libraries(${LIBRARY_NAME} PRIVATE ${LIBS} Vulkan::Vulkan ${JNI_LIBRARIES})
+target_link_libraries(${LIBRARY_NAME} PRIVATE ${LIBS} ${JNI_LIBRARIES} Vulkan::Vulkan glbinding::glbinding glbinding::glbinding-aux)
 #add_executable(${APPLICATION_NAME} src/legacy/test/main.cpp ${RSOURCES})
 #target_link_libraries(${APPLICATION_NAME} PRIVATE ${LIBS} Vulkan::Vulkan)
 
