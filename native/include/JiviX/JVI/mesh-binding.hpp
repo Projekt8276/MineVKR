@@ -1,4 +1,4 @@
-#pragma once // #
+﻿#pragma once // #
 
 #include "./config.hpp"
 #include "./driver.hpp"
@@ -45,23 +45,13 @@ namespace jvi {
             // 
             this->counterData = vkt::Vector<uint32_t>(std::make_shared<vkt::VmaBufferAllocation>(this->driver->getAllocator(), vkh::VkBufferCreateInfo{ .size = sizeof(uint32_t) * 4u, .usage = {.eTransferSrc = 1, .eTransferDst = 1, .eUniformBuffer = 1, .eStorageBuffer = 1, .eIndirectBuffer = 1, .eRayTracing = 1, .eTransformFeedbackBuffer = 1, .eTransformFeedbackCounterBuffer = 1, .eSharedDeviceAddress = 1 } }, VMA_MEMORY_USAGE_GPU_TO_CPU));
 
-            // ALPHA_TEST
-            //this->offsetIndirectPtr = vkt::Vector<uint64_t>(std::make_shared<vkt::VmaBufferAllocation>(this->driver->getAllocator(), vkh::VkBufferCreateInfo{ .size = 16u, .usage = { .eTransferDst = 1, .eUniformBuffer = 1, .eStorageBuffer = 1, .eIndirectBuffer = 1, .eRayTracing = 1, .eTransformFeedbackCounterBuffer = 1 } }, VMA_MEMORY_USAGE_GPU_ONLY));
-            //this->offsetIndirect = vkt::Vector<vkh::VkAccelerationStructureBuildOffsetInfoKHR>(std::make_shared<vkt::VmaBufferAllocation>(this->driver->getAllocator(), vkh::VkBufferCreateInfo{ .size = sizeof(vkh::VkAccelerationStructureBuildOffsetInfoKHR), .usage = {.eTransferDst = 1, .eUniformBuffer = 1, .eStorageBuffer = 1, .eIndirectBuffer = 1, .eRayTracing = 1, .eTransformFeedbackCounterBuffer = 1 } }, VMA_MEMORY_USAGE_GPU_ONLY));
-
-            /*
-            thread->submitOnce([&, this](vk::CommandBuffer& cmd) {
-                cmd.fillBuffer(this->offsetIndirect, 0u, 4u, 1u);
-                cmd.fillBuffer(this->offsetIndirect, 4u, 12u, 0u);
-            });*/
-
             // 
             //this->gpuMeshInfo = vkt::Vector<MeshInfo>(this->driver->getAllocator(), vkh::VkBufferCreateInfo{ .size = 16u, .usage = {.eTransferDst = 1, .eUniformBuffer = 1, .eStorageBuffer = 1, .eRayTracing = 1 } }, VMA_MEMORY_USAGE_GPU_ONLY);
             this->rawMeshInfo = vkt::Vector<MeshInfo>(std::make_shared<vkt::VmaBufferAllocation>(this->driver->getAllocator(), vkh::VkBufferCreateInfo{ .size = 16u, .usage = {.eTransferSrc = 1, .eUniformBuffer = 1, .eStorageBuffer = 1, .eRayTracing = 1 } }, VMA_MEMORY_USAGE_CPU_TO_GPU));
 
             // Internal Instance Map Per Global Node
-            this->rawInstanceMap = vkt::Vector<uint32_t>(std::make_shared<vkt::VmaBufferAllocation>(this->driver->getAllocator(), vkh::VkBufferCreateInfo{ .size = GeometryInitial.size() * sizeof(uint32_t), .usage = {.eTransferSrc = 1, .eUniformBuffer = 1, .eStorageBuffer = 1, .eRayTracing = 1 } }, VMA_MEMORY_USAGE_CPU_TO_GPU));
-            this->gpuInstanceMap = vkt::Vector<uint32_t>(std::make_shared<vkt::VmaBufferAllocation>(this->driver->getAllocator(), vkh::VkBufferCreateInfo{ .size = GeometryInitial.size() * sizeof(uint32_t), .usage = {.eTransferDst = 1, .eUniformBuffer = 1, .eStorageBuffer = 1, .eRayTracing = 1 } }, VMA_MEMORY_USAGE_GPU_ONLY));
+            this->rawInstanceMap = vkt::Vector<uint32_t>(std::make_shared<vkt::VmaBufferAllocation>(this->driver->getAllocator(), vkh::VkBufferCreateInfo{ .size = std::max(GeometryInitial.size(), 64ull) * sizeof(uint32_t), .usage = {.eTransferSrc = 1, .eUniformBuffer = 1, .eStorageBuffer = 1, .eRayTracing = 1 } }, VMA_MEMORY_USAGE_CPU_TO_GPU));
+            this->gpuInstanceMap = vkt::Vector<uint32_t>(std::make_shared<vkt::VmaBufferAllocation>(this->driver->getAllocator(), vkh::VkBufferCreateInfo{ .size = std::max(GeometryInitial.size(), 64ull) * sizeof(uint32_t), .usage = {.eTransferDst = 1, .eUniformBuffer = 1, .eStorageBuffer = 1, .eRayTracing = 1 } }, VMA_MEMORY_USAGE_GPU_ONLY));
 
             // for faster code, pre-initialize
             this->stages = vkt::vector_cast<vkh::VkPipelineShaderStageCreateInfo, vk::PipelineShaderStageCreateInfo>({
@@ -74,23 +64,6 @@ namespace jvi {
                 vkt::makePipelineStageInfo(this->driver->getDevice(), vkt::readBinary("./shaders/rtrace/covergence.vert.spv"), vk::ShaderStageFlagBits::eVertex),
                 vkt::makePipelineStageInfo(this->driver->getDevice(), vkt::readBinary("./shaders/rtrace/covergence.frag.spv"), vk::ShaderStageFlagBits::eFragment)
             });
-
-            /*{ //
-                this->indexData = vkt::Vector<uint8_t>(std::make_shared<vkt::VmaBufferAllocation>(this->driver->getAllocator(), vkh::VkBufferCreateInfo{
-                    .size = sizeof(uint32_t) * 3u,
-                    .usage = {.eTransferDst = 1, .eStorageTexelBuffer = 1, .eStorageBuffer = 1, .eIndexBuffer = 1, .eSharedDeviceAddress = 1 },
-                }));
-                this->rawMeshInfo[0u].indexType = uint32_t(vk::IndexType::eNoneKHR) + 1u;
-
-                // TODO: other platforms memory handling
-                // create OpenGL version of buffers
-#ifdef ENABLE_OPENGL_INTEROP
-                glCreateBuffers(1u, &this->indexDataOGL.second);
-                glCreateMemoryObjectsEXT(1u, &this->indexDataOGL.first);
-                glImportMemoryWin32HandleEXT(this->indexDataOGL.first, this->indexData->getAllocationInfo().reqSize, GL_HANDLE_TYPE_OPAQUE_WIN32_EXT, this->indexData->getAllocationInfo().handle);
-                glNamedBufferStorageMemEXT(this->indexDataOGL.second, MaxPrimitiveCount * sizeof(uint32_t) * 3u, this->indexDataOGL.first, 0u);
-#endif
-            };*/
 
             // 
             vkt::MemoryAllocationInfo almac = {};
@@ -254,8 +227,16 @@ namespace jvi {
         virtual uPTR(MeshBinding) setPrimitiveCount(const vk::DeviceSize& count = 65536u) { this->primitiveCount = std::min(vk::DeviceSize(count), vk::DeviceSize(this->MaxPrimitiveCount)); return uTHIS; };
 
         // 
+        virtual uPTR(MeshBinding) resetInstanceMap(const uint32_t& mapID = 0u) {
+            this->mapCount = 0u;
+            return uTHIS;
+        };
+
+        // 
         virtual uPTR(MeshBinding) linkWithInstance(const uint32_t& mapID = 0u) {
-            this->rawInstanceMap[this->mapCount++] = mapID;
+            if (this->mapCount < this->rawInstanceMap.size()) {
+                this->rawInstanceMap[this->mapCount++] = mapID;
+            };
             return uTHIS;
         };
 
@@ -360,9 +341,7 @@ namespace jvi {
             // this->fullGeometryCount
             uint32_t f = 0, i = 0, c = 0; for (auto& I : this->inputs) { // Quads needs to format...
                 const auto uOffset = this->primitiveCount * 3u;
-                if (I.has()) {
-                    I->createRasterizePipeline()->createDescriptorSet()->formatQuads(uTHIS, glm::u64vec4(uOffset, 0u, 0u, 0u), buildCommand);
-                };
+                if (I.has()) { I->formatQuads(uTHIS, glm::u64vec4(uOffset, 0u, 0u, 0u), buildCommand); };
 
                 // copy as template, use as triangle...
                 auto offsetp = this->offsetTemp;
@@ -493,6 +472,14 @@ namespace jvi {
             return uTHIS;
         };
 
+        // Öбнулись! Nullify Rendering! Made for Minecraft... 
+        virtual uPTR(MeshBinding) resetMeshInputs() {
+            this->fullGeometryCount = 0ull;
+            this->needsUpdate = false;
+            this->ranges.resize(0u);
+            this->inputs.resize(0u);
+            return uTHIS;
+        };
 
         // 
         virtual uPTR(MeshBinding) addMeshInput(const vkt::uni_ptr<MeshInput>& input, const std::vector<int32_t>& materialIDs) {
@@ -758,10 +745,13 @@ namespace jvi {
 
     // Implemented here due undefined type..
     uPTR(MeshInput) MeshInput::buildGeometry(const vkt::uni_ptr<jvi::MeshBinding>& binding, vkt::uni_arg<glm::u64vec4> offsetHelp, vkt::uni_arg<vk::CommandBuffer> buildCommand) { // 
-         bool DirectCommand = false;
+         bool DirectCommand = false, HasCommand = buildCommand.has() && buildCommand && *buildCommand;
+
+         // Initialize Input
+         this->createRasterizePipeline()->createDescriptorSet();
 
          // 
-         if (!buildCommand || ignoreIndirection) {
+         if (!HasCommand || ignoreIndirection) {
              buildCommand = vkt::createCommandBuffer(this->thread->getDevice(), this->thread->getCommandPool()); DirectCommand = true;
          };
 
@@ -778,7 +768,7 @@ namespace jvi {
          };
 
          // 
-         if (buildCommand && this->needUpdate) {
+         if (HasCommand && this->needUpdate) {
              this->needUpdate = false; // 
              std::vector<vk::Buffer> buffers = {}; std::vector<vk::DeviceSize> offsets = {};
              buffers.resize(this->bindings.size()); offsets.resize(this->bindings.size()); uintptr_t I = 0u;

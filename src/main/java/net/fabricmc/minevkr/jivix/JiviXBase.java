@@ -276,7 +276,7 @@ public class JiviXBase extends Pointer {
 
         public native @SharedPtr JiviXCore.MeshInput sharedPtr();
 
-        public native void createDescriptorSet();
+        public native JiviXCore.MeshInput createDescriptorSet();
 
         public native JiviXCore.MeshInput makeQuad();
         public native JiviXCore.MeshInput copyMeta(@Cast("VkCommandBuffer") long commandBuffer);
@@ -298,6 +298,7 @@ public class JiviXBase extends Pointer {
         public native long getIndexCount(); // Return Reference
 
         public native JiviXCore.MeshInput linkBViewSet(@SharedPtr JiviXCore.BufferViewSet bufferViewSet);
+        public native JiviXCore.MeshInput linkBViewSet(@ByRef BufferViewSet bufferViewSet);
     };
 
 
@@ -342,13 +343,20 @@ public class JiviXBase extends Pointer {
         public native JiviXCore.MeshBinding setTransformData(@Cast("vkt::Vector<glm::mat3x4>*") long address);
 
         public native JiviXCore.MeshBinding buildGeometry(@Cast("VkCommandBuffer") long cmdbufAddress, @Cast("glm::uvec4*") long meshData);
+
         public native JiviXCore.MeshBinding addMeshInput(@SharedPtr JiviXCore.MeshInput input, int materialID, long instances);
         public native JiviXCore.MeshBinding addMeshInput(@SharedPtr JiviXCore.MeshInput input, int materialID);
         public native JiviXCore.MeshBinding addMeshInput(@SharedPtr JiviXCore.MeshInput input, @StdVector int materialIDs[]);
 
+        public native JiviXCore.MeshBinding addMeshInput(@ByRef MeshInput input, int materialID, long instances);
+        public native JiviXCore.MeshBinding addMeshInput(@ByRef MeshInput input, int materialID);
+        public native JiviXCore.MeshBinding addMeshInput(@ByRef MeshInput input, @StdVector int materialIDs[]);
+
         public native JiviXCore.MeshBinding addRangeInput(long range, int materialID, long instances);
         public native JiviXCore.MeshBinding addRangeInput(long range, int materialID);
         public native JiviXCore.MeshBinding addRangeInput(long range, @StdVector int materialIDs[]);
+
+        public native JiviXCore.MeshBinding resetMeshInputs();
 
         //public native @ByRef JiviXCore.MeshBinding addMeshInput(@ByRef MeshInput input, @StdVector int materialIDs[]);
     };
@@ -424,6 +432,10 @@ public class JiviXBase extends Pointer {
         //
         public native JiviXCore.Renderer linkMaterial(@SharedPtr JiviXCore.Material material);
         public native JiviXCore.Renderer linkNode(@SharedPtr JiviXCore.Node node);
+
+        //
+        public native JiviXCore.Renderer linkMaterial(@ByRef Material material);
+        public native JiviXCore.Renderer linkNode(@ByRef Node node);
         //public native void createDescriptorSet();
     };
 
