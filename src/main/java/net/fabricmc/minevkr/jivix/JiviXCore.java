@@ -35,7 +35,7 @@ public class JiviXCore extends Pointer {
 
         //private native @SharedPtr ImageAllocation uniPtr();
 
-        public native int getGLBuffer();
+        public native int getGLImage();
         public native int getGLMemory();
     };
 
@@ -56,7 +56,7 @@ public class JiviXCore extends Pointer {
 
         //private native @SharedPtr ImageAllocation uniPtr();
 
-        public native int getGLBuffer();
+        public native int getGLImage();
         public native int getGLMemory();
     };
 
