@@ -39,7 +39,7 @@ public class JiviXBase extends Pointer {
         private native void allocate(@SharedPtr JiviXCore.VmaImageAllocation alloc, @Cast("vkh::VkImageViewCreateInfo*") long info, @Cast("vk::ImageLayout") int layout);
 
         //
-        public native int getGLBuffer();
+        public native int getGLImage();
         public native int getGLMemory();
     };
 
@@ -79,10 +79,11 @@ public class JiviXBase extends Pointer {
         public native BytePointer map();
         public native BytePointer data();
 
-        // Java have NOT support `VkDeviceOrHostAddressKHR` or `VkDeviceOrHostAddressConstKHR`, and become rude var...
+        // Java have NOT support `VkDeviceOrHostAddressKHR` or `VkDeviceOrHostAddressConstKHR`, and become rude var... (DeRMo!)
         public native @Cast("uintptr_t") long deviceAddress();
 
         //
+        public native int getGL();
         public native int getGLBuffer();
         public native int getGLMemory();
     };
@@ -124,8 +125,13 @@ public class JiviXBase extends Pointer {
         public native @Cast("uint8_t*") BytePointer map();
         public native @Cast("uint8_t*") BytePointer data();
 
-        // Java have NOT support `VkDeviceOrHostAddressKHR` or `VkDeviceOrHostAddressConstKHR`, and become rude var...
+        // Java have NOT support `VkDeviceOrHostAddressKHR` or `VkDeviceOrHostAddressConstKHR`, and become rude var... (DeRMo!)
         public native @Cast("uintptr_t") long deviceAddress();
+
+        //
+        public native int getGL();
+        public native int getGLBuffer();
+        public native int getGLMemory();
     };
 
 
