@@ -2,16 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="4b7b64e4-95fe-4605-8caf-f658c6b40341" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/src/main/kotlin/net/fabricmc/minevkr/readme.md" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/native/bin/jniJiviXCore.exp" beforeDir="false" afterPath="$PROJECT_DIR$/native/bin/jniJiviXCore.exp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/native/include/JiviX/JVI/bview-set.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/native/include/JiviX/JVI/bview-set.hpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/native/include/JiviX/JVI/context.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/native/include/JiviX/JVI/context.hpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/native/include/JiviX/JVI/material.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/native/include/JiviX/JVI/material.hpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/native/include/JiviX/JVI/mesh-binding.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/native/include/JiviX/JVI/mesh-binding.hpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/native/include/JiviX/JVI/node.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/native/include/JiviX/JVI/node.hpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/native/include/JiviX/JVI/renderer.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/native/include/JiviX/JVI/renderer.hpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/native/include/JiviX/node.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/native/include/JiviX/node.hpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/net/fabricmc/minevkr/MineVKR.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/fabricmc/minevkr/MineVKR.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/build.gradle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/fabric.mod.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/fabric.mod.json" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -45,7 +39,7 @@
                 <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
                 <item name="MineRTX" type="f1a62948:ProjectNode" />
                 <item name="Tasks" type="e4a08cd1:TasksNode" />
-                <item name="build" type="c8890929:TasksNode$1" />
+                <item name="build setup" type="c8890929:TasksNode$1" />
               </path>
               <path>
                 <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
@@ -85,7 +79,7 @@
     <property name="project.structure.last.edited" value="Project" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
-    <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
+    <property name="settings.editor.selected.configurable" value="preferences.language.Kotlin" />
     <property name="show.unlinked.gradle.project.popup" value="true" />
   </component>
   <component name="RunManager" selected="Application.Minecraft Client">
@@ -108,6 +102,30 @@
       <GradleScriptDebugEnabled>true</GradleScriptDebugEnabled>
       <method v="2" />
     </configuration>
+    <configuration name="MineRTX [init]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+      <ExternalSystemSettings>
+        <option name="executionName" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list>
+            <option value="init" />
+          </list>
+        </option>
+        <option name="vmOptions" />
+      </ExternalSystemSettings>
+      <GradleScriptDebugEnabled>true</GradleScriptDebugEnabled>
+      <method v="2" />
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Gradle.MineRTX [init]" />
+      </list>
+    </recent_temporary>
   </component>
   <component name="SvnConfiguration">
     <configuration />
@@ -142,30 +160,30 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="634" y="231" key="FileChooserDialogImpl/0.0.1920.1040@0.0.1920.1040" timestamp="1587960634350" />
-    <state width="1878" height="284" key="GridCell.Tab.0.bottom" timestamp="1588610954339">
+    <state width="1878" height="284" key="GridCell.Tab.0.bottom" timestamp="1588829054515">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1878" height="284" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1588610954339" />
-    <state width="1878" height="284" key="GridCell.Tab.0.center" timestamp="1588610954339">
+    <state width="1878" height="284" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1588829054515" />
+    <state width="1878" height="284" key="GridCell.Tab.0.center" timestamp="1588829054515">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1878" height="284" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1588610954339" />
-    <state width="1878" height="284" key="GridCell.Tab.0.left" timestamp="1588610954339">
+    <state width="1878" height="284" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1588829054515" />
+    <state width="1878" height="284" key="GridCell.Tab.0.left" timestamp="1588829054515">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1878" height="284" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1588610954339" />
-    <state width="1878" height="284" key="GridCell.Tab.0.right" timestamp="1588610954339">
+    <state width="1878" height="284" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1588829054515" />
+    <state width="1878" height="284" key="GridCell.Tab.0.right" timestamp="1588829054515">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1878" height="284" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1588610954339" />
+    <state width="1878" height="284" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1588829054515" />
     <state x="541" y="263" key="IDE.errors.dialog" timestamp="1588591926832">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="541" y="263" key="IDE.errors.dialog/0.0.1920.1040@0.0.1920.1040" timestamp="1588591926832" />
-    <state x="441" y="95" key="SettingsEditor" timestamp="1588592022038">
+    <state x="441" y="95" key="SettingsEditor" timestamp="1588828318437">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="441" y="95" key="SettingsEditor/0.0.1920.1040@0.0.1920.1040" timestamp="1588592022038" />
+    <state x="441" y="95" key="SettingsEditor/0.0.1920.1040@0.0.1920.1040" timestamp="1588828318437" />
     <state width="1829" height="1038" key="com.intellij.byteCodeViewer.ShowByteCodeAction" timestamp="1588587232359">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>

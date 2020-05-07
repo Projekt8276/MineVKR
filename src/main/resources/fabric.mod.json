@@ -18,14 +18,17 @@
 
   "environment": "*",
   "entrypoints": {
-    "main": [
-      "net.fabricmc.minevkr.MineVKR"
-    ]
+    "main": [{
+        "adapter": "java",
+        "value": "net.fabricmc.minevkr.MineVKR"
+    }]
   },
   "mixins": [
     "modid.mixins.json"
   ],
-
+  "requires": {
+    "fabric-language-kotlin": ">=1.3.71"
+  },
   "depends": {
     "fabricloader": ">=0.7.4",
     "fabric": "*",
