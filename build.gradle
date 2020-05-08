@@ -44,12 +44,13 @@ dependencies {
     //For javax.annotation.Nullable
     implementation 'com.google.code.findbugs:jsr305:3.0.2'
 
-    //Connect With C++ and Pukan API
+    //Connect With C++ and Pukan API (3.2.2)
     //implementation "org.lwjgl:lwjgl-vulkan:3.2.2"
     //implementation "org.lwjgl:lwjgl-vma:3.2.2"
 
-    //
+    // JavaCPP for connect our framework... (JiviX)
     compile "org.bytedeco:javacpp:1.5.3"
+    compile fileTree(include: ['*.jar'], dir: 'lib')
 
     // Fabric API. This is technically optional, but you probably want it anyway.
     modImplementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_version}"
@@ -58,8 +59,14 @@ dependencies {
     // Try latest version...
 	implementation platform("org.lwjgl:lwjgl-bom:3.2.4-SNAPSHOT")
 	implementation "org.lwjgl:lwjgl"
+	implementation "org.lwjgl:lwjgl-vma"
 	implementation "org.lwjgl:lwjgl-vulkan"
 	runtimeOnly "org.lwjgl:lwjgl::natives-windows"
+	runtimeOnly "org.lwjgl:lwjgl-vma::natives-windows"
+    
+    // ONLY when override OpenGL!
+    //implementation "org.lwjgl:lwjgl-opengl"
+    //runtimeOnly "org.lwjgl:lwjgl-opengl::natives-windows"
 }
 
 processResources {
