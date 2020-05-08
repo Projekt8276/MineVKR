@@ -1,7 +1,7 @@
 plugins {
-	id 'fabric-loom' version '0.2.7-SNAPSHOT'
-	id 'org.jetbrains.kotlin.jvm' version '1.3.72'
-	id 'maven-publish'
+    id 'fabric-loom'
+    id 'maven-publish'
+    id "org.jetbrains.kotlin.jvm"
 }
 
 sourceCompatibility = JavaVersion.VERSION_1_8
@@ -11,137 +11,134 @@ archivesBaseName = project.archives_base_name
 version = project.mod_version
 group = project.maven_group
 
+
 minecraft {
 }
 
 repositories {
-	//optifabric
-	maven { url 'https://jitpack.io' }
-	mavenCentral()
+    //optifabric
+    maven { url = "http://maven.fabricmc.net/" }
+    mavenCentral()
 }
 
 dependencies {
-//	modCompile 'com.github.modmuss50:OptiFabric:1.0.0-beta4'
+    //Deps required for optifabric
+    compile 'org.zeroturnaround:zt-zip:1.13'
+    compile('net.fabricmc:stitch:0.2.1.61') {
+        transitive = false
+    }
 
-	//Deps required for optifabric
-	compile 'org.zeroturnaround:zt-zip:1.13'
-	compile('net.fabricmc:stitch:0.2.1.61') {
-		transitive = false
-	}
+    //to change the versions see the gradle.properties file
+    minecraft "com.mojang:minecraft:${project.minecraft_version}"
+    mappings "net.fabricmc:yarn:${project.yarn_mappings}:v2"
+    modCompile "net.fabricmc:fabric-loader:${project.loader_version}"
+    modCompile "net.fabricmc.fabric-api:fabric-api:${project.fabric_version}"
 
-	//to change the versions see the gradle.properties file
-	minecraft "com.mojang:minecraft:${project.minecraft_version}"
-	mappings "net.fabricmc:yarn:${project.yarn_mappings}:v2"
-	modCompile "net.fabricmc:fabric-loader:${project.loader_version}"
+    //used for building mod
+    compileOnly files('ofpre10.jar')
 
-	// Fabric API. This is technically optional, but you probably want it anyway.
-	modCompile "net.fabricmc.fabric-api:fabric-api:${project.fabric_version}"
+    // 
+    modCompileOnly "me.shedaniel.cloth:config-2:3.3.2-unstable"
+    modCompileOnly "io.github.prospector:modmenu:1.11.1+build.3"
 
-	// PSA: Some older mods, compiled on Loom 0.2.1, might have outdated Maven POMs.
-	// You may need to force-disable transitiveness on them.
-
-	//modImplementation "io.github.Ladysnake:Requiem:1.1.4"
-	//modImplementation "io.github.Ladysnake:Requiem:1.1.4:api"
-
-	//used for building mod
-	compileOnly files('ofpre10.jar')
-
-	modCompileOnly "me.shedaniel.cloth:config-2:3.3.2-unstable"
-	modCompileOnly "io.github.prospector:modmenu:1.11.1+build.3"
-
-	//include "me.shedaniel.cloth:config-2:3.0.1"
-	//include "io.github.prospector:modmenu:1.10.2+build.1"
-
-	//For javax.annotation.Nullable
-	implementation 'com.google.code.findbugs:jsr305:3.0.2'
+    //For javax.annotation.Nullable
+    implementation 'com.google.code.findbugs:jsr305:3.0.2'
 
     //Connect With C++ and Pukan API
-    implementation "org.lwjgl:lwjgl-vulkan:3.2.2"
-    implementation "org.lwjgl:lwjgl-vma:3.2.2"
-	implementation "net.fabricmc:fabric-language-kotlin:1.3.72-SNAPSHOT"
+    //implementation "org.lwjgl:lwjgl-vulkan:3.2.2"
+    //implementation "org.lwjgl:lwjgl-vma:3.2.2"
 
-	//
-	compile "org.bytedeco:javacpp:1.5.3"
-	implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8"
-	implementation "org.jetbrains.kotlin:kotlin-script-runtime:1.3.72"
-	//compile "net.fabricmc:dev-launch-injector:0.2.0"
+    //
+    compile "org.bytedeco:javacpp:1.5.3"
+
+    // Fabric API. This is technically optional, but you probably want it anyway.
+    modImplementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_version}"
+    modImplementation "net.fabricmc:fabric-language-kotlin:${project.fabric_kotlin_version}"
+    
+    // Try latest version...
+	implementation platform("org.lwjgl:lwjgl-bom:3.2.4-SNAPSHOT")
+	implementation "org.lwjgl:lwjgl"
+	implementation "org.lwjgl:lwjgl-vulkan"
+	runtimeOnly "org.lwjgl:lwjgl::natives-windows"
 }
 
 processResources {
-	inputs.property "version", project.version
+    inputs.property "version", project.version
 
-	from(sourceSets.main.resources.srcDirs) {
-		include "fabric.mod.json"
-		expand "version": project.version
-	}
+    from(sourceSets.main.resources.srcDirs) {
+        include "fabric.mod.json"
+        expand "version": project.version
+    }
 
-	from(sourceSets.main.resources.srcDirs) {
-		exclude "fabric.mod.json"
-	}
+    from(sourceSets.main.resources.srcDirs) {
+        exclude "fabric.mod.json"
+    }
 }
 
 // ensure that the encoding is set to UTF-8, no matter what the system default is
 // this fixes some edge cases with special characters not displaying correctly
 // see http://yodaconditions.net/blog/fix-for-java-file-encoding-problems-with-gradle.html
 tasks.withType(JavaCompile) {
-	options.encoding = "UTF-8"
+    options.encoding = "UTF-8"
 }
 
 // Loom will automatically attach sourcesJar to a RemapSourcesJar task and to the "build" task
 // if it is present.
 // If you remove this task, sources will not be generated.
 task sourcesJar(type: Jar, dependsOn: classes) {
-	classifier = "sources"
-	from sourceSets.main.allSource
+    classifier = "sources"
+    from sourceSets.main.allSource
 }
 
 jar {
-	from "LICENSE"
+    from "LICENSE"
 }
 
 // configure the maven publication
 publishing {
-	publications {
-		mavenJava(MavenPublication) {
-			// add all the jars that should be included when publishing to maven
-			artifact(jar) {
-				builtBy remapJar
-			}
-			artifact(sourcesJar) {
-				builtBy remapSourcesJar
-			}
-		}
-	}
+    publications {
+        mavenJava(MavenPublication) {
+            // add all the jars that should be included when publishing to maven
+            artifact(jar) {
+                builtBy remapJar
+            }
+            artifact(sourcesJar) {
+                builtBy remapSourcesJar
+            }
+        }
+    }
 
-	// select the repositories you want to publish to
-	repositories {
-		// uncomment to publish to the local maven
-		// mavenLocal()
-	}
+    // select the repositories you want to publish to
+    repositories {
+        // uncomment to publish to the local maven
+        // mavenLocal()
+    }
 }
 
 repositories {
-	flatDir {
-		dirs 'deps'
-	}
+    flatDir {
+        dirs 'deps'
+    }
 
-	//for requiem
-	jcenter()
-	maven {
-		name = 'JitPack'
-		url = 'https://jitpack.io'
-	}
-	maven {
-		url = 'https://maven.fabricmc.net'
-	}
+    //for requiem
+    jcenter()
+    maven {
+        name = 'JitPack'
+        url = 'https://jitpack.io'
+    }
+    maven {
+        url = 'https://maven.fabricmc.net'
+    }
 }
+
 compileKotlin {
-	kotlinOptions {
-		jvmTarget = "1.8"
-	}
+    kotlinOptions {
+        jvmTarget = "1.8"
+    }
 }
+
 compileTestKotlin {
-	kotlinOptions {
-		jvmTarget = "1.8"
-	}
+    kotlinOptions {
+        jvmTarget = "1.8"
+    }
 }
