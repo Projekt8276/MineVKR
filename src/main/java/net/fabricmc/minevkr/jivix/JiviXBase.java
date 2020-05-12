@@ -9,7 +9,7 @@ import org.bytedeco.javacpp.annotation.*;
 
 @Platform(include={
         "./include/GLFW/glfw3.h",
-        "./include/vkt2/fw.hpp",
+        "./include/vkt3/fw.hpp",
         "./include/JiviX/JiviX.hpp",
         "./jniJiviXCore.h"
 }, link={"vulkan-1","glfw","glbinding","glbinding-aux"}, define={"ENABLE_OPENGL_INTEROP","WIN32","OS_WIN","VK_ENABLE_BETA_EXTENSIONS","VK_USE_PLATFORM_WIN32_KHR","VMA_IMPLEMENTATION","SHARED_PTR_NAMESPACE std", "UNIQUE_PTR_NAMESPACE std"})
@@ -31,12 +31,12 @@ public class JiviXBase extends Pointer {
         private native void allocate(ImageRegion b);
 
         //
-        public ImageRegion(@SharedPtr JiviXCore.ImageAllocation alloc, @Cast("vkh::VkImageViewCreateInfo*") long info, @Cast("vk::ImageLayout") int layout) { allocate(alloc, info, layout);  }
-        private native void allocate(@SharedPtr JiviXCore.ImageAllocation alloc, @Cast("vkh::VkImageViewCreateInfo*") long info, @Cast("vk::ImageLayout") int layout);
+        public ImageRegion(@SharedPtr JiviXCore.ImageAllocation alloc, @Cast("vkh::VkImageViewCreateInfo*") long info, @Cast("VkImageLayout") int layout) { allocate(alloc, info, layout);  }
+        private native void allocate(@SharedPtr JiviXCore.ImageAllocation alloc, @Cast("vkh::VkImageViewCreateInfo*") long info, @Cast("VkImageLayout") int layout);
 
         //
-        public ImageRegion(@SharedPtr JiviXCore.VmaImageAllocation alloc, @Cast("vkh::VkImageViewCreateInfo*") long info, @Cast("vk::ImageLayout") int layout) { allocate(alloc, info, layout);  }
-        private native void allocate(@SharedPtr JiviXCore.VmaImageAllocation alloc, @Cast("vkh::VkImageViewCreateInfo*") long info, @Cast("vk::ImageLayout") int layout);
+        public ImageRegion(@SharedPtr JiviXCore.VmaImageAllocation alloc, @Cast("vkh::VkImageViewCreateInfo*") long info, @Cast("VkImageLayout") int layout) { allocate(alloc, info, layout);  }
+        private native void allocate(@SharedPtr JiviXCore.VmaImageAllocation alloc, @Cast("vkh::VkImageViewCreateInfo*") long info, @Cast("VkImageLayout") int layout);
 
         //
         public native int getGLImage();
@@ -177,12 +177,12 @@ public class JiviXBase extends Pointer {
         public Thread(@SharedPtr JiviXCore.Thread object) { allocate(object); }
         private native void allocate(@SharedPtr JiviXCore.Thread object);
 
-        //public native void createDescriptorSet();
+        // public native void createDescriptorSet();
         public native @SharedPtr JiviXCore.Thread sharedPtr();
 
-        //
-        public native void submitCmd(@Cast("VkCommandBuffer") long commandBuf, @Cast("vk::SubmitInfo*") long submitInfoAddress);
-        public native void submitCmdAsync(@Cast("VkCommandBuffer") long commandBuf, @Cast("vk::SubmitInfo*") long submitInfoAddress);
+        // conflict with vector-based!
+        public native void submitCmd(@Cast("VkCommandBuffer") long commandBuf, @Cast("vkh::VkSubmitInfo*") long submitInfoAddress);
+        public native void submitCmdAsync(@Cast("VkCommandBuffer") long commandBuf, @Cast("vkh::VkSubmitInfo*") long submitInfoAddress);
     };
 
 
@@ -219,10 +219,10 @@ public class JiviXBase extends Pointer {
         // Get Address of Reference... (but needs wrapped as Pointer?)
         public native @Name("getMemoryProperties")  @ByRef @Cast("int8_t*") BytePointer _getMemoryProperties();
         public native @Name("getAllocator")         @ByRef @Cast("int8_t*") BytePointer _getAllocator();
-        public native @Name("getDispatch")          @ByRef @Cast("int8_t*") BytePointer _getDispatch();
+        //public native @Name("getDispatch")          @ByRef @Cast("int8_t*") BytePointer _getDispatch();
 
         // Get Address from allocator or properties
-        public long getDispatch()         { return this._getDispatch().address(); };
+        //public long getDispatch()         { return this._getDispatch().address(); };
         public long getAllocator()        { return this._getAllocator().address(); };
         public long getMemoryProperties() { return this._getMemoryProperties().address(); };
 
@@ -286,19 +286,19 @@ public class JiviXBase extends Pointer {
 
         public native JiviXCore.MeshInput makeQuad();
         public native JiviXCore.MeshInput copyMeta(@Cast("VkCommandBuffer") long commandBuffer);
-        public native JiviXCore.MeshInput manifestIndex(@Cast("vk::IndexType") int indexType);
+        public native JiviXCore.MeshInput manifestIndex(@Cast("VkIndexType") int indexType);
 
         // Use Address from LWJGL-3 structures
         public native JiviXCore.MeshInput addBinding(int bufferID, @Cast("vkh::VkVertexInputBindingDescription*") long bindingAddress);
         public native JiviXCore.MeshInput addAttribute(@Cast("vkh::VkVertexInputAttributeDescription*") long attributeAddress);
 
-        public native JiviXCore.MeshInput setIndexData(int bufferID, @Cast("vk::IndexType") int indexType);
-        public native JiviXCore.MeshInput setIndexOffset(@Cast("vk::DeviceSize") long offset);
-        public native JiviXCore.MeshInput setIndexCount(@Cast("vk::DeviceSize") long count);
-        public native JiviXCore.MeshInput setPrimitiveCount(@Cast("vk::DeviceSize") long count);
+        public native JiviXCore.MeshInput setIndexData(int bufferID, @Cast("VkIndexType") int indexType);
+        public native JiviXCore.MeshInput setIndexOffset(@Cast("VkDeviceSize") long offset);
+        public native JiviXCore.MeshInput setIndexCount(@Cast("VkDeviceSize") long count);
+        public native JiviXCore.MeshInput setPrimitiveCount(@Cast("VkDeviceSize") long count);
 
         // Reference Based
-        // public native @Cast("vk::DeviceSize&") @ByRef LongPointer getIndexCount(); // Return Reference
+        // public native @Cast("VkDeviceSize&") @ByRef LongPointer getIndexCount(); // Return Reference
 
         // Value Based
         public native long getIndexCount(); // Return Reference
@@ -343,8 +343,8 @@ public class JiviXBase extends Pointer {
         public native int getBindingBufferGL(long i);
         public native int getIndexBufferGL();
 
-        public native JiviXCore.MeshBinding setIndexCount(@Cast("vk::DeviceSize") long count);
-        public native JiviXCore.MeshBinding setPrimitiveCount(@Cast("vk::DeviceSize") long count);
+        public native JiviXCore.MeshBinding setIndexCount(@Cast("VkDeviceSize") long count);
+        public native JiviXCore.MeshBinding setPrimitiveCount(@Cast("VkDeviceSize") long count);
         public native JiviXCore.MeshBinding setTransformData(@Cast("vkt::Vector<glm::mat3x4>*") long address, int stride);
         public native JiviXCore.MeshBinding setTransformData(@Cast("vkt::Vector<glm::mat3x4>*") long address);
 

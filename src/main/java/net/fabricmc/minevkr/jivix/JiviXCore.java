@@ -12,7 +12,7 @@ import org.bytedeco.javacpp.annotation.*;
 
 @Platform(include={
         "./include/GLFW/glfw3.h",
-        "./include/vkt2/fw.hpp",
+        "./include/vkt3/fw.hpp",
         "./include/JiviX/JiviX.hpp",
 }, link={"vulkan-1","glfw","glbinding","glbinding-aux"}, define={"ENABLE_OPENGL_INTEROP","WIN32","OS_WIN","VK_ENABLE_BETA_EXTENSIONS","VK_USE_PLATFORM_WIN32_KHR","VMA_IMPLEMENTATION","SHARED_PTR_NAMESPACE std", "UNIQUE_PTR_NAMESPACE std"})
 @Name("") //
@@ -51,8 +51,8 @@ public class JiviXCore extends Pointer {
         public VmaImageAllocation(@SharedPtr ImageAllocation alloc) { allocate(alloc); };
         private native void allocate(@SharedPtr ImageAllocation alloc);
 
-        public VmaImageAllocation(@Cast("VmaAllocator*") long vmaAllocator, @Cast("vkh::VkImageCreateInfo*") long createInfo, @Cast("VmaMemoryUsage") int vmaUsage) { allocate(vmaAllocator, createInfo, vmaUsage); };
-        private native void allocate(@Cast("VmaAllocator*") long vmaAllocator, @Cast("vkh::VkImageCreateInfo*") long createInfo, @Cast("VmaMemoryUsage") int vmaUsage);
+        public VmaImageAllocation(@Cast("VmaAllocator*") long vmaAllocator, @Cast("vkh::VkImageCreateInfo*") long createInfo, @Cast("vkt::VmaMemoryInfo*") long memInfoPtr) { allocate(vmaAllocator, createInfo, memInfoPtr); };
+        private native void allocate(@Cast("VmaAllocator*") long vmaAllocator, @Cast("vkh::VkImageCreateInfo*") long createInfo, @Cast("vkt::VmaMemoryInfo*") long memInfoPtr);
 
         //private native @SharedPtr ImageAllocation uniPtr();
 
@@ -90,8 +90,8 @@ public class JiviXCore extends Pointer {
         public VmaBufferAllocation(@SharedPtr BufferAllocation alloc) { allocate(alloc); };
         private native void allocate(@SharedPtr BufferAllocation alloc);
 
-        public VmaBufferAllocation(@Cast("VmaAllocator*") long vmaAllocator, @Cast("vkh::VkBufferCreateInfo*") long createInfo, @Cast("VmaMemoryUsage") int vmaUsage) { allocate(vmaAllocator, createInfo, vmaUsage); };
-        private native void allocate(@Cast("VmaAllocator*") long vmaAllocator, @Cast("vkh::VkBufferCreateInfo*") long createInfo, @Cast("VmaMemoryUsage") int vmaUsage);
+        public VmaBufferAllocation(@Cast("VmaAllocator*") long vmaAllocator, @Cast("vkh::VkBufferCreateInfo*") long createInfo, @Cast("vkt::VmaMemoryInfo*") long memInfoPtr) { allocate(vmaAllocator, createInfo, memInfoPtr); };
+        private native void allocate(@Cast("VmaAllocator*") long vmaAllocator, @Cast("vkh::VkBufferCreateInfo*") long createInfo, @Cast("vkt::VmaMemoryInfo*") long memInfoPtr);
 
         //private native @SharedPtr BufferAllocation uniPtr();
     };

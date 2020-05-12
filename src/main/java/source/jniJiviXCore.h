@@ -2,7 +2,7 @@
 
 #include <jni.h>
 #include "./include/GLFW/glfw3.h"
-#include "./include/vkt2/fw.hpp"
+#include "./include/vkt3/fw.hpp"
 #include "./include/JiviX/JiviX.hpp"
 
 #ifdef __cplusplus

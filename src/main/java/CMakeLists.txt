@@ -35,7 +35,7 @@ set (SOURCES_LIST
     "./include/vulkan/*"
     "./include/vma/*"
     "./include/vkh/*"
-    "./include/vkt2/*"
+    "./include/vkt3/*"
     "./include/vkt/*"
     "./include/volk/*"
     "./include/spirv/*"

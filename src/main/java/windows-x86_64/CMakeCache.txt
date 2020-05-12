@@ -74,7 +74,7 @@ CMAKE_EXE_LINKER_FLAGS_RELWITHDEBINFO:STRING=/debug /INCREMENTAL
 CMAKE_INSTALL_PREFIX:PATH=C:/Program Files (x86)/JiviX
 
 //Path to a program.
-CMAKE_LINKER:FILEPATH=H:/Program Files (x86)/Microsoft Visual Studio/2019/Preview/VC/Tools/MSVC/14.26.28801/bin/Hostx64/x64/link.exe
+CMAKE_LINKER:FILEPATH=H:/Program Files/Microsoft Visual Studio/2019/Community/VC/Tools/MSVC/14.26.28801/bin/Hostx64/x64/link.exe
 
 //Flags used by the linker during the creation of modules during
 // all build types.
@@ -302,7 +302,7 @@ CMAKE_EXTRA_GENERATOR:INTERNAL=
 //Name of generator.
 CMAKE_GENERATOR:INTERNAL=Visual Studio 16 2019
 //Generator instance identifier.
-CMAKE_GENERATOR_INSTANCE:INTERNAL=H:/Program Files (x86)/Microsoft Visual Studio/2019/Preview
+CMAKE_GENERATOR_INSTANCE:INTERNAL=H:/Program Files/Microsoft Visual Studio/2019/Community
 //Name of generator platform.
 CMAKE_GENERATOR_PLATFORM:INTERNAL=
 //Name of generator toolset.
