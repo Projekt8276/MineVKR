@@ -65,9 +65,9 @@ dependencies {
     // Fabric API. This is technically optional, but you probably want it anyway.
     modImplementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_version}"
     modImplementation "net.fabricmc:fabric-language-kotlin:${project.fabric_kotlin_version}"
-    
+
     // Try latest version...
-	//implementation platform("org.lwjgl:lwjgl-bom:${project.lwjgl3_version}") // Not Available For 3.2.2
+	implementation platform("org.lwjgl:lwjgl-bom:${project.lwjgl3_version}") // Not Available For 3.2.2
 	implementation "org.lwjgl:lwjgl:${project.lwjgl3_version}"
     implementation "org.lwjgl:lwjgl-stb:${project.lwjgl3_version}"
 	implementation "org.lwjgl:lwjgl-vma:${project.lwjgl3_version}"
@@ -77,6 +77,10 @@ dependencies {
     implementation "org.lwjgl:lwjgl-glfw:${project.lwjgl3_version}"
 	runtimeOnly "org.lwjgl:lwjgl:${project.lwjgl3_version}:natives-windows"
 	runtimeOnly "org.lwjgl:lwjgl-vma:${project.lwjgl3_version}:natives-windows"
+    runtimeOnly "org.lwjgl:lwjgl-stb:${project.lwjgl3_version}:natives-windows"
+    runtimeOnly "org.lwjgl:lwjgl-glfw:${project.lwjgl3_version}:natives-windows"
+    runtimeOnly "org.lwjgl:lwjgl-opengl:${project.lwjgl3_version}:natives-windows"
+    runtimeOnly "org.lwjgl:lwjgl-openal:${project.lwjgl3_version}:natives-windows"
 
     // ONLY when override OpenGL!
     //implementation "org.lwjgl:lwjgl-opengl"

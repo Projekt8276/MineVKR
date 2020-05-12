@@ -2,10 +2,50 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="4b7b64e4-95fe-4605-8caf-f658c6b40341" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/runConfigurations/Minecraft_Server.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/runConfigurations/Minecraft_Server.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/build.gradle" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/gradle.properties" beforeDir="false" afterPath="$PROJECT_DIR$/gradle.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gradle/wrapper/gradle-wrapper.properties" beforeDir="false" afterPath="$PROJECT_DIR$/gradle/wrapper/gradle-wrapper.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/jar/lwjgl-glfw-javadoc.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/jar/lwjgl-glfw-natives-linux.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/jar/lwjgl-glfw-natives-macos.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/jar/lwjgl-glfw-natives-windows.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/jar/lwjgl-glfw-sources.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/jar/lwjgl-glfw.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/jar/lwjgl-javadoc.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/jar/lwjgl-natives-linux.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/jar/lwjgl-natives-macos.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/jar/lwjgl-natives-windows.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/jar/lwjgl-sources.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/jar/lwjgl-vma-javadoc.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/jar/lwjgl-vma-natives-linux.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/jar/lwjgl-vma-natives-macos.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/jar/lwjgl-vma-natives-windows.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/jar/lwjgl-vma-sources.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/jar/lwjgl-vma.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/jar/lwjgl-vulkan-javadoc.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/jar/lwjgl-vulkan-natives-macos.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/jar/lwjgl-vulkan-sources.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/jar/lwjgl-vulkan.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/jar/lwjgl.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/native/bin/lwjgl.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/native/bin/lwjgl.dll.git" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/native/bin/lwjgl.dll.sha1" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/native/bin/lwjgl32.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/native/bin/lwjgl32.dll.git" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/native/bin/lwjgl32.dll.sha1" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/native/bin/lwjgl_opengl.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/native/bin/lwjgl_opengl.dll.sha1" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/native/bin/lwjgl_opengl32.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/native/bin/lwjgl_opengl32.dll.sha1" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/native/bin/lwjgl_stb.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/native/bin/lwjgl_stb.dll.sha1" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/native/bin/lwjgl_stb32.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/native/bin/lwjgl_stb32.dll.sha1" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/native/bin/lwjgl_vma.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/native/bin/lwjgl_vma.dll.sha1" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/native/bin/lwjgl_vma32.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/native/bin/lwjgl_vma32.dll.sha1" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -159,6 +199,14 @@
       <GradleScriptDebugEnabled>true</GradleScriptDebugEnabled>
       <method v="2" />
     </configuration>
+    <list>
+      <item itemvalue="Application.Minecraft Client" />
+      <item itemvalue="Application.Minecraft Server" />
+      <item itemvalue="Gradle.MineRTX [build]" />
+      <item itemvalue="Gradle.MineRTX [init]" />
+      <item itemvalue="Gradle.MineVKR [buildDependents]" />
+      <item itemvalue="Gradle.MineVKR [wrapper]" />
+    </list>
     <recent_temporary>
       <list>
         <item itemvalue="Gradle.MineVKR [buildDependents]" />
@@ -188,10 +236,10 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="657" y="140" key="#Minecraft_Client/0.0.1920.1040@0.0.1920.1040" timestamp="1589310385471" />
-    <state x="416" y="175" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1588517083984">
+    <state x="416" y="175" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1589314530839">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="416" y="175" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1588517083984" />
+    <state x="416" y="175" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1589314530839" />
     <state x="678" y="338" key="#com.intellij.refactoring.move.moveMembers.MoveMembersDialog" timestamp="1588562522005">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
@@ -200,22 +248,22 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="634" y="231" key="FileChooserDialogImpl/0.0.1920.1040@0.0.1920.1040" timestamp="1587960634350" />
-    <state width="1878" height="284" key="GridCell.Tab.0.bottom" timestamp="1589312416729">
+    <state width="1878" height="284" key="GridCell.Tab.0.bottom" timestamp="1589315630343">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1878" height="284" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1589312416729" />
-    <state width="1878" height="284" key="GridCell.Tab.0.center" timestamp="1589312416729">
+    <state width="1878" height="284" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1589315630343" />
+    <state width="1878" height="284" key="GridCell.Tab.0.center" timestamp="1589315630343">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1878" height="284" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1589312416729" />
-    <state width="1878" height="284" key="GridCell.Tab.0.left" timestamp="1589312416729">
+    <state width="1878" height="284" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1589315630343" />
+    <state width="1878" height="284" key="GridCell.Tab.0.left" timestamp="1589315630343">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1878" height="284" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1589312416729" />
-    <state width="1878" height="284" key="GridCell.Tab.0.right" timestamp="1589312416729">
+    <state width="1878" height="284" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1589315630343" />
+    <state width="1878" height="284" key="GridCell.Tab.0.right" timestamp="1589315630343">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1878" height="284" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1589312416729" />
+    <state width="1878" height="284" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1589315630343" />
     <state x="541" y="263" key="IDE.errors.dialog" timestamp="1588591926832">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
