@@ -132,7 +132,34 @@ Cargo.lock
 # TOO BIG!
 *.pdb
 *.VC.db
-*.db 
+*.db
+*.VC
+*/*.pdb
+*/*.VC.db
+*/*.db
+*/*.VC
+
+#
+.vs/*
+*/.vs/*
+.vs/
+*/.vs/
+/.vs
+*/.vs
+/.vs/*
+/.vs/
+.vs
+
+#
+vs/*
+*/vs/*
+vs/
+*/vs/
+/vs
+*/vs
+/vs/*
+/vs/
+vs
 
 # 
 ipch/*
