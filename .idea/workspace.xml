@@ -1,7 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="4b7b64e4-95fe-4605-8caf-f658c6b40341" name="Default Changelist" comment="" />
+    <list default="true" id="4b7b64e4-95fe-4605-8caf-f658c6b40341" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/build.gradle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gradle.properties" beforeDir="false" afterPath="$PROJECT_DIR$/gradle.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gradle/wrapper/gradle-wrapper.properties" beforeDir="false" afterPath="$PROJECT_DIR$/gradle/wrapper/gradle-wrapper.properties" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -35,6 +40,11 @@
                 <item name="MineVKR" type="f1a62948:ProjectNode" />
                 <item name="Tasks" type="e4a08cd1:TasksNode" />
                 <item name="build" type="c8890929:TasksNode$1" />
+              </path>
+              <path>
+                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
+                <item name="MineVKR" type="f1a62948:ProjectNode" />
+                <item name="Dependencies" type="6de06a37:ExternalSystemViewDefaultContributor$MyDependenciesNode" />
               </path>
             </expand>
             <select />
@@ -190,22 +200,22 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="634" y="231" key="FileChooserDialogImpl/0.0.1920.1040@0.0.1920.1040" timestamp="1587960634350" />
-    <state width="1878" height="358" key="GridCell.Tab.0.bottom" timestamp="1589311913856">
+    <state width="1878" height="284" key="GridCell.Tab.0.bottom" timestamp="1589312416729">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1878" height="358" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1589311913856" />
-    <state width="1878" height="358" key="GridCell.Tab.0.center" timestamp="1589311913856">
+    <state width="1878" height="284" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1589312416729" />
+    <state width="1878" height="284" key="GridCell.Tab.0.center" timestamp="1589312416729">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1878" height="358" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1589311913856" />
-    <state width="1878" height="358" key="GridCell.Tab.0.left" timestamp="1589311913856">
+    <state width="1878" height="284" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1589312416729" />
+    <state width="1878" height="284" key="GridCell.Tab.0.left" timestamp="1589312416729">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1878" height="358" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1589311913856" />
-    <state width="1878" height="358" key="GridCell.Tab.0.right" timestamp="1589311913856">
+    <state width="1878" height="284" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1589312416729" />
+    <state width="1878" height="284" key="GridCell.Tab.0.right" timestamp="1589312416729">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1878" height="358" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1589311913856" />
+    <state width="1878" height="284" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1589312416729" />
     <state x="541" y="263" key="IDE.errors.dialog" timestamp="1588591926832">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
