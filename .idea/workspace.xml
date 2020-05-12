@@ -1,29 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="4b7b64e4-95fe-4605-8caf-f658c6b40341" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/native/bin/OpenAL32.dll" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/native/bin/OpenAL32.dll.git" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/native/bin/OpenAL32.dll.sha1" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/native/bin/lwjgl_opengl32.dll" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/native/bin/lwjgl_opengl32.dll.sha1" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/native/bin/lwjgl_stb32.dll" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/native/bin/lwjgl_stb32.dll.sha1" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/build.gradle" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gradle.properties" beforeDir="false" afterPath="$PROJECT_DIR$/gradle.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/native/bin/OpenAL.dll" beforeDir="false" afterPath="$PROJECT_DIR$/native/bin/OpenAL.dll" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/native/bin/OpenAL.dll.sha1" beforeDir="false" afterPath="$PROJECT_DIR$/native/bin/OpenAL.dll.sha1" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/native/bin/glfw.dll" beforeDir="false" afterPath="$PROJECT_DIR$/native/bin/glfw.dll" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/native/bin/glfw.dll.git" beforeDir="false" afterPath="$PROJECT_DIR$/native/bin/glfw.dll.git" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/native/bin/glfw.dll.sha1" beforeDir="false" afterPath="$PROJECT_DIR$/native/bin/glfw.dll.sha1" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/native/bin/lwjgl_opengl.dll" beforeDir="false" afterPath="$PROJECT_DIR$/native/bin/lwjgl_opengl.dll" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/native/bin/lwjgl_opengl.dll.sha1" beforeDir="false" afterPath="$PROJECT_DIR$/native/bin/lwjgl_opengl.dll.sha1" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/native/bin/lwjgl_stb.dll" beforeDir="false" afterPath="$PROJECT_DIR$/native/bin/lwjgl_stb.dll" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/native/bin/lwjgl_stb.dll.sha1" beforeDir="false" afterPath="$PROJECT_DIR$/native/bin/lwjgl_stb.dll.sha1" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/native/bin/lwjgl_vma.dll" beforeDir="false" afterPath="$PROJECT_DIR$/native/bin/lwjgl_vma.dll" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/native/bin/lwjgl_vma.dll.sha1" beforeDir="false" afterPath="$PROJECT_DIR$/native/bin/lwjgl_vma.dll.sha1" afterDir="false" />
-    </list>
+    <list default="true" id="4b7b64e4-95fe-4605-8caf-f658c6b40341" name="Default Changelist" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -212,22 +190,22 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="634" y="231" key="FileChooserDialogImpl/0.0.1920.1040@0.0.1920.1040" timestamp="1587960634350" />
-    <state width="1878" height="284" key="GridCell.Tab.0.bottom" timestamp="1589311773402">
+    <state width="1878" height="358" key="GridCell.Tab.0.bottom" timestamp="1589311913856">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1878" height="284" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1589311773402" />
-    <state width="1878" height="284" key="GridCell.Tab.0.center" timestamp="1589311773402">
+    <state width="1878" height="358" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1589311913856" />
+    <state width="1878" height="358" key="GridCell.Tab.0.center" timestamp="1589311913856">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1878" height="284" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1589311773402" />
-    <state width="1878" height="284" key="GridCell.Tab.0.left" timestamp="1589311773402">
+    <state width="1878" height="358" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1589311913856" />
+    <state width="1878" height="358" key="GridCell.Tab.0.left" timestamp="1589311913856">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1878" height="284" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1589311773402" />
-    <state width="1878" height="284" key="GridCell.Tab.0.right" timestamp="1589311773402">
+    <state width="1878" height="358" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1589311913856" />
+    <state width="1878" height="358" key="GridCell.Tab.0.right" timestamp="1589311913856">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1878" height="284" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1589311773402" />
+    <state width="1878" height="358" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1589311913856" />
     <state x="541" y="263" key="IDE.errors.dialog" timestamp="1588591926832">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
