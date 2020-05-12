@@ -567,7 +567,7 @@ JNIEXPORT int JavaCPP_init(int argc, const char *argv[]) {
     JNIEnv *env;
     int nOptions = 1 + (argc > 255 ? 255 : argc);
     JavaVMOption options[256] = { { NULL } };
-    options[0].optionString = (char*)"-Djava.class.path=javacpp.jar;H:/Data/Projects/MineRTX/src/main/java";
+    options[0].optionString = (char*)"-Djava.class.path=javacpp.jar;H:/Data/Projects/MineVKR/src/main/java";
     for (int i = 1; i < nOptions && argv != NULL; i++) {
         options[i].optionString = (char*)argv[i - 1];
     }

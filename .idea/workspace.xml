@@ -2,7 +2,45 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="4b7b64e4-95fe-4605-8caf-f658c6b40341" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/native/bin/lwjgl_stb.dll" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/native/bin/lwjgl_stb.dll.sha1" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/include/.vscode" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/include/GLFW" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/include/JiviX" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/include/KHR" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/include/glbinding" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/include/glm" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/include/misc" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/include/spirv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/include/vkh" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/include/vkt2" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/include/vkt3" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/include/vma" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/include/vulkan" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/include/xvk" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/jarRepositories.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/jarRepositories.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/runConfigurations/Minecraft_Client.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/runConfigurations/Minecraft_Client.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/build.gradle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gradle/wrapper/gradle-wrapper.jar" beforeDir="false" afterPath="$PROJECT_DIR$/gradle/wrapper/gradle-wrapper.jar" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gradle/wrapper/gradle-wrapper.properties" beforeDir="false" afterPath="$PROJECT_DIR$/gradle/wrapper/gradle-wrapper.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gradlew" beforeDir="false" afterPath="$PROJECT_DIR$/gradlew" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gradlew.bat" beforeDir="false" afterPath="$PROJECT_DIR$/gradlew.bat" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/native/bin/glfw.dll" beforeDir="false" afterPath="$PROJECT_DIR$/native/bin/glfw.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/native/bin/glfw.dll.git" beforeDir="false" afterPath="$PROJECT_DIR$/native/bin/glfw.dll.git" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/native/bin/glfw.dll.sha1" beforeDir="false" afterPath="$PROJECT_DIR$/native/bin/glfw.dll.sha1" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/native/bin/lwjgl_vma.dll" beforeDir="false" afterPath="$PROJECT_DIR$/native/bin/lwjgl_vma.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/native/bin/lwjgl_vma.dll.sha1" beforeDir="false" afterPath="$PROJECT_DIR$/native/bin/lwjgl_vma.dll.sha1" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/CMakeLists.txt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/CMakeLists.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/include" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/source/jniJiviXBase.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/source/jniJiviXBase.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/source/jniJiviXCore.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/source/jniJiviXCore.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/source/jniVectorTest.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/source/jniVectorTest.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/source/jnijavacpp.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/source/jnijavacpp.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/windows-x86_64/CMakeCache.txt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/windows-x86_64/CMakeCache.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/windows-x86_64/CMakeFiles/TargetDirectories.txt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/windows-x86_64/CMakeFiles/TargetDirectories.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/windows-x86_64/cmake_install.cmake" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/windows-x86_64/cmake_install.cmake" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/fabric.mod.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/fabric.mod.json" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -25,23 +63,18 @@
             <expand>
               <path>
                 <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
-                <item name="MineRTX" type="f1a62948:ProjectNode" />
+                <item name="MineVKR" type="f1a62948:ProjectNode" />
               </path>
               <path>
                 <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
-                <item name="MineRTX" type="f1a62948:ProjectNode" />
+                <item name="MineVKR" type="f1a62948:ProjectNode" />
                 <item name="Tasks" type="e4a08cd1:TasksNode" />
               </path>
               <path>
                 <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
-                <item name="MineRTX" type="f1a62948:ProjectNode" />
+                <item name="MineVKR" type="f1a62948:ProjectNode" />
                 <item name="Tasks" type="e4a08cd1:TasksNode" />
-                <item name="build setup" type="c8890929:TasksNode$1" />
-              </path>
-              <path>
-                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
-                <item name="MineRTX" type="f1a62948:ProjectNode" />
-                <item name="Dependencies" type="6de06a37:ExternalSystemViewDefaultContributor$MyDependenciesNode" />
+                <item name="build" type="c8890929:TasksNode$1" />
               </path>
             </expand>
             <select />
@@ -118,8 +151,28 @@
       <GradleScriptDebugEnabled>true</GradleScriptDebugEnabled>
       <method v="2" />
     </configuration>
+    <configuration name="MineVKR [wrapper]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+      <ExternalSystemSettings>
+        <option name="executionName" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list>
+            <option value="wrapper" />
+          </list>
+        </option>
+        <option name="vmOptions" />
+      </ExternalSystemSettings>
+      <GradleScriptDebugEnabled>true</GradleScriptDebugEnabled>
+      <method v="2" />
+    </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Gradle.MineVKR [wrapper]" />
         <item itemvalue="Gradle.MineRTX [init]" />
       </list>
     </recent_temporary>
@@ -141,10 +194,10 @@
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="657" y="140" key="#Minecraft_Client" timestamp="1587959035803">
+    <state x="657" y="140" key="#Minecraft_Client" timestamp="1589310385471">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="657" y="140" key="#Minecraft_Client/0.0.1920.1040@0.0.1920.1040" timestamp="1587959035803" />
+    <state x="657" y="140" key="#Minecraft_Client/0.0.1920.1040@0.0.1920.1040" timestamp="1589310385471" />
     <state x="416" y="175" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1588517083984">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
@@ -157,22 +210,22 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="634" y="231" key="FileChooserDialogImpl/0.0.1920.1040@0.0.1920.1040" timestamp="1587960634350" />
-    <state width="1878" height="284" key="GridCell.Tab.0.bottom" timestamp="1588829054515">
+    <state width="1878" height="284" key="GridCell.Tab.0.bottom" timestamp="1589310990863">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1878" height="284" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1588829054515" />
-    <state width="1878" height="284" key="GridCell.Tab.0.center" timestamp="1588829054515">
+    <state width="1878" height="284" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1589310990863" />
+    <state width="1878" height="284" key="GridCell.Tab.0.center" timestamp="1589310990863">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1878" height="284" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1588829054515" />
-    <state width="1878" height="284" key="GridCell.Tab.0.left" timestamp="1588829054515">
+    <state width="1878" height="284" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1589310990863" />
+    <state width="1878" height="284" key="GridCell.Tab.0.left" timestamp="1589310990863">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1878" height="284" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1588829054515" />
-    <state width="1878" height="284" key="GridCell.Tab.0.right" timestamp="1588829054515">
+    <state width="1878" height="284" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1589310990863" />
+    <state width="1878" height="284" key="GridCell.Tab.0.right" timestamp="1589310990863">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1878" height="284" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1588829054515" />
+    <state width="1878" height="284" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1589310990863" />
     <state x="541" y="263" key="IDE.errors.dialog" timestamp="1588591926832">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>

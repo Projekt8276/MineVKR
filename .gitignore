@@ -138,6 +138,10 @@ Cargo.lock
 */*.VC.db
 */*.db
 */*.VC
+*.VC.db.*
+*.db.*
+*/*.VC.db.*
+*/*.db.*
 
 #
 .vs/*

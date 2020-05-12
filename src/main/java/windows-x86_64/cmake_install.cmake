@@ -1,4 +1,4 @@
-# Install script for directory: H:/Data/Projects/MineRTX/src/main/java
+# Install script for directory: H:/Data/Projects/MineVKR/src/main/java
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
@@ -40,5 +40,5 @@ endif()
 
 string(REPLACE ";" "\n" CMAKE_INSTALL_MANIFEST_CONTENT
        "${CMAKE_INSTALL_MANIFEST_FILES}")
-file(WRITE "H:/Data/Projects/MineRTX/src/main/java/windows-x86_64/${CMAKE_INSTALL_MANIFEST}"
+file(WRITE "H:/Data/Projects/MineVKR/src/main/java/windows-x86_64/${CMAKE_INSTALL_MANIFEST}"
      "${CMAKE_INSTALL_MANIFEST_CONTENT}")

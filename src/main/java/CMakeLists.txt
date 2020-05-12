@@ -163,6 +163,15 @@ add_library(${LIBRARY_NAME} SHARED source/jnijavacpp.cpp source/jniJiviXBase.cpp
 add_custom_command(PRE_BUILD COMMAND "./generate.bat" OUTPUT "./log.txt")
 target_link_libraries(${LIBRARY_NAME} PRIVATE ${LIBS} ${JNI_LIBRARIES} Vulkan::Vulkan glbinding::glbinding glbinding::glbinding-aux)
 
+# Add includes to MSVC explorer 
+foreach(source IN LISTS RSOURCES)
+    get_filename_component(source_path "${source}" PATH)
+    string(REPLACE "/" "\\" source_path_msvc "${source_path}")
+    source_group("${source_path_msvc}" FILES "${source}")
+endforeach()
+
+
+
 # Core
 set (LIBRARY_NAME "jniJiviXCore") #
 add_definitions(${DEFINES})
