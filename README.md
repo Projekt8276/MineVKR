@@ -64,6 +64,15 @@ Any developer with knowledge of C, C ++, Java, as well as GLSL and EVEN HLSL (th
 - Any native pointers in Java are LONG type... 
 
 
+### Intellij IDEA Problem AGAIN?!
+
+I again tip to use `gradlew idea` for that IDE... 
+
+I afraid that my mod become a second [Immersive Portals](https://github.com/qouteall/ImmersivePortalsMod/tree/1.16), but I want base from Improved First Person... 
+
+I afraid that for me needs [`qouteall`](https://github.com/qouteall), [`maierfelix`](https://github.com/maierfelix) for development... Second developer DOESN'T know Minecraft and (probably) Java! But these soul essentials are minimally required...
+
+
 ### Used Symbolic Links!
 
 Clone with `git clone -c core.symlinks=true https://github.com/hyperearth/MineVKR.git --recursive`

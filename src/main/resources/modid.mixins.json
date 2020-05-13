@@ -7,7 +7,9 @@
   ],
   "client": [
     "MixinWorldRenderer",
-    "MixinWindow"
+    "MixinWindow",
+    "MixinMatrix4f",
+    "MixinVector4f"
   ],
   "injectors": {
     "defaultRequire": 1

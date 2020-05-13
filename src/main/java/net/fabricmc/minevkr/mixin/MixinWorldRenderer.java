@@ -1,18 +1,12 @@
 package net.fabricmc.minevkr.mixin;
 
-import it.unimi.dsi.fastutil.objects.ObjectList;
-import net.fabricmc.minevkr.jivix.JiviXBase;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gl.VertexBuffer;
-import net.minecraft.client.gui.screen.TitleScreen;
 import net.minecraft.client.render.*;
-import net.minecraft.client.render.WorldRenderer.*;
 import net.minecraft.client.render.chunk.ChunkBuilder;
 import net.minecraft.client.texture.TextureManager;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.util.math.BlockPos;
-import org.lwjgl.PointerBuffer;
-import org.lwjgl.vulkan.*;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
@@ -20,34 +14,7 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.Redirect;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
-import net.fabricmc.minevkr.*;
 import net.fabricmc.minevkr.MineVKR;
-import net.minecraft.client.render.RenderLayer;
-
-import java.nio.ByteBuffer;
-
-import static org.lwjgl.glfw.GLFWVulkan.glfwGetRequiredInstanceExtensions;
-import static org.lwjgl.system.MemoryUtil.*;
-import static org.lwjgl.vulkan.EXTDebugReport.VK_EXT_DEBUG_REPORT_EXTENSION_NAME;
-import static org.lwjgl.vulkan.VK10.*;
-import static org.lwjgl.vulkan.VK10.VK_SUCCESS;
-import static org.lwjgl.vulkan.VK11.VK_API_VERSION_1_1;
-
-import net.fabricmc.minevkr.jivix.*;
-import net.fabricmc.minevkr.jivix.JiviXBase;
-import net.fabricmc.minevkr.jivix.JiviXCore;
-import net.fabricmc.minevkr.jivix.JiviXBase.*;
-import net.fabricmc.minevkr.jivix.JiviXCore.*;
-import static net.fabricmc.minevkr.jivix.JiviXBase.*;
-import static net.fabricmc.minevkr.jivix.JiviXCore.*;
-import static net.minecraft.client.render.WorldRenderer.*;
-//import static net.minecraft.client.render.WorldRenderer.ChunkInfo;
-
-import org.lwjgl.glfw.*;
-import org.lwjgl.glfw.GLFW.*;
-
-import static org.lwjgl.glfw.GLFW.*;
-import static org.lwjgl.glfw.GLFW.Functions.*;
 
 
 @Mixin(WorldRenderer.class)

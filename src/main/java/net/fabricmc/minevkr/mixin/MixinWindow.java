@@ -1,28 +1,15 @@
 package net.fabricmc.minevkr.mixin;
 
-
-import net.fabricmc.minevkr.MineVKR;
 import net.fabricmc.minevkr.jivix.JiviXBase;
-import net.minecraft.client.WindowEventHandler;
-import net.minecraft.client.WindowSettings;
-import net.minecraft.client.render.WorldRenderer;
-import net.minecraft.client.util.MonitorTracker;
 import net.minecraft.client.util.Window;
 import org.lwjgl.glfw.*;
-import org.lwjgl.glfw.GLFW.*;
 import org.lwjgl.opengl.GL;
 import org.lwjgl.opengl.GLCapabilities;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
-import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.Redirect;
-import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
-import javax.annotation.Nullable;
-
-import static org.lwjgl.glfw.GLFW.*;
 import static org.lwjgl.glfw.GLFW.Functions.*;
-import static org.lwjgl.opengl.GL.*;
 
 @Mixin(Window.class)
 public class MixinWindow {
