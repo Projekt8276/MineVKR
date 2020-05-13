@@ -38,6 +38,28 @@ public class JiviXCore extends Pointer {
     };
 
 
+
+    @Name("vkt::VmaMemoryInfo")
+    public static class VmaMemoryInfo extends Pointer {
+        static { Loader.load(); }
+        public VmaMemoryInfo(Pointer p) { super(p); }
+
+        // 
+        public VmaMemoryInfo() { allocate(); }
+        private native void allocate();
+
+        // 
+        private native @Cast("VmaMemoryUsage*") @ValueGetter @ByRef IntPointer memUsage();
+        private native @ByRef VmaMemoryInfo setDeviceDispatch(@SharedPtr JiviXCore.Device device);
+        private native @ByRef VmaMemoryInfo setInstanceDispatch(@SharedPtr JiviXCore.Instance instance);
+        
+        // 
+        private native @ByRef @SharedPtr JiviXCore.Device getDeviceDispatch();
+        private native @ByRef @SharedPtr JiviXCore.Instance getInstanceDispatch();
+    };
+
+
+
     @Name("vkt::ImageAllocation")
     public static class ImageAllocation extends Pointer {
         static { Loader.load(); }
@@ -72,6 +94,9 @@ public class JiviXCore extends Pointer {
 
         public VmaImageAllocation(@Cast("VmaAllocator*") long vmaAllocator, @Cast("vkh::VkImageCreateInfo*") long createInfo, @Cast("vkt::VmaMemoryInfo*") long memInfoPtr) { allocate(vmaAllocator, createInfo, memInfoPtr); };
         private native void allocate(@Cast("VmaAllocator*") long vmaAllocator, @Cast("vkh::VkImageCreateInfo*") long createInfo, @Cast("vkt::VmaMemoryInfo*") long memInfoPtr);
+
+        public VmaImageAllocation(@Cast("VmaAllocator*") long vmaAllocator, @Cast("vkh::VkImageCreateInfo*") long createInfo, VmaMemoryInfo memInfo) { allocate(vmaAllocator, createInfo, memInfo); };
+        private native void allocate(@Cast("VmaAllocator*") long vmaAllocator, @Cast("vkh::VkImageCreateInfo*") long createInfo, VmaMemoryInfo memInfo);
 
         //private native @SharedPtr ImageAllocation uniPtr();
 
@@ -111,6 +136,9 @@ public class JiviXCore extends Pointer {
 
         public VmaBufferAllocation(@Cast("VmaAllocator*") long vmaAllocator, @Cast("vkh::VkBufferCreateInfo*") long createInfo, @Cast("vkt::VmaMemoryInfo*") long memInfoPtr) { allocate(vmaAllocator, createInfo, memInfoPtr); };
         private native void allocate(@Cast("VmaAllocator*") long vmaAllocator, @Cast("vkh::VkBufferCreateInfo*") long createInfo, @Cast("vkt::VmaMemoryInfo*") long memInfoPtr);
+
+        public VmaBufferAllocation(@Cast("VmaAllocator*") long vmaAllocator, @Cast("vkh::VkBufferCreateInfo*") long createInfo, VmaMemoryInfo memInfo) { allocate(vmaAllocator, createInfo, memInfo); };
+        private native void allocate(@Cast("VmaAllocator*") long vmaAllocator, @Cast("vkh::VkBufferCreateInfo*") long createInfo, VmaMemoryInfo memInfo);
 
         //private native @SharedPtr BufferAllocation uniPtr();
     };
@@ -265,29 +293,6 @@ public class JiviXCore extends Pointer {
 
         // 
         private native @Cast("int64_t*") @ValueGetter @ByRef LongPointer accelerationStructureHandle();
-    };
-    
-    
-    
-    
-    
-    @Name("vkt::VmaMemoryInfo")
-    public static class VmaMemoryInfo extends Pointer {
-        static { Loader.load(); }
-        public VmaMemoryInfo(Pointer p) { super(p); }
-
-        // 
-        public VmaMemoryInfo() { allocate(); }
-        private native void allocate();
-
-        // 
-        private native @Cast("VmaMemoryUsage*") @ValueGetter @ByRef IntPointer memUsage();
-        private native @ByRef VmaMemoryInfo setDeviceDispatch(@SharedPtr JiviXCore.Device device);
-        private native @ByRef VmaMemoryInfo setInstanceDispatch(@SharedPtr JiviXCore.Instance instance);
-        
-        // 
-        private native @ByRef @SharedPtr JiviXCore.Device getDeviceDispatch();
-        private native @ByRef @SharedPtr JiviXCore.Instance getInstanceDispatch();
     };
     
 };
