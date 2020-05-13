@@ -9,6 +9,12 @@ buildscript {
 }
 
 plugins {
+    id 'java'
+    id 'java-gradle-plugin'
+    id 'idea'
+    id 'eclipse'
+    id 'groovy'
+    id 'checkstyle'
     id 'maven-publish'
     id 'fabric-loom' version '0.2.7-SNAPSHOT'//'0.2.3-SNAPSHOT'
     id "org.jetbrains.kotlin.jvm" version "1.3.72"
@@ -53,10 +59,6 @@ dependencies {
 
     //For javax.annotation.Nullable
     implementation 'com.google.code.findbugs:jsr305:3.0.2'
-
-    //Connect With C++ and Pukan API (3.2.2)
-    //implementation "org.lwjgl:lwjgl-vulkan:3.2.2"
-    //implementation "org.lwjgl:lwjgl-vma:3.2.2"
 
     // JavaCPP for connect our framework... (JiviX)
     compile "org.bytedeco:javacpp:1.5.3"

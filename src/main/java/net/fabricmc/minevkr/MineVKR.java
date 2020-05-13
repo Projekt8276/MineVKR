@@ -65,41 +65,51 @@ public class MineVKR implements ModInitializer  {
 		this.vCPosition = new double[3];
 	}
 
-	public static void InitializeRenderer(){
-
-		//MineVKR.vDriver.initializeGL( GetProcAddress ); // NOT POSSIBLE!
+	public static void InitializeRenderer() {
 		System.out.println("This line is printed by an example mod mixin!");
 
 		//
 		MineVKR.vInstanceHandle = MineVKR.vDriver.createInstance();
 		MineVKR.vInstance = new VkInstance(MineVKR.vInstanceHandle, VkInstanceCreateInfo.createSafe(MineVKR.vDriver.getInstanceCreateInfoAddress())); // LWJGL-3 can read from JavaCPP by same address
-		System.out.println("With create VkInstance: [" + MineVKR.vInstanceHandle + "] ...");
+		System.out.println("With create VkInstance: [" + MineVKR.vInstanceHandle + "]...");
 
 		//
 		MineVKR.vPhysicalDeviceHandle = MineVKR.vDriver.getPhysicalDevice();
 		MineVKR.vPhysicalDevice = new VkPhysicalDevice(MineVKR.vPhysicalDeviceHandle, MineVKR.vInstance);
+		System.out.println("With got VkPhysicalDevice: [" + MineVKR.vPhysicalDeviceHandle + "]...");
 
 		//
 		MineVKR.vDeviceHandle = MineVKR.vDriver.createDevice(MineVKR.vPhysicalDeviceHandle);
 		MineVKR.vDevice = new VkDevice(MineVKR.vDeviceHandle, MineVKR.vPhysicalDevice, VkDeviceCreateInfo.createSafe(MineVKR.vDriver.getDeviceCreateInfoAddress())); // LWJGL-3 can read from JavaCPP by same address
-		System.out.println("With create VkDevice: [" + MineVKR.vDeviceHandle + "] ...");
+		System.out.println("With create VkDevice: [" + MineVKR.vDeviceHandle + "]...");
 
 		//
 		MineVKR.vContext = new JiviXBase.Context(MineVKR.vDriver);
-		//MineVKR.vBufferViewSet = new JiviXBase.BufferViewSet(MineVKR.vContext);
+		System.out.println("Create Context...");
+
+		//
 		MineVKR.vMaterials = new JiviXBase.Material(MineVKR.vContext);
 		MineVKR.vNode = new JiviXBase.Node[]{ new JiviXBase.Node(MineVKR.vContext) };
+		System.out.println("Create Node and Materials...");
+
+		//
 		MineVKR.vRenderer = new JiviXBase.Renderer(MineVKR.vContext);
+		System.out.println("Create Renderer...");
+
+		//
+		MineVKR.vRenderer.linkMaterial(MineVKR.vMaterials.sharedPtr());
+		MineVKR.vRenderer.linkNode(MineVKR.vNode[0].sharedPtr());
+		System.out.println("Link Node and Materials...");
 
 		//
 		MineVKR.vContext.initialize(1600, 1200); // UNABLE TO DEBUG!!
-		MineVKR.vRenderer.linkMaterial(MineVKR.vMaterials.sharedPtr());
-		MineVKR.vRenderer.linkNode(MineVKR.vNode[0].sharedPtr());
+		System.out.println("Initialize Context...");
 
 		// Declare all chunks to be ray-traced!
 		MineVKR.vBindingsChunksOpaque = new JiviXBase.MeshBinding[MaxChunkBindings]; // for chunk range = 4
 		MineVKR.vBindingsChunksCutout = new JiviXBase.MeshBinding[MaxChunkBindings]; // for chunk range = 4
 		MineVKR.vBindingsChunksTranslucent = new JiviXBase.MeshBinding[MaxChunkBindings]; // for chunk range = 4
+		System.out.println("Create array of chunk bindings...");
 
 		// Create bindings per every chunks!
 		for (int i=0;i<MaxChunkBindings;i++) { // Reserve per chunk 2048 faces, and 16 chunks possible...
@@ -107,14 +117,17 @@ public class MineVKR implements ModInitializer  {
 			MineVKR.vBindingsChunksCutout[i] = new JiviXBase.MeshBinding(MineVKR.vContext, 2048);
 			MineVKR.vBindingsChunksTranslucent[i] = new JiviXBase.MeshBinding(MineVKR.vContext, 2048);
 		}
+		System.out.println("Create chunk bindings itself...");
 
 		//
 		for (int i=0;i<MaxChunkBindings;i++) MineVKR.vNode[0].pushMesh(MineVKR.vBindingsChunksOpaque[i]);
 		for (int i=0;i<MaxChunkBindings;i++) MineVKR.vNode[0].pushMesh(MineVKR.vBindingsChunksCutout[i]);
 		for (int i=0;i<MaxChunkBindings;i++) MineVKR.vNode[0].pushMesh(MineVKR.vBindingsChunksTranslucent[i]);
+		System.out.println("Add chunk bindings into Node...");
 
 		// Declare entity bindings
 		MineVKR.vBindingsEntity = new JiviXBase.MeshBinding[MaxEntityBindings];
+		System.out.println("Create array of entity bindings...");
 
 		// Needs 16 Parts of Entity, with 16th cube vertices
 		long PartsSize[] = new long[] { 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32 };
@@ -122,7 +135,10 @@ public class MineVKR implements ModInitializer  {
 		// Create bindings per every entity!
 		for (int i=0;i<MaxEntityBindings;i++) {
 			MineVKR.vBindingsEntity[i] = new JiviXBase.MeshBinding(MineVKR.vContext, 512, PartsSize);
-			MineVKR.vNode[0].pushMesh(MineVKR.vBindingsEntity[i]);
 		};
+		System.out.println("Create entity bindings itself...");
+
+		for (int i=0;i<MaxEntityBindings;i++) { MineVKR.vNode[0].pushMesh(MineVKR.vBindingsEntity[i]); };
+		System.out.println("Add entity bindings into Node...");
 	}
 }
