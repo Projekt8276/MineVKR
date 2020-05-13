@@ -10,7 +10,7 @@
 #endif
 
 #include <GLFW/glfw3.h>
-#include <vkt2/fw.hpp>
+#include <vkt3/fw.hpp>
 #include <JiviX/JiviX.hpp>
 
 #define TINYGLTF_IMPLEMENTATION
@@ -295,7 +295,7 @@ int main()
     // 
     auto TRS = vkt::Vector<glm::mat3x4>(std::make_shared<vkt::VmaBufferAllocation>(fw->getAllocator(), vkh::VkBufferCreateInfo{
         .size = sizeof(glm::mat3x4) * 2ull, .usage = {.eTransferSrc = 1, .eStorageTexelBuffer = 1, .eStorageBuffer = 1, .eIndexBuffer = 1, .eVertexBuffer = 1, .eSharedDeviceAddress = 1 },
-    }, VMA_MEMORY_USAGE_CPU_TO_GPU));
+    }, vkt::VmaMemoryInfo{.memUsage = VMA_MEMORY_USAGE_CPU_TO_GPU }));
 
     // 
     TRS[0] = glm::mat3x4(1.f);
@@ -335,21 +335,20 @@ int main()
 
 	// 
 	struct Semaphores {
-        vk::Semaphore glReady = {}, glComplete = {};
+        VkSemaphore glReady = {}, glComplete = {};
 	} semaphores;
 
 	{ // 
 		auto handleType = vk::ExternalSemaphoreHandleTypeFlagBits::eOpaqueWin32;
-		{
-			vk::SemaphoreCreateInfo sci;
-			vk::ExportSemaphoreCreateInfo esci;
-			sci.pNext = &esci;
-			esci.handleTypes = handleType;
-			semaphores.glReady = device.createSemaphore(sci);
-			semaphores.glComplete = device.createSemaphore(sci);
-		}
-		handles.glReady = device.getSemaphoreWin32HandleKHR({ semaphores.glReady, handleType }, fw->getDispatch());
-		handles.glComplete = device.getSemaphoreWin32HandleKHR({ semaphores.glComplete, handleType }, fw->getDispatch());
+        {
+            const auto exportable = vkh::VkExportSemaphoreCreateInfo{ .handleTypes = {.eOpaqueWin32 = 1} };
+            fw->getDeviceDispatch()->CreateSemaphoreA(vkh::VkSemaphoreCreateInfo{ .pNext = &exportable }, nullptr, &semaphores.glReady);
+            fw->getDeviceDispatch()->CreateSemaphoreA(vkh::VkSemaphoreCreateInfo{ .pNext = &exportable }, nullptr, &semaphores.glComplete);
+        };
+        {
+            fw->getDeviceDispatch()->GetSemaphoreWin32HandleKHR(vkh::VkSemaphoreGetWin32HandleInfoKHR{ .semaphore = semaphores.glReady, .handleType = VK_EXTERNAL_SEMAPHORE_HANDLE_TYPE_OPAQUE_WIN32_BIT }, &handles.glReady);
+            fw->getDeviceDispatch()->GetSemaphoreWin32HandleKHR(vkh::VkSemaphoreGetWin32HandleInfoKHR{ .semaphore = semaphores.glComplete, .handleType = VK_EXTERNAL_SEMAPHORE_HANDLE_TYPE_OPAQUE_WIN32_BIT }, &handles.glComplete);
+        };
 	}
 
 	// Platform specific import.  On non-Win32 systems use glImportSemaphoreFdEXT instead
@@ -405,11 +404,12 @@ int main()
         glSignalSemaphoreEXT(glComplete, 0, nullptr, 1, &color, &layoutSignal);
 
 		// 
-		std::vector<vk::PipelineStageFlags> waitStages = { vk::PipelineStageFlagBits::eFragmentShader | vk::PipelineStageFlagBits::eComputeShader | vk::PipelineStageFlagBits::eRayTracingShaderKHR };
-		context->getThread()->submitCmd(std::vector<vk::CommandBuffer>{ renderer->refCommandBuffer() }, vk::SubmitInfo()
-            .setPWaitDstStageMask(waitStages.data())
-			.setPWaitSemaphores  (&semaphores.glComplete)  .setWaitSemaphoreCount(1)
-            .setPSignalSemaphores(&semaphores.glReady   ).setSignalSemaphoreCount(1));
+        std::vector<vkh::VkPipelineStageFlags> waitStages = { {.eFragmentShader = 1, .eComputeShader = 1, .eRayTracingShader = 1 } };
+        vkh::handleVk(fw->getDeviceDispatch()->QueueSubmit(queue, 1u, vkh::VkSubmitInfo{
+            .waitSemaphoreCount = 1u, .pWaitSemaphores = &semaphores.glComplete, .pWaitDstStageMask = waitStages.data(),
+            .commandBufferCount = 1u, .pCommandBuffers = &renderer->setupCommands()->refCommandBuffer(),
+            .signalSemaphoreCount = 1u, .pSignalSemaphores = &semaphores.glReady
+        }, {}));
 
         // 
         glWaitSemaphoreEXT(glReady, 0, nullptr, 1, &color, &layoutWait);
