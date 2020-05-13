@@ -226,7 +226,9 @@ public class JiviXBase extends Pointer {
         public long getAllocator()        { return this._getAllocator().address(); };
         public long getMemoryProperties() { return this._getMemoryProperties().address(); };
 
-
+        //
+        public native @SharedPtr JiviXCore.Device getDeviceDispatch();
+        public native @SharedPtr JiviXCore.Instance getInstanceDispatch();
     };
 
     //
