@@ -31,7 +31,6 @@ set (SOURCES_LIST
     "./include/JiviX/*/*/*/*/*.hpp"
     "./include/JiviX/*/*/*/*/vulkan.*"
 
-    "./include/radx/*"
     "./include/vulkan/*"
     "./include/vma/*"
     "./include/vkh/*"
@@ -43,20 +42,20 @@ set (SOURCES_LIST
     "./include/glbinding/*"
     "./include/glbinding/*/*"
     
-    #"./src/*.hpp"
-    #"./src/*.h"
-    #"./src/*.cpp"
-    #"./src/*.c"
-    #"./src/*/*.hpp"
-    #"./src/*/*.c"
-    #"./src/*/*.h"
-    #"./src/*/*/*.hpp"
-    #"./src/*/*/*.c"
-    #"./src/*/*/*.h"
-    #"./src/include/*.hpp"
-    #"./src/include/*.h"
-    #"./src/include/*/*.hpp"
-    #"./src/include/*/*.h"
+    "./source/*.hpp"
+    "./source/*.h"
+    "./source/*.cpp"
+    "./source/*.c"
+    "./source/*/*.hpp"
+    "./source/*/*.c"
+    "./source/*/*.h"
+    "./source/*/*/*.hpp"
+    "./source/*/*/*.c"
+    "./source/*/*/*.h"
+    "./source/include/*.hpp"
+    "./source/include/*.h"
+    "./source/include/*/*.hpp"
+    "./source/include/*/*.h"
 )
 
 # Find packages (Linux Prior)
@@ -64,8 +63,12 @@ find_package (Vulkan REQUIRED)
 find_package (GLFW3 QUIET)
 find_package (PkgConfig QUIET)
 find_package (glbinding REQUIRED) # if it is really required in your project
+find_package (Java REQUIRED)
+find_package (JNI REQUIRED)
 pkg_search_module(GLFW QUIET glfw3)
 pkg_search_module(GLFW QUIET renderdoc)
+
+#include(UseJava)
 
 # Set libs and include dirs of projects
 set (LIBS glfw3)
@@ -146,15 +149,12 @@ endif()
 set (CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} -O0")
 set (CMAKE_C_FLAGS_DEBUG "${CMAKE_C_FLAGS_DEBUG} -O0")
 
-# 
-find_package(Java REQUIRED)
-find_package(JNI REQUIRED)
-#include(UseJava)
-
 # Set default compiler options
 link_directories(${LIB_DIR})
 include_directories(${INC_DIR} ${JNI_INCLUDE_DIRS})
 file (GLOB RSOURCES RELATIVE ${CMAKE_CURRENT_SOURCE_DIR} ${SOURCES_LIST})
+
+
 
 # Base
 set (LIBRARY_NAME "jniJiviXBase") #
