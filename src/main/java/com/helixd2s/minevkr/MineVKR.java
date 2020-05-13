@@ -1,24 +1,11 @@
 package com.helixd2s.minevkr;
 
 import net.fabricmc.api.ModInitializer;
-import com.helixd2s.minevkr.jivix.*;
-import com.helixd2s.minevkr.jivix.JiviXBase;
-import com.helixd2s.minevkr.jivix.JiviXCore;
-import com.helixd2s.minevkr.jivix.JiviXBase.*;
-import com.helixd2s.minevkr.jivix.JiviXCore.*;
+import com.helixd2s.jivix.JiviXBase;
 import net.minecraft.client.gl.VertexBuffer;
 import net.minecraft.client.render.chunk.ChunkBuilder;
 import net.minecraft.util.math.BlockPos;
 import org.lwjgl.vulkan.*;
-import org.lwjgl.glfw.*;
-import org.lwjgl.glfw.GLFW.*;
-import org.spongepowered.asm.mixin.Shadow;
-
-import static com.helixd2s.minevkr.jivix.JiviXBase.*;
-import static com.helixd2s.minevkr.jivix.JiviXCore.*;
-//import static org.lwjgl.glfw.*;
-import static org.lwjgl.glfw.GLFW.*;
-import static org.lwjgl.glfw.GLFW.Functions.*;
 
 public class MineVKR implements ModInitializer  {
 	public static long vPhysicalDeviceHandle;

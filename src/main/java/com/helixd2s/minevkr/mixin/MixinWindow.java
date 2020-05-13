@@ -1,6 +1,6 @@
 package com.helixd2s.minevkr.mixin;
 
-import com.helixd2s.minevkr.jivix.JiviXBase;
+import com.helixd2s.jivix.JiviXBase;
 import net.minecraft.client.util.Window;
 import org.lwjgl.glfw.*;
 import org.lwjgl.opengl.GL;
