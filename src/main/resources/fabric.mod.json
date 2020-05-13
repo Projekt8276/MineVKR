@@ -14,7 +14,7 @@
   "environment": "*",
   "entrypoints": {
     "main": [{
-        "value": "net.fabricmc.minevkr.MineVKR"
+        "value": "com.helixd2s.minevkr.MineVKR"
     }]
   },
   "mixins": [

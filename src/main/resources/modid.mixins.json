@@ -1,7 +1,7 @@
 {
   "required": true,
   "minVersion": "0.8",
-  "package": "net.fabricmc.minevkr.mixin",
+  "package": "com.helixd2s.minevkr.mixin",
   "compatibilityLevel": "JAVA_8",
   "mixins": [
   ],
