@@ -32,14 +32,6 @@ class RayTracer : public std::enable_shared_from_this<RayTracer> { public:
 	std::shared_ptr<vkt::GPUFramework> fw = {};
 };
 
-GLuint handleError() {
-    GLuint errorCode = 0;
-    //std::cout << (errorCode = glGetError()) << std::endl;
-    assert(errorCode == 0);
-    return errorCode;
-}
-
-
 void framebuffer_size_callback(GLFWwindow* window, int width, int height);
 void processInput(GLFWwindow *window);
 
@@ -47,12 +39,14 @@ void processInput(GLFWwindow *window);
 const unsigned int SCR_WIDTH = 1600;
 const unsigned int SCR_HEIGHT = 1200;
 
+
 const char *vertexShaderSource = "#version 460 compatibility\n"
     "layout (location = 0) in vec4 aPos;\n" 
     "void main()\n"
     "{\n"
     "   gl_Position = vec4(aPos.xyz, 1.0f);\n"
     "}\0";
+
 
 const char *fragmentShaderSource = "#version 460 compatibility\n"
     "#extension GL_ARB_bindless_texture : require\n"
@@ -111,6 +105,83 @@ struct FDStruct {
 };
 
 
+
+void APIENTRY glDebugOutput(GLenum source,
+    GLenum type,
+    unsigned int id,
+    GLenum severity,
+    GLsizei length,
+    const char* message,
+    const void* userParam)
+{
+    // ignore non-significant error/warning codes
+    if (id == 131169 || id == 131185 || id == 131218 || id == 131204) return;
+
+    std::cout << "---------------" << std::endl;
+    std::cout << "Debug message (" << id << "): " << message << std::endl;
+
+    switch (source)
+    {
+    case GL_DEBUG_SOURCE_API:             std::cout << "Source: API"; break;
+    case GL_DEBUG_SOURCE_WINDOW_SYSTEM:   std::cout << "Source: Window System"; break;
+    case GL_DEBUG_SOURCE_SHADER_COMPILER: std::cout << "Source: Shader Compiler"; break;
+    case GL_DEBUG_SOURCE_THIRD_PARTY:     std::cout << "Source: Third Party"; break;
+    case GL_DEBUG_SOURCE_APPLICATION:     std::cout << "Source: Application"; break;
+    case GL_DEBUG_SOURCE_OTHER:           std::cout << "Source: Other"; break;
+    } std::cout << std::endl;
+
+    switch (type)
+    {
+    case GL_DEBUG_TYPE_ERROR:               std::cout << "Type: Error"; break;
+    case GL_DEBUG_TYPE_DEPRECATED_BEHAVIOR: std::cout << "Type: Deprecated Behaviour"; break;
+    case GL_DEBUG_TYPE_UNDEFINED_BEHAVIOR:  std::cout << "Type: Undefined Behaviour"; break;
+    case GL_DEBUG_TYPE_PORTABILITY:         std::cout << "Type: Portability"; break;
+    case GL_DEBUG_TYPE_PERFORMANCE:         std::cout << "Type: Performance"; break;
+    case GL_DEBUG_TYPE_MARKER:              std::cout << "Type: Marker"; break;
+    case GL_DEBUG_TYPE_PUSH_GROUP:          std::cout << "Type: Push Group"; break;
+    case GL_DEBUG_TYPE_POP_GROUP:           std::cout << "Type: Pop Group"; break;
+    case GL_DEBUG_TYPE_OTHER:               std::cout << "Type: Other"; break;
+    } std::cout << std::endl;
+
+    switch (severity)
+    {
+    case GL_DEBUG_SEVERITY_HIGH:         std::cout << "Severity: high"; break;
+    case GL_DEBUG_SEVERITY_MEDIUM:       std::cout << "Severity: medium"; break;
+    case GL_DEBUG_SEVERITY_LOW:          std::cout << "Severity: low"; break;
+    case GL_DEBUG_SEVERITY_NOTIFICATION: std::cout << "Severity: notification"; break;
+    } std::cout << std::endl;
+    std::cout << std::endl;
+}
+
+
+GLenum glCheckError_(const char* file, int line) {
+    GLenum errorCode = GL_NO_ERROR;
+    while ((errorCode = glGetError()) != GL_NO_ERROR)
+    {
+        std::string error = "UNKNOWN_ERROR";
+        switch (errorCode)
+        {
+            case GL_INVALID_ENUM:                  error = "INVALID_ENUM"; break;
+            case GL_INVALID_VALUE:                 error = "INVALID_VALUE"; break;
+            case GL_INVALID_OPERATION:             error = "INVALID_OPERATION"; break;
+            case GL_STACK_OVERFLOW:                error = "STACK_OVERFLOW"; break;
+            case GL_STACK_UNDERFLOW:               error = "STACK_UNDERFLOW"; break;
+            case GL_OUT_OF_MEMORY:                 error = "OUT_OF_MEMORY"; break;
+            case GL_INVALID_FRAMEBUFFER_OPERATION: error = "INVALID_FRAMEBUFFER_OPERATION"; break;
+            default:                               error = "UNKNOWN_ERROR"; break;
+        };
+        std::cerr << error << " | " << file << " (" << line << ")" << std::endl; throw (error);
+        assert(errorCode == GL_NO_ERROR);
+        glfwTerminate(); exit(int(errorCode));
+    };
+    return errorCode;
+}
+
+#define glCheckError() glCheckError_(__FILE__, __LINE__) 
+
+
+
+
 int main()
 {
     // glfw: initialize and configure
@@ -119,6 +190,7 @@ int main()
     glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 4);
     glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 6);
     glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_COMPAT_PROFILE);
+    glfwWindowHint(GLFW_OPENGL_DEBUG_CONTEXT, true);
 
 #ifdef __APPLE__
     glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE); // uncomment this statement to fix compilation on OS X
@@ -136,13 +208,22 @@ int main()
     glfwMakeContextCurrent(window);
     glfwSetFramebufferSizeCallback(window, framebuffer_size_callback);
 
-
-
-
-
 	// initialize Vulkan
     auto fw = jvx::Driver();
-    vkt::initializeGL(glfwGetProcAddress);
+    vkt::initializeGL();
+
+
+    // 
+    int flags; glGetIntegerv(GL_CONTEXT_FLAGS, &flags);
+    if (flags & int(GL_CONTEXT_FLAG_DEBUG_BIT))
+    {
+        // initialize debug output 
+        glEnable(GL_DEBUG_OUTPUT);
+        glEnable(GL_DEBUG_OUTPUT_SYNCHRONOUS);
+        glDebugMessageCallback(glDebugOutput, nullptr);
+        glDebugMessageControl(GL_DONT_CARE, GL_DONT_CARE, GL_DONT_CARE, 0, nullptr, GL_TRUE);
+        glCheckError();
+    }
 
 
     // build and compile our shader program
@@ -158,6 +239,7 @@ int main()
         glGetShaderInfoLog(vertexTFShader, 512, NULL, infoLog);
         std::cout << "ERROR::SHADER::VERTEX::COMPILATION_FAILED\n" << infoLog << std::endl;
     }
+    glCheckError();
 
     // 
     const int geometryTFShader = glCreateShader(GL_GEOMETRY_SHADER);
@@ -170,6 +252,8 @@ int main()
         glGetShaderInfoLog(geometryTFShader, 512, NULL, infoLog);
         std::cout << "ERROR::SHADER::VERTEX::COMPILATION_FAILED\n" << infoLog << std::endl;
     }
+    glCheckError();
+
 
     // link shaders
     const int shaderTFProgram = glCreateProgram();
@@ -178,6 +262,8 @@ int main()
     glAttachShader(shaderTFProgram, vertexTFShader);
     glAttachShader(shaderTFProgram, geometryTFShader);
     glLinkProgram(shaderTFProgram);
+    glValidateProgram(shaderTFProgram);
+    glCheckError();
     // check for linking errors
     glGetProgramiv(shaderTFProgram, GL_LINK_STATUS, &success);
     if (!success) {
@@ -185,7 +271,7 @@ int main()
         std::cout << "ERROR::SHADER::PROGRAM::LINKING_FAILED\n" << infoLog << std::endl;
     }
     glDeleteShader(vertexTFShader);
-
+    glCheckError();
 
 
     // vertex shader
@@ -199,6 +285,8 @@ int main()
         glGetShaderInfoLog(vertexShader, 512, NULL, infoLog);
         std::cout << "ERROR::SHADER::VERTEX::COMPILATION_FAILED\n" << infoLog << std::endl;
     }
+    glCheckError();
+
 
     // fragment shader
     const int fragmentShader = glCreateShader(GL_FRAGMENT_SHADER);
@@ -211,12 +299,16 @@ int main()
         glGetShaderInfoLog(fragmentShader, 512, NULL, infoLog);
         std::cout << "ERROR::SHADER::FRAGMENT::COMPILATION_FAILED\n" << infoLog << std::endl;
     }
+    glCheckError();
+
 
     // link shaders
     const int shaderProgram = glCreateProgram();
     glAttachShader(shaderProgram, vertexShader);
     glAttachShader(shaderProgram, fragmentShader);
     glLinkProgram(shaderProgram);
+    glValidateProgram(shaderProgram);
+    glCheckError();
     // check for linking errors
     glGetProgramiv(shaderProgram, GL_LINK_STATUS, &success);
     if (!success) {
@@ -225,6 +317,7 @@ int main()
     }
     glDeleteShader(vertexShader);
     glDeleteShader(fragmentShader);
+    glCheckError();
 
 
     // 
@@ -238,14 +331,16 @@ int main()
     unsigned int TFVBO, TFVAO;
     glGenVertexArrays(1, &TFVAO);
     glBindVertexArray(TFVAO);
+    glCheckError();
 
     glGenBuffers(1, &TFVBO);
     glBindBuffer(GL_ARRAY_BUFFER, TFVBO);
     glBufferData(GL_ARRAY_BUFFER, sizeof(tf_vertices), tf_vertices, GL_STATIC_DRAW);
+    glCheckError();
 
     glEnableVertexAttribArray(0);
     glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), (void*)0);
-
+    glCheckError();
 
 
     // 
@@ -259,13 +354,16 @@ int main()
     unsigned int VBO, VAO;
     glGenVertexArrays(1, &VAO);
     glBindVertexArray(VAO);
+    glCheckError();
 
     glGenBuffers(1, &VBO);
     glBindBuffer(GL_ARRAY_BUFFER, VBO);
     glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
+    glCheckError();
 
     glEnableVertexAttribArray(0);
     glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), (void*)0);
+    glCheckError();
 
     //std::vector<FDStruct> outScript(3);
 
@@ -282,15 +380,16 @@ int main()
     auto node = jvx::Node(context);
     auto material = jvx::Material(context);
     auto renderer = jvx::Renderer(context);
-    auto meshTest0 = jvx::MeshInput(context);
-    auto meshTest1 = jvx::MeshInput(context);
-    auto meshBinding = jvx::MeshBinding(context, 1024u, std::vector<vk::DeviceSize>{ 1024u, 1024u });
-    auto bufferViewS = jvx::BufferViewSet(context);
-
 
 	// initialize renderer
     context->initialize(SCR_WIDTH, SCR_HEIGHT);
     renderer->linkMaterial(material)->linkNode(node);
+
+    // 
+    auto meshTest0 = jvx::MeshInput(context);
+    auto meshTest1 = jvx::MeshInput(context);
+    auto meshBinding = jvx::MeshBinding(context, 1024u, std::vector<vk::DeviceSize>{ 1024u, 1024u });
+    auto bufferViewS = jvx::BufferViewSet(context);
 
     // 
     auto TRS = vkt::Vector<glm::mat3x4>(std::make_shared<vkt::VmaBufferAllocation>(fw->getAllocator(), vkh::VkBufferCreateInfo{
@@ -338,30 +437,27 @@ int main()
         VkSemaphore glReady = {}, glComplete = {};
 	} semaphores;
 
-	{ // 
-		auto handleType = vk::ExternalSemaphoreHandleTypeFlagBits::eOpaqueWin32;
-        {
-            const auto exportable = vkh::VkExportSemaphoreCreateInfo{ .handleTypes = {.eOpaqueWin32 = 1} };
-            fw->getDeviceDispatch()->CreateSemaphoreA(vkh::VkSemaphoreCreateInfo{ .pNext = &exportable }, nullptr, &semaphores.glReady);
-            fw->getDeviceDispatch()->CreateSemaphoreA(vkh::VkSemaphoreCreateInfo{ .pNext = &exportable }, nullptr, &semaphores.glComplete);
-        };
-        {
-            fw->getDeviceDispatch()->GetSemaphoreWin32HandleKHR(vkh::VkSemaphoreGetWin32HandleInfoKHR{ .semaphore = semaphores.glReady, .handleType = VK_EXTERNAL_SEMAPHORE_HANDLE_TYPE_OPAQUE_WIN32_BIT }, &handles.glReady);
-            fw->getDeviceDispatch()->GetSemaphoreWin32HandleKHR(vkh::VkSemaphoreGetWin32HandleInfoKHR{ .semaphore = semaphores.glComplete, .handleType = VK_EXTERNAL_SEMAPHORE_HANDLE_TYPE_OPAQUE_WIN32_BIT }, &handles.glComplete);
-        };
-	}
+    { // Vulkan Semaphores
+        const auto exportable = vkh::VkExportSemaphoreCreateInfo{ .handleTypes = {.eOpaqueWin32 = 1} };
+        vkh::handleVk(fw->getDeviceDispatch()->CreateSemaphoreA(vkh::VkSemaphoreCreateInfo{ .pNext = &exportable }, nullptr, &semaphores.glReady));
+        vkh::handleVk(fw->getDeviceDispatch()->CreateSemaphoreA(vkh::VkSemaphoreCreateInfo{ .pNext = &exportable }, nullptr, &semaphores.glComplete));
+    };
+    { // On non-Win32 systems needs use glImportSemaphoreFdEXT instead
+        vkh::handleVk(fw->getDeviceDispatch()->GetSemaphoreWin32HandleKHR(vkh::VkSemaphoreGetWin32HandleInfoKHR{ .semaphore = semaphores.glReady, .handleType = VK_EXTERNAL_SEMAPHORE_HANDLE_TYPE_OPAQUE_WIN32_BIT }, &handles.glReady));
+        vkh::handleVk(fw->getDeviceDispatch()->GetSemaphoreWin32HandleKHR(vkh::VkSemaphoreGetWin32HandleInfoKHR{ .semaphore = semaphores.glComplete, .handleType = VK_EXTERNAL_SEMAPHORE_HANDLE_TYPE_OPAQUE_WIN32_BIT }, &handles.glComplete));
+    };
 
-	// Platform specific import.  On non-Win32 systems use glImportSemaphoreFdEXT instead
+	// Platform specific import.
     GLuint glReady = 0;
     glGenSemaphoresEXT(1, &glReady);
 	glImportSemaphoreWin32HandleEXT(glReady, GL_HANDLE_TYPE_OPAQUE_WIN32_EXT, handles.glReady);
-    handleError();
+    glCheckError();
 
     // 
     GLuint glComplete = 0;
     glGenSemaphoresEXT(1, &glComplete);
 	glImportSemaphoreWin32HandleEXT(glComplete, GL_HANDLE_TYPE_OPAQUE_WIN32_EXT, handles.glComplete);
-    handleError();
+    glCheckError();
 
     // 
     GLuint color = context->getFrameBuffers()[8].getGL();
@@ -369,6 +465,7 @@ int main()
     glTextureParameteri(color, GL_TEXTURE_WRAP_T, GL_REPEAT);
     glTextureParameteri(color, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
     glTextureParameteri(color, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+    glCheckError();
 
     // 
     GLenum layoutSignal = GL_LAYOUT_GENERAL_EXT;
@@ -389,22 +486,28 @@ int main()
         //glBindTransformFeedback(GL_TRANSFORM_FEEDBACK, transformFeedback);
 
         glBindBufferBase(GL_TRANSFORM_FEEDBACK_BUFFER, 0u, GLID);
+        glCheckError();
 
         // 
         glUseProgram(shaderTFProgram);
+        glCheckError();
+
         glBindVertexArray(TFVAO);
+        glCheckError();
 
         // 
         glEnable(GL_RASTERIZER_DISCARD);
         glBeginTransformFeedback(GL_TRIANGLES);
         glDrawArrays(GL_LINES_ADJACENCY, 0, 4);
         glEndTransformFeedback();
+        glCheckError();
 
         // 
         glSignalSemaphoreEXT(glComplete, 0, nullptr, 1, &color, &layoutSignal);
+        glCheckError();
 
 		// 
-        std::vector<vkh::VkPipelineStageFlags> waitStages = { {.eFragmentShader = 1, .eComputeShader = 1, .eRayTracingShader = 1 } };
+        std::vector<vkh::VkPipelineStageFlags> waitStages = { vkh::VkPipelineStageFlags{.eFragmentShader = 1, .eComputeShader = 1, .eTransfer = 1, .eRayTracingShader = 1 } };
         vkh::handleVk(fw->getDeviceDispatch()->QueueSubmit(queue, 1u, vkh::VkSubmitInfo{
             .waitSemaphoreCount = 1u, .pWaitSemaphores = &semaphores.glComplete, .pWaitDstStageMask = waitStages.data(),
             .commandBufferCount = 1u, .pCommandBuffers = &renderer->setupCommands()->refCommandBuffer(),
@@ -413,6 +516,7 @@ int main()
 
         // 
         glWaitSemaphoreEXT(glReady, 0, nullptr, 1, &color, &layoutWait);
+        glCheckError();
 
         // 
         //glGetNamedBufferSubData(GLID, 0u, outScript.size() * sizeof(FDStruct), outScript.data());
@@ -425,6 +529,7 @@ int main()
         glUseProgram(shaderProgram);
         glBindVertexArray(VAO);
         glDrawArrays(GL_TRIANGLE_FAN, 0, 4);
+        glCheckError();
 
 		// 
         glfwSwapBuffers(window);
@@ -434,6 +539,7 @@ int main()
 	// 
     glDeleteVertexArrays(1, &VAO);
     glDeleteBuffers(1, &VBO);
+    glCheckError();
 
     glfwTerminate();
     return 0;
