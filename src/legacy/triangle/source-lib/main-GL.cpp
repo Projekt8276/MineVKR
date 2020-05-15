@@ -20,7 +20,9 @@
 
 #include <iostream>
 
+#if defined(ENABLE_OPENGL_INTEROP) && !defined(VKT_USE_GLAD)
 using namespace gl;
+#endif
 
 class RayTracer : public std::enable_shared_from_this<RayTracer> { public: 
 	 ~RayTracer() {};

@@ -40,8 +40,9 @@ set (SOURCES_LIST
     "./include/volk/*"
     "./include/spirv/*"
     "./include/spirv/*/*"
-    "./include/glbinding/*"
-    "./include/glbinding/*/*"
+    "./include/glad/*"
+    "./include/glad/*/*"
+    
     "./source/*.hpp"
     "./source/*.h"
     "./source/*.cpp"
@@ -104,6 +105,11 @@ endif()
 # Vulkan Directories 
 if (Vulkan_INCLUDE_DIR)
     set (INC_DIR ${INC_DIR} ${Vulkan_INCLUDE_DIR})
+endif()
+
+# glbinding
+if (glbinding_DIR)
+    set (INC_DIR ${INC_DIR} ${glbinding_DIR} "${glbinding_DIR}/include")
 endif()
 
 # Vulkan Library 
