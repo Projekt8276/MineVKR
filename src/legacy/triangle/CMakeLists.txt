@@ -42,7 +42,7 @@ set (SOURCES_LIST
     "./include/spirv/*/*"
     "./include/glad/*"
     "./include/glad/*/*"
-    
+
     "./source/*.hpp"
     "./source/*.h"
     "./source/*.cpp"

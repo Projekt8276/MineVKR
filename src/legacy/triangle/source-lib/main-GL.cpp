@@ -390,7 +390,7 @@ int main()
     // 
     auto meshTest0 = jvx::MeshInput(context);
     auto meshTest1 = jvx::MeshInput(context);
-    auto meshBinding = jvx::MeshBinding(context, 1024u, std::vector<vk::DeviceSize>{ 1024u, 1024u });
+    auto meshBinding = jvx::MeshBinding(context, 4u, std::vector<vk::DeviceSize>{ 2u, 2u });
     auto bufferViewS = jvx::BufferViewSet(context);
 
     // 
@@ -403,7 +403,7 @@ int main()
     TRS[1] = glm::transpose(glm::translate(glm::mat4x4(1.f), glm::vec3(0.5f, -0.5f, 0.f)));
 
     // 
-    meshBinding->setTransformData(TRS)->addRangeInput(2u)->setIndexCount(6u);
+    meshBinding->setTransformData(TRS)->addRangeInput(1u)->setIndexCount(3u);
 
     // 
     node->pushInstance(vkh::VsGeometryInstance{
@@ -471,7 +471,7 @@ int main()
 
     // 
     GLenum layoutSignal = GL_LAYOUT_GENERAL_EXT;
-    GLenum layoutWait = GL_LAYOUT_GENERAL_EXT;
+    GLenum layoutWait = GL_LAYOUT_COLOR_ATTACHMENT_EXT;//GL_LAYOUT_GENERAL_EXT;
 
     // 
     GLuint64 colorHandle = 0;
@@ -501,11 +501,11 @@ int main()
         glDrawArrays(GL_LINES_ADJACENCY, 0, 4);
         glEndTransformFeedback();
         glCheckError();
-
+        
         // Signal for Vulkan
         glSignalSemaphoreEXT(glComplete, 1, &GLID, 1, &color, &layoutSignal);
         glCheckError();
-
+        
         // Fence a Vulkan call...
         vkh::handleVk(fw->getDeviceDispatch()->WaitForFences(1u, &waitFence, true, 30ull * 1000ull * 1000ull * 1000ull));
         vkh::handleVk(fw->getDeviceDispatch()->ResetFences(1u, &waitFence));
@@ -536,6 +536,7 @@ int main()
         glCheckError();
 
 		// 
+        //glFinish();
         glfwSwapBuffers(window);
         glfwPollEvents();
     }
