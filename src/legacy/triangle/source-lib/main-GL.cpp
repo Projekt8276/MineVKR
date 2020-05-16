@@ -3,22 +3,31 @@
 #define TINYOBJLOADER_IMPLEMENTATION
 #define VKT_FORCE_VMA_IMPLEMENTATION
 #define VK_ENABLE_BETA_EXTENSIONS
-//#define VKT_ENABLE_GLFW_SUPPORT
+#define VKT_ENABLE_GLFW_SUPPORT
 
 #ifdef WIN32
 #define VK_USE_PLATFORM_WIN32_KHR
+//#define VKT_ENABLE_GLFW_SUPPORT
 #endif
 
+//#define FORCE_RAY_TRACING
+
+// 
+#include <iostream>
+#include <vulkan/vulkan.h>
 #include <GLFW/glfw3.h>
 #include <vkt3/fw.hpp>
 #include <JiviX/JiviX.hpp>
+
+// 
+#include <glbinding-aux/debug.h>
+#include <glbinding/getProcAddress.h>
 
 #define TINYGLTF_IMPLEMENTATION
 #define STB_IMAGE_IMPLEMENTATION
 #define STB_IMAGE_WRITE_IMPLEMENTATION
 #include "misc/tiny_gltf.h"
 
-#include <iostream>
 
 #if defined(ENABLE_OPENGL_INTEROP) && !defined(VKT_USE_GLAD)
 using namespace gl;
@@ -182,21 +191,40 @@ GLenum glCheckError_(const char* file, int line) {
 #define glCheckError() glCheckError_(__FILE__, __LINE__) 
 
 
-
-
-int main()
+void error(int errnum, const char* errmsg)
 {
+    std::cerr << errnum << ": " << errmsg << std::endl;
+}
+
+
+void key_callback(GLFWwindow* window, int key, int /*scancode*/, int action, int /*mods*/)
+{
+    if (key == GLFW_KEY_ESCAPE && action == GLFW_PRESS)
+    {
+        glfwSetWindowShouldClose(window, 1);
+    }
+}
+
+int main() {
     // glfw: initialize and configure
     // ------------------------------
+    glfwSetErrorCallback(error);
     glfwInit();
+
+    // 
+    if (GLFW_FALSE == glfwVulkanSupported()) {
+        glfwTerminate(); return -1;
+    };
+
+    // glfw: window and context hints
+    glfwDefaultWindowHints();
     glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 4);
     glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 6);
     glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_COMPAT_PROFILE);
     glfwWindowHint(GLFW_OPENGL_DEBUG_CONTEXT, true);
-
-#ifdef __APPLE__
-    glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE); // uncomment this statement to fix compilation on OS X
-#endif
+    glfwWindowHint(GLFW_CLIENT_API, GLFW_OPENGL_API);
+    glfwWindowHint(GLFW_CONTEXT_CREATION_API, GLFW_NATIVE_CONTEXT_API);
+    glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, true);
 
     // glfw window creation
     // --------------------
@@ -210,15 +238,20 @@ int main()
     glfwMakeContextCurrent(window);
     glfwSetFramebufferSizeCallback(window, framebuffer_size_callback);
 
+
+
 	// initialize Vulkan
     auto fw = jvx::Driver();
-    vkt::initializeGL();
+    fw->getAppObject().window = window;
 
+    // Ininitialize by GlBinding
+    //glfwMakeContextCurrent(appObj.opengl = glfwCreateWindow(canvasWidth, canvasHeight, "GLTest", nullptr, nullptr));
+    glbinding::initialize(0, glfwGetProcAddress, true, false);
+    glbinding::aux::enableGetErrorCallback();
 
-    // 
-    int flags; glGetIntegerv(GL_CONTEXT_FLAGS, &flags);
-    if (flags & int(GL_CONTEXT_FLAG_DEBUG_BIT))
-    {
+    // Pravoslavie Smerti
+    int flags = 0u; glGetIntegerv(GL_CONTEXT_FLAGS, &flags);
+    if (flags & int(GL_CONTEXT_FLAG_DEBUG_BIT)) {
         // initialize debug output 
         glEnable(GL_DEBUG_OUTPUT);
         glEnable(GL_DEBUG_OUTPUT_SYNCHRONOUS);
@@ -226,7 +259,6 @@ int main()
         glDebugMessageControl(GL_DONT_CARE, GL_DONT_CARE, GL_DONT_CARE, 0, nullptr, GL_TRUE);
         glCheckError();
     }
-
 
     // build and compile our shader program
     // ------------------------------------
@@ -403,7 +435,7 @@ int main()
     TRS[1] = glm::transpose(glm::translate(glm::mat4x4(1.f), glm::vec3(0.5f, -0.5f, 0.f)));
 
     // 
-    meshBinding->setTransformData(TRS)->addRangeInput(1u)->setIndexCount(3u);
+    meshBinding->setTransformData(TRS)->addRangeInput(2u)->setIndexCount(6u);
 
     // 
     node->pushInstance(vkh::VsGeometryInstance{
@@ -483,8 +515,11 @@ int main()
     VkFence waitFence = {};
     vkh::handleVk(fw->getDeviceDispatch()->CreateFence(vkh::VkFenceCreateInfo{ .flags{1} }, nullptr, &waitFence));
 
+    //
+    glfwSwapInterval(1);
+
     // 
-    renderer->setupCommands({}, false); // 
+    //renderer->setupCommands({}, false); // 
     while (!glfwWindowShouldClose(window))
     {
         processInput(window);
@@ -514,7 +549,7 @@ int main()
         std::vector<vkh::VkPipelineStageFlags> waitStages = { vkh::VkPipelineStageFlags{ .eFragmentShader = 1, .eComputeShader = 1, .eTransfer = 1, .eRayTracingShader = 1, .eAccelerationStructureBuild = 1 } };
         vkh::handleVk(fw->getDeviceDispatch()->QueueSubmit(queue, 1u, vkh::VkSubmitInfo{
             .waitSemaphoreCount = 1u, .pWaitSemaphores = &semaphores.glComplete, .pWaitDstStageMask = waitStages.data(),
-            .commandBufferCount = 1u, .pCommandBuffers = &renderer->refCommandBuffer(),
+            .commandBufferCount = 1u, .pCommandBuffers = &renderer->setupCommands()->refCommandBuffer(),
             .signalSemaphoreCount = 1u, .pSignalSemaphores = &semaphores.glReady
         }, waitFence));
 
