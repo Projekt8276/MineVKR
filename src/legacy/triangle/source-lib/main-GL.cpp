@@ -480,50 +480,52 @@ int main()
     auto GLID = meshBinding->getBindingBufferGL();
 
     // 
+    VkFence waitFence = {};
+    vkh::handleVk(fw->getDeviceDispatch()->CreateFence(vkh::VkFenceCreateInfo{ .flags{1} }, nullptr, &waitFence));
+
+    // 
+    renderer->setupCommands({}, false); // 
     while (!glfwWindowShouldClose(window))
     {
         processInput(window);
 
         // 
-        //glBindTransformFeedback(GL_TRANSFORM_FEEDBACK, transformFeedback);
-
-        glBindBufferBase(GL_TRANSFORM_FEEDBACK_BUFFER, 0u, GLID);
-        glCheckError();
-
-        // 
         glUseProgram(shaderTFProgram);
-        glCheckError();
-
         glBindVertexArray(TFVAO);
+        glEnable(GL_RASTERIZER_DISCARD);
         glCheckError();
 
-        // 
-        glEnable(GL_RASTERIZER_DISCARD);
+        // Do transform feedback
+        glBindBufferBase(GL_TRANSFORM_FEEDBACK_BUFFER, 0u, GLID);
         glBeginTransformFeedback(GL_TRIANGLES);
         glDrawArrays(GL_LINES_ADJACENCY, 0, 4);
         glEndTransformFeedback();
         glCheckError();
 
-        // 
-        glSignalSemaphoreEXT(glComplete, 0, nullptr, 1, &color, &layoutSignal);
+        // Signal for Vulkan
+        glSignalSemaphoreEXT(glComplete, 1, &GLID, 1, &color, &layoutSignal);
         glCheckError();
 
-		// 
-        std::vector<vkh::VkPipelineStageFlags> waitStages = { vkh::VkPipelineStageFlags{.eFragmentShader = 1, .eComputeShader = 1, .eTransfer = 1, .eRayTracingShader = 1 } };
+        // Fence a Vulkan call...
+        vkh::handleVk(fw->getDeviceDispatch()->WaitForFences(1u, &waitFence, true, 30ull * 1000ull * 1000ull * 1000ull));
+        vkh::handleVk(fw->getDeviceDispatch()->ResetFences(1u, &waitFence));
+
+		// Ray-Trace!
+        std::vector<vkh::VkPipelineStageFlags> waitStages = { vkh::VkPipelineStageFlags{ .eFragmentShader = 1, .eComputeShader = 1, .eTransfer = 1, .eRayTracingShader = 1, .eAccelerationStructureBuild = 1 } };
         vkh::handleVk(fw->getDeviceDispatch()->QueueSubmit(queue, 1u, vkh::VkSubmitInfo{
             .waitSemaphoreCount = 1u, .pWaitSemaphores = &semaphores.glComplete, .pWaitDstStageMask = waitStages.data(),
-            .commandBufferCount = 1u, .pCommandBuffers = &renderer->setupCommands()->refCommandBuffer(),
+            .commandBufferCount = 1u, .pCommandBuffers = &renderer->refCommandBuffer(),
             .signalSemaphoreCount = 1u, .pSignalSemaphores = &semaphores.glReady
-        }, {}));
+        }, waitFence));
 
-        // 
-        glWaitSemaphoreEXT(glReady, 0, nullptr, 1, &color, &layoutWait);
+        // Wait in OpenGL side...
+        glWaitSemaphoreEXT(glReady, 1, &GLID, 1, &color, &layoutWait);
         glCheckError();
 
         // 
         //glGetNamedBufferSubData(GLID, 0u, outScript.size() * sizeof(FDStruct), outScript.data());
 
-		// 
+		// Draw Result...
         glDisable(GL_RASTERIZER_DISCARD);
         glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
         glClear(GL_COLOR_BUFFER_BIT);
