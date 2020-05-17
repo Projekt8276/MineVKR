@@ -4,13 +4,14 @@
 #define VKT_FORCE_VMA_IMPLEMENTATION
 #define VK_ENABLE_BETA_EXTENSIONS
 #define VKT_ENABLE_GLFW_SUPPORT
+#define TINYEXR_IMPLEMENTATION
 
 #ifdef WIN32
 #define VK_USE_PLATFORM_WIN32_KHR
 //#define VKT_ENABLE_GLFW_SUPPORT
 #endif
 
-//#define FORCE_RAY_TRACING
+#define FORCE_RAY_TRACING
 
 // 
 #include <iostream>
@@ -18,6 +19,8 @@
 #include <GLFW/glfw3.h>
 #include <vkt3/fw.hpp>
 #include <JiviX/JiviX.hpp>
+//#include <misc/tiny_gltf.h>
+#include <misc/tinyexr.h>
 
 // 
 #include <glbinding-aux/debug.h>
@@ -185,6 +188,7 @@ GLenum glCheckError_(const char* file, int line) {
         assert(errorCode == GL_NO_ERROR);
         glfwTerminate(); exit(int(errorCode));
     };
+    glFinish();
     return errorCode;
 }
 
@@ -304,7 +308,7 @@ int main() {
         glGetProgramInfoLog(shaderTFProgram, 512, NULL, infoLog);
         std::cout << "ERROR::SHADER::PROGRAM::LINKING_FAILED\n" << infoLog << std::endl;
     }
-    glDeleteShader(vertexTFShader);
+    //glDeleteShader(vertexTFShader);
     glCheckError();
 
 
@@ -349,8 +353,8 @@ int main() {
         glGetProgramInfoLog(shaderProgram, 512, NULL, infoLog);
         std::cout << "ERROR::SHADER::PROGRAM::LINKING_FAILED\n" << infoLog << std::endl;
     }
-    glDeleteShader(vertexShader);
-    glDeleteShader(fragmentShader);
+    //glDeleteShader(vertexShader);
+    //glDeleteShader(fragmentShader);
     glCheckError();
 
 
@@ -399,7 +403,8 @@ int main() {
     glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), (void*)0);
     glCheckError();
 
-    //std::vector<FDStruct> outScript(3);
+    // Debug View
+    std::vector<FDStruct> outScript(6u);
 
 
 
@@ -427,7 +432,7 @@ int main() {
 
     // 
     auto TRS = vkt::Vector<glm::mat3x4>(std::make_shared<vkt::VmaBufferAllocation>(fw->getAllocator(), vkh::VkBufferCreateInfo{
-        .size = sizeof(glm::mat3x4) * 2ull, .usage = {.eTransferSrc = 1, .eStorageTexelBuffer = 1, .eStorageBuffer = 1, .eIndexBuffer = 1, .eVertexBuffer = 1, .eSharedDeviceAddress = 1 },
+        .size = sizeof(glm::mat3x4) * 2ull, .usage = {.eTransferSrc = 1, .eStorageTexelBuffer = 1, .eStorageBuffer = 1, .eIndexBuffer = 1, .eVertexBuffer = 1, .eRayTracing = 1, .eSharedDeviceAddress = 1 },
     }, vkt::VmaMemoryInfo{.memUsage = VMA_MEMORY_USAGE_CPU_TO_GPU }));
 
     // 
@@ -436,6 +441,7 @@ int main() {
 
     // 
     meshBinding->setTransformData(TRS)->addRangeInput(2u)->setIndexCount(6u);
+    //meshBinding->addRangeInput(2u)->setIndexCount(6u);
 
     // 
     node->pushInstance(vkh::VsGeometryInstance{
@@ -447,17 +453,100 @@ int main() {
 
 	// Orange
     jvi::MaterialUnit mdk = {};
-    mdk.diffuse = glm::vec4(1.f,0.75f,0.f,1.f);
+    mdk.diffuse = glm::vec4(1.f, 0.75f, 0.f, 1.f);
     mdk.diffuseTexture = -1;
+    //mdk.emission = glm::vec4(1.f, 0.75f, 0.f, 1.f);
+    //mdk.emissionTexture = -1;
 	material->pushMaterial(mdk);
 
     // Blue
     mdk.diffuse = glm::vec4(0.f, 0.75f, 1.f, 1.f);
     mdk.diffuseTexture = -1;
+    //mdk.emission = glm::vec4(0.f, 0.75f, 1.f, 1.f);
+    //mdk.emissionTexture = -1;
     material->pushMaterial(mdk);
 
+
+    std::cout << "Materialized" << std::endl;
+
+    /*
+    // HDRI RenderDoc CORRUPT! (i.e. CRASH runtime with Unable to Debug through Visual Studio 2019)
+    vkt::ImageRegion image = {};
+    {
+        int width = 0u, height = 0u;
+        float* rgba = nullptr;
+        const char* err = nullptr;
+
+        // 
+        std::vector<glm::vec4> gSkyColor = {
+            glm::vec4(0.9f,0.98,0.999f, 1.f),
+            glm::vec4(0.9f,0.98,0.999f, 1.f),
+            glm::vec4(0.9f,0.98,0.999f, 1.f),
+            glm::vec4(0.9f,0.98,0.999f, 1.f)
+        };
+
+        { //
+            int ret = LoadEXR(&rgba, &width, &height, "spiaggia_di_mondello_4k.exr", &err);
+            if (ret != 0) {
+                printf("err: %s\n", err); // 
+
+                // backdoor image
+                rgba = (float*)gSkyColor.data();
+                width = 2u, height = 2u;
+            }
+        };
+
+        if (width >= 0 && height >= 0 && rgba) { // 
+            image = vkt::ImageRegion(std::make_shared<vkt::VmaImageAllocation>(fw.getAllocator(), vkh::VkImageCreateInfo{  // experimental: callify
+                .format = VK_FORMAT_R32G32B32A32_SFLOAT,
+                .extent = {uint32_t(width),uint32_t(height),1u},
+                .usage = {.eTransferDst = 1, .eSampled = 1, .eStorage = 1, .eColorAttachment = 1 },
+            }, vkt::VmaMemoryInfo{ .memUsage = VMA_MEMORY_USAGE_GPU_ONLY, .deviceDispatch = fw->getDeviceDispatch(), .instanceDispatch = fw->getInstanceDispatch() }), vkh::VkImageViewCreateInfo{
+                .format = VK_FORMAT_R32G32B32A32_SFLOAT,
+            });
+
+            // Create Sampler By Reference
+            vkh::handleVk(fw->getDeviceDispatch()->CreateSampler(vkh::VkSamplerCreateInfo{
+                .magFilter = VK_FILTER_LINEAR,
+                .minFilter = VK_FILTER_LINEAR,
+                .addressModeU = VK_SAMPLER_ADDRESS_MODE_REPEAT,
+                .addressModeV = VK_SAMPLER_ADDRESS_MODE_CLAMP_TO_EDGE,
+            }, nullptr, &image.refSampler()));
+
+            // 
+            vkt::Vector<> imageBuf = {};
+            if (width > 0u && height > 0u && rgba) {
+                imageBuf = vkt::Vector<>(std::make_shared<vkt::VmaBufferAllocation>(fw.getAllocator(), vkh::VkBufferCreateInfo{ // experimental: callify
+                    .size = size_t(width) * size_t(height) * sizeof(glm::vec4),
+                    .usage = {.eTransferSrc = 1, .eStorageTexelBuffer = 1, .eStorageBuffer = 1, .eIndexBuffer = 1, .eVertexBuffer = 1 },
+                    }, vkt::VmaMemoryInfo{ .memUsage = VMA_MEMORY_USAGE_CPU_TO_GPU, .deviceDispatch = fw->getDeviceDispatch(), .instanceDispatch = fw->getInstanceDispatch() }));
+                memcpy(imageBuf.data(), rgba, size_t(width) * size_t(height) * sizeof(glm::vec4));
+            };
+
+            // 
+            context->getThread()->submitOnce([&](VkCommandBuffer& cmd) {
+                image.transfer(cmd);
+
+                auto buffer = imageBuf;
+                fw->getDeviceDispatch()->CmdCopyBufferToImage(cmd, buffer.buffer(), image.getImage(), image.getImageLayout(), 1u, vkh::VkBufferImageCopy{
+                    .bufferOffset = buffer.offset(),
+                    .bufferRowLength = uint32_t(width),
+                    .bufferImageHeight = uint32_t(height),
+                    .imageSubresource = image.subresourceLayers(),
+                    .imageOffset = {0u,0u,0u},
+                    .imageExtent = {uint32_t(width),uint32_t(height),1u},
+                    });
+                });
+
+            // ONLY FOR TEST!
+            material->setBackgroundImage(image);
+        };
+    };
+    std::cout << "HDRI Initialized" << std::endl;
+    */
+
     // 
-    renderer->setupCommands();
+    //renderer->setupCommands();
 
 	// 
 	struct ShareHandles {
@@ -544,6 +633,7 @@ int main() {
         // Fence a Vulkan call...
         vkh::handleVk(fw->getDeviceDispatch()->WaitForFences(1u, &waitFence, true, 30ull * 1000ull * 1000ull * 1000ull));
         vkh::handleVk(fw->getDeviceDispatch()->ResetFences(1u, &waitFence));
+        //glFinish(); // For Debug
 
 		// Ray-Trace!
         std::vector<vkh::VkPipelineStageFlags> waitStages = { vkh::VkPipelineStageFlags{ .eFragmentShader = 1, .eComputeShader = 1, .eTransfer = 1, .eRayTracingShader = 1, .eAccelerationStructureBuild = 1 } };
@@ -568,6 +658,7 @@ int main() {
         glUseProgram(shaderProgram);
         glBindVertexArray(VAO);
         glDrawArrays(GL_TRIANGLE_FAN, 0, 4);
+        //glFinish(); // For Debug
         glCheckError();
 
 		// 
