@@ -1,49 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="4b7b64e4-95fe-4605-8caf-f658c6b40341" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/config/checkstyle/checkstyle.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/qouteall/README.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/qouteall/immersive_portals/ducks/IEBuiltChunk.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/qouteall/immersive_portals/ducks/IECamera.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/qouteall/immersive_portals/ducks/IEChunkHolder.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/qouteall/immersive_portals/ducks/IEChunkTicketManager.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/qouteall/immersive_portals/ducks/IEClientPlayNetworkHandler.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/qouteall/immersive_portals/ducks/IEClientPlayerInteractionManager.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/qouteall/immersive_portals/ducks/IEEntityTracker.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/qouteall/immersive_portals/ducks/IEFrameBuffer.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/qouteall/immersive_portals/ducks/IEFrustum.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/qouteall/immersive_portals/ducks/IEGameRenderer.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/qouteall/immersive_portals/ducks/IEMatrix4f.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/qouteall/immersive_portals/ducks/IEMetricsData.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/qouteall/immersive_portals/ducks/IEMinecraftClient.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/qouteall/immersive_portals/ducks/IEMinecraftServer.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/qouteall/immersive_portals/ducks/IEParticleManager.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/qouteall/immersive_portals/ducks/IEPlayerEntity.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/qouteall/immersive_portals/ducks/IEPlayerListEntry.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/qouteall/immersive_portals/ducks/IEPlayerMoveC2SPacket.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/qouteall/immersive_portals/ducks/IEPlayerPositionLookS2CPacket.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/qouteall/immersive_portals/ducks/IERayTraceContext.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/qouteall/immersive_portals/ducks/IEServerChunkManager.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/qouteall/immersive_portals/ducks/IEServerPlayNetworkHandler.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/qouteall/immersive_portals/ducks/IEServerPlayerEntity.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/qouteall/immersive_portals/ducks/IEServerWorld.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/qouteall/immersive_portals/ducks/IEThreadedAnvilChunkStorage.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/qouteall/immersive_portals/ducks/IEVector4f.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/qouteall/immersive_portals/ducks/IEWorld.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/qouteall/immersive_portals/ducks/IEWorldChunk.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/qouteall/immersive_portals/ducks/IEWorldRenderer.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/qouteall/immersive_portals/ducks/IEWorldRendererChunkInfo.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/net/fabricmc/minevkr/ReflectionUtil.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/net/fabricmc/minevkr/mixin/MixinMatrix4f.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/net/fabricmc/minevkr/mixin/MixinVector4f.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/build.gradle" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gradle.properties" beforeDir="false" afterPath="$PROJECT_DIR$/gradle.properties" afterDir="false" />
+    <list default="true" id="abea29d8-dd5f-4646-929d-1d5365628f68" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/gradle.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/jarRepositories.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/runConfigurations/Minecraft_Client.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/runConfigurations/Minecraft_Server.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/gradle/wrapper/gradle-wrapper.jar" beforeDir="false" afterPath="$PROJECT_DIR$/gradle/wrapper/gradle-wrapper.jar" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/gradle/wrapper/gradle-wrapper.properties" beforeDir="false" afterPath="$PROJECT_DIR$/gradle/wrapper/gradle-wrapper.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/net/fabricmc/minevkr/mixin/MixinWindow.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/fabricmc/minevkr/mixin/MixinWindow.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/net/fabricmc/minevkr/mixin/MixinWorldRenderer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/fabricmc/minevkr/mixin/MixinWorldRenderer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/modid.mixins.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/modid.mixins.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gradlew.bat" beforeDir="false" afterPath="$PROJECT_DIR$/gradlew.bat" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -55,294 +24,36 @@
       <ProjectState />
     </projectState>
   </component>
-  <component name="ExternalProjectsManager">
-    <system id="GRADLE">
-      <state>
-        <task path="$PROJECT_DIR$">
-          <activation />
-        </task>
-        <projects_view>
-          <tree_state>
-            <expand>
-              <path>
-                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
-                <item name="MineVKR" type="f1a62948:ProjectNode" />
-              </path>
-              <path>
-                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
-                <item name="MineVKR" type="f1a62948:ProjectNode" />
-                <item name="Tasks" type="e4a08cd1:TasksNode" />
-              </path>
-              <path>
-                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
-                <item name="MineVKR" type="f1a62948:ProjectNode" />
-                <item name="Tasks" type="e4a08cd1:TasksNode" />
-                <item name="build" type="c8890929:TasksNode$1" />
-              </path>
-              <path>
-                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
-                <item name="MineVKR" type="f1a62948:ProjectNode" />
-                <item name="Tasks" type="e4a08cd1:TasksNode" />
-                <item name="build setup" type="c8890929:TasksNode$1" />
-              </path>
-              <path>
-                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
-                <item name="MineVKR" type="f1a62948:ProjectNode" />
-                <item name="Tasks" type="e4a08cd1:TasksNode" />
-                <item name="fabric" type="c8890929:TasksNode$1" />
-              </path>
-              <path>
-                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
-                <item name="MineVKR" type="f1a62948:ProjectNode" />
-                <item name="Dependencies" type="6de06a37:ExternalSystemViewDefaultContributor$MyDependenciesNode" />
-              </path>
-            </expand>
-            <select />
-          </tree_state>
-        </projects_view>
-      </state>
-    </system>
-  </component>
-  <component name="FileTemplateManagerImpl">
-    <option name="RECENT_TEMPLATES">
-      <list>
-        <option value="Class" />
-      </list>
-    </option>
-  </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
-  <component name="ProjectId" id="1b6ahtieV3Rxl0H5Vn9RUlK1Fmi" />
-  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
-    <ConfirmationsSetting value="2" id="Add" />
-  </component>
+  <component name="ProjectId" id="1c1dSLmgDFbBwKe72nj04XyK0fT" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent">
-    <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
-    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
-    <property name="project.structure.last.edited" value="Project" />
-    <property name="project.structure.proportion" value="0.15" />
-    <property name="project.structure.side.proportion" value="0.2" />
-    <property name="settings.editor.selected.configurable" value="preferences.language.Kotlin" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="aspect.path.notification.shown" value="true" />
     <property name="show.unlinked.gradle.project.popup" value="true" />
-  </component>
-  <component name="RunManager" selected="Application.Minecraft Client">
-    <configuration name="MineRTX [build]" type="GradleRunConfiguration" factoryName="Gradle">
-      <ExternalSystemSettings>
-        <option name="executionName" />
-        <option name="externalProjectPath" value="$PROJECT_DIR$" />
-        <option name="externalSystemIdString" value="GRADLE" />
-        <option name="scriptParameters" />
-        <option name="taskDescriptions">
-          <list />
-        </option>
-        <option name="taskNames">
-          <list>
-            <option value="build" />
-          </list>
-        </option>
-        <option name="vmOptions" />
-      </ExternalSystemSettings>
-      <GradleScriptDebugEnabled>true</GradleScriptDebugEnabled>
-      <method v="2" />
-    </configuration>
-    <configuration name="MineRTX [init]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
-      <ExternalSystemSettings>
-        <option name="executionName" />
-        <option name="externalProjectPath" value="$PROJECT_DIR$" />
-        <option name="externalSystemIdString" value="GRADLE" />
-        <option name="scriptParameters" />
-        <option name="taskDescriptions">
-          <list />
-        </option>
-        <option name="taskNames">
-          <list>
-            <option value="init" />
-          </list>
-        </option>
-        <option name="vmOptions" />
-      </ExternalSystemSettings>
-      <GradleScriptDebugEnabled>true</GradleScriptDebugEnabled>
-      <method v="2" />
-    </configuration>
-    <configuration name="MineVKR [buildDependents]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
-      <ExternalSystemSettings>
-        <option name="executionName" />
-        <option name="externalProjectPath" value="$PROJECT_DIR$" />
-        <option name="externalSystemIdString" value="GRADLE" />
-        <option name="scriptParameters" />
-        <option name="taskDescriptions">
-          <list />
-        </option>
-        <option name="taskNames">
-          <list>
-            <option value="buildDependents" />
-          </list>
-        </option>
-        <option name="vmOptions" />
-      </ExternalSystemSettings>
-      <GradleScriptDebugEnabled>true</GradleScriptDebugEnabled>
-      <method v="2" />
-    </configuration>
-    <configuration name="MineVKR [genSourcesDecompile]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
-      <ExternalSystemSettings>
-        <option name="executionName" />
-        <option name="externalProjectPath" value="$PROJECT_DIR$" />
-        <option name="externalSystemIdString" value="GRADLE" />
-        <option name="scriptParameters" />
-        <option name="taskDescriptions">
-          <list />
-        </option>
-        <option name="taskNames">
-          <list>
-            <option value="genSourcesDecompile" />
-          </list>
-        </option>
-        <option name="vmOptions" />
-      </ExternalSystemSettings>
-      <GradleScriptDebugEnabled>true</GradleScriptDebugEnabled>
-      <method v="2" />
-    </configuration>
-    <configuration name="MineVKR [genSources]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
-      <ExternalSystemSettings>
-        <option name="executionName" />
-        <option name="externalProjectPath" value="$PROJECT_DIR$" />
-        <option name="externalSystemIdString" value="GRADLE" />
-        <option name="scriptParameters" />
-        <option name="taskDescriptions">
-          <list />
-        </option>
-        <option name="taskNames">
-          <list>
-            <option value="genSources" />
-          </list>
-        </option>
-        <option name="vmOptions" />
-      </ExternalSystemSettings>
-      <GradleScriptDebugEnabled>true</GradleScriptDebugEnabled>
-      <method v="2" />
-    </configuration>
-    <configuration name="MineVKR [wrapper]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
-      <ExternalSystemSettings>
-        <option name="executionName" />
-        <option name="externalProjectPath" value="$PROJECT_DIR$" />
-        <option name="externalSystemIdString" value="GRADLE" />
-        <option name="scriptParameters" />
-        <option name="taskDescriptions">
-          <list />
-        </option>
-        <option name="taskNames">
-          <list>
-            <option value="wrapper" />
-          </list>
-        </option>
-        <option name="vmOptions" />
-      </ExternalSystemSettings>
-      <GradleScriptDebugEnabled>true</GradleScriptDebugEnabled>
-      <method v="2" />
-    </configuration>
-    <list>
-      <item itemvalue="Application.Minecraft Client" />
-      <item itemvalue="Application.Minecraft Server" />
-      <item itemvalue="Gradle.MineRTX [build]" />
-      <item itemvalue="Gradle.MineRTX [init]" />
-      <item itemvalue="Gradle.MineVKR [buildDependents]" />
-      <item itemvalue="Gradle.MineVKR [wrapper]" />
-      <item itemvalue="Gradle.MineVKR [genSourcesDecompile]" />
-      <item itemvalue="Gradle.MineVKR [genSources]" />
-    </list>
-    <recent_temporary>
-      <list>
-        <item itemvalue="Gradle.MineVKR [wrapper]" />
-        <item itemvalue="Gradle.MineVKR [genSources]" />
-        <item itemvalue="Gradle.MineVKR [genSourcesDecompile]" />
-        <item itemvalue="Gradle.MineVKR [buildDependents]" />
-        <item itemvalue="Gradle.MineRTX [init]" />
-      </list>
-    </recent_temporary>
   </component>
   <component name="SvnConfiguration">
     <configuration />
   </component>
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="4b7b64e4-95fe-4605-8caf-f658c6b40341" name="Default Changelist" comment="" />
-      <created>1587955119407</created>
+      <changelist id="abea29d8-dd5f-4646-929d-1d5365628f68" name="Default Changelist" comment="" />
+      <created>1589700031200</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
-      <updated>1587955119407</updated>
+      <updated>1589700031200</updated>
+      <workItem from="1589700037490" duration="11000" />
     </task>
     <servers />
   </component>
-  <component name="VcsManagerConfiguration">
-    <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-  </component>
-  <component name="WindowStateProjectService">
-    <state x="657" y="140" key="#Minecraft_Client" timestamp="1589310385471">
-      <screen x="0" y="0" width="1920" height="1040" />
-    </state>
-    <state x="657" y="140" key="#Minecraft_Client/0.0.1920.1040@0.0.1920.1040" timestamp="1589310385471" />
-    <state x="416" y="175" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1589355262069">
-      <screen x="0" y="0" width="1920" height="1040" />
-    </state>
-    <state x="416" y="175" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1589355262069" />
-    <state x="678" y="338" key="#com.intellij.refactoring.move.moveMembers.MoveMembersDialog" timestamp="1588562522005">
-      <screen x="0" y="0" width="1920" height="1040" />
-    </state>
-    <state x="678" y="338" key="#com.intellij.refactoring.move.moveMembers.MoveMembersDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1588562522005" />
-    <state x="634" y="231" key="FileChooserDialogImpl" timestamp="1587960634350">
-      <screen x="0" y="0" width="1920" height="1040" />
-    </state>
-    <state x="634" y="231" key="FileChooserDialogImpl/0.0.1920.1040@0.0.1920.1040" timestamp="1587960634350" />
-    <state width="1878" height="364" key="GridCell.Tab.0.bottom" timestamp="1589355308428">
-      <screen x="0" y="0" width="1920" height="1040" />
-    </state>
-    <state width="1878" height="364" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1589355308428" />
-    <state width="1878" height="364" key="GridCell.Tab.0.center" timestamp="1589355308428">
-      <screen x="0" y="0" width="1920" height="1040" />
-    </state>
-    <state width="1878" height="364" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1589355308428" />
-    <state width="1878" height="364" key="GridCell.Tab.0.left" timestamp="1589355308428">
-      <screen x="0" y="0" width="1920" height="1040" />
-    </state>
-    <state width="1878" height="364" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1589355308428" />
-    <state width="1878" height="364" key="GridCell.Tab.0.right" timestamp="1589355308428">
-      <screen x="0" y="0" width="1920" height="1040" />
-    </state>
-    <state width="1878" height="364" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1589355308428" />
-    <state x="541" y="263" key="IDE.errors.dialog" timestamp="1588591926832">
-      <screen x="0" y="0" width="1920" height="1040" />
-    </state>
-    <state x="541" y="263" key="IDE.errors.dialog/0.0.1920.1040@0.0.1920.1040" timestamp="1588591926832" />
-    <state x="441" y="95" key="SettingsEditor" timestamp="1588828318437">
-      <screen x="0" y="0" width="1920" height="1040" />
-    </state>
-    <state x="441" y="95" key="SettingsEditor/0.0.1920.1040@0.0.1920.1040" timestamp="1588828318437" />
-    <state width="1829" height="1038" key="com.intellij.byteCodeViewer.ShowByteCodeAction" timestamp="1588587232359">
-      <screen x="0" y="0" width="1920" height="1040" />
-    </state>
-    <state width="1829" height="1038" key="com.intellij.byteCodeViewer.ShowByteCodeAction/0.0.1920.1040@0.0.1920.1040" timestamp="1588587232359" />
-    <state x="670" y="252" width="779" height="534" key="find.popup" timestamp="1588561040101">
-      <screen x="0" y="0" width="1920" height="1040" />
-    </state>
-    <state x="670" y="252" width="779" height="534" key="find.popup/0.0.1920.1040@0.0.1920.1040" timestamp="1588561040101" />
-    <state x="385" y="141" key="new project wizard" timestamp="1587960686884">
-      <screen x="0" y="0" width="1920" height="1040" />
-    </state>
-    <state x="385" y="141" key="new project wizard/0.0.1920.1040@0.0.1920.1040" timestamp="1587960686884" />
-    <state x="621" y="244" key="run.anything.popup" timestamp="1588561570939">
-      <screen x="0" y="0" width="1920" height="1040" />
-    </state>
-    <state x="621" y="244" key="run.anything.popup/0.0.1920.1040@0.0.1920.1040" timestamp="1588561570939" />
-    <state x="624" y="227" width="672" height="678" key="search.everywhere.popup" timestamp="1588587296773">
-      <screen x="0" y="0" width="1920" height="1040" />
-    </state>
-    <state x="624" y="227" width="672" height="678" key="search.everywhere.popup/0.0.1920.1040@0.0.1920.1040" timestamp="1588587296773" />
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="2" />
   </component>
 </project>
