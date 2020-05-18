@@ -14,7 +14,8 @@
   "environment": "*",
   "entrypoints": {
     "main": [{
-        "value": "com.helixd2s.minevkr.MineVKR"
+        "value": "com.helixd2s.minevkr.MineVKR",
+        "adapter": "kotlin"
     }]
   },
   "mixins": [

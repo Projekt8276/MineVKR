@@ -66,7 +66,7 @@ public abstract class MixinWorldRenderer {
 			double cameraY,
 			double cameraZ
 	) {
-		MineVKR.vCPosition = new double[] {cameraX, cameraY, cameraZ};
+		MineVKR.vCPosition = new double[] {cameraX, cameraY, cameraZ}; // TODO: USE Kotlin Version
 		renderLayer(renderLayer, matrices, cameraX, cameraY, cameraZ);
 	};
 
@@ -114,9 +114,9 @@ public abstract class MixinWorldRenderer {
 */
 
 		// LWJGL-3 can interact with JavaCPP... (i.e. curved interop), can't to be Debug
-		if (!MineVKR.vInitialized) { MineVKR.vInitialized = true; // Needs create before the filling data...
-			MineVKR.InitializeRenderer();
-		};
+		//if (!MineVKR.vInitialized) { MineVKR.vInitialized = true; // Needs create before the filling data...
+			MineVKR.vInitializeRenderer();
+		//};
 
 	};
 };

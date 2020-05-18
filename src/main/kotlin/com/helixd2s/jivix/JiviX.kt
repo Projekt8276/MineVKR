@@ -12,28 +12,32 @@ import org.bytedeco.javacpp.indexer.UByteBufferIndexer
 import org.lwjgl.vulkan.*
 
 // TODO: Reduce Native Layers count and make more thin
-class JiviX {
+open class JiviX {
 
     // WHAT IS `core`?
     // Core is UnWrapped Java or Wrapped Native Interface between with Kotlin
 
+    // Here is GLOBAL Methods, Variables...
+    companion object {
+
+    }
 
     //
     open class Device() {
         open lateinit var core: JiviXCore.Device;
-        constructor(core: JiviXCore.Device) { this.core = core; };
+        constructor(core: JiviXCore.Device) : this() { this.core = core; };
     }
 
     //
     open class Instance() {
         open lateinit var core: JiviXCore.Instance;
-        constructor(core: JiviXCore.Instance) { this.core = core; };
+        constructor(core: JiviXCore.Instance) : this() { this.core = core; };
     }
 
     // MOST HARDCORE!
-    open class MaterialUnit {
+    open class MaterialUnit() {
         open lateinit var core: JiviXCore.MaterialUnit;
-        constructor(core: JiviXCore.MaterialUnit) { this.core = core; };
+        constructor(core: JiviXCore.MaterialUnit) : this() { this.core = core; };
 
 
         open var diffuse: FloatArray
@@ -94,10 +98,10 @@ class JiviX {
     }
 
     // TODO: Add Minecraft Matrix4f to FloatArrray[12] Convert!
-    open class VsGeometryInstance {
+    open class VsGeometryInstance() {
         open var core: JiviXCore.VsGeometryInstance = JiviXCore.VsGeometryInstance();
 
-        constructor(data: JiviXCore.VsGeometryInstance){
+        constructor(data: JiviXCore.VsGeometryInstance) : this() {
             this.core = data;
         }
 
@@ -139,7 +143,7 @@ class JiviX {
     open class VmaMemoryInfo() {
         open var core: JiviXCore.VmaMemoryInfo = JiviXCore.VmaMemoryInfo();
 
-        constructor(info: JiviXCore.VmaMemoryInfo){
+        constructor(info: JiviXCore.VmaMemoryInfo) : this() {
             this.core = info;
         }
 
@@ -161,12 +165,12 @@ class JiviX {
         open lateinit var core: JiviXCore.VmaBufferAllocation;
 
         //
-        constructor(allocation: JiviXCore.VmaBufferAllocation) {
+        constructor(allocation: JiviXCore.VmaBufferAllocation) : this() {
             this.core = allocation;
         }
 
         // LWJGL-3 here is now used!
-        constructor(vmaAllocator: ULong, bufferCreateInfo: VkBufferCreateInfo, vmaMemInfo: VmaMemoryInfo){
+        constructor(vmaAllocator: ULong, bufferCreateInfo: VkBufferCreateInfo, vmaMemInfo: VmaMemoryInfo) : this() {
             this.core = JiviXCore.VmaBufferAllocation(vmaAllocator.toLong(), bufferCreateInfo.address(), vmaMemInfo.core);
         };
 
@@ -177,12 +181,12 @@ class JiviX {
         open lateinit var core: JiviXCore.VmaImageAllocation;
 
         //
-        constructor(allocation: JiviXCore.VmaImageAllocation) {
+        constructor(allocation: JiviXCore.VmaImageAllocation) : this() {
             this.core = allocation;
         }
 
         // LWJGL-3 here is now used!
-        constructor(vmaAllocator: ULong, imageCreateInfo: VkImageCreateInfo, vmaMemInfo: VmaMemoryInfo){
+        constructor(vmaAllocator: ULong, imageCreateInfo: VkImageCreateInfo, vmaMemInfo: VmaMemoryInfo) : this() {
             this.core = JiviXCore.VmaImageAllocation(vmaAllocator.toLong(), imageCreateInfo.address(), vmaMemInfo.core);
         };
 
@@ -193,12 +197,12 @@ class JiviX {
         open lateinit var core: JiviXBase.ImageRegion;
 
         //
-        constructor(region: JiviXBase.ImageRegion) {
+        constructor(region: JiviXBase.ImageRegion) : this(){
             this.core = region;
         }
 
         // JavaCPP Have NO ULong, so NEEDS BI-DIRECTIONAL PER-BITS Conversion Between LONG and ULONG! (i.e. ULONG -> LONG -> ULONG WITHOUT any data loss)
-        constructor(allocation: VmaImageAllocation, imageCreateInfo: VkImageCreateInfo, layout: UInt) {
+        constructor(allocation: VmaImageAllocation, imageCreateInfo: VkImageCreateInfo, layout: UInt) : this() {
             this.core = JiviXBase.ImageRegion(allocation.core, imageCreateInfo.address(), layout.toInt());
         }
     }
@@ -207,12 +211,12 @@ class JiviX {
     open class ByteVector() {
         open lateinit var core: JiviXBase.ByteVector;
 
-        constructor(vector: JiviXBase.ByteVector) {
+        constructor(vector: JiviXBase.ByteVector) : this() {
             this.core = vector;
         }
 
         // JavaCPP Have NO ULong, so NEEDS BI-DIRECTIONAL PER-BITS Conversion Between LONG and ULONG! (i.e. ULONG -> LONG -> ULONG WITHOUT any data loss)
-        constructor(allocation: VmaBufferAllocation, offset: ULong, range: ULong) {
+        constructor(allocation: VmaBufferAllocation, offset: ULong, range: ULong) : this() {
             this.core = JiviXBase.ByteVector(allocation.core, offset.toLong(), range.toLong());
         }
 
@@ -242,12 +246,12 @@ class JiviX {
     open class UByteVector() {
         open lateinit var core: JiviXBase.UByteVector;
 
-        constructor(vector: JiviXBase.UByteVector) {
+        constructor(vector: JiviXBase.UByteVector) : this() {
             this.core = vector;
         }
 
         // JavaCPP Have NO ULong, so NEEDS BI-DIRECTIONAL PER-BITS Conversion Between LONG and ULONG! (i.e. ULONG -> LONG -> ULONG WITHOUT any data loss)
-        constructor(allocation: VmaBufferAllocation, offset: ULong, range: ULong) {
+        constructor(allocation: VmaBufferAllocation, offset: ULong, range: ULong) : this() {
             this.core = JiviXBase.UByteVector(allocation.core, offset.toLong(), range.toLong());
         }
 
@@ -274,9 +278,11 @@ class JiviX {
     }
 
     //
-    open class Driver() {
+    //open class Driver() {
+    open class Driver {
         open lateinit var core: JiviXBase.Driver;
 
+        constructor() { this.core = JiviXBase.Driver(); };
         constructor(obj: JiviXBase.Driver) { this.core = obj; }
         constructor(obj: JiviXCore.Driver) { this.core = JiviXBase.Driver(obj); }
 
@@ -326,13 +332,14 @@ class JiviX {
     open class Context() {
         open lateinit var core: JiviXBase.Context;
 
-        constructor(obj: JiviXBase.Context) { this.core = obj; }
-        constructor(obj: JiviXCore.Context) { this.core = JiviXBase.Context(obj); }
+        constructor(obj: JiviXBase.Context) : this() { this.core = obj; }
+        constructor(obj: JiviXCore.Context) : this() { this.core = JiviXBase.Context(obj); }
 
-        constructor(driver: Driver) { this.core = JiviXBase.Context(driver.core); }
+        constructor(driver: Driver) : this() { this.core = JiviXBase.Context(driver.core); }
 
         // Core Value
-        open fun sharedPtr(): JiviXCore.Context { return core.sharedPtr(); }
+        open fun sharedPtr(): Context { return Context(core.sharedPtr()); }
+        open fun initialize(width: UInt, height: UInt): Context { return Context(core.initialize(width.toInt(), height.toInt())); };
 
         //
         open fun getFrameBuffer(idx: UInt): ImageRegion { return ImageRegion(this.core.getFrameBuffer(idx.toInt())); }
@@ -344,10 +351,10 @@ class JiviX {
     open class Thread() {
         open lateinit var core: JiviXBase.Thread;
 
-        constructor(obj: JiviXBase.Thread) { this.core = obj; }
-        constructor(obj: JiviXCore.Thread) { this.core = JiviXBase.Thread(obj); }
+        constructor(obj: JiviXBase.Thread) : this() { this.core = obj; }
+        constructor(obj: JiviXCore.Thread) : this() { this.core = JiviXBase.Thread(obj); }
 
-        constructor(driver: Driver) { this.core = JiviXBase.Thread(driver.core); }
+        constructor(driver: Driver) : this() { this.core = JiviXBase.Thread(driver.core); }
 
         // Core Value
         open fun sharedPtr(): JiviXCore.Thread { return core.sharedPtr(); }
@@ -357,10 +364,10 @@ class JiviX {
     open class BufferViewSet() {
         open lateinit var core: JiviXBase.BufferViewSet;
 
-        constructor(obj: JiviXBase.BufferViewSet) { this.core = obj; }
-        constructor(obj: JiviXCore.BufferViewSet) { this.core = JiviXBase.BufferViewSet(obj); }
+        constructor(obj: JiviXBase.BufferViewSet) : this() { this.core = obj; }
+        constructor(obj: JiviXCore.BufferViewSet) : this() { this.core = JiviXBase.BufferViewSet(obj); }
 
-        constructor(context: Context) { this.core = JiviXBase.BufferViewSet(context.core); }
+        constructor(context: Context) : this() { this.core = JiviXBase.BufferViewSet(context.core); }
 
         // Core Value
         open fun sharedPtr(): JiviXCore.BufferViewSet { return core.sharedPtr(); }
@@ -387,10 +394,10 @@ class JiviX {
     open class MeshInput() {
         open lateinit var core: JiviXBase.MeshInput;
 
-        constructor(obj: JiviXBase.MeshInput) {this.core = obj; }
-        constructor(obj: JiviXCore.MeshInput) {this.core = JiviXBase.MeshInput(obj); }
+        constructor(obj: JiviXBase.MeshInput) : this() { this.core = obj; }
+        constructor(obj: JiviXCore.MeshInput) : this() { this.core = JiviXBase.MeshInput(obj); }
 
-        constructor(context: Context) { this.core = JiviXBase.MeshInput(context.core); }
+        constructor(context: Context) : this() { this.core = JiviXBase.MeshInput(context.core); }
 
         // Core Value
         open fun sharedPtr(): JiviXCore.MeshInput { return core.sharedPtr(); }
@@ -437,14 +444,14 @@ class JiviX {
     open class MeshBinding() {
         open lateinit var core: JiviXBase.MeshBinding;
 
-        constructor(obj: JiviXBase.MeshBinding) {this.core = obj; }
-        constructor(obj: JiviXCore.MeshBinding) {this.core = JiviXBase.MeshBinding(obj); }
+        constructor(obj: JiviXBase.MeshBinding) : this() { this.core = obj; }
+        constructor(obj: JiviXCore.MeshBinding) : this() { this.core = JiviXBase.MeshBinding(obj); }
 
         // Core Value
         open fun sharedPtr(): JiviXCore.MeshBinding { return core.sharedPtr(); }
 
         // Unified Constructor
-        constructor(context: Context, maxPrimitiveCount: ULong?, perGeometryCount: ULongArray?) {
+        constructor(context: Context, maxPrimitiveCount: ULong?, perGeometryCount: ULongArray?) : this() {
             if (maxPrimitiveCount != null) {
                 if (perGeometryCount != null) {
                     this.core = JiviXBase.MeshBinding(context.core, maxPrimitiveCount.toLong(), perGeometryCount.toLongArray())
@@ -456,26 +463,30 @@ class JiviX {
             };
         };
 
+        constructor(context: Context) : this() {
+            this.core = JiviXBase.MeshBinding(context.core);
+        };
+
+        constructor(context: Context, maxPrimitiveCount: ULong) : this() {
+            this.core = JiviXBase.MeshBinding(context.core, maxPrimitiveCount.toLong());
+        };
+
+        constructor(context: Context, maxPrimitiveCount: ULong, perGeometryCount: ULongArray) : this() {
+            this.core = JiviXBase.MeshBinding(context.core, maxPrimitiveCount.toLong(), perGeometryCount.toLongArray());
+        };
+
         //
         open fun bindingBuffer(idx: ULong = 0UL): UByteVector { return UByteVector(core.getBindingBuffer(idx.toLong())); };
         open fun bindingBufferGL(idx: ULong = 0UL): UInt { return core.getBindingBufferGL(idx.toLong()).toUInt() };
 
         // Instanced, but same material
-        open fun addMeshInput(input: MeshInput, materialID: UInt, instances: ULong?): MeshBinding {
-            if (instances != null) {
-                return MeshBinding(this.core.addMeshInput(input.core, materialID.toInt(), instances.toLong()));
-            } else {
-                return MeshBinding(this.core.addMeshInput(input.core, materialID.toInt()));
-            }
+        open fun addMeshInput(input: MeshInput, materialID: UInt, instances: ULong = 1UL): MeshBinding {
+            return MeshBinding(this.core.addMeshInput(input.core, materialID.toInt(), instances.toLong()));
         }
 
         // Instanced, but same material
-        open fun addRangeInput(range: ULong, materialID: UInt, instances: ULong?): MeshBinding {
-            if (instances != null) {
-                return MeshBinding(this.core.addRangeInput(range.toLong(), materialID.toInt(), instances.toLong()));
-            } else {
-                return MeshBinding(this.core.addRangeInput(range.toLong(), materialID.toInt()));
-            }
+        open fun addRangeInput(range: ULong, materialID: UInt, instances: ULong = 1UL): MeshBinding {
+            return MeshBinding(this.core.addRangeInput(range.toLong(), materialID.toInt(), instances.toLong()));
         }
 
         // Material Array
@@ -498,10 +509,10 @@ class JiviX {
     open class Node() {
         open lateinit var core: JiviXBase.Node;
 
-        constructor(obj: JiviXBase.Node) {this.core = obj; }
-        constructor(obj: JiviXCore.Node) {this.core = JiviXBase.Node(obj); }
+        constructor(obj: JiviXBase.Node) : this() { this.core = obj; }
+        constructor(obj: JiviXCore.Node) : this() { this.core = JiviXBase.Node(obj); }
 
-        constructor(context: Context) { this.core = JiviXBase.Node(context.core); }
+        constructor(context: Context) : this() { this.core = JiviXBase.Node(context.core); }
 
         // Core Value
         open fun sharedPtr(): JiviXCore.Node { return core.sharedPtr(); }
@@ -518,10 +529,10 @@ class JiviX {
     open class Renderer() {
         open lateinit var core: JiviXBase.Renderer;
 
-        constructor(obj: JiviXBase.Renderer) { this.core = obj; }
-        constructor(obj: JiviXCore.Renderer) { this.core = JiviXBase.Renderer(obj); }
+        constructor(obj: JiviXBase.Renderer) : this() { this.core = obj; }
+        constructor(obj: JiviXCore.Renderer) : this() { this.core = JiviXBase.Renderer(obj); }
 
-        constructor(context: Context) { this.core = JiviXBase.Renderer(context.core); }
+        constructor(context: Context) : this() { this.core = JiviXBase.Renderer(context.core); }
 
         // Core Value
         open fun sharedPtr(): JiviXCore.Renderer { return core.sharedPtr(); }
@@ -535,10 +546,10 @@ class JiviX {
     open class Material() {
         open lateinit var core: JiviXBase.Material;
 
-        constructor(obj: JiviXBase.Material) { this.core = obj; }
-        constructor(obj: JiviXCore.Material) { this.core = JiviXBase.Material(obj); }
+        constructor(obj: JiviXBase.Material) : this() { this.core = obj; }
+        constructor(obj: JiviXCore.Material) : this() { this.core = JiviXBase.Material(obj); }
 
-        constructor(context: Context) { this.core = JiviXBase.Material(context.core); }
+        constructor(context: Context) : this() { this.core = JiviXBase.Material(context.core); }
 
         // Core Value
         open fun sharedPtr(): Material { return Material(core.sharedPtr()); }
