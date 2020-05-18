@@ -33,13 +33,13 @@ open class MineVKR : ModInitializer {
         open lateinit var vDriver: JiviX.Driver;
         open lateinit var vContext: JiviX.Context;
         open lateinit var vMaterials: JiviX.Material;
-        open lateinit var vBindingsEntity: Array<JiviX.MeshBinding>; //= arrayOf<JiviX.MeshBinding>();
-        open lateinit var vBindingsChunksOpaque: Array<JiviX.MeshBinding>; //= arrayOf<JiviX.MeshBinding>();
-        open lateinit var vBindingsChunksTranslucent: Array<JiviX.MeshBinding>; //= arrayOf<JiviX.MeshBinding>();
-        open lateinit var vBindingsChunksCutout: Array<JiviX.MeshBinding>; //= arrayOf<JiviX.MeshBinding>();
+        open var vBindingsEntity = arrayOf<JiviX.MeshBinding>();
+        open var vBindingsChunksOpaque= arrayOf<JiviX.MeshBinding>();
+        open var vBindingsChunksTranslucent = arrayOf<JiviX.MeshBinding>();
+        open var vBindingsChunksCutout = arrayOf<JiviX.MeshBinding>();
 
         //
-        open lateinit var vNode: Array<JiviX.Node>; //= arrayOf<JiviX.Node>();
+        open var vNode = arrayOf<JiviX.Node>();
         open lateinit var vRenderer: JiviX.Renderer;
 
         // TODO: Settings For Constants
