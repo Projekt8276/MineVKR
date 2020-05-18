@@ -11,8 +11,14 @@ import org.bytedeco.javacpp.Pointer
 import org.bytedeco.javacpp.annotation.*
 import org.bytedeco.javacpp.indexer.ByteBufferIndexer
 import org.bytedeco.javacpp.indexer.UByteBufferIndexer
+import org.lwjgl.vulkan.VkVertexInputAttributeDescription
+import org.lwjgl.vulkan.VkVertexInputBindingDescription
 
 class JiviX {
+
+    // WHAT IS `core`?
+    // Core is UnWrapped Java or Wrapped Native Interface between with Kotlin
+
 
     //
     open class Device() {
@@ -286,6 +292,11 @@ class JiviX {
 
         // Core Value
         open fun sharedPtr(): JiviXCore.Context { return core.sharedPtr(); }
+
+        //
+        open fun getFrameBuffer(idx: UInt): ImageRegion { return ImageRegion(this.core.getFrameBuffer(idx.toInt())); }
+        open fun getFlip0Buffer(idx: UInt): ImageRegion { return ImageRegion(this.core.getFlip0Buffer(idx.toInt())); }
+        open fun getFlip1Buffer(idx: UInt): ImageRegion { return ImageRegion(this.core.getFlip1Buffer(idx.toInt())); }
     }
 
     //
@@ -342,6 +353,43 @@ class JiviX {
 
         // Core Value
         open fun sharedPtr(): JiviXCore.MeshInput { return core.sharedPtr(); }
+
+        open fun addBinding(bufferID: UInt, binding: VkVertexInputBindingDescription): MeshInput {
+            return MeshInput(this.core.addBinding(bufferID.toInt(), binding.address()));
+        }
+
+        open fun addAttribute(attribute: VkVertexInputAttributeDescription): MeshInput {
+            return MeshInput(this.core.addAttribute(attribute.address()));
+        }
+
+        open fun setIndexData(bufferID: UInt, indexType: UInt): MeshInput {
+            return MeshInput(this.core.setIndexData(bufferID.toInt(), indexType.toInt()));
+        }
+
+        open fun setIndexOffset(offset: ULong): MeshInput {
+            return MeshInput(this.core.setIndexOffset(offset.toLong()));
+        }
+
+        open fun setPrimitiveCount(count: ULong): MeshInput {
+            return MeshInput(this.core.setPrimitiveCount(count.toLong()));
+        }
+
+        open fun setIndexCount(count: ULong): MeshInput {
+            return MeshInput(this.core.setIndexCount(count.toLong()));
+        }
+
+        open fun linkBViewSet(vset: BufferViewSet): MeshInput {
+            return MeshInput(this.core.linkBViewSet(vset.core));
+        }
+
+        //open fun getIndexCount(): ULong {
+        //    return this.core.getIndexCount().toULong();
+        //}
+
+        var indexCount: ULong
+            set(value) { this.setIndexCount(value); }
+            get() { return this.core.getIndexCount().toULong(); }
+
     }
 
     //
@@ -380,9 +428,28 @@ class JiviX {
             }
         }
 
+        // Instanced, but same material
+        open fun addRangeInput(range: ULong, materialID: UInt, instances: ULong?): MeshBinding {
+            if (instances != null) {
+                return MeshBinding(this.core.addRangeInput(range.toLong(), materialID.toInt(), instances.toLong()));
+            } else {
+                return MeshBinding(this.core.addRangeInput(range.toLong(), materialID.toInt()));
+            }
+        }
+
         // Material Array
         open fun addMeshInput(input: MeshInput, materialID: UIntArray): MeshBinding {
             return MeshBinding(this.core.addMeshInput(input.core, materialID.toIntArray()));
+        }
+
+        // Material Array
+        open fun addRangeInput(range: ULong, materialID: UIntArray): MeshBinding {
+            return MeshBinding(this.core.addRangeInput(range.toLong(), materialID.toIntArray()));
+        }
+
+        // TODO: FloatPointer and FloatArray[12] support...
+        open fun setTransformData(address: Long, stride: Int = 48): MeshBinding {
+            return MeshBinding(this.core.setTransformData(address, stride));
         }
     }
 
@@ -417,6 +484,10 @@ class JiviX {
 
         // Core Value
         open fun sharedPtr(): JiviXCore.Renderer { return core.sharedPtr(); }
+
+        //
+        open fun linkMaterial(material: Material): Renderer { return Renderer(this.core.linkMaterial(material.core)); }
+        open fun linkNode(node: Node): Renderer { return Renderer(this.core.linkNode(node.core)); }
     }
 
     //
@@ -434,6 +505,26 @@ class JiviX {
         // 
         open fun pushMaterial(unit: MaterialUnit): Long {
             return core.pushMaterial(unit.core);
+        }
+
+        open fun pushSampledImage(imageDescAddress: ULong) : Material {
+            return Material(core.pushSampledImage(imageDescAddress.toLong()));
+        }
+
+        open fun setRawMaterials(rawMaterials: UByteVector, materialCount: ULong): Material {
+            return Material(this.core.setRawMaterials(rawMaterials.core, materialCount.toLong()));
+        }
+
+        open fun setGpuMaterials(rawMaterials: UByteVector): Material {
+            return Material(this.core.setGpuMaterials(rawMaterials.core));
+        }
+
+        open fun resetMaterials(): Material {
+            return Material(this.core.resetMaterials());
+        }
+
+        open fun resetSampledImages(): Material {
+            return Material(this.core.resetSampledImages());
         }
     }
 
