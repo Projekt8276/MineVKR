@@ -49,13 +49,13 @@ public class JiviXCore extends Pointer {
         private native void allocate();
 
         // 
-        private native @Cast("VmaMemoryUsage*") @ValueGetter @ByRef IntPointer memUsage();
-        private native @ByRef VmaMemoryInfo setDeviceDispatch(@SharedPtr JiviXCore.Device device);
-        private native @ByRef VmaMemoryInfo setInstanceDispatch(@SharedPtr JiviXCore.Instance instance);
+        public native @Cast("VmaMemoryUsage*") @ValueGetter @ByRef IntPointer memUsage();
+        public native @ByRef VmaMemoryInfo setDeviceDispatch(@SharedPtr JiviXCore.Device device);
+        public native @ByRef VmaMemoryInfo setInstanceDispatch(@SharedPtr JiviXCore.Instance instance);
         
         // 
-        private native @ByRef @SharedPtr JiviXCore.Device getDeviceDispatch();
-        private native @ByRef @SharedPtr JiviXCore.Instance getInstanceDispatch();
+        public native @ByRef @SharedPtr JiviXCore.Device getDeviceDispatch();
+        public native @ByRef @SharedPtr JiviXCore.Instance getInstanceDispatch();
     };
 
 

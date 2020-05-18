@@ -67,7 +67,6 @@ public class JiviXBase extends Pointer {
 
         //
         @Name("operator[]")
-        public native @ByRef BytePointer get(long n);
         public native @ByRef BytePointer at(long n);
 
         //
@@ -106,14 +105,12 @@ public class JiviXBase extends Pointer {
         public UByteVector(@SharedPtr JiviXCore.BufferAllocation a, long offset, long size) { allocate(a, offset, size); } // this = (vector<vector<void*> >*)p
         private native void allocate(@SharedPtr JiviXCore.BufferAllocation a, long offset, long size);
 
-
         //
         @Name("operator=")
         public native @ByRef UByteVector put(@ByRef UByteVector x);
 
         //
         @Name("operator[]")
-        public native @Cast("uint8_t*") @ByRef BytePointer get(long n);
         public native @Cast("uint8_t*") @ByRef BytePointer at(long n);
 
         //
