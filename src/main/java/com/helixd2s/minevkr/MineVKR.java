@@ -39,6 +39,7 @@ public class MineVKR implements ModInitializer  {
 	//
 	public static int MaxChunkBindings = 16;
 	public static int MaxEntityBindings = 16;
+	public static int MaxEntityParts = 16;
 
 	@Override
 	public void onInitialize() {
@@ -117,7 +118,8 @@ public class MineVKR implements ModInitializer  {
 		System.out.println("Create array of entity bindings...");
 
 		// Needs 16 Parts of Entity, with 16th cube vertices
-		long PartsSize[] = new long[] { 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32 };
+		long PartsSize[] = new long[MaxEntityParts];
+		for (int i=0;i<MaxEntityParts;i++) { PartsSize[i] = 32; };
 
 		// Create bindings per every entity!
 		for (int i=0;i<MaxEntityBindings;i++) {
