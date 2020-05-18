@@ -115,7 +115,7 @@ class JiviX {
             }
             set(value) {
                 var ptr = this.core.transform();
-                for (i: Int in 0 until 12) value[i] = ptr.get(i.toLong());
+                for (i: Int in 0 until 12) ptr.put(i.toLong(), value[i]);
             }
 
         open var mask: UByte
