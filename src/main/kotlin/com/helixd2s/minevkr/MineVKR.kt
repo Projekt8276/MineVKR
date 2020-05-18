@@ -27,9 +27,9 @@ open class MineVKR : ModInitializer {
 
         open lateinit var vBlockPos: BlockPos;
         open lateinit var vCurrentChunk: ChunkBuilder.BuiltChunk;
+        open var vCPosition: DoubleArray = doubleArrayOf(0.0, 0.0, 0.0);
 
-        // lateinit for Java Backward Compatibility, TODO: to use pre-initialized again
-        open lateinit var vCPosition: DoubleArray; //= doubleArrayOf(0.0, 0.0, 0.0);
+        //
         open lateinit var vDriver: JiviX.Driver;
         open lateinit var vContext: JiviX.Context;
         open lateinit var vMaterials: JiviX.Material;
