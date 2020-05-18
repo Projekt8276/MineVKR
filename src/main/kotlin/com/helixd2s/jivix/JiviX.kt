@@ -1,8 +1,6 @@
 package com.helixd2s.jivix
 
 import org.bytedeco.javacpp.annotation.SharedPtr
-import org.lwjgl.vulkan.VkBufferCreateInfo
-import org.lwjgl.vulkan.VkImageCreateInfo
 
 import org.bytedeco.javacpp.BytePointer
 import org.bytedeco.javacpp.FloatPointer
@@ -11,8 +9,7 @@ import org.bytedeco.javacpp.Pointer
 import org.bytedeco.javacpp.annotation.*
 import org.bytedeco.javacpp.indexer.ByteBufferIndexer
 import org.bytedeco.javacpp.indexer.UByteBufferIndexer
-import org.lwjgl.vulkan.VkVertexInputAttributeDescription
-import org.lwjgl.vulkan.VkVertexInputBindingDescription
+import org.lwjgl.vulkan.*
 
 class JiviX {
 
@@ -38,7 +35,7 @@ class JiviX {
         constructor(core: JiviXCore.MaterialUnit) { this.core = core; };
 
 
-        var diffuse: FloatArray
+        open var diffuse: FloatArray
             get() {
                 var data = this.core.diffuse();
                 var array = FloatArray(4); for (i: Int in 0 until 4) array[i] = data.get(i.toLong());
@@ -48,7 +45,7 @@ class JiviX {
                 var data = this.core.diffuse(); for (i: Int in 0 until 4) data.put(i.toLong(), value[i]);
             }
 
-        var specular: FloatArray
+        open var specular: FloatArray
             get() {
                 var data = this.core.specular();
                 var array = FloatArray(4); for (i: Int in 0 until 4) array[i] = data.get(i.toLong());
@@ -58,7 +55,7 @@ class JiviX {
                 var data = this.core.specular(); for (i: Int in 0 until 4) data.put(i.toLong(), value[i]);
             }
 
-        var normals: FloatArray
+        open var normals: FloatArray
             get() {
                 var data = this.core.normals();
                 var array = FloatArray(4); for (i: Int in 0 until 4) array[i] = data.get(i.toLong());
@@ -68,7 +65,7 @@ class JiviX {
                 var data = this.core.normals(); for (i: Int in 0 until 4) data.put(i.toLong(), value[i]);
             }
 
-        var emission: FloatArray
+        open var emission: FloatArray
             get() {
                 var data = this.core.emission();
                 var array = FloatArray(4); for (i: Int in 0 until 4) array[i] = data.get(i.toLong());
@@ -78,19 +75,19 @@ class JiviX {
                 var data = this.core.emission(); for (i: Int in 0 until 4) data.put(i.toLong(), value[i]);
             }
 
-        var diffuseTexture: Int
+        open var diffuseTexture: Int
             get( ) { return this.core.diffuseTexture().get(0).toInt() }
             set(value) { this.core.diffuseTexture().put(0L, value.toInt()) }
 
-        var specularTexture: Int
+        open var specularTexture: Int
             get( ) { return this.core.specularTexture().get(0).toInt() }
             set(value) { this.core.specularTexture().put(0L, value.toInt()) }
 
-        var normalsTexture: Int
+        open var normalsTexture: Int
             get( ) { return this.core.normalsTexture().get(0).toInt() }
             set(value) { this.core.normalsTexture().put(0L, value.toInt()) }
 
-        var emissionTexture: Int
+        open var emissionTexture: Int
             get( ) { return this.core.emissionTexture().get(0).toInt() }
             set(value) { this.core.emissionTexture().put(0L, value.toInt()) }
     }
@@ -104,22 +101,22 @@ class JiviX {
         }
 
         // TODO: MAKE REAL ARRAY!
-        var transform: FloatPointer? = FloatPointer(1.0F,0.0F,0.0F,0.0F, 0.0F,1.0F,0.0F,0.0F, 0.0F,0.0F,1.0F,0.0F)
+        open var transform: FloatPointer? = FloatPointer(1.0F,0.0F,0.0F,0.0F, 0.0F,1.0F,0.0F,0.0F, 0.0F,0.0F,1.0F,0.0F)
             get ( ) { return this.core.transform(); }
 
-        var mask: UByte
+        open var mask: UByte
             get( ) { return this.core.mask().get(0).toUByte() }
             set(value) { this.core.mask().put(0L, value.toByte()) }
 
-        var flags: UByte
+        open var flags: UByte
             get( ) { return this.core.flags().get(0).toUByte() }
             set(value) { this.core.flags().put(0L, value.toByte()) }
 
-        var instanceId: UInt
+        open var instanceId: UInt
             get( ) { return this.core.instanceId().get(0).toUInt().and(0xFFFFFFU) }
             set(value) { this.core.instanceId().put(0L, value.and(0xFFFFFFU).toInt()) }
 
-        var instanceOffset: UInt
+        open var instanceOffset: UInt
             get( ) { return this.core.instanceOffset().get(0).toUInt().and(0xFFFFFFU) }
             set(value) { this.core.instanceOffset().put(0L, value.and(0xFFFFFFU).toInt()) }
     }
@@ -132,15 +129,15 @@ class JiviX {
             this.core = info;
         }
 
-        var memUsage: UInt
+        open var memUsage: UInt
             set(value) { core.memUsage().put(0, value.toInt()) }
             get() { return core.memUsage().get(0).toUInt(); }
 
-        var deviceDispatch: Device
+        open var deviceDispatch: Device
             get() { return Device(core.getDeviceDispatch()); }
             set(value) { core.setDeviceDispatch(value.core); };
 
-        var instanceDispatch: Instance
+        open var instanceDispatch: Instance
             get() { return Instance(core.getInstanceDispatch()); }
             set(value) { core.setInstanceDispatch(value.core); };
     }
@@ -272,13 +269,43 @@ class JiviX {
         open fun allocator(): ULong { return this.core._getAllocator().address().toULong(); }
         open fun memoryProperties(): ULong { return this.core._getMemoryProperties().address().toULong(); }
 
-        val deviceDispatch: Device //= Device()
+        open val deviceDispatch: Device //= Device()
             get() { return Device(core.getDeviceDispatch()); }
             //set(value) { core.setDeviceDispatch(value.core); };
 
-        val instanceDispatch: Instance //= Instance()
+        open val instanceDispatch: Instance //= Instance()
             get() { return Instance(core.getInstanceDispatch()); }
             //set(value) { core.setInstanceDispatch(value.core); };
+
+        // TODO: Make Kotlin Getters
+        open fun physicalDevice(): ULong { return this.core.getPhysicalDevice().toULong(); };
+        open fun device(): ULong { return this.core.getDevice().toULong(); };
+        open fun queue(): ULong { return this.core.getQueue().toULong(); };
+        open fun fence(): ULong { return this.core.getFence().toULong(); };
+        open fun instance(): ULong { return this.core.getInstance().toULong(); };
+        open fun commandPool(): ULong { return this.core.getCommandPool().toULong(); };
+        open fun pipelineCache(): ULong { return this.core.getPipelineCache().toULong(); };
+        open fun descriptorPool(): ULong { return this.core.getDescriptorPool().toULong(); };
+        open fun depthImageView(): ULong { return this.core.getDepthImageView().toULong(); };
+        open fun depthImage(): ULong { return this.core.getDepthImage().toULong(); };
+        open fun createInstance(): ULong { return this.core.createInstance().toULong(); };
+
+        open fun instanceClass(): VkInstance { return VkInstance(this.instance().toLong(), this.instanceCreateInfo()); };
+        open fun physicalDeviceClass(): VkPhysicalDevice {
+            return VkPhysicalDevice(this.physicalDevice().toLong(), this.instanceClass());
+        };
+
+        open fun createDevice(): ULong { return this.core.createDevice().toULong(); };
+        open fun createDevice(physicalDeviceHandle: ULong): ULong { return this.core.createDevice(physicalDeviceHandle.toLong()).toULong(); };
+        open fun createDevice(physicalDevice: VkPhysicalDevice): VkDevice { return VkDevice(this.createDevice().toLong(), physicalDevice, this.deviceCreateInfo()); };
+
+        open fun instanceCreateInfo(): VkInstanceCreateInfo? {
+            return VkInstanceCreateInfo.createSafe(this.core.getInstanceCreateInfoAddress());
+        };
+
+        open fun deviceCreateInfo(): VkDeviceCreateInfo? {
+            return VkDeviceCreateInfo.createSafe(this.core.getDeviceCreateInfoAddress());
+        };
     }
 
     //
@@ -477,8 +504,8 @@ class JiviX {
     open class Renderer() {
         open lateinit var core: JiviXBase.Renderer;
 
-        constructor(obj: JiviXBase.Renderer) {this.core = obj; }
-        constructor(obj: JiviXCore.Renderer) {this.core = JiviXBase.Renderer(obj); }
+        constructor(obj: JiviXBase.Renderer) { this.core = obj; }
+        constructor(obj: JiviXCore.Renderer) { this.core = JiviXBase.Renderer(obj); }
 
         constructor(context: Context) { this.core = JiviXBase.Renderer(context.core); }
 
@@ -494,8 +521,8 @@ class JiviX {
     open class Material() {
         open lateinit var core: JiviXBase.Material;
 
-        constructor(obj: JiviXBase.Material) {this.core = obj; }
-        constructor(obj: JiviXCore.Material) {this.core = JiviXBase.Material(obj); }
+        constructor(obj: JiviXBase.Material) { this.core = obj; }
+        constructor(obj: JiviXCore.Material) { this.core = JiviXBase.Material(obj); }
 
         constructor(context: Context) { this.core = JiviXBase.Material(context.core); }
 

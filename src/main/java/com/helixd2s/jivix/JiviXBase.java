@@ -9,6 +9,7 @@ import org.bytedeco.javacpp.indexer.UByteBufferIndexer;
 
 // "jniJiviXBase", "JiviX"
 
+// TODO: Wrap CORE Instead Of External Native... (i.e. reduce layers count)
 @Platform(include={
         "./include/GLFW/glfw3.h",
         "./include/vkt3/fw.hpp",
