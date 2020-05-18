@@ -4,6 +4,8 @@ import org.bytedeco.javacpp.BytePointer;
 import org.bytedeco.javacpp.Loader;
 import org.bytedeco.javacpp.Pointer;
 import org.bytedeco.javacpp.annotation.*;
+import org.bytedeco.javacpp.indexer.ByteBufferIndexer;
+import org.bytedeco.javacpp.indexer.UByteBufferIndexer;
 
 // "jniJiviXBase", "JiviX"
 
@@ -61,6 +63,11 @@ public class JiviXBase extends Pointer {
         public ByteVector(@SharedPtr JiviXCore.BufferAllocation a, long offset, long size) { allocate(a, offset, size); } // this = (vector<vector<void*> >*)p
         private native void allocate(@SharedPtr JiviXCore.BufferAllocation a, long offset, long size);
 
+        // Indexer for Data
+        public ByteBufferIndexer getIndexer(){
+            return new ByteBufferIndexer(this.data().asByteBuffer());
+        };
+
         //
         @Name("operator=")
         public native @ByRef ByteVector put(@ByRef ByteVector x);
@@ -104,6 +111,11 @@ public class JiviXBase extends Pointer {
         //
         public UByteVector(@SharedPtr JiviXCore.BufferAllocation a, long offset, long size) { allocate(a, offset, size); } // this = (vector<vector<void*> >*)p
         private native void allocate(@SharedPtr JiviXCore.BufferAllocation a, long offset, long size);
+
+        // Indexer for Data
+        public UByteBufferIndexer getIndexer(){
+            return new UByteBufferIndexer(this.data().asByteBuffer());
+        };
 
         //
         @Name("operator=")

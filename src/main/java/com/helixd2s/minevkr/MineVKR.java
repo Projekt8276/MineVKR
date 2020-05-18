@@ -7,7 +7,15 @@ import net.minecraft.client.render.chunk.ChunkBuilder;
 import net.minecraft.util.math.BlockPos;
 import org.lwjgl.vulkan.*;
 
+// FOR TEST ONLY!
+import com.helixd2s.jivix.JiviX;
+import com.helixd2s.jivix.JiviX.*;
+import static com.helixd2s.jivix.JiviX.*;
+//import static com.helixd2s.jivix.JiviX;
+
 public class MineVKR implements ModInitializer  {
+	//public static JiviX.Device jDevice;
+
 	public static long vPhysicalDeviceHandle;
 	public static VkPhysicalDevice vPhysicalDevice;
 

@@ -261,16 +261,16 @@ public class JiviXCore extends Pointer {
         private native void allocate();
 
         // Channels
-        private native @Cast("float*") @ValueGetter @ByRef FloatPointer diffuse();
-        private native @Cast("float*") @ValueGetter @ByRef FloatPointer specular();
-        private native @Cast("float*") @ValueGetter @ByRef FloatPointer normals();
-        private native @Cast("float*") @ValueGetter @ByRef FloatPointer emission();
+        public native @Cast("float*") @ValueGetter @ByRef FloatPointer diffuse();
+        public native @Cast("float*") @ValueGetter @ByRef FloatPointer specular();
+        public native @Cast("float*") @ValueGetter @ByRef FloatPointer normals();
+        public native @Cast("float*") @ValueGetter @ByRef FloatPointer emission();
 
         // Channels
-        private native @Cast("int*") @ValueGetter @ByRef IntPointer diffuseTexture();
-        private native @Cast("int*") @ValueGetter @ByRef IntPointer specularTexture(); 
-        private native @Cast("int*") @ValueGetter @ByRef IntPointer normalsTexture();
-        private native @Cast("int*") @ValueGetter @ByRef IntPointer emissionTexture();
+        public native @Cast("int*") @ValueGetter @ByRef IntPointer diffuseTexture();
+        public native @Cast("int*") @ValueGetter @ByRef IntPointer specularTexture();
+        public native @Cast("int*") @ValueGetter @ByRef IntPointer normalsTexture();
+        public native @Cast("int*") @ValueGetter @ByRef IntPointer emissionTexture();
     };
 
     @Name("vkh::VsGeometryInstance")
@@ -283,16 +283,16 @@ public class JiviXCore extends Pointer {
         private native void allocate();
 
         // Transform
-        private native @Cast("float*") @ValueGetter @ByRef FloatPointer transform();
+        public native @Cast("float*") @ValueGetter @ByRef FloatPointer transform();
 
         // 
-        private native @Cast("byte*") @ValueGetter @ByRef BytePointer mask();
-        private native @Cast("byte*") @ValueGetter @ByRef BytePointer flags();
-        private native @Cast("int*") @ValueGetter @ByRef IntPointer instanceId();
-        private native @Cast("int*") @ValueGetter @ByRef IntPointer instanceOffset();
+        public native @Cast("byte*") @ValueGetter @ByRef BytePointer mask();
+        public native @Cast("byte*") @ValueGetter @ByRef BytePointer flags();
+        public native @Cast("int*") @ValueGetter @ByRef IntPointer instanceId();
+        public native @Cast("int*") @ValueGetter @ByRef IntPointer instanceOffset();
 
         // 
-        private native @Cast("int64_t*") @ValueGetter @ByRef LongPointer accelerationStructureHandle();
+        public native @Cast("int64_t*") @ValueGetter @ByRef LongPointer accelerationStructureHandle();
     };
     
 };

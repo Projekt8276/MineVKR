@@ -31,6 +31,7 @@ public class MixinVector4f implements IEVector4f {
         this.w = ReflectionUtil.getFieldFValue(matrix,"a30") * f + ReflectionUtil.getFieldFValue(matrix,"a31") * g + ReflectionUtil.getFieldFValue(matrix,"a32") * h + ReflectionUtil.getFieldFValue(matrix,"a33") * i;
     }
 
+/*  // UN-Prefer...
     @Inject(method = "transform", at = @At("HEAD"), cancellable = true)
     public void onTransform(Matrix4f matrix, CallbackInfo ci) throws NoSuchFieldException, IllegalAccessException {
         float f = this.x;
@@ -45,4 +46,5 @@ public class MixinVector4f implements IEVector4f {
 
         ci.cancel(); return;
     }
+*/
 }
