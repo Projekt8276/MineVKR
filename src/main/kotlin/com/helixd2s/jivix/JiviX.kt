@@ -11,6 +11,7 @@ import org.bytedeco.javacpp.indexer.ByteBufferIndexer
 import org.bytedeco.javacpp.indexer.UByteBufferIndexer
 import org.lwjgl.vulkan.*
 
+// TODO: Reduce Native Layers count and make more thin
 class JiviX {
 
     // WHAT IS `core`?
@@ -92,7 +93,7 @@ class JiviX {
             set(value) { this.core.emissionTexture().put(0L, value.toInt()) }
     }
 
-    //
+    // TODO: Add Minecraft Matrix4f to FloatArrray[12] Convert!
     open class VsGeometryInstance {
         open var core: JiviXCore.VsGeometryInstance = JiviXCore.VsGeometryInstance();
 
@@ -100,9 +101,22 @@ class JiviX {
             this.core = data;
         }
 
-        // TODO: MAKE REAL ARRAY!
-        open var transform: FloatPointer? = FloatPointer(1.0F,0.0F,0.0F,0.0F, 0.0F,1.0F,0.0F,0.0F, 0.0F,0.0F,1.0F,0.0F)
-            get ( ) { return this.core.transform(); }
+        // TODO: Reference Version
+        //open var transform: FloatPointer? = FloatPointer(1.0F,0.0F,0.0F,0.0F, 0.0F,1.0F,0.0F,0.0F, 0.0F,0.0F,1.0F,0.0F)
+            //get ( ) { return this.core.transform(); }
+
+        // ...
+        open var transform: FloatArray
+            get() {
+                var ptr = this.core.transform();
+                var arr: FloatArray = floatArrayOf(1.0F,0.0F,0.0F,0.0F, 0.0F,1.0F,0.0F,0.0F, 0.0F,0.0F,1.0F,0.0F);
+                for (i: Int in 0 until 12) arr[i] = ptr.get(i.toLong());
+                return arr;
+            }
+            set(value) {
+                var ptr = this.core.transform();
+                for (i: Int in 0 until 12) value[i] = ptr.get(i.toLong());
+            }
 
         open var mask: UByte
             get( ) { return this.core.mask().get(0).toUByte() }
