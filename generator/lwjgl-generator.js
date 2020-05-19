@@ -88,7 +88,7 @@ let meta = {
     "releaseTime": "2019-06-24T12:52:52+00:00",
     "type": "release",
     "uid": "org.lwjgl3",
-    "version": "3.2.2",
+    "version": lwjglVersion,
     "volatile": true  
 };
 
@@ -213,5 +213,5 @@ function generate(rpath) {
     fs.writeFileSync("org.lwjgl3.json", JSON.stringify(json, null, '\t'), 'utf8');
 };
 
-generate(__dirname + "\\" + lwjglVersion);
+generate(process.argv[2] + "\\" + lwjglVersion);
 //generate(__dirname.replace(/\\/g,"/") + "/" + lwjglVersion);
