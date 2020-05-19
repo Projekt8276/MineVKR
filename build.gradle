@@ -169,3 +169,15 @@ compileTestKotlin {
         jvmTarget = "1.8"
     }
 }
+
+// Kotlin EXPERIMENTAL
+allprojects {
+    tasks.withType(org.jetbrains.kotlin.gradle.tasks.KotlinCompile).all {
+        kotlinOptions {
+            freeCompilerArgs += [
+                    "-Xuse-experimental=kotlin.ExperimentalUnsignedTypes",
+                    "-XXLanguage:+InlineClasses"
+            ]
+        }
+    }
+}

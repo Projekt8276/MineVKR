@@ -280,7 +280,7 @@ open class JiviX {
     //
     //open class Driver() {
     open class Driver {
-        open lateinit var core: JiviXBase.Driver;
+        open var core: JiviXBase.Driver;
 
         constructor() { this.core = JiviXBase.Driver(); };
         constructor(obj: JiviXBase.Driver) { this.core = obj; }

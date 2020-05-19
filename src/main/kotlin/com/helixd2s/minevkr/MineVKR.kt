@@ -81,9 +81,9 @@ open class MineVKR : ModInitializer {
                 println("Initialize Context...");
 
                 //
-                MineVKR.vBindingsChunksOpaque = Array<JiviX.MeshBinding>(vMaxChunkBindings) { i -> JiviX.MeshBinding(MineVKR.vContext, 2048UL); };
-                MineVKR.vBindingsChunksCutout = Array<JiviX.MeshBinding>(vMaxChunkBindings) { i -> JiviX.MeshBinding(MineVKR.vContext, 2048UL); };
-                MineVKR.vBindingsChunksTranslucent = Array<JiviX.MeshBinding>(vMaxChunkBindings) { i -> JiviX.MeshBinding(MineVKR.vContext, 2048UL); };
+                MineVKR.vBindingsChunksOpaque = Array<JiviX.MeshBinding>(vMaxChunkBindings) { _ -> JiviX.MeshBinding(MineVKR.vContext, 2048UL); };
+                MineVKR.vBindingsChunksCutout = Array<JiviX.MeshBinding>(vMaxChunkBindings) { _ -> JiviX.MeshBinding(MineVKR.vContext, 2048UL); };
+                MineVKR.vBindingsChunksTranslucent = Array<JiviX.MeshBinding>(vMaxChunkBindings) { _ -> JiviX.MeshBinding(MineVKR.vContext, 2048UL); };
                 println("Create chunk bindings itself...");
 
                 //
@@ -96,8 +96,8 @@ open class MineVKR : ModInitializer {
                 println("Add chunk bindings into Node...");
 
                 //
-                var vPartsSize = ULongArray(vMaxEntityParts) { i -> 32UL };
-                MineVKR.vBindingsEntity = Array<JiviX.MeshBinding>(vMaxEntityBindings) { i -> JiviX.MeshBinding(MineVKR.vContext, 512UL, vPartsSize); };
+                var vPartsSize = ULongArray(vMaxEntityParts) { _ -> 32UL };
+                MineVKR.vBindingsEntity = Array<JiviX.MeshBinding>(vMaxEntityBindings) { _ -> JiviX.MeshBinding(MineVKR.vContext, 512UL, vPartsSize); };
                 println("Create entity bindings itself...");
 
                 //
