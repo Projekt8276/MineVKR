@@ -1,0 +1,3 @@
+### No More?
+
+Mod sources merged into `kotlin/com/helixd2s/minevkr/readme.md`...
