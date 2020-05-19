@@ -78,7 +78,6 @@ I afraid that my mod may become to a second [Immersive Portals](https://github.c
 
 I afraid that for me needs [`qouteall`](https://github.com/qouteall), [`maierfelix`](https://github.com/maierfelix) for development... 
 
-Second developer DOESN'T know Minecraft, Fabric and (probably) Java! But these soul essentials are minimally required...
 
 
 ### Used Symbolic Links!
