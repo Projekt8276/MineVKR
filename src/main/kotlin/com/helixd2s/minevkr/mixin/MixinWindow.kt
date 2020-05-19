@@ -25,15 +25,9 @@ class MixinWindow {
     @Redirect(at = At(value = "INVOKE", target = "Lorg/lwjgl/glfw/GLFW;glfwWindowHint(II)V", remap = false), method = ["<init>"])
     private fun OnGlfwWindowHint(hint: Int, value: Int) {
         println("Try Redirect GLFW.glfwWindowHint")
-        if (hint == 139266) {
-            GLFW.glfwWindowHint(139266, 4)
-        } else if (hint == 139267) {
-            GLFW.glfwWindowHint(139267, 6)
-        } else  //
-            if (hint == 139272) {
-                GLFW.glfwWindowHint(139272, 0x00032002)
-            } else {
-                GLFW.glfwWindowHint(hint, value)
-            }
+        if (hint == 139266) { GLFW.glfwWindowHint(139266, 4) } else      // GLFW_CONTEXT_VERSION_MAJOR
+        if (hint == 139267) { GLFW.glfwWindowHint(139267, 6) } else      // GLFW_CONTEXT_VERSION_MINOR
+        if (hint == 139272) { GLFW.glfwWindowHint(139272, 204802) } else // GLFW_OPENGL_PROFILE: GLFW_OPENGL_COMPAT_PROFILE
+        { GLFW.glfwWindowHint(hint, value) }
     }
 }
