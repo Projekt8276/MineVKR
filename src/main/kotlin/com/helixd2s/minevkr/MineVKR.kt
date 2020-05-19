@@ -8,10 +8,16 @@ import net.minecraft.util.math.BlockPos
 import org.lwjgl.vulkan.VkDevice
 import org.lwjgl.vulkan.VkInstance
 import org.lwjgl.vulkan.VkPhysicalDevice
+import net.minecraft.client.util.Window
+import kotlin.properties.Delegates
 
 open class MineVKR : ModInitializer {
 
     companion object {
+        ///open lateinit var window: Window;
+        open var width = 1600;
+        open var height = 1200;
+
         open var vPhysicalDeviceHandle = 0UL;
         open lateinit var vPhysicalDevice: VkPhysicalDevice;
 
@@ -77,7 +83,7 @@ open class MineVKR : ModInitializer {
                 println("Link Node and Materials...");
 
                 //
-                MineVKR.vContext.initialize(1600U, 1200U);
+                MineVKR.vContext.initialize(MineVKR.width.toUInt(), MineVKR.height.toUInt());
                 println("Initialize Context...");
 
                 //

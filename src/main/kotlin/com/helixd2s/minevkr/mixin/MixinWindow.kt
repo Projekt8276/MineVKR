@@ -1,6 +1,7 @@
 package com.helixd2s.minevkr.mixin
 
 import com.helixd2s.jivix.JiviXBase
+import com.helixd2s.minevkr.MineVKR
 import net.minecraft.client.util.Window
 import org.lwjgl.glfw.GLFW
 import org.lwjgl.glfw.GLFW.Functions.GetProcAddress
@@ -9,6 +10,7 @@ import org.lwjgl.opengl.GLCapabilities
 import org.spongepowered.asm.mixin.Mixin
 import org.spongepowered.asm.mixin.injection.At
 import org.spongepowered.asm.mixin.injection.Redirect
+import java.nio.ByteBuffer
 
 
 @Mixin(Window::class)
@@ -30,4 +32,18 @@ class MixinWindow {
         if (hint == 139272) { GLFW.glfwWindowHint(139272, 204802) } else // GLFW_OPENGL_PROFILE: GLFW_OPENGL_COMPAT_PROFILE
         { GLFW.glfwWindowHint(hint, value) }
     }
+
+    //
+    @Redirect(at = At(value = "INVOKE", target = "Lorg/lwjgl/glfw/GLFW;glfwCreateWindow(IILjava/lang/CharSequence;JJ)J", remap = false), method = ["<init>"])
+    private fun OnGlfwCreateWindow(width: Int, height: Int, title: CharSequence, monitor: Long, share: Long): Long {
+        MineVKR.width = width; MineVKR.height = height;
+        return GLFW.glfwCreateWindow(width, height, title, monitor, share);
+    }
+
+    /*// Not Found
+    @Redirect(at = At(value = "INVOKE", target = "Lorg/lwjgl/glfw/GLFW;glfwCreateWindow(IILjava/nio/ByteBuffer;JJ)J", remap = false), method = ["<init>"])
+    private fun OnGlfwCreateWindow(width: Int, height: Int, title: ByteBuffer, monitor: Long, share: Long): Long {
+        MineVKR.width = width; MineVKR.height = height;
+        return GLFW.glfwCreateWindow(width, height, title, monitor, share);
+    }*/
 }
