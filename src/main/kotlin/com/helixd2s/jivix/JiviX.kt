@@ -83,13 +83,8 @@ open class JiviX {
 
         // ...
         open var transform: FloatArray
-            get() { // UNSAFE!
-                var arr: FloatArray = floatArrayOf(1.0F, 0.0F, 0.0F, 0.0F, 0.0F, 1.0F, 0.0F, 0.0F, 0.0F, 0.0F, 1.0F, 0.0F)
-                return arr.also { this.core.transform().get(it, 0, 12) }
-            }
-            set(value) { // UNSAFE!
-                this.core.transform().put(value, 0, min(12,value.size))
-            }
+            get() { return floatArrayOf(1.0F, 0.0F, 0.0F, 0.0F, 0.0F, 1.0F, 0.0F, 0.0F, 0.0F, 0.0F, 1.0F, 0.0F).also { this.core.transform().get(it, 0, 12) } } // UNSAFE!
+            set(value) { this.core.transform().put(value, 0, min(12,value.size)) } // UNSAFE!
 
         open var mask: UByte
             get() { return this.core.mask().get(0).toUByte() }
@@ -206,8 +201,7 @@ open class JiviX {
             this.core = JiviXBase.UByteVector(allocation.core, offset.toLong(), range.toLong()) }
 
         // TODO: Indexer Wrapper For Kotlin!
-        open fun indexer(): UByteBufferIndexer {
-            return core.indexer }
+        open fun indexer(): UByteBufferIndexer { return core.indexer }
 
         // TODO: FULL REFERENCE SUPPORT
         open operator fun get(index: Long): UByte { // SHOULD TO BE LOSSLESS (Bit In Bit!)
@@ -216,14 +210,11 @@ open class JiviX {
         open operator fun set(index: Long, value: UByte) { // SHOULD TO BE LOSSLESS (Bit In Bit!)
             core.data().put(index, value.toByte()) }
 
-        open fun size(): ULong {
-            return this.core.size().toULong(); }
+        open fun size(): ULong { return this.core.size().toULong(); }
 
-        open fun range(): ULong {
-            return this.core.range().toULong(); }
+        open fun range(): ULong { return this.core.range().toULong(); }
 
-        open fun data(): BytePointer {
-            return core.data() }
+        open fun data(): BytePointer { return core.data() }
     }
 
     //
@@ -231,20 +222,15 @@ open class JiviX {
     open class Driver {
         open var core: JiviXBase.Driver
 
-        constructor() {
-            this.core = JiviXBase.Driver(); }
+        constructor() { this.core = JiviXBase.Driver(); }
 
-        constructor(obj: JiviXBase.Driver) {
-            this.core = obj; }
+        constructor(obj: JiviXBase.Driver) { this.core = obj; }
 
-        constructor(obj: JiviXCore.Driver) {
-            this.core = JiviXBase.Driver(obj); }
+        constructor(obj: JiviXCore.Driver) { this.core = JiviXBase.Driver(obj); }
 
-        open fun allocator(): ULong {
-            return this.core._getAllocator().address().toULong(); }
+        open fun allocator(): ULong { return this.core._getAllocator().address().toULong(); }
 
-        open fun memoryProperties(): ULong {
-            return this.core._getMemoryProperties().address().toULong(); }
+        open fun memoryProperties(): ULong { return this.core._getMemoryProperties().address().toULong(); }
 
         open val deviceDispatch: Device //= Device()
             get() { return Device(core.deviceDispatch); }
@@ -254,11 +240,9 @@ open class JiviX {
             get() { return Instance(core.instanceDispatch); }
         //set(value) { core.setInstanceDispatch(value.core); };
 
-        open fun physicalDevice(idx: UInt): ULong {
-            return this.core.getPhysicalDevice(idx.toInt()).toULong(); }
+        open fun physicalDevice(idx: UInt): ULong { return this.core.getPhysicalDevice(idx.toInt()).toULong(); }
 
-        open fun physicalDevice(): ULong {
-            return this.core.physicalDevice.toULong(); }
+        open fun physicalDevice(): ULong { return this.core.physicalDevice.toULong(); }
 
         open fun device(): ULong {
             //if (this.core.device != 0L) {
@@ -268,11 +252,9 @@ open class JiviX {
             //}
         }
 
-        open fun queue(): ULong {
-            return this.core.queue.toULong(); }
+        open fun queue(): ULong { return this.core.queue.toULong(); }
 
-        open fun fence(): ULong {
-            return this.core.fence.toULong(); }
+        open fun fence(): ULong { return this.core.fence.toULong(); }
 
         open fun instance(): ULong { // Automatically create when null found
             if (this.core.instance != 0L) {
@@ -282,23 +264,17 @@ open class JiviX {
             }
         }
 
-        open fun commandPool(): ULong {
-            return this.core.commandPool.toULong(); }
+        open fun commandPool(): ULong { return this.core.commandPool.toULong(); }
 
-        open fun pipelineCache(): ULong {
-            return this.core.pipelineCache.toULong(); }
+        open fun pipelineCache(): ULong { return this.core.pipelineCache.toULong(); }
 
-        open fun descriptorPool(): ULong {
-            return this.core.descriptorPool.toULong(); }
+        open fun descriptorPool(): ULong { return this.core.descriptorPool.toULong(); }
 
-        open fun depthImageView(): ULong {
-            return this.core.depthImageView.toULong(); }
+        open fun depthImageView(): ULong { return this.core.depthImageView.toULong(); }
 
-        open fun depthImage(): ULong {
-            return this.core.depthImage.toULong(); }
+        open fun depthImage(): ULong { return this.core.depthImage.toULong(); }
 
-        open fun createInstance(): ULong {
-            return this.core.createInstance().toULong(); }
+        open fun createInstance(): ULong { return this.core.createInstance().toULong(); }
 
         open fun createInstanceClass(): VkInstance { // TODO: Null-Safe
             return VkInstance(this.instance().toLong(), this.instanceCreateInfo()); }
@@ -306,8 +282,7 @@ open class JiviX {
         open fun createPhysicalDeviceClass(): VkPhysicalDevice { // TODO: Null-Safe
             return VkPhysicalDevice(this.physicalDevice().toLong(), this.createInstanceClass()) }
 
-        open fun createDevice(): ULong {
-            return this.core.createDevice().toULong(); }
+        open fun createDevice(): ULong { return this.core.createDevice().toULong(); }
 
         open fun createDevice(physicalDeviceHandle: ULong): ULong {
             return this.core.createDevice(physicalDeviceHandle.toLong()).toULong(); }
@@ -326,18 +301,14 @@ open class JiviX {
     open class Context() {
         open lateinit var core: JiviXBase.Context
 
-        constructor(obj: JiviXBase.Context) : this() {
-            this.core = obj; }
+        constructor(obj: JiviXBase.Context) : this() { this.core = obj; }
 
-        constructor(obj: JiviXCore.Context) : this() {
-            this.core = JiviXBase.Context(obj); }
+        constructor(obj: JiviXCore.Context) : this() { this.core = JiviXBase.Context(obj); }
 
-        constructor(driver: Driver) : this() {
-            this.core = JiviXBase.Context(driver.core); }
+        constructor(driver: Driver) : this() { this.core = JiviXBase.Context(driver.core); }
 
         // Core Value
-        open fun sharedPtr(): Context {
-            return Context(core.sharedPtr()); }
+        open fun sharedPtr(): Context { return Context(core.sharedPtr()); }
 
         open fun initialize(width: UInt, height: UInt): Context {
             return Context(core.initialize(width.toInt(), height.toInt())); }
@@ -369,74 +340,56 @@ open class JiviX {
     open class Thread() {
         open lateinit var core: JiviXBase.Thread
 
-        constructor(obj: JiviXBase.Thread) : this() {
-            this.core = obj; }
+        constructor(obj: JiviXBase.Thread) : this() { this.core = obj; }
 
-        constructor(obj: JiviXCore.Thread) : this() {
-            this.core = JiviXBase.Thread(obj); }
+        constructor(obj: JiviXCore.Thread) : this() { this.core = JiviXBase.Thread(obj); }
 
-        constructor(driver: Driver) : this() {
-            this.core = JiviXBase.Thread(driver.core); }
+        constructor(driver: Driver) : this() { this.core = JiviXBase.Thread(driver.core); }
 
         // Core Value
-        open fun sharedPtr(): JiviXCore.Thread {
-            return core.sharedPtr(); }
+        open fun sharedPtr(): JiviXCore.Thread { return core.sharedPtr(); }
     }
 
     //
     open class BufferViewSet() {
         open lateinit var core: JiviXBase.BufferViewSet
 
-        constructor(obj: JiviXBase.BufferViewSet) : this() {
-            this.core = obj; }
+        constructor(obj: JiviXBase.BufferViewSet) : this() { this.core = obj; }
 
-        constructor(obj: JiviXCore.BufferViewSet) : this() {
-            this.core = JiviXBase.BufferViewSet(obj); }
+        constructor(obj: JiviXCore.BufferViewSet) : this() { this.core = JiviXBase.BufferViewSet(obj); }
 
-        constructor(context: Context) : this() {
-            this.core = JiviXBase.BufferViewSet(context.core); }
+        constructor(context: Context) : this() { this.core = JiviXBase.BufferViewSet(context.core); }
 
         // Core Value
-        open fun sharedPtr(): JiviXCore.BufferViewSet {
-            return core.sharedPtr(); }
+        open fun sharedPtr(): JiviXCore.BufferViewSet { return core.sharedPtr(); }
 
-        open fun bufferCount(): ULong {
-            return this.core.bufferCount.toULong(); }
+        open fun bufferCount(): ULong { return this.core.bufferCount.toULong(); }
 
         //
         open operator fun get(index: Long): JiviXBase.UByteVector? { // TODO: Fix Index Type
             return core.get(index.toInt()) }
 
         //
-        open fun pushBufferView(buf: JiviXBase.UByteVector?): Long {
-            return core.pushBufferView(buf) }
+        open fun pushBufferView(buf: JiviXBase.UByteVector?): Long { return core.pushBufferView(buf) }
 
         //
-        open fun descriptorSet(): ULong {
-            return core.descriptorSet.toULong(); }
+        open fun descriptorSet(): ULong { return core.descriptorSet.toULong(); }
 
-        open fun descriptorLayout(): ULong {
-            return core.descriptorLayout.toULong(); }
-
-
+        open fun descriptorLayout(): ULong { return core.descriptorLayout.toULong(); }
     }
 
     //
     open class MeshInput() {
         open lateinit var core: JiviXBase.MeshInput
 
-        constructor(obj: JiviXBase.MeshInput) : this() {
-            this.core = obj; }
+        constructor(obj: JiviXBase.MeshInput) : this() { this.core = obj; }
 
-        constructor(obj: JiviXCore.MeshInput) : this() {
-            this.core = JiviXBase.MeshInput(obj); }
+        constructor(obj: JiviXCore.MeshInput) : this() { this.core = JiviXBase.MeshInput(obj); }
 
-        constructor(context: Context) : this() {
-            this.core = JiviXBase.MeshInput(context.core); }
+        constructor(context: Context) : this() { this.core = JiviXBase.MeshInput(context.core); }
 
         // Core Value
-        open fun sharedPtr(): JiviXCore.MeshInput {
-            return core.sharedPtr(); }
+        open fun sharedPtr(): JiviXCore.MeshInput { return core.sharedPtr(); }
 
         open fun addBinding(bufferID: UInt, binding: VkVertexInputBindingDescription): MeshInput {
             return MeshInput(this.core.addBinding(bufferID.toInt(), binding.address())) }
@@ -472,15 +425,12 @@ open class JiviX {
     open class MeshBinding() {
         open lateinit var core: JiviXBase.MeshBinding
 
-        constructor(obj: JiviXBase.MeshBinding) : this() {
-            this.core = obj; }
+        constructor(obj: JiviXBase.MeshBinding) : this() { this.core = obj; }
 
-        constructor(obj: JiviXCore.MeshBinding) : this() {
-            this.core = JiviXBase.MeshBinding(obj); }
+        constructor(obj: JiviXCore.MeshBinding) : this() { this.core = JiviXBase.MeshBinding(obj); }
 
         // Core Value
-        open fun sharedPtr(): JiviXCore.MeshBinding {
-            return core.sharedPtr(); }
+        open fun sharedPtr(): JiviXCore.MeshBinding { return core.sharedPtr(); }
 
         // Unified Constructor
         constructor(context: Context, maxPrimitiveCount: ULong?, perGeometryCount: ULongArray?) : this() {
@@ -536,18 +486,14 @@ open class JiviX {
     open class Node() {
         open lateinit var core: JiviXBase.Node
 
-        constructor(obj: JiviXBase.Node) : this() {
-            this.core = obj; }
+        constructor(obj: JiviXBase.Node) : this() { this.core = obj; }
 
-        constructor(obj: JiviXCore.Node) : this() {
-            this.core = JiviXBase.Node(obj); }
+        constructor(obj: JiviXCore.Node) : this() { this.core = JiviXBase.Node(obj); }
 
-        constructor(context: Context) : this() {
-            this.core = JiviXBase.Node(context.core); }
+        constructor(context: Context) : this() { this.core = JiviXBase.Node(context.core); }
 
         // Core Value
-        open fun sharedPtr(): JiviXCore.Node {
-            return core.sharedPtr(); }
+        open fun sharedPtr(): JiviXCore.Node { return core.sharedPtr(); }
 
         open fun pushInstance(instance: ULong): Node {
             return Node(core.pushInstance(instance.toLong())); }
@@ -564,18 +510,14 @@ open class JiviX {
     open class Renderer() {
         open lateinit var core: JiviXBase.Renderer
 
-        constructor(obj: JiviXBase.Renderer) : this() {
-            this.core = obj; }
+        constructor(obj: JiviXBase.Renderer) : this() { this.core = obj; }
 
-        constructor(obj: JiviXCore.Renderer) : this() {
-            this.core = JiviXBase.Renderer(obj); }
+        constructor(obj: JiviXCore.Renderer) : this() { this.core = JiviXBase.Renderer(obj); }
 
-        constructor(context: Context) : this() {
-            this.core = JiviXBase.Renderer(context.core); }
+        constructor(context: Context) : this() { this.core = JiviXBase.Renderer(context.core); }
 
         // Core Value
-        open fun sharedPtr(): JiviXCore.Renderer {
-            return core.sharedPtr(); }
+        open fun sharedPtr(): JiviXCore.Renderer { return core.sharedPtr(); }
 
         //
         open fun linkMaterial(material: Material): Renderer {
@@ -589,22 +531,17 @@ open class JiviX {
     open class Material() {
         open lateinit var core: JiviXBase.Material
 
-        constructor(obj: JiviXBase.Material) : this() {
-            this.core = obj; }
+        constructor(obj: JiviXBase.Material) : this() { this.core = obj; }
 
-        constructor(obj: JiviXCore.Material) : this() {
-            this.core = JiviXBase.Material(obj); }
+        constructor(obj: JiviXCore.Material) : this() { this.core = JiviXBase.Material(obj); }
 
-        constructor(context: Context) : this() {
-            this.core = JiviXBase.Material(context.core); }
+        constructor(context: Context) : this() { this.core = JiviXBase.Material(context.core); }
 
         // Core Value
-        open fun sharedPtr(): Material {
-            return Material(core.sharedPtr()); }
+        open fun sharedPtr(): Material { return Material(core.sharedPtr()); }
 
         // 
-        open fun pushMaterial(unit: MaterialUnit): Long {
-            return core.pushMaterial(unit.core) }
+        open fun pushMaterial(unit: MaterialUnit): Long { return core.pushMaterial(unit.core) }
 
         open fun pushSampledImage(imageDescAddress: ULong): Material {
             return Material(core.pushSampledImage(imageDescAddress.toLong())) }
