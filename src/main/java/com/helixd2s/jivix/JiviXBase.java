@@ -52,7 +52,7 @@ public class JiviXBase extends Pointer {
         public native int getGLMemory();
     }
 
-    @Name("vkt::Vector<uint8_t>") // TODO: Untyped Vector in Native
+    @Name("vkt::VectorBase") // TODO: Untyped Vector in Native
     public static class Vector extends Pointer {
         static { Loader.load(); }
 
