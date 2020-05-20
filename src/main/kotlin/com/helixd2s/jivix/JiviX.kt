@@ -2,11 +2,11 @@ package com.helixd2s.jivix
 
 import org.bytedeco.javacpp.BytePointer
 import org.bytedeco.javacpp.FloatPointer
-import org.bytedeco.javacpp.indexer.ByteBufferIndexer
-import org.bytedeco.javacpp.indexer.UByteBufferIndexer
+import org.bytedeco.javacpp.IntPointer
+import org.bytedeco.javacpp.ShortPointer
+import org.bytedeco.javacpp.indexer.*
 import org.lwjgl.vulkan.*
 import java.lang.Integer.min
-import java.nio.FloatBuffer
 
 // TODO: Reduce Native Layers count and make more thin
 // TODO: Add operable Int, UInt, Long, ULong... referenced types for Kotlin
@@ -14,7 +14,7 @@ abstract class JiviX {
 
     // WHAT IS `core`?
     // Core is UnWrapped Java or Wrapped Native Interface between with Kotlin
-
+    // JavaCPP Have NO ULong, so NEEDS BI-DIRECTIONAL PER-BITS Conversion Between LONG and ULONG! (i.e. ULONG -> LONG -> ULONG WITHOUT any data loss)
     // Here is GLOBAL Methods, Variables...
     companion object;
 
@@ -160,61 +160,123 @@ abstract class JiviX {
             this.core = JiviXBase.ImageRegion(allocation.core, imageCreateInfo.address(), layout.toInt()) }
     }
 
-    //
-    open class ByteVector() {
-        open lateinit var core: JiviXBase.ByteVector
 
+    //
+    open class Vector() {
+        open lateinit var core: JiviXBase.Vector
+
+        //constructor(): this() {};
         constructor(vector: JiviXBase.ByteVector) : this() { this.core = vector }
 
         // JavaCPP Have NO ULong, so NEEDS BI-DIRECTIONAL PER-BITS Conversion Between LONG and ULONG! (i.e. ULONG -> LONG -> ULONG WITHOUT any data loss)
+        constructor(allocation: VmaBufferAllocation, offset: ULong, range: ULong, stride: ULong = 1UL) : this() {
+            this.core = JiviXBase.Vector(allocation.core, offset.toLong(), range.toLong(), stride.toLong()) }
+
+        open fun size(): ULong { return this.core.size().toULong(); }
+        open fun range(): ULong { return this.core.range().toULong(); }
+        open fun address(): ULong { return core.address().toULong(); }
+        open fun deviceAddress(): ULong { return core.deviceAddress().toULong(); }
+    }
+
+
+    //
+    open class ByteVector() : Vector() {
+        constructor(vector: JiviXBase.ByteVector) { this.core = vector }
         constructor(allocation: VmaBufferAllocation, offset: ULong, range: ULong) : this() {
             this.core = JiviXBase.ByteVector(allocation.core, offset.toLong(), range.toLong()) }
 
         // TODO: Indexer Wrapper For Kotlin!
-        open fun indexer(): ByteBufferIndexer { return core.indexer }
+        open fun indexer(): ByteBufferIndexer { return (core as JiviXBase.ByteVector).indexer }
 
         // TODO: FULL REFERENCE SUPPORT
-        open operator fun get(index: Long): Byte { return core.data().get(index) }
-        open operator fun set(index: Long, value: Byte) { core.data().put(index, value) }
+        open operator fun get(index: Long): Byte { return (core as JiviXBase.ByteVector).data().get(index) }
+        open operator fun set(index: Long, value: Byte) { (core as JiviXBase.ByteVector).data().put(index, value) }
 
-        open fun size(): ULong { return this.core.size().toULong(); }
-
-        open fun range(): ULong { return this.core.range().toULong(); }
-
-        open fun data(): BytePointer { return core.data() }
-
-        open fun address(): ULong { return core.address().toULong(); }
-
-        open fun deviceAddress(): ULong { return core.deviceAddress().toULong(); }
+        open fun data(): BytePointer { return (core as JiviXBase.ByteVector).data() }
     }
 
     // SHOULD TO BE LOSSLESS (Bit In Bit!)
-    open class UByteVector() {
-        open lateinit var core: JiviXBase.UByteVector
-
+    open class UByteVector() : Vector() {
         constructor(vector: JiviXBase.UByteVector) : this() { this.core = vector }
-
-        // JavaCPP Have NO ULong, so NEEDS BI-DIRECTIONAL PER-BITS Conversion Between LONG and ULONG! (i.e. ULONG -> LONG -> ULONG WITHOUT any data loss)
         constructor(allocation: VmaBufferAllocation, offset: ULong, range: ULong) : this() {
             this.core = JiviXBase.UByteVector(allocation.core, offset.toLong(), range.toLong()) }
 
         // TODO: Indexer Wrapper For Kotlin!
-        open fun indexer(): UByteBufferIndexer { return core.indexer }
+        open fun indexer(): UByteBufferIndexer { return (core as JiviXBase.UByteVector).indexer }
 
         // TODO: FULL REFERENCE SUPPORT
-        open operator fun get(index: Long): UByte { return core.data().get(index).toUByte() }
-        open operator fun set(index: Long, value: UByte) { core.data().put(index, value.toByte()) }
+        open operator fun get(index: Long): UByte { return (core as JiviXBase.UByteVector).data().get(index).toUByte() }
+        open operator fun set(index: Long, value: UByte) { (core as JiviXBase.UByteVector).data().put(index, value.toByte()) }
 
-        open fun size(): ULong { return this.core.size().toULong(); }
-
-        open fun range(): ULong { return this.core.range().toULong(); }
-
-        open fun data(): BytePointer { return core.data() }
-
-        open fun address(): ULong { return core.address().toULong(); }
-
-        open fun deviceAddress(): ULong { return core.deviceAddress().toULong(); }
+        open fun data(): BytePointer { return (core as JiviXBase.UByteVector).data() }
     }
+
+
+    //
+    open class ShortVector() : Vector() {
+        constructor(vector: JiviXBase.ShortVector) { this.core = vector }
+        constructor(allocation: VmaBufferAllocation, offset: ULong, range: ULong) : this() {
+            this.core = JiviXBase.ShortVector(allocation.core, offset.toLong(), range.toLong()) }
+
+        // TODO: Indexer Wrapper For Kotlin!
+        open fun indexer(): ShortBufferIndexer { return (core as JiviXBase.ShortVector).indexer }
+
+        // TODO: FULL REFERENCE SUPPORT
+        open operator fun get(index: Long): Short { return (core as JiviXBase.ShortVector).data().get(index) }
+        open operator fun set(index: Long, value: Short) { (core as JiviXBase.ShortVector).data().put(index, value) }
+
+        open fun data(): ShortPointer { return (core as JiviXBase.ShortVector).data() }
+    }
+
+    // SHOULD TO BE LOSSLESS (Bit In Bit!)
+    open class UShortVector() : Vector() {
+        constructor(vector: JiviXBase.UShortVector) : this() { this.core = vector }
+        constructor(allocation: VmaBufferAllocation, offset: ULong, range: ULong) : this() {
+            this.core = JiviXBase.UShortVector(allocation.core, offset.toLong(), range.toLong()) }
+
+        // TODO: Indexer Wrapper For Kotlin!
+        open fun indexer(): UShortBufferIndexer { return (core as JiviXBase.UShortVector).indexer }
+
+        // TODO: FULL REFERENCE SUPPORT
+        open operator fun get(index: Long): UShort { return (core as JiviXBase.UShortVector).data().get(index).toUShort() }
+        open operator fun set(index: Long, value: UShort) { (core as JiviXBase.UShortVector).data().put(index, value.toShort()) }
+
+        open fun data(): ShortPointer { return (core as JiviXBase.UShortVector).data() }
+    }
+
+
+    //
+    open class IntVector() : Vector() {
+        constructor(vector: JiviXBase.IntVector) { this.core = vector }
+        constructor(allocation: VmaBufferAllocation, offset: ULong, range: ULong) : this() {
+            this.core = JiviXBase.IntVector(allocation.core, offset.toLong(), range.toLong()) }
+
+        // TODO: Indexer Wrapper For Kotlin!
+        open fun indexer(): IntBufferIndexer { return (core as JiviXBase.IntVector).indexer }
+
+        // TODO: FULL REFERENCE SUPPORT
+        open operator fun get(index: Long): Int { return (core as JiviXBase.IntVector).data().get(index) }
+        open operator fun set(index: Long, value: Int) { (core as JiviXBase.IntVector).data().put(index, value) }
+
+        open fun data(): IntPointer { return (core as JiviXBase.IntVector).data() }
+    }
+
+    // SHOULD TO BE LOSSLESS (Bit In Bit!)
+    open class UIntVector() : Vector() {
+        constructor(vector: JiviXBase.UIntVector) : this() { this.core = vector }
+        constructor(allocation: VmaBufferAllocation, offset: ULong, range: ULong) : this() {
+            this.core = JiviXBase.UIntVector(allocation.core, offset.toLong(), range.toLong()) }
+
+        // TODO: Indexer Wrapper For Kotlin!
+        open fun indexer(): UIntBufferIndexer { return (core as JiviXBase.UIntVector).indexer }
+
+        // TODO: FULL REFERENCE SUPPORT
+        open operator fun get(index: Long): UInt { return (core as JiviXBase.UIntVector).data().get(index).toUInt() }
+        open operator fun set(index: Long, value: UInt) { (core as JiviXBase.UIntVector).data().put(index, value.toInt()) }
+
+        open fun data(): IntPointer { return (core as JiviXBase.UIntVector).data() }
+    }
+
 
     //
     //open class Driver() {
@@ -544,10 +606,10 @@ abstract class JiviX {
             return Material(core.pushSampledImage(imageDescAddress.toLong())) }
 
         open fun setRawMaterials(rawMaterials: UByteVector, materialCount: ULong): Material {
-            return Material(this.core.setRawMaterials(rawMaterials.core, materialCount.toLong())) }
+            return Material(this.core.setRawMaterials(rawMaterials.core as JiviXBase.UByteVector?, materialCount.toLong())) }
 
         open fun setGpuMaterials(rawMaterials: UByteVector): Material {
-            return Material(this.core.setGpuMaterials(rawMaterials.core)) }
+            return Material(this.core.setGpuMaterials(rawMaterials.core as JiviXBase.UByteVector?)) }
 
         open fun resetMaterials(): Material {
             return Material(this.core.resetMaterials()) }

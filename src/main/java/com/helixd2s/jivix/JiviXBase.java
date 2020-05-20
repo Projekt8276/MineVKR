@@ -1,12 +1,8 @@
 package com.helixd2s.jivix;
 
-import org.bytedeco.javacpp.BytePointer;
-import org.bytedeco.javacpp.FloatPointer;
-import org.bytedeco.javacpp.Loader;
-import org.bytedeco.javacpp.Pointer;
+import org.bytedeco.javacpp.*;
 import org.bytedeco.javacpp.annotation.*;
-import org.bytedeco.javacpp.indexer.ByteBufferIndexer;
-import org.bytedeco.javacpp.indexer.UByteBufferIndexer;
+import org.bytedeco.javacpp.indexer.*;
 
 // "jniJiviXBase", "JiviX"
 
@@ -32,191 +28,215 @@ public class JiviXBase extends Pointer {
 
     @Name("vkt::ImageRegion") //
     public static class ImageRegion extends Pointer {
-        static {
-            Loader.load();
-        }
+        static { Loader.load(); }
 
-        public ImageRegion(Pointer p) {
-            super(p);
-        }
-
-        //
         public ImageRegion() {
             allocate();
         }
-
-        //
+        public ImageRegion(Pointer p) {
+            super(p);
+        }
         public ImageRegion(ImageRegion b) {
             allocate(b);
         }
-
-        //
-        public ImageRegion(@SharedPtr JiviXCore.ImageAllocation alloc, @Cast("vkh::VkImageViewCreateInfo*") long info, @Cast("VkImageLayout") int layout) {
-            allocate(alloc, info, layout);
-        }
-
-        //
-        public ImageRegion(@SharedPtr JiviXCore.VmaImageAllocation alloc, @Cast("vkh::VkImageViewCreateInfo*") long info, @Cast("VkImageLayout") int layout) {
-            allocate(alloc, info, layout);
-        }
+        public ImageRegion(@SharedPtr JiviXCore.ImageAllocation alloc, @Cast("vkh::VkImageViewCreateInfo*") long info, @Cast("VkImageLayout") int layout) { allocate(alloc, info, layout); }
+        public ImageRegion(@SharedPtr JiviXCore.VmaImageAllocation alloc, @Cast("vkh::VkImageViewCreateInfo*") long info, @Cast("VkImageLayout") int layout) { allocate(alloc, info, layout); }
 
         private native void allocate();
-
         private native void allocate(ImageRegion b);
-
         private native void allocate(@SharedPtr JiviXCore.ImageAllocation alloc, @Cast("vkh::VkImageViewCreateInfo*") long info, @Cast("VkImageLayout") int layout);
-
         private native void allocate(@SharedPtr JiviXCore.VmaImageAllocation alloc, @Cast("vkh::VkImageViewCreateInfo*") long info, @Cast("VkImageLayout") int layout);
 
         //
         public native int getGLImage();
-
         public native int getGLMemory();
     }
 
-    @Name("vkt::Vector<int8_t>") // int8_t default
-    public static class ByteVector extends Pointer {
-        static {
-            Loader.load();
-        }
+    @Name("vkt::Vector<uint8_t>") // TODO: Untyped Vector in Native
+    public static class Vector extends Pointer {
+        static { Loader.load(); }
 
+        public Vector() { super(); }
+        public Vector(Pointer p) {
+            super(p);
+        }
+        public Vector(@SharedPtr JiviXCore.VmaBufferAllocation a, long offset, long size, long stride) { allocate(a, offset, size, stride); }
+        public Vector(@SharedPtr JiviXCore.BufferAllocation a, long offset, long size, long stride) { allocate(a, offset, size, stride); }
+
+        protected native void allocate();
+        protected native void allocate(@SharedPtr JiviXCore.VmaBufferAllocation a, long offset, long size, long stride);
+        protected native void allocate(@SharedPtr JiviXCore.BufferAllocation a, long offset, long size, long stride);
+
+        // Java have NOT support `VkDeviceOrHostAddressKHR` or `VkDeviceOrHostAddressConstKHR`, and become rude var... (DeRMo!)
+        public native @Cast("uintptr_t") long deviceAddress();
+
+        //
+        public native long size();
+        public native long range();
+
+        //
+        public native int getGL();
+        public native int getGLBuffer();
+        public native int getGLMemory();
+    };
+
+    // For JAVA only
+    @Name("vkt::Vector<int8_t>") // int8_t default
+    public static class ByteVector extends Vector {
+        static { Loader.load(); }
+
+        public ByteVector() { super(); }
         public ByteVector(Pointer p) {
             super(p);
         }
-
-        //
-        public ByteVector() {
-            allocate();
-        }
-
-        //
-        public ByteVector(@SharedPtr JiviXCore.VmaBufferAllocation a, long offset, long size) {
-            allocate(a, offset, size);
-        } // this = (vector<vector<void*> >*)p
-
-        //
-        public ByteVector(@SharedPtr JiviXCore.BufferAllocation a, long offset, long size) {
-            allocate(a, offset, size);
-        } // this = (vector<vector<void*> >*)p
-
-        private native void allocate();
-
-        private native void allocate(@SharedPtr JiviXCore.VmaBufferAllocation a, long offset, long size);
-
-        private native void allocate(@SharedPtr JiviXCore.BufferAllocation a, long offset, long size);
+        public ByteVector(@SharedPtr JiviXCore.VmaBufferAllocation a, long offset, long size) { super(a, offset, size, 1); }
+        public ByteVector(@SharedPtr JiviXCore.BufferAllocation a, long offset, long size) { super(a, offset, size, 1); }
 
         // Indexer for Data
         public ByteBufferIndexer getIndexer() {
-            return new ByteBufferIndexer(this.data().asByteBuffer());
+            return new ByteBufferIndexer(this.data().asBuffer());
         }
 
         //
-        @Name("operator=")
-        public native @ByRef
-        ByteVector put(@ByRef ByteVector x);
-
-        //
-        @Name("operator[]")
-        public native @ByRef
-        BytePointer at(long n);
-
-        //
-        public native long size();
-
-        public native long range();
+        @Name("operator=") public native @ByRef ByteVector put(@ByRef ByteVector x);
+        @Name("operator[]") public native @ByRef BytePointer at(long n);
 
         // map buffer data
         public native BytePointer mapped();
-
         public native BytePointer map();
-
         public native BytePointer data();
-
-        // Java have NOT support `VkDeviceOrHostAddressKHR` or `VkDeviceOrHostAddressConstKHR`, and become rude var... (DeRMo!)
-        public native @Cast("uintptr_t")
-        long deviceAddress();
-
-        //
-        public native int getGL();
-
-        public native int getGLBuffer();
-
-        public native int getGLMemory();
     }
 
+    // FOR KOTLIN AND NATIVE!
     @Name("vkt::Vector<uint8_t>") // uint8_t version (C++)
-    public static class UByteVector extends Pointer {
-        static {
-            Loader.load();
-        }
-
+    public static class UByteVector extends Vector {
+        static { Loader.load(); }
         public UByteVector(Pointer p) {
             super(p);
-        } // this = (vector<vector<void*> >*)p
-
-        //
-        public UByteVector() {
-            allocate();
         }
-
-        //
-        public UByteVector(@SharedPtr JiviXCore.VmaBufferAllocation a, long offset, long size) {
-            allocate(a, offset, size);
-        } // this = (vector<vector<void*> >*)p
-
-        //
-        public UByteVector(@SharedPtr JiviXCore.BufferAllocation a, long offset, long size) {
-            allocate(a, offset, size);
-        } // this = (vector<vector<void*> >*)p
-
-        private native void allocate();
-
-        private native void allocate(@SharedPtr JiviXCore.VmaBufferAllocation a, long offset, long size);
-
-        private native void allocate(@SharedPtr JiviXCore.BufferAllocation a, long offset, long size);
+        public UByteVector() { super(); }
+        public UByteVector(@SharedPtr JiviXCore.VmaBufferAllocation a, long offset, long size) { super(a, offset, size, 1); }
+        public UByteVector(@SharedPtr JiviXCore.BufferAllocation a, long offset, long size) { super(a, offset, size, 1); }
 
         // Indexer for Data
         public UByteBufferIndexer getIndexer() {
-            return new UByteBufferIndexer(this.data().asByteBuffer());
+            return new UByteBufferIndexer(this.data().asBuffer());
         }
 
         //
-        @Name("operator=")
-        public native @ByRef
-        UByteVector put(@ByRef UByteVector x);
-
-        //
-        @Name("operator[]")
-        public native @Cast("uint8_t*")
-        @ByRef
-        BytePointer at(long n);
-
-        //
-        public native long size();
-
-        public native long range();
+        @Name("operator=") public native @ByRef UByteVector put(@ByRef UByteVector x);
+        @Name("operator[]") public native @Cast("uint8_t*") @ByRef BytePointer at(long n);
 
         // map buffer data
-        public native @Cast("uint8_t*")
-        BytePointer mapped();
+        public native @Cast("uint8_t*") BytePointer mapped();
+        public native @Cast("uint8_t*") BytePointer map();
+        public native @Cast("uint8_t*") BytePointer data();
+    }
 
-        public native @Cast("uint8_t*")
-        BytePointer map();
+    // For JAVA only
+    @Name("vkt::Vector<int16_t>") // int8_t default
+    public static class ShortVector extends Vector {
+        static { Loader.load(); }
+        public ShortVector(Pointer p) {
+            super(p);
+        }
+        public ShortVector() { super(); }
+        public ShortVector(@SharedPtr JiviXCore.VmaBufferAllocation a, long offset, long size) { super(a, offset, size, 2); }
+        public ShortVector(@SharedPtr JiviXCore.BufferAllocation a, long offset, long size) { super(a, offset, size, 2); }
 
-        public native @Cast("uint8_t*")
-        BytePointer data();
-
-        // Java have NOT support `VkDeviceOrHostAddressKHR` or `VkDeviceOrHostAddressConstKHR`, and become rude var... (DeRMo!)
-        public native @Cast("uintptr_t")
-        long deviceAddress();
+        // Indexer for Data
+        public ShortBufferIndexer getIndexer() {
+            return new ShortBufferIndexer(this.data().asBuffer());
+        }
 
         //
-        public native int getGL();
+        @Name("operator=") public native @ByRef ShortVector put(@ByRef UShortVector x);
+        @Name("operator[]") public native @ByRef ShortPointer at(long n);
 
-        public native int getGLBuffer();
-
-        public native int getGLMemory();
+        // map buffer data
+        public native ShortPointer mapped();
+        public native ShortPointer map();
+        public native ShortPointer data();
     }
+
+    // FOR KOTLIN AND NATIVE!
+    @Name("vkt::Vector<uint16_t>") // uint8_t version (C++)
+    public static class UShortVector extends Vector {
+        static { Loader.load(); }
+        public UShortVector(Pointer p) {
+            super(p);
+        }
+        public UShortVector() { super(); }
+        public UShortVector(@SharedPtr JiviXCore.VmaBufferAllocation a, long offset, long size) { super(a, offset, size, 2); }
+        public UShortVector(@SharedPtr JiviXCore.BufferAllocation a, long offset, long size) { super(a, offset, size, 2); }
+
+        // Indexer for Data
+        public UShortBufferIndexer getIndexer() {
+            return new UShortBufferIndexer(this.data().asBuffer());
+        }
+
+        //
+        @Name("operator=") public native @ByRef UShortVector put(@ByRef UShortVector x);
+        @Name("operator[]") public native @Cast("uint16_t*") @ByRef ShortPointer at(long n);
+
+        // map buffer data
+        public native @Cast("uint16_t*") ShortPointer mapped();
+        public native @Cast("uint16_t*") ShortPointer map();
+        public native @Cast("uint16_t*") ShortPointer data();
+    }
+
+    // For JAVA only
+    @Name("vkt::Vector<int32_t>") // int8_t default
+    public static class IntVector extends Vector {
+        static { Loader.load(); }
+        public IntVector(Pointer p) {
+            super(p);
+        }
+        public IntVector() { super(); }
+        public IntVector(@SharedPtr JiviXCore.VmaBufferAllocation a, long offset, long size) { super(a, offset, size, 4); }
+        public IntVector(@SharedPtr JiviXCore.BufferAllocation a, long offset, long size) { super(a, offset, size, 4); }
+
+        // Indexer for Data
+        public IntBufferIndexer getIndexer() {
+            return new IntBufferIndexer(this.data().asBuffer());
+        }
+
+        //
+        @Name("operator=") public native @ByRef IntVector put(@ByRef IntVector x);
+        @Name("operator[]") public native @ByRef IntPointer at(long n);
+
+        // map buffer data
+        public native IntPointer mapped();
+        public native IntPointer map();
+        public native IntPointer data();
+    }
+
+    // FOR KOTLIN AND NATIVE!
+    @Name("vkt::Vector<uint32_t>") // uint8_t version (C++)
+    public static class UIntVector extends Vector {
+        static { Loader.load(); }
+        public UIntVector(Pointer p) {
+            super(p);
+        }
+        public UIntVector() { super(); }
+        public UIntVector(@SharedPtr JiviXCore.VmaBufferAllocation a, long offset, long size) { super(a, offset, size, 4); }
+        public UIntVector(@SharedPtr JiviXCore.BufferAllocation a, long offset, long size) { super(a, offset, size, 4); }
+
+        // Indexer for Data
+        public UIntBufferIndexer getIndexer() {
+            return new UIntBufferIndexer(this.data().asBuffer());
+        }
+
+        //
+        @Name("operator=") public native @ByRef UIntVector put(@ByRef UIntVector x);
+        @Name("operator[]") public native @Cast("uint32_t*") @ByRef IntPointer at(long n);
+
+        // map buffer data
+        public native @Cast("uint32_t*") IntPointer mapped();
+        public native @Cast("uint32_t*") IntPointer map();
+        public native @Cast("uint32_t*") IntPointer data();
+    }
+
 
     @Name("jvx::Context")
     public static class Context extends Pointer {
