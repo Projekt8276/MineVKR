@@ -5,6 +5,7 @@ import org.bytedeco.javacpp.FloatPointer
 import org.bytedeco.javacpp.indexer.ByteBufferIndexer
 import org.bytedeco.javacpp.indexer.UByteBufferIndexer
 import org.lwjgl.vulkan.*
+import java.lang.Integer.min
 import java.nio.FloatBuffer
 
 // TODO: Reduce Native Layers count and make more thin
@@ -21,106 +22,60 @@ open class JiviX {
     open class Device() {
         open lateinit var core: JiviXCore.Device
 
-        constructor(core: JiviXCore.Device) : this() {
-            this.core = core; }
+        constructor(core: JiviXCore.Device) : this() { this.core = core; }
     }
 
     //
     open class Instance() {
         open lateinit var core: JiviXCore.Instance
 
-        constructor(core: JiviXCore.Instance) : this() {
-            this.core = core; }
+        constructor(core: JiviXCore.Instance) : this() { this.core = core; }
     }
 
     // MOST HARDCORE!
     open class MaterialUnit() {
         open lateinit var core: JiviXCore.MaterialUnit
 
-        constructor(core: JiviXCore.MaterialUnit) : this() {
-            this.core = core; }
-
+        constructor(core: JiviXCore.MaterialUnit) : this() { this.core = core; }
 
         open var diffuse: FloatArray
-            get() {
-                var data = this.core.diffuse()
-                var array = FloatArray(4); for (i: Int in 0 until 4) array[i] = data.get(i.toLong())
-                return array
-            }
-            set(value) {
-                var data = this.core.diffuse(); for (i: Int in 0 until 4) data.put(i.toLong(), value[i])
-            }
+            get() { return FloatArray(4).also { this.core.diffuse().get(it, 0, 4) } }
+            set(value) { this.core.diffuse().put(value, 0, min(value.size,4)) }
 
         open var specular: FloatArray
-            get() {
-                var data = this.core.specular()
-                var array = FloatArray(4); for (i: Int in 0 until 4) array[i] = data.get(i.toLong())
-                return array
-            }
-            set(value) {
-                var data = this.core.specular(); for (i: Int in 0 until 4) data.put(i.toLong(), value[i])
-            }
+            get() { return FloatArray(4).also { this.core.specular().get(it, 0, 4) } }
+            set(value) { this.core.specular().put(value, 0, min(value.size,4)) }
 
         open var normals: FloatArray
-            get() {
-                var data = this.core.normals()
-                var array = FloatArray(4); for (i: Int in 0 until 4) array[i] = data.get(i.toLong())
-                return array
-            }
-            set(value) {
-                var data = this.core.normals(); for (i: Int in 0 until 4) data.put(i.toLong(), value[i])
-            }
+            get() { return FloatArray(4).also { this.core.normals().get(it, 0, 4) } }
+            set(value) { this.core.normals().put(value, 0, min(value.size,4)) }
 
         open var emission: FloatArray
-            get() {
-                var data = this.core.emission()
-                var array = FloatArray(4); for (i: Int in 0 until 4) array[i] = data.get(i.toLong())
-                return array
-            }
-            set(value) {
-                var data = this.core.emission(); for (i: Int in 0 until 4) data.put(i.toLong(), value[i])
-            }
+            get() { return FloatArray(4).also { this.core.emission().get(it, 0, 4) } }
+            set(value) { this.core.emission().put(value, 0, min(value.size,4)) }
 
         open var diffuseTexture: Int
-            get() {
-                return this.core.diffuseTexture().get(0).toInt()
-            }
-            set(value) {
-                this.core.diffuseTexture().put(0L, value.toInt())
-            }
+            get() { return this.core.diffuseTexture().get(0).toInt() }
+            set(value) { this.core.diffuseTexture().put(0L, value.toInt()) }
 
         open var specularTexture: Int
-            get() {
-                return this.core.specularTexture().get(0).toInt()
-            }
-            set(value) {
-                this.core.specularTexture().put(0L, value.toInt())
-            }
+            get() { return this.core.specularTexture().get(0).toInt() }
+            set(value) { this.core.specularTexture().put(0L, value.toInt()) }
 
         open var normalsTexture: Int
-            get() {
-                return this.core.normalsTexture().get(0).toInt()
-            }
-            set(value) {
-                this.core.normalsTexture().put(0L, value.toInt())
-            }
+            get() { return this.core.normalsTexture().get(0).toInt() }
+            set(value) { this.core.normalsTexture().put(0L, value.toInt()) }
 
         open var emissionTexture: Int
-            get() {
-                return this.core.emissionTexture().get(0).toInt()
-            }
-            set(value) {
-                this.core.emissionTexture().put(0L, value.toInt())
-            }
+            get() { return this.core.emissionTexture().get(0).toInt() }
+            set(value) { this.core.emissionTexture().put(0L, value.toInt()) }
     }
 
     // TODO: Add Minecraft Matrix4f to FloatArrray[12] Convert!
     open class VsGeometryInstance() {
         open var core: JiviXCore.VsGeometryInstance = JiviXCore.VsGeometryInstance()
 
-        constructor(data: JiviXCore.VsGeometryInstance) : this() {
-            this.core = data
-        }
+        constructor(data: JiviXCore.VsGeometryInstance) : this() { this.core = data }
 
         // TODO: Reference Version
         //open var transform: FloatPointer? = FloatPointer(1.0F,0.0F,0.0F,0.0F, 0.0F,1.0F,0.0F,0.0F, 0.0F,0.0F,1.0F,0.0F)
@@ -128,76 +83,48 @@ open class JiviX {
 
         // ...
         open var transform: FloatArray
-            get() {
-                var ptr = this.core.transform()
+            get() { // UNSAFE!
                 var arr: FloatArray = floatArrayOf(1.0F, 0.0F, 0.0F, 0.0F, 0.0F, 1.0F, 0.0F, 0.0F, 0.0F, 0.0F, 1.0F, 0.0F)
-                for (i: Int in 0 until 12) arr[i] = ptr.get(i.toLong())
-                return arr
+                return arr.also { this.core.transform().get(it, 0, 12) }
             }
-            set(value) {
-                var ptr = this.core.transform()
-                for (i: Int in 0 until 12) ptr.put(i.toLong(), value[i])
+            set(value) { // UNSAFE!
+                this.core.transform().put(value, 0, min(12,value.size))
             }
 
         open var mask: UByte
-            get() {
-                return this.core.mask().get(0).toUByte()
-            }
-            set(value) {
-                this.core.mask().put(0L, value.toByte())
-            }
+            get() { return this.core.mask().get(0).toUByte() }
+            set(value) { this.core.mask().put(0L, value.toByte()) }
 
         open var flags: UByte
-            get() {
-                return this.core.flags().get(0).toUByte()
-            }
-            set(value) {
-                this.core.flags().put(0L, value.toByte())
-            }
+            get() { return this.core.flags().get(0).toUByte() }
+            set(value) { this.core.flags().put(0L, value.toByte()) }
 
         open var instanceId: UInt
-            get() {
-                return this.core.instanceId().get(0).toUInt().and(0xFFFFFFU)
-            }
-            set(value) {
-                this.core.instanceId().put(0L, value.and(0xFFFFFFU).toInt())
-            }
+            get() { return this.core.instanceId().get(0).toUInt().and(0xFFFFFFU) }
+            set(value) { this.core.instanceId().put(0L, value.and(0xFFFFFFU).toInt()) }
 
         open var instanceOffset: UInt
-            get() {
-                return this.core.instanceOffset().get(0).toUInt().and(0xFFFFFFU)
-            }
-            set(value) {
-                this.core.instanceOffset().put(0L, value.and(0xFFFFFFU).toInt())
-            }
+            get() { return this.core.instanceOffset().get(0).toUInt().and(0xFFFFFFU) }
+            set(value) { this.core.instanceOffset().put(0L, value.and(0xFFFFFFU).toInt()) }
     }
 
     // WARNING! ANY STRUCT SHOULD TO BE ALREADY INITIALIZED!
     open class VmaMemoryInfo() {
         open var core: JiviXCore.VmaMemoryInfo = JiviXCore.VmaMemoryInfo()
 
-        constructor(info: JiviXCore.VmaMemoryInfo) : this() {
-            this.core = info
-        }
+        constructor(info: JiviXCore.VmaMemoryInfo) : this() { this.core = info }
 
         open var memUsage: UInt
-            set(value) {
-                core.memUsage().put(0, value.toInt())
-            }
-            get() {
-                return core.memUsage().get(0).toUInt(); }
+            set(value) { core.memUsage().put(0, value.toInt()) }
+            get() { return core.memUsage().get(0).toUInt(); }
 
         open var deviceDispatch: Device
-            get() {
-                return Device(core.deviceDispatch); }
-            set(value) {
-                core.deviceDispatch = value.core; }
+            get() { return Device(core.deviceDispatch); }
+            set(value) { core.deviceDispatch = value.core; }
 
         open var instanceDispatch: Instance
-            get() {
-                return Instance(core.instanceDispatch); }
-            set(value) {
-                core.instanceDispatch = value.core; }
+            get() { return Instance(core.instanceDispatch); }
+            set(value) { core.instanceDispatch = value.core; }
     }
 
     //
@@ -205,9 +132,7 @@ open class JiviX {
         open lateinit var core: JiviXCore.VmaBufferAllocation
 
         //
-        constructor(allocation: JiviXCore.VmaBufferAllocation) : this() {
-            this.core = allocation
-        }
+        constructor(allocation: JiviXCore.VmaBufferAllocation) : this() { this.core = allocation }
 
         // LWJGL-3 here is now used!
         constructor(vmaAllocator: ULong, bufferCreateInfo: VkBufferCreateInfo, vmaMemInfo: VmaMemoryInfo) : this() {
@@ -221,9 +146,7 @@ open class JiviX {
         open lateinit var core: JiviXCore.VmaImageAllocation
 
         //
-        constructor(allocation: JiviXCore.VmaImageAllocation) : this() {
-            this.core = allocation
-        }
+        constructor(allocation: JiviXCore.VmaImageAllocation) : this() { this.core = allocation }
 
         // LWJGL-3 here is now used!
         constructor(vmaAllocator: ULong, imageCreateInfo: VkImageCreateInfo, vmaMemInfo: VmaMemoryInfo) : this() {
@@ -237,9 +160,7 @@ open class JiviX {
         open lateinit var core: JiviXBase.ImageRegion
 
         //
-        constructor(region: JiviXBase.ImageRegion) : this() {
-            this.core = region
-        }
+        constructor(region: JiviXBase.ImageRegion) : this() { this.core = region }
 
         // JavaCPP Have NO ULong, so NEEDS BI-DIRECTIONAL PER-BITS Conversion Between LONG and ULONG! (i.e. ULONG -> LONG -> ULONG WITHOUT any data loss)
         constructor(allocation: VmaImageAllocation, imageCreateInfo: VkImageCreateInfo, layout: UInt) : this() {
@@ -251,9 +172,7 @@ open class JiviX {
     open class ByteVector() {
         open lateinit var core: JiviXBase.ByteVector
 
-        constructor(vector: JiviXBase.ByteVector) : this() {
-            this.core = vector
-        }
+        constructor(vector: JiviXBase.ByteVector) : this() { this.core = vector }
 
         // JavaCPP Have NO ULong, so NEEDS BI-DIRECTIONAL PER-BITS Conversion Between LONG and ULONG! (i.e. ULONG -> LONG -> ULONG WITHOUT any data loss)
         constructor(allocation: VmaBufferAllocation, offset: ULong, range: ULong) : this() {
@@ -261,28 +180,18 @@ open class JiviX {
         }
 
         // TODO: Indexer Wrapper For Kotlin!
-        open fun indexer(): ByteBufferIndexer {
-            return core.indexer
-        }
+        open fun indexer(): ByteBufferIndexer { return core.indexer }
 
         // TODO: FULL REFERENCE SUPPORT
-        open operator fun get(index: Long): Byte {
-            return core.data().get(index)
-        }
+        open operator fun get(index: Long): Byte { return core.data().get(index) }
 
-        open operator fun set(index: Long, value: Byte) {
-            core.data().put(index, value)
-        }
+        open operator fun set(index: Long, value: Byte) { core.data().put(index, value) }
 
-        open fun size(): ULong {
-            return this.core.size().toULong(); }
+        open fun size(): ULong { return this.core.size().toULong(); }
 
-        open fun range(): ULong {
-            return this.core.range().toULong(); }
+        open fun range(): ULong { return this.core.range().toULong(); }
 
-        open fun data(): BytePointer {
-            return core.data()
-        }
+        open fun data(): BytePointer { return core.data() }
     }
 
     //
@@ -290,27 +199,22 @@ open class JiviX {
         open lateinit var core: JiviXBase.UByteVector
 
         constructor(vector: JiviXBase.UByteVector) : this() {
-            this.core = vector
-        }
+            this.core = vector }
 
         // JavaCPP Have NO ULong, so NEEDS BI-DIRECTIONAL PER-BITS Conversion Between LONG and ULONG! (i.e. ULONG -> LONG -> ULONG WITHOUT any data loss)
         constructor(allocation: VmaBufferAllocation, offset: ULong, range: ULong) : this() {
-            this.core = JiviXBase.UByteVector(allocation.core, offset.toLong(), range.toLong())
-        }
+            this.core = JiviXBase.UByteVector(allocation.core, offset.toLong(), range.toLong()) }
 
         // TODO: Indexer Wrapper For Kotlin!
         open fun indexer(): UByteBufferIndexer {
-            return core.indexer
-        }
+            return core.indexer }
 
         // TODO: FULL REFERENCE SUPPORT
         open operator fun get(index: Long): UByte { // SHOULD TO BE LOSSLESS (Bit In Bit!)
-            return core.data().get(index).toUByte()
-        }
+            return core.data().get(index).toUByte() }
 
         open operator fun set(index: Long, value: UByte) { // SHOULD TO BE LOSSLESS (Bit In Bit!)
-            core.data().put(index, value.toByte())
-        }
+            core.data().put(index, value.toByte()) }
 
         open fun size(): ULong {
             return this.core.size().toULong(); }
@@ -319,8 +223,7 @@ open class JiviX {
             return this.core.range().toULong(); }
 
         open fun data(): BytePointer {
-            return core.data()
-        }
+            return core.data() }
     }
 
     //
@@ -344,13 +247,11 @@ open class JiviX {
             return this.core._getMemoryProperties().address().toULong(); }
 
         open val deviceDispatch: Device //= Device()
-            get() {
-                return Device(core.deviceDispatch); }
+            get() { return Device(core.deviceDispatch); }
         //set(value) { core.setDeviceDispatch(value.core); };
 
         open val instanceDispatch: Instance //= Instance()
-            get() {
-                return Instance(core.instanceDispatch); }
+            get() { return Instance(core.instanceDispatch); }
         //set(value) { core.setInstanceDispatch(value.core); };
 
         open fun physicalDevice(idx: UInt): ULong {
@@ -452,10 +353,16 @@ open class JiviX {
             return ImageRegion(this.core.getFlip1Buffer(idx.toInt())); }
 
         open fun setModelView(mv: FloatArray): Context {
-            return Context(this.core.setModelView(FloatPointer(16L).also{it.put(mv,0,16)})); }
+            return Context(this.core.setModelView(FloatPointer(mv.size.toLong()).also{it.put(mv,0,mv.size)})); }
 
         open fun setPerspective(mv: FloatArray): Context { // WARNING: Needs to be careful with SIZE
             return Context(this.core.setPerspective(FloatPointer(mv.size.toLong()).also{it.put(mv,0,mv.size)})); }
+
+        open fun setModelView(mv: FloatPointer): Context {
+            return Context(this.core.setModelView(mv)); }
+
+        open fun setPerspective(mv: FloatPointer): Context { // WARNING: Needs to be careful with SIZE
+            return Context(this.core.setPerspective(mv)); }
     }
 
     //
@@ -497,14 +404,12 @@ open class JiviX {
             return this.core.bufferCount.toULong(); }
 
         //
-        open operator fun get(index: Long): JiviXBase.UByteVector? {
-            return core.get(index.toInt()) // TODO: Fix Index Type
-        }
+        open operator fun get(index: Long): JiviXBase.UByteVector? { // TODO: Fix Index Type
+            return core.get(index.toInt()) }
 
         //
         open fun pushBufferView(buf: JiviXBase.UByteVector?): Long {
-            return core.pushBufferView(buf)
-        }
+            return core.pushBufferView(buf) }
 
         //
         open fun descriptorSet(): ULong {
@@ -534,43 +439,33 @@ open class JiviX {
             return core.sharedPtr(); }
 
         open fun addBinding(bufferID: UInt, binding: VkVertexInputBindingDescription): MeshInput {
-            return MeshInput(this.core.addBinding(bufferID.toInt(), binding.address()))
-        }
+            return MeshInput(this.core.addBinding(bufferID.toInt(), binding.address())) }
 
         open fun addAttribute(attribute: VkVertexInputAttributeDescription): MeshInput {
-            return MeshInput(this.core.addAttribute(attribute.address()))
-        }
+            return MeshInput(this.core.addAttribute(attribute.address())) }
 
         open fun setIndexData(bufferID: UInt, indexType: UInt): MeshInput {
-            return MeshInput(this.core.setIndexData(bufferID.toInt(), indexType.toInt()))
-        }
+            return MeshInput(this.core.setIndexData(bufferID.toInt(), indexType.toInt())) }
 
         open fun setIndexOffset(offset: ULong): MeshInput {
-            return MeshInput(this.core.setIndexOffset(offset.toLong()))
-        }
+            return MeshInput(this.core.setIndexOffset(offset.toLong())) }
 
         open fun setPrimitiveCount(count: ULong): MeshInput {
-            return MeshInput(this.core.setPrimitiveCount(count.toLong()))
-        }
+            return MeshInput(this.core.setPrimitiveCount(count.toLong())) }
 
         open fun setIndexCount(count: ULong): MeshInput {
-            return MeshInput(this.core.setIndexCount(count.toLong()))
-        }
+            return MeshInput(this.core.setIndexCount(count.toLong())) }
 
         open fun linkBViewSet(vset: BufferViewSet): MeshInput {
-            return MeshInput(this.core.linkBViewSet(vset.core))
-        }
+            return MeshInput(this.core.linkBViewSet(vset.core)) }
 
         //open fun getIndexCount(): ULong {
         //    return this.core.getIndexCount().toULong();
         //}
 
         var indexCount: ULong
-            set(value) {
-                this.setIndexCount(value); }
-            get() {
-                return this.core.indexCount.toULong(); }
-
+            set(value) { this.setIndexCount(value); }
+            get() { return this.core.indexCount.toULong(); }
     }
 
     //
@@ -601,49 +496,40 @@ open class JiviX {
         }
 
         constructor(context: Context) : this() {
-            this.core = JiviXBase.MeshBinding(context.core)
-        }
+            this.core = JiviXBase.MeshBinding(context.core) }
 
         constructor(context: Context, maxPrimitiveCount: ULong) : this() {
-            this.core = JiviXBase.MeshBinding(context.core, maxPrimitiveCount.toLong())
-        }
+            this.core = JiviXBase.MeshBinding(context.core, maxPrimitiveCount.toLong()) }
 
         constructor(context: Context, maxPrimitiveCount: ULong, perGeometryCount: ULongArray) : this() {
-            this.core = JiviXBase.MeshBinding(context.core, maxPrimitiveCount.toLong(), perGeometryCount.toLongArray())
-        }
+            this.core = JiviXBase.MeshBinding(context.core, maxPrimitiveCount.toLong(), perGeometryCount.toLongArray()) }
 
         //
         open fun bindingBuffer(idx: ULong = 0UL): UByteVector {
             return UByteVector(core.getBindingBuffer(idx.toLong())); }
 
         open fun bindingBufferGL(idx: ULong = 0UL): UInt {
-            return core.getBindingBufferGL(idx.toLong()).toUInt()
-        }
+            return core.getBindingBufferGL(idx.toLong()).toUInt() }
 
         // Instanced, but same material
         open fun addMeshInput(input: MeshInput, materialID: UInt, instances: ULong = 1UL): MeshBinding {
-            return MeshBinding(this.core.addMeshInput(input.core, materialID.toInt(), instances.toLong()))
-        }
+            return MeshBinding(this.core.addMeshInput(input.core, materialID.toInt(), instances.toLong())) }
 
         // Instanced, but same material
         open fun addRangeInput(range: ULong, materialID: UInt, instances: ULong = 1UL): MeshBinding {
-            return MeshBinding(this.core.addRangeInput(range.toLong(), materialID.toInt(), instances.toLong()))
-        }
+            return MeshBinding(this.core.addRangeInput(range.toLong(), materialID.toInt(), instances.toLong())) }
 
         // Material Array
         open fun addMeshInput(input: MeshInput, materialID: UIntArray): MeshBinding {
-            return MeshBinding(this.core.addMeshInput(input.core, materialID.toIntArray()))
-        }
+            return MeshBinding(this.core.addMeshInput(input.core, materialID.toIntArray())) }
 
         // Material Array
         open fun addRangeInput(range: ULong, materialID: UIntArray): MeshBinding {
-            return MeshBinding(this.core.addRangeInput(range.toLong(), materialID.toIntArray()))
-        }
+            return MeshBinding(this.core.addRangeInput(range.toLong(), materialID.toIntArray())) }
 
         // TODO: FloatPointer and FloatArray[12] support...
         open fun setTransformData(address: Long, stride: Int = 48): MeshBinding {
-            return MeshBinding(this.core.setTransformData(address, stride))
-        }
+            return MeshBinding(this.core.setTransformData(address, stride)) }
     }
 
     //
@@ -718,28 +604,22 @@ open class JiviX {
 
         // 
         open fun pushMaterial(unit: MaterialUnit): Long {
-            return core.pushMaterial(unit.core)
-        }
+            return core.pushMaterial(unit.core) }
 
         open fun pushSampledImage(imageDescAddress: ULong): Material {
-            return Material(core.pushSampledImage(imageDescAddress.toLong()))
-        }
+            return Material(core.pushSampledImage(imageDescAddress.toLong())) }
 
         open fun setRawMaterials(rawMaterials: UByteVector, materialCount: ULong): Material {
-            return Material(this.core.setRawMaterials(rawMaterials.core, materialCount.toLong()))
-        }
+            return Material(this.core.setRawMaterials(rawMaterials.core, materialCount.toLong())) }
 
         open fun setGpuMaterials(rawMaterials: UByteVector): Material {
-            return Material(this.core.setGpuMaterials(rawMaterials.core))
-        }
+            return Material(this.core.setGpuMaterials(rawMaterials.core)) }
 
         open fun resetMaterials(): Material {
-            return Material(this.core.resetMaterials())
-        }
+            return Material(this.core.resetMaterials()) }
 
         open fun resetSampledImages(): Material {
-            return Material(this.core.resetSampledImages())
-        }
+            return Material(this.core.resetSampledImages()) }
     }
 
 
