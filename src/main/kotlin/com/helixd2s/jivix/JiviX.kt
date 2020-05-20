@@ -182,6 +182,10 @@ abstract class JiviX {
         open fun range(): ULong { return this.core.range().toULong(); }
 
         open fun data(): BytePointer { return core.data() }
+
+        open fun address(): ULong { return core.address().toULong(); }
+
+        open fun deviceAddress(): ULong { return core.deviceAddress().toULong(); }
     }
 
     // SHOULD TO BE LOSSLESS (Bit In Bit!)
@@ -206,6 +210,10 @@ abstract class JiviX {
         open fun range(): ULong { return this.core.range().toULong(); }
 
         open fun data(): BytePointer { return core.data() }
+
+        open fun address(): ULong { return core.address().toULong(); }
+
+        open fun deviceAddress(): ULong { return core.deviceAddress().toULong(); }
     }
 
     //
