@@ -117,7 +117,7 @@ endif()
 
 # GLFW 
 if (GLFW_LIBRARIES)
-    set (LIBS ${LIBS} ${GLFW_LIBRARIES})
+    #set (LIBS ${LIBS} ${GLFW_LIBRARIES})
     set (INC_DIR ${INC_DIR} ${GLFW_INCLUDE_DIRS})
 endif()
 

@@ -151,10 +151,10 @@ CMAKE_SHARED_LINKER_FLAGS_RELWITHDEBINFO:STRING=/debug /INCREMENTAL
 
 //If set, runtime paths are not added when installing shared libraries,
 // but are added when building.
-CMAKE_SKIP_INSTALL_RPATH:BOOL=NO
+CMAKE_SKIP_INSTALL_RPATH:BOOL=OFF
 
 //If set, runtime paths are not added when using shared libraries.
-CMAKE_SKIP_RPATH:BOOL=NO
+CMAKE_SKIP_RPATH:BOOL=OFF
 
 //Flags used by the linker during the creation of static libraries
 // during all build types.
@@ -180,7 +180,7 @@ CMAKE_STATIC_LINKER_FLAGS_RELWITHDEBINFO:STRING=
 // .SILENT directive, and all commands will be echoed to the console
 // during the make.  This is useful for debugging only. With Visual
 // Studio IDE projects all commands are done without /nologo.
-CMAKE_VERBOSE_MAKEFILE:BOOL=FALSE
+CMAKE_VERBOSE_MAKEFILE:BOOL=OFF
 
 //The directory containing a CMake configuration file for GLFW3.
 GLFW3_DIR:PATH=H:/Data/Projects/MineVKR/src/main/java/lib/cmake/glfw3
@@ -201,7 +201,7 @@ JAVA_INCLUDE_PATH2:PATH=H:/Program Files/Java/jdk-14.0.1/include/win32
 JAVA_JVM_LIBRARY:FILEPATH=H:/Program Files/Java/jdk-14.0.1/lib/jvm.lib
 
 //Path to a program.
-Java_IDLJ_EXECUTABLE:FILEPATH=Java_IDLJ_EXECUTABLE-NOTFOUND
+Java_IDLJ_EXECUTABLE:FILEPATH=H:/Program Files/Java/jdk1.8.0_251/bin/idlj.exe
 
 //Path to a program.
 Java_JARSIGNER_EXECUTABLE:FILEPATH=H:/Program Files/Java/jdk-14.0.1/bin/jarsigner.exe
@@ -216,7 +216,7 @@ Java_JAVAC_EXECUTABLE:FILEPATH=H:/Program Files/Java/jdk-14.0.1/bin/javac.exe
 Java_JAVADOC_EXECUTABLE:FILEPATH=H:/Program Files/Java/jdk-14.0.1/bin/javadoc.exe
 
 //Path to a program.
-Java_JAVAH_EXECUTABLE:FILEPATH=Java_JAVAH_EXECUTABLE-NOTFOUND
+Java_JAVAH_EXECUTABLE:FILEPATH=H:/Program Files/Java/jdk1.8.0_251/bin/javah.exe
 
 //Path to a program.
 Java_JAVA_EXECUTABLE:FILEPATH=H:/Program Files/Java/jdk-14.0.1/bin/java.exe
