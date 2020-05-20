@@ -1,9 +1,9 @@
 package com.helixd2s.minevkr
 
-import net.minecraft.util.math.Matrix4f;
+import net.minecraft.util.math.Matrix4f
 
-import java.lang.reflect.Field;
-import java.lang.reflect.Modifier;
+import java.lang.reflect.Field
+import java.lang.reflect.Modifier
 
 object ReflectionUtil {
     @Throws(NoSuchFieldException::class)

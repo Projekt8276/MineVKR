@@ -24,8 +24,10 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo
 @Mixin(WorldRenderer::class)
 abstract class MixinWorldRenderer {
     //public static JiviXBase.Driver driver;
-    @Final @Shadow private val textureManager: TextureManager? = null
+    @Final
+    @Shadow private val textureManager: TextureManager? = null
     @Shadow private val chunks: BuiltChunkStorage? = null
+
     @Shadow
     protected abstract fun renderLayer(
             renderLayer: RenderLayer?,
@@ -71,6 +73,8 @@ abstract class MixinWorldRenderer {
     // Vulkan Initialize
     @Inject(at = [At("TAIL")], method = ["<init>"])
     private fun init(client: MinecraftClient, bufferBuilders: BufferBuilderStorage, info: CallbackInfo) {
-        vInitializeRenderer()
+        if (!MineVKR.vInitialized) {
+            vInitializeRenderer()
+        }
     }
 }
