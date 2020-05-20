@@ -10,7 +10,7 @@ import java.nio.FloatBuffer
 
 // TODO: Reduce Native Layers count and make more thin
 // TODO: Add operable Int, UInt, Long, ULong... referenced types for Kotlin
-open class JiviX {
+abstract class JiviX {
 
     // WHAT IS `core`?
     // Core is UnWrapped Java or Wrapped Native Interface between with Kotlin
@@ -131,8 +131,7 @@ open class JiviX {
 
         // LWJGL-3 here is now used!
         constructor(vmaAllocator: ULong, bufferCreateInfo: VkBufferCreateInfo, vmaMemInfo: VmaMemoryInfo) : this() {
-            this.core = JiviXCore.VmaBufferAllocation(vmaAllocator.toLong(), bufferCreateInfo.address(), vmaMemInfo.core)
-        }
+            this.core = JiviXCore.VmaBufferAllocation(vmaAllocator.toLong(), bufferCreateInfo.address(), vmaMemInfo.core) }
 
     }
 
@@ -145,8 +144,7 @@ open class JiviX {
 
         // LWJGL-3 here is now used!
         constructor(vmaAllocator: ULong, imageCreateInfo: VkImageCreateInfo, vmaMemInfo: VmaMemoryInfo) : this() {
-            this.core = JiviXCore.VmaImageAllocation(vmaAllocator.toLong(), imageCreateInfo.address(), vmaMemInfo.core)
-        }
+            this.core = JiviXCore.VmaImageAllocation(vmaAllocator.toLong(), imageCreateInfo.address(), vmaMemInfo.core) }
 
     }
 
@@ -159,8 +157,7 @@ open class JiviX {
 
         // JavaCPP Have NO ULong, so NEEDS BI-DIRECTIONAL PER-BITS Conversion Between LONG and ULONG! (i.e. ULONG -> LONG -> ULONG WITHOUT any data loss)
         constructor(allocation: VmaImageAllocation, imageCreateInfo: VkImageCreateInfo, layout: UInt) : this() {
-            this.core = JiviXBase.ImageRegion(allocation.core, imageCreateInfo.address(), layout.toInt())
-        }
+            this.core = JiviXBase.ImageRegion(allocation.core, imageCreateInfo.address(), layout.toInt()) }
     }
 
     //
@@ -171,15 +168,13 @@ open class JiviX {
 
         // JavaCPP Have NO ULong, so NEEDS BI-DIRECTIONAL PER-BITS Conversion Between LONG and ULONG! (i.e. ULONG -> LONG -> ULONG WITHOUT any data loss)
         constructor(allocation: VmaBufferAllocation, offset: ULong, range: ULong) : this() {
-            this.core = JiviXBase.ByteVector(allocation.core, offset.toLong(), range.toLong())
-        }
+            this.core = JiviXBase.ByteVector(allocation.core, offset.toLong(), range.toLong()) }
 
         // TODO: Indexer Wrapper For Kotlin!
         open fun indexer(): ByteBufferIndexer { return core.indexer }
 
         // TODO: FULL REFERENCE SUPPORT
         open operator fun get(index: Long): Byte { return core.data().get(index) }
-
         open operator fun set(index: Long, value: Byte) { core.data().put(index, value) }
 
         open fun size(): ULong { return this.core.size().toULong(); }
@@ -189,12 +184,11 @@ open class JiviX {
         open fun data(): BytePointer { return core.data() }
     }
 
-    //
+    // SHOULD TO BE LOSSLESS (Bit In Bit!)
     open class UByteVector() {
         open lateinit var core: JiviXBase.UByteVector
 
-        constructor(vector: JiviXBase.UByteVector) : this() {
-            this.core = vector }
+        constructor(vector: JiviXBase.UByteVector) : this() { this.core = vector }
 
         // JavaCPP Have NO ULong, so NEEDS BI-DIRECTIONAL PER-BITS Conversion Between LONG and ULONG! (i.e. ULONG -> LONG -> ULONG WITHOUT any data loss)
         constructor(allocation: VmaBufferAllocation, offset: ULong, range: ULong) : this() {
@@ -204,11 +198,8 @@ open class JiviX {
         open fun indexer(): UByteBufferIndexer { return core.indexer }
 
         // TODO: FULL REFERENCE SUPPORT
-        open operator fun get(index: Long): UByte { // SHOULD TO BE LOSSLESS (Bit In Bit!)
-            return core.data().get(index).toUByte() }
-
-        open operator fun set(index: Long, value: UByte) { // SHOULD TO BE LOSSLESS (Bit In Bit!)
-            core.data().put(index, value.toByte()) }
+        open operator fun get(index: Long): UByte { return core.data().get(index).toUByte() }
+        open operator fun set(index: Long, value: UByte) { core.data().put(index, value.toByte()) }
 
         open fun size(): ULong { return this.core.size().toULong(); }
 
@@ -366,8 +357,7 @@ open class JiviX {
         open fun bufferCount(): ULong { return this.core.bufferCount.toULong(); }
 
         //
-        open operator fun get(index: Long): JiviXBase.UByteVector? { // TODO: Fix Index Type
-            return core.get(index.toInt()) }
+        open operator fun get(index: Long): JiviXBase.UByteVector? { return core.get(index.toInt()) }  // TODO: Fix Index Type
 
         //
         open fun pushBufferView(buf: JiviXBase.UByteVector?): Long { return core.pushBufferView(buf) }
@@ -502,8 +492,7 @@ open class JiviX {
             return Node(core.pushInstance(instance.core)); }
 
         open fun pushMesh(binding: MeshBinding): ULong {
-            return core.pushMesh(binding.core).toULong()
-        }
+            return core.pushMesh(binding.core).toULong() }
     }
 
     //
@@ -558,6 +547,5 @@ open class JiviX {
         open fun resetSampledImages(): Material {
             return Material(this.core.resetSampledImages()) }
     }
-
 
 }
