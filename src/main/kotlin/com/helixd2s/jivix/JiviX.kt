@@ -1,9 +1,11 @@
 package com.helixd2s.jivix
 
 import org.bytedeco.javacpp.BytePointer
+import org.bytedeco.javacpp.FloatPointer
 import org.bytedeco.javacpp.indexer.ByteBufferIndexer
 import org.bytedeco.javacpp.indexer.UByteBufferIndexer
 import org.lwjgl.vulkan.*
+import java.nio.FloatBuffer
 
 // TODO: Reduce Native Layers count and make more thin
 // TODO: Add operable Int, UInt, Long, ULong... referenced types for Kotlin
@@ -351,12 +353,19 @@ open class JiviX {
                 return Instance(core.instanceDispatch); }
         //set(value) { core.setInstanceDispatch(value.core); };
 
-        // TODO: Make Kotlin Getters
+        open fun physicalDevice(idx: UInt): ULong {
+            return this.core.getPhysicalDevice(idx.toInt()).toULong(); }
+
         open fun physicalDevice(): ULong {
             return this.core.physicalDevice.toULong(); }
 
         open fun device(): ULong {
-            return this.core.device.toULong(); }
+            //if (this.core.device != 0L) {
+                return this.core.device.toULong();
+            //} else {
+            //    return this.core.createDevice().toULong();
+            //}
+        }
 
         open fun queue(): ULong {
             return this.core.queue.toULong(); }
@@ -364,8 +373,13 @@ open class JiviX {
         open fun fence(): ULong {
             return this.core.fence.toULong(); }
 
-        open fun instance(): ULong {
-            return this.core.instance.toULong(); }
+        open fun instance(): ULong { // Automatically create when null found
+            if (this.core.instance != 0L) {
+                return this.core.instance.toULong();
+            } else {
+                return this.core.createInstance().toULong();
+            }
+        }
 
         open fun commandPool(): ULong {
             return this.core.commandPool.toULong(); }
@@ -385,12 +399,11 @@ open class JiviX {
         open fun createInstance(): ULong {
             return this.core.createInstance().toULong(); }
 
-        open fun instanceClass(): VkInstance {
+        open fun createInstanceClass(): VkInstance { // TODO: Null-Safe
             return VkInstance(this.instance().toLong(), this.instanceCreateInfo()); }
 
-        open fun physicalDeviceClass(): VkPhysicalDevice {
-            return VkPhysicalDevice(this.physicalDevice().toLong(), this.instanceClass())
-        }
+        open fun createPhysicalDeviceClass(): VkPhysicalDevice { // TODO: Null-Safe
+            return VkPhysicalDevice(this.physicalDevice().toLong(), this.createInstanceClass()) }
 
         open fun createDevice(): ULong {
             return this.core.createDevice().toULong(); }
@@ -398,16 +411,14 @@ open class JiviX {
         open fun createDevice(physicalDeviceHandle: ULong): ULong {
             return this.core.createDevice(physicalDeviceHandle.toLong()).toULong(); }
 
-        open fun createDevice(physicalDevice: VkPhysicalDevice): VkDevice {
+        open fun createDevice(physicalDevice: VkPhysicalDevice): VkDevice { // TODO: Null-Safe
             return VkDevice(this.createDevice().toLong(), physicalDevice, this.deviceCreateInfo()); }
 
         open fun instanceCreateInfo(): VkInstanceCreateInfo? {
-            return VkInstanceCreateInfo.createSafe(this.core.instanceCreateInfoAddress)
-        }
+            return VkInstanceCreateInfo.createSafe(this.core.instanceCreateInfoAddress) }
 
         open fun deviceCreateInfo(): VkDeviceCreateInfo? {
-            return VkDeviceCreateInfo.createSafe(this.core.deviceCreateInfoAddress)
-        }
+            return VkDeviceCreateInfo.createSafe(this.core.deviceCreateInfoAddress) }
     }
 
     //
@@ -439,6 +450,12 @@ open class JiviX {
 
         open fun getFlip1Buffer(idx: UInt): ImageRegion {
             return ImageRegion(this.core.getFlip1Buffer(idx.toInt())); }
+
+        open fun setModelView(mv: FloatArray): Context {
+            return Context(this.core.setModelView(FloatPointer(16L).also{it.put(mv,0,16)})); }
+
+        open fun setPerspective(mv: FloatArray): Context { // WARNING: Needs to be careful with SIZE
+            return Context(this.core.setPerspective(FloatPointer(mv.size.toLong()).also{it.put(mv,0,mv.size)})); }
     }
 
     //

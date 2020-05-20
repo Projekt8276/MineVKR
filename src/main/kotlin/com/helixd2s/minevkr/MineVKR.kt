@@ -59,10 +59,10 @@ open class MineVKR : ModInitializer {
 
                 //
                 MineVKR.vInstanceHandle = MineVKR.vDriver.createInstance()
-                MineVKR.vInstance = MineVKR.vDriver.instanceClass()
+                MineVKR.vInstance = MineVKR.vDriver.createInstanceClass()
 
                 // TODO: Support Other GPU's
-                MineVKR.vPhysicalDevice = MineVKR.vDriver.physicalDeviceClass()
+                MineVKR.vPhysicalDevice = MineVKR.vDriver.createPhysicalDeviceClass()
                 MineVKR.vPhysicalDeviceHandle = MineVKR.vDriver.physicalDevice()
 
                 //
@@ -95,7 +95,7 @@ open class MineVKR : ModInitializer {
                 for (element in vBindingsChunksCutout) MineVKR.vNode[0].pushMesh(element)
                 for (element in vBindingsChunksTranslucent) MineVKR.vNode[0].pushMesh(element)
                 println("Add chunk bindings into Node...")
- 
+
                 //
                 var vPartsSize = ULongArray(vMaxEntityParts) { _ -> 32UL }
                 MineVKR.vBindingsEntity = Array<JiviX.MeshBinding>(vMaxEntityBindings) { _ -> JiviX.MeshBinding(MineVKR.vContext, 512UL, vPartsSize) }

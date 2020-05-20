@@ -1,6 +1,7 @@
 package com.helixd2s.jivix;
 
 import org.bytedeco.javacpp.BytePointer;
+import org.bytedeco.javacpp.FloatPointer;
 import org.bytedeco.javacpp.Loader;
 import org.bytedeco.javacpp.Pointer;
 import org.bytedeco.javacpp.annotation.*;
@@ -251,6 +252,10 @@ public class JiviXBase extends Pointer {
 
         private native void allocate(Driver object);
 
+        public native JiviXCore.Context setModelView(@Cast("glm::mat4x4*") FloatPointer mv);
+
+        public native JiviXCore.Context setPerspective(@Cast("glm::mat4x4*") FloatPointer mv);
+
         //public native void createDescriptorSet();
         public native @SharedPtr
         JiviXCore.Context sharedPtr();
@@ -332,6 +337,9 @@ public class JiviXBase extends Pointer {
         // Get Handle Value
         public native @Cast("VkPhysicalDevice")
         long getPhysicalDevice();
+
+        public native @Cast("VkPhysicalDevice")
+        long getPhysicalDevice(int ID);
 
         public native @Cast("VkDevice")
         long getDevice();
