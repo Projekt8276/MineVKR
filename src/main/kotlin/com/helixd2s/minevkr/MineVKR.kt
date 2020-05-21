@@ -3,6 +3,7 @@ package com.helixd2s.minevkr
 import com.helixd2s.jivix.JiviX
 import net.fabricmc.api.ModInitializer
 import net.minecraft.client.gl.VertexBuffer
+import net.minecraft.client.render.VertexFormat
 import net.minecraft.client.render.WorldRenderer
 import net.minecraft.client.render.chunk.ChunkBuilder
 import net.minecraft.client.util.Window
@@ -37,6 +38,7 @@ open class MineVKR : ModInitializer {
 
         open lateinit var vBlockPos: BlockPos
         open lateinit var vCurrentChunk: ChunkBuilder.BuiltChunk
+        open lateinit var vVertexFormat: VertexFormat
         open var vCPosition: DoubleArray = doubleArrayOf(0.0, 0.0, 0.0)
 
         //

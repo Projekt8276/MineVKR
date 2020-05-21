@@ -4,10 +4,7 @@ import com.helixd2s.minevkr.MineVKR
 import com.helixd2s.minevkr.MineVKR.Companion.vInitializeRenderer
 import net.minecraft.client.MinecraftClient
 import net.minecraft.client.gl.VertexBuffer
-import net.minecraft.client.render.BufferBuilderStorage
-import net.minecraft.client.render.BuiltChunkStorage
-import net.minecraft.client.render.RenderLayer
-import net.minecraft.client.render.WorldRenderer
+import net.minecraft.client.render.*
 import net.minecraft.client.render.chunk.ChunkBuilder.BuiltChunk
 import net.minecraft.client.texture.TextureManager
 import net.minecraft.client.util.math.MatrixStack
@@ -54,6 +51,13 @@ abstract class MixinWorldRenderer {
     @Redirect(method = ["renderLayer"], at = At(value = "INVOKE", target = "Lnet/minecraft/client/render/chunk/ChunkBuilder\$BuiltChunk;getBuffer(Lnet/minecraft/client/render/RenderLayer;)Lnet/minecraft/client/gl/VertexBuffer;"))
     private fun onVertexBufferGet(builtChunk: BuiltChunk, layer: RenderLayer): VertexBuffer {
         return builtChunk.also { MineVKR.vCurrentChunk = it }.getBuffer(layer).also { MineVKR.vVertexBuffer = it }
+    }
+
+    //
+    @Redirect(method = ["renderLayer"], at = At(value = "INVOKE", target = "Lnet/minecraft/client/render/VertexFormat;startDrawing(J)V"))
+    private fun onStartDrawing(format: VertexFormat, pointer: Long) {
+        MineVKR.vVertexFormat = format
+        format.startDrawing(pointer)
     }
 
     //
