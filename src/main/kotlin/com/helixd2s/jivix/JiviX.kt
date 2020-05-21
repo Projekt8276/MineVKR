@@ -181,7 +181,7 @@ abstract class JiviX {
 
     //
     open class ByteVector() : Vector() {
-        constructor(vector: JiviXBase.ByteVector) { this.core = vector }
+        constructor(vector: JiviXBase.ByteVector) : this() { this.core = vector }
         constructor(allocation: VmaBufferAllocation, offset: ULong, range: ULong) : this() {
             this.core = JiviXBase.ByteVector(allocation.core, offset.toLong(), range.toLong()) }
 
@@ -214,7 +214,7 @@ abstract class JiviX {
 
     //
     open class ShortVector() : Vector() {
-        constructor(vector: JiviXBase.ShortVector) { this.core = vector }
+        constructor(vector: JiviXBase.ShortVector): this() { this.core = vector }
         constructor(allocation: VmaBufferAllocation, offset: ULong, range: ULong) : this() {
             this.core = JiviXBase.ShortVector(allocation.core, offset.toLong(), range.toLong()) }
 
@@ -245,9 +245,11 @@ abstract class JiviX {
     }
 
 
-    //
+    // FOR USE:
+    // fun Float.Companion.fromBits(bits: Int): Float
+    // fun Float.toRawBits(): Int
     open class IntVector() : Vector() {
-        constructor(vector: JiviXBase.IntVector) { this.core = vector }
+        constructor(vector: JiviXBase.IntVector): this() { this.core = vector }
         constructor(allocation: VmaBufferAllocation, offset: ULong, range: ULong) : this() {
             this.core = JiviXBase.IntVector(allocation.core, offset.toLong(), range.toLong()) }
 
@@ -261,7 +263,9 @@ abstract class JiviX {
         open fun data(): IntPointer { return (core as JiviXBase.IntVector).data() }
     }
 
-    // SHOULD TO BE LOSSLESS (Bit In Bit!)
+    // SHOULD TO BE LOSSLESS (Bit In Bit!), FOR USE:
+    // fun Float.Companion.fromBits(bits: Int): Float
+    // fun Float.toRawBits(): Int
     open class UIntVector() : Vector() {
         constructor(vector: JiviXBase.UIntVector) : this() { this.core = vector }
         constructor(allocation: VmaBufferAllocation, offset: ULong, range: ULong) : this() {
@@ -275,6 +279,22 @@ abstract class JiviX {
         open operator fun set(index: Long, value: UInt) { (core as JiviXBase.UIntVector).data().put(index, value.toInt()) }
 
         open fun data(): IntPointer { return (core as JiviXBase.UIntVector).data() }
+    }
+
+    //
+    open class FloatVector() : Vector() {
+        constructor(vector: JiviXBase.FloatVector) : this() { this.core = vector }
+        constructor(allocation: VmaBufferAllocation, offset: ULong, range: ULong) : this() {
+            this.core = JiviXBase.FloatVector(allocation.core, offset.toLong(), range.toLong()) }
+
+        // TODO: Indexer Wrapper For Kotlin!
+        open fun indexer(): FloatBufferIndexer { return (core as JiviXBase.FloatVector).indexer }
+
+        // TODO: FULL REFERENCE SUPPORT
+        open operator fun get(index: Long): Float { return (core as JiviXBase.FloatVector).data().get(index) }
+        open operator fun set(index: Long, value: Float) { (core as JiviXBase.FloatVector).data().put(index, value) }
+
+        open fun data(): FloatPointer { return (core as JiviXBase.FloatVector).data() }
     }
 
 

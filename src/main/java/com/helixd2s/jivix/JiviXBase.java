@@ -69,6 +69,7 @@ public class JiviXBase extends Pointer {
 
         // Java have NOT support `VkDeviceOrHostAddressKHR` or `VkDeviceOrHostAddressConstKHR`, and become rude var... (DeRMo!)
         public native @Cast("uintptr_t") long deviceAddress();
+        public native @Cast("uintptr_t") long address(); // For Pointer Passes
 
         //
         public native long size();
@@ -111,6 +112,7 @@ public class JiviXBase extends Pointer {
     @Name("vkt::Vector<uint8_t>") // uint8_t version (C++)
     public static class UByteVector extends Vector {
         static { Loader.load(); }
+
         public UByteVector(Pointer p) {
             super(p);
         }
@@ -137,6 +139,7 @@ public class JiviXBase extends Pointer {
     @Name("vkt::Vector<int16_t>") // int8_t default
     public static class ShortVector extends Vector {
         static { Loader.load(); }
+
         public ShortVector(Pointer p) {
             super(p);
         }
@@ -163,6 +166,7 @@ public class JiviXBase extends Pointer {
     @Name("vkt::Vector<uint16_t>") // uint8_t version (C++)
     public static class UShortVector extends Vector {
         static { Loader.load(); }
+
         public UShortVector(Pointer p) {
             super(p);
         }
@@ -189,6 +193,7 @@ public class JiviXBase extends Pointer {
     @Name("vkt::Vector<int32_t>") // int8_t default
     public static class IntVector extends Vector {
         static { Loader.load(); }
+
         public IntVector(Pointer p) {
             super(p);
         }
@@ -215,6 +220,7 @@ public class JiviXBase extends Pointer {
     @Name("vkt::Vector<uint32_t>") // uint8_t version (C++)
     public static class UIntVector extends Vector {
         static { Loader.load(); }
+
         public UIntVector(Pointer p) {
             super(p);
         }
@@ -237,12 +243,38 @@ public class JiviXBase extends Pointer {
         public native @Cast("uint32_t*") IntPointer data();
     }
 
+    // Universal
+    @Name("vkt::Vector<float>") // int8_t default
+    public static class FloatVector extends Vector {
+        static { Loader.load(); }
+
+        public FloatVector(Pointer p) {
+            super(p);
+        }
+        public FloatVector() { super(); }
+        public FloatVector(@SharedPtr JiviXCore.VmaBufferAllocation a, long offset, long size) { super(a, offset, size, 4); }
+        public FloatVector(@SharedPtr JiviXCore.BufferAllocation a, long offset, long size) { super(a, offset, size, 4); }
+
+        // Indexer for Data
+        public FloatBufferIndexer getIndexer() {
+            return new FloatBufferIndexer(this.data().asBuffer());
+        }
+
+        //
+        @Name("operator=") public native @ByRef FloatVector put(@ByRef IntVector x);
+        @Name("operator[]") public native @ByRef FloatPointer at(long n);
+
+        // map buffer data
+        public native FloatPointer mapped();
+        public native FloatPointer map();
+        public native FloatPointer data();
+    }
+
+
 
     @Name("jvx::Context")
     public static class Context extends Pointer {
-        static {
-            Loader.load();
-        }
+        static { Loader.load(); }
 
         public Context(Pointer p) {
             super(p);
@@ -277,18 +309,14 @@ public class JiviXBase extends Pointer {
         public native JiviXCore.Context setPerspective(@Cast("glm::mat4x4*") FloatPointer mv);
 
         //public native void createDescriptorSet();
-        public native @SharedPtr
-        JiviXCore.Context sharedPtr();
+        public native @SharedPtr JiviXCore.Context sharedPtr();
 
         //
-        public native @ByRef
-        JiviXBase.ImageRegion getFrameBuffer(int index);
+        public native @ByRef JiviXBase.ImageRegion getFrameBuffer(int index);
 
-        public native @ByRef
-        JiviXBase.ImageRegion getFlip0Buffer(int index);
+        public native @ByRef JiviXBase.ImageRegion getFlip0Buffer(int index);
 
-        public native @ByRef
-        JiviXBase.ImageRegion getFlip1Buffer(int index);
+        public native @ByRef JiviXBase.ImageRegion getFlip1Buffer(int index);
 
         //
         public native JiviXCore.Context initialize(int i, int i1);
@@ -297,9 +325,7 @@ public class JiviXBase extends Pointer {
 
     @Name("jvx::Thread")
     public static class Thread extends Pointer {
-        static {
-            Loader.load();
-        }
+        static { Loader.load(); }
 
         public Thread(Pointer p) {
             super(p);
@@ -318,8 +344,7 @@ public class JiviXBase extends Pointer {
         private native void allocate(@SharedPtr JiviXCore.Thread object);
 
         // public native void createDescriptorSet();
-        public native @SharedPtr
-        JiviXCore.Thread sharedPtr();
+        public native @SharedPtr JiviXCore.Thread sharedPtr();
 
         // conflict with vector-based!
         public native void submitCmd(@Cast("VkCommandBuffer") long commandBuf, @Cast("vkh::VkSubmitInfo*") long submitInfoAddress);
@@ -329,9 +354,7 @@ public class JiviXBase extends Pointer {
 
     @Name("jvx::Driver")
     public static class Driver extends Pointer {
-        static {
-            Loader.load();
-        }
+        static { Loader.load(); }
 
         public Driver(Pointer p) {
             super(p);
@@ -355,58 +378,38 @@ public class JiviXBase extends Pointer {
         public native long getDeviceCreateInfoAddress();
 
         // Get Handle Value
-        public native @Cast("VkPhysicalDevice")
-        long getPhysicalDevice();
+        public native @Cast("VkPhysicalDevice") long getPhysicalDevice();
 
-        public native @Cast("VkPhysicalDevice")
-        long getPhysicalDevice(int ID);
+        public native @Cast("VkPhysicalDevice") long getPhysicalDevice(int ID);
 
-        public native @Cast("VkDevice")
-        long getDevice();
+        public native @Cast("VkDevice") long getDevice();
 
-        public native @Cast("VkQueue")
-        long getQueue();
+        public native @Cast("VkQueue")long getQueue();
 
-        public native @Cast("VkFence")
-        long getFence();
+        public native @Cast("VkFence") long getFence();
 
-        public native @Cast("VkInstance")
-        long getInstance();
+        public native @Cast("VkInstance") long getInstance();
 
-        public native @Cast("VkCommandPool")
-        long getCommandPool();
+        public native @Cast("VkCommandPool") long getCommandPool();
 
-        public native @Cast("VkPipelineCache")
-        long getPipelineCache();
+        public native @Cast("VkPipelineCache") long getPipelineCache();
 
-        public native @Cast("VkDescriptorPool")
-        long getDescriptorPool();
+        public native @Cast("VkDescriptorPool") long getDescriptorPool();
 
-        public native @Cast("VkImageView")
-        long getDepthImageView();
+        public native @Cast("VkImageView") long getDepthImageView();
 
-        public native @Cast("VkImage")
-        long getDepthImage();
+        public native @Cast("VkImage") long getDepthImage();
 
-        public native @Cast("VkInstance")
-        long createInstance();
+        public native @Cast("VkInstance") long createInstance();
 
-        public native @Cast("VkDevice")
-        long createDevice();
+        public native @Cast("VkDevice") long createDevice();
 
-        public native @Cast("VkDevice")
-        long createDevice(@Cast("VkPhysicalDevice") long physicalDeviceHandle);
+        public native @Cast("VkDevice") long createDevice(@Cast("VkPhysicalDevice") long physicalDeviceHandle);
 
         // Get Address of Reference... (but needs wrapped as Pointer?)
-        public native @Name("getMemoryProperties")
-        @ByRef
-        @Cast("int8_t*")
-        BytePointer _getMemoryProperties();
+        public native @Name("getMemoryProperties") @ByRef @Cast("int8_t*") BytePointer _getMemoryProperties();
 
-        public native @Name("getAllocator")
-        @ByRef
-        @Cast("int8_t*")
-        BytePointer _getAllocator();
+        public native @Name("getAllocator") @ByRef @Cast("int8_t*") BytePointer _getAllocator();
         //public native @Name("getDispatch")          @ByRef @Cast("int8_t*") BytePointer _getDispatch();
 
         // Get Address from allocator or properties
@@ -420,18 +423,14 @@ public class JiviXBase extends Pointer {
         }
 
         //
-        public native @SharedPtr
-        JiviXCore.Device getDeviceDispatch();
+        public native @SharedPtr JiviXCore.Device getDeviceDispatch();
 
-        public native @SharedPtr
-        JiviXCore.Instance getInstanceDispatch();
+        public native @SharedPtr JiviXCore.Instance getInstanceDispatch();
     }
 
     @Name("jvx::BufferViewSet")
     public static class BufferViewSet extends Pointer {
-        static {
-            Loader.load();
-        }
+        static { Loader.load(); }
 
         public BufferViewSet(Pointer p) {
             super(p);
@@ -455,25 +454,21 @@ public class JiviXBase extends Pointer {
 
         private native void allocate(@SharedPtr JiviXCore.BufferViewSet object);
 
-        public native @SharedPtr
-        JiviXCore.BufferViewSet sharedPtr();
+        public native @SharedPtr JiviXCore.BufferViewSet sharedPtr();
 
         public native long getBufferCount();
 
         public native void createDescriptorSet();
 
-        public native @ByRef
-        UByteVector get(int id);
+        public native @ByRef UByteVector get(int id);
 
         public native long pushBufferView(@ByRef UByteVector vector);
         //public native @StdVector @ByRef ByteVector[] getBufferViewList();
 
         // Value based handle
-        public native @Cast("VkDescriptorSet")
-        long getDescriptorSet();
+        public native @Cast("VkDescriptorSet") long getDescriptorSet();
 
-        public native @Cast("VkDescriptorSetLayout")
-        long getDescriptorLayout();
+        public native @Cast("VkDescriptorSetLayout") long getDescriptorLayout();
 
         // Swinka Tramvaya
         //public native @Cast("VkDescriptorSet*") @ByRef LongPointer getDescriptorSet();
@@ -483,9 +478,7 @@ public class JiviXBase extends Pointer {
 
     @Name("jvx::MeshInput")
     public static class MeshInput extends Pointer {
-        static {
-            Loader.load();
-        }
+        static { Loader.load(); }
 
         public MeshInput(Pointer p) {
             super(p);
@@ -509,8 +502,7 @@ public class JiviXBase extends Pointer {
 
         private native void allocate(@SharedPtr JiviXCore.MeshInput object);
 
-        public native @SharedPtr
-        JiviXCore.MeshInput sharedPtr();
+        public native @SharedPtr JiviXCore.MeshInput sharedPtr();
 
         public native JiviXCore.MeshInput createDescriptorSet();
 
@@ -547,9 +539,7 @@ public class JiviXBase extends Pointer {
 
     @Name("jvx::MeshBinding")
     public static class MeshBinding extends Pointer {
-        static {
-            Loader.load();
-        }
+        static { Loader.load(); }
 
         public MeshBinding(Pointer p) {
             super(p);
@@ -585,18 +575,15 @@ public class JiviXBase extends Pointer {
 
         private native void allocate(@SharedPtr JiviXCore.MeshBinding object);
 
-        public native @SharedPtr
-        JiviXCore.MeshBinding sharedPtr();
+        public native @SharedPtr JiviXCore.MeshBinding sharedPtr();
 
         public native JiviXCore.MeshBinding setThread(JiviXCore.Thread thread);
 
         public native JiviXCore.MeshBinding setDriver(JiviXCore.Driver thread);
 
-        public native @ByRef
-        UByteVector getBindingBuffer(long i);
+        public native @ByRef UByteVector getBindingBuffer(long i);
 
-        public native @ByRef
-        UByteVector getIndexBuffer();
+        public native @ByRef UByteVector getIndexBuffer();
 
         public native int getBindingBufferGL(long i);
 
@@ -638,9 +625,7 @@ public class JiviXBase extends Pointer {
 
     @Name("jvx::Node")
     public static class Node extends Pointer {
-        static {
-            Loader.load();
-        }
+        static { Loader.load(); }
 
         public Node(Pointer p) {
             super(p);
@@ -664,8 +649,7 @@ public class JiviXBase extends Pointer {
 
         private native void allocate(@SharedPtr JiviXCore.Node object);
 
-        public native @SharedPtr
-        JiviXCore.Node sharedPtr();
+        public native @SharedPtr JiviXCore.Node sharedPtr();
 
         public native JiviXCore.Node pushInstance(@Cast("vkh::VsGeometryInstance*") long address);
 
@@ -679,9 +663,7 @@ public class JiviXBase extends Pointer {
 
     @Name("jvx::Material")
     public static class Material extends Pointer {
-        static {
-            Loader.load();
-        }
+        static { Loader.load(); }
 
         public Material(Pointer p) {
             super(p);
@@ -705,8 +687,7 @@ public class JiviXBase extends Pointer {
 
         private native void allocate(@SharedPtr JiviXCore.Material object);
 
-        public native @SharedPtr
-        JiviXCore.Material sharedPtr();
+        public native @SharedPtr JiviXCore.Material sharedPtr();
 
         public native void createDescriptorSet();
 
@@ -726,9 +707,7 @@ public class JiviXBase extends Pointer {
 
     @Name("jvx::Renderer")
     public static class Renderer extends Pointer {
-        static {
-            Loader.load();
-        }
+        static { Loader.load(); }
 
         public Renderer(Pointer p) {
             super(p);
@@ -752,8 +731,7 @@ public class JiviXBase extends Pointer {
 
         private native void allocate(@SharedPtr JiviXCore.Renderer object);
 
-        public native @SharedPtr
-        JiviXCore.Renderer sharedPtr();
+        public native @SharedPtr JiviXCore.Renderer sharedPtr();
 
         //
         public native JiviXCore.Renderer linkMaterial(@SharedPtr JiviXCore.Material material);
@@ -770,9 +748,7 @@ public class JiviXBase extends Pointer {
 
     @Name("jvx::TestClass")
     public static class TestClass extends Pointer {
-        static {
-            Loader.load();
-        }
+        static { Loader.load(); }
 
         public TestClass(Pointer p) {
             super(p);
