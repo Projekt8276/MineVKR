@@ -3,7 +3,9 @@ package com.helixd2s.minevkr
 import com.helixd2s.jivix.JiviX
 import net.fabricmc.api.ModInitializer
 import net.minecraft.client.gl.VertexBuffer
+import net.minecraft.client.render.WorldRenderer
 import net.minecraft.client.render.chunk.ChunkBuilder
+import net.minecraft.client.util.Window
 import net.minecraft.util.math.BlockPos
 import org.lwjgl.vulkan.VkDevice
 import org.lwjgl.vulkan.VkInstance
@@ -12,9 +14,13 @@ import org.lwjgl.vulkan.VkPhysicalDevice
 open class MineVKR : ModInitializer {
 
     companion object {
+        open lateinit var vWindow: Window;
+        open lateinit var vWorldRenderer: WorldRenderer;
+        open lateinit var vRenderer: JiviX.Renderer
+
         ///open lateinit var window: Window;
-        open var width = 1600
-        open var height = 1200
+        open var vWidth = 1600
+        open var vHeight = 1200
 
         open var vPhysicalDeviceHandle = 0UL
         open lateinit var vPhysicalDevice: VkPhysicalDevice
@@ -44,7 +50,6 @@ open class MineVKR : ModInitializer {
 
         //
         open var vNode = arrayOf<JiviX.Node>()
-        open lateinit var vRenderer: JiviX.Renderer
 
         // TODO: Settings For Constants
         const val vMaxChunkBindings = 16
@@ -81,7 +86,7 @@ open class MineVKR : ModInitializer {
                 println("Link Node and Materials...")
 
                 //
-                MineVKR.vContext.initialize(MineVKR.width.toUInt(), MineVKR.height.toUInt())
+                MineVKR.vContext.initialize(MineVKR.vWidth.toUInt(), MineVKR.vHeight.toUInt())
                 println("Initialize Context...")
 
                 //

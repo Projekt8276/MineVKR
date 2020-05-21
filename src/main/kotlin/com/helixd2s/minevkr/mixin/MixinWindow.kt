@@ -14,10 +14,12 @@ import org.spongepowered.asm.mixin.injection.Redirect
 
 @Mixin(Window::class)
 abstract class MixinWindow {
+
     // Oh... thanks?
     @Redirect(at = At(value = "INVOKE", target = "Lorg/lwjgl/opengl/GL;createCapabilities()Lorg/lwjgl/opengl/GLCapabilities;", remap = false), method = ["<init>"]) // doesn't work...
     private fun OnGlCreateCapabilities(): GLCapabilities {
         println("Try Inject Before GL.createCapabilities")
+        MineVKR.vWindow = this as Window;
         JiviXBase.initializeGL(GetProcAddress) // GetProcAddress
         return GL.createCapabilities()
     }
@@ -35,8 +37,8 @@ abstract class MixinWindow {
     // TODO: Add operable Int, UInt, Long, ULong referenced type for Kotlin
     @Redirect(at = At(value = "INVOKE", target = "Lorg/lwjgl/glfw/GLFW;glfwCreateWindow(IILjava/lang/CharSequence;JJ)J", remap = false), method = ["<init>"])
     private fun OnGlfwCreateWindow(width: Int, height: Int, title: CharSequence, monitor: Long, share: Long): Long {
-        MineVKR.width = width; MineVKR.height = height
-        return GLFW.glfwCreateWindow(MineVKR.width, MineVKR.height, title, monitor, share)
+        MineVKR.vWidth = width; MineVKR.vHeight = height
+        return GLFW.glfwCreateWindow(MineVKR.vWidth, MineVKR.vHeight, title, monitor, share)
     }
 
     /*// Not Found

@@ -74,6 +74,7 @@ abstract class MixinWorldRenderer {
     @Inject(at = [At("TAIL")], method = ["<init>"])
     private fun init(client: MinecraftClient, bufferBuilders: BufferBuilderStorage, info: CallbackInfo) {
         if (!MineVKR.vInitialized) {
+            MineVKR.vWorldRenderer = this as WorldRenderer
             vInitializeRenderer()
         }
     }
