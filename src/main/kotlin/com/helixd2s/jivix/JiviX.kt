@@ -357,11 +357,14 @@ abstract class JiviX {
 
         open fun createInstance(): ULong { return this.core.createInstance().toULong(); }
 
-        open fun createInstanceClass(): VkInstance { // TODO: Null-Safe
+        open fun instanceClass(): VkInstance { // TODO: Null-Safe
             return VkInstance(this.instance().toLong(), this.instanceCreateInfo()); }
 
-        open fun createPhysicalDeviceClass(): VkPhysicalDevice { // TODO: Null-Safe
-            return VkPhysicalDevice(this.physicalDevice().toLong(), this.createInstanceClass()) }
+        open fun physicalDeviceClass(): VkPhysicalDevice { // TODO: Null-Safe
+            return VkPhysicalDevice(this.physicalDevice().toLong(), this.instanceClass()) }
+
+        open fun physicalDeviceClass(idx: UInt): VkPhysicalDevice { // TODO: Null-Safe
+            return VkPhysicalDevice(this.physicalDevice(idx).toLong(), this.instanceClass()) }
 
         open fun createDevice(): ULong { return this.core.createDevice().toULong(); }
 

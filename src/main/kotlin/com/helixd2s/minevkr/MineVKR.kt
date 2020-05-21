@@ -64,10 +64,10 @@ open class MineVKR : ModInitializer {
 
                 //
                 MineVKR.vInstanceHandle = MineVKR.vDriver.createInstance()
-                MineVKR.vInstance = MineVKR.vDriver.createInstanceClass()
+                MineVKR.vInstance = MineVKR.vDriver.instanceClass()
 
                 // TODO: Support Other GPU's
-                MineVKR.vPhysicalDevice = MineVKR.vDriver.createPhysicalDeviceClass()
+                MineVKR.vPhysicalDevice = MineVKR.vDriver.physicalDeviceClass()
                 MineVKR.vPhysicalDeviceHandle = MineVKR.vDriver.physicalDevice()
 
                 //
