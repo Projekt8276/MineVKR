@@ -44,19 +44,19 @@ abstract class MixinWorldRenderer {
 
     @Redirect(method = ["renderLayer"], at = At(value = "INVOKE", target = "Lnet/minecraft/client/render/chunk/ChunkBuilder\$BuiltChunk;getOrigin()Lnet/minecraft/util/math/BlockPos;"))
     private fun onBlockPosGet(builtChunk: BuiltChunk): BlockPos {
-        return builtChunk.also { MineVKR.vCurrentChunk = it }.origin.also { MineVKR.vBlockPos = it }
+        return builtChunk.also { MineVKR.CurrentChunk.vCurrentChunk = it }.origin.also { MineVKR.CurrentChunk.vBlockPos = it }
     }
 
     // Steal Vertex Buffer for any other injections
     @Redirect(method = ["renderLayer"], at = At(value = "INVOKE", target = "Lnet/minecraft/client/render/chunk/ChunkBuilder\$BuiltChunk;getBuffer(Lnet/minecraft/client/render/RenderLayer;)Lnet/minecraft/client/gl/VertexBuffer;"))
     private fun onVertexBufferGet(builtChunk: BuiltChunk, layer: RenderLayer): VertexBuffer {
-        return builtChunk.also { MineVKR.vCurrentChunk = it }.getBuffer(layer).also { MineVKR.vVertexBuffer = it }
+        return builtChunk.also { MineVKR.CurrentChunk.vCurrentChunk = it }.getBuffer(layer).also { MineVKR.CurrentChunk.vVertexBuffer = it }
     }
 
-    //
+    // Will used for make ray-tracer bindings
     @Redirect(method = ["renderLayer"], at = At(value = "INVOKE", target = "Lnet/minecraft/client/render/VertexFormat;startDrawing(J)V"))
-    private fun onStartDrawing(format: VertexFormat, pointer: Long) {
-        MineVKR.vVertexFormat = format
+    private fun onVertexFormatStartDrawing(format: VertexFormat, pointer: Long) {
+        MineVKR.CurrentChunk.vVertexFormat = format
         format.startDrawing(pointer)
     }
 
@@ -70,7 +70,7 @@ abstract class MixinWorldRenderer {
             cameraY: Double,
             cameraZ: Double
     ) {
-        MineVKR.vCPosition = doubleArrayOf(cameraX, cameraY, cameraZ)
+        MineVKR.CurrentChunk.vCPosition = doubleArrayOf(cameraX, cameraY, cameraZ)
         renderLayer(renderLayer, matrices, cameraX, cameraY, cameraZ)
     }
 

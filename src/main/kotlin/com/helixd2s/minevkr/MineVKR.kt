@@ -14,6 +14,14 @@ import org.lwjgl.vulkan.VkPhysicalDevice
 
 open class MineVKR : ModInitializer {
 
+    object CurrentChunk {
+        open lateinit var vVertexBuffer: VertexBuffer
+        open lateinit var vBlockPos: BlockPos
+        open lateinit var vCurrentChunk: ChunkBuilder.BuiltChunk
+        open lateinit var vVertexFormat: VertexFormat
+        open var vCPosition: DoubleArray = doubleArrayOf(0.0, 0.0, 0.0)
+    }
+
     companion object {
         open lateinit var vWindow: Window;
         open lateinit var vWorldRenderer: WorldRenderer;
@@ -34,12 +42,6 @@ open class MineVKR : ModInitializer {
 
         //open var vInitialized by Delegates.notNull<Boolean>();
         open var vInitialized: Boolean = false
-        open lateinit var vVertexBuffer: VertexBuffer
-
-        open lateinit var vBlockPos: BlockPos
-        open lateinit var vCurrentChunk: ChunkBuilder.BuiltChunk
-        open lateinit var vVertexFormat: VertexFormat
-        open var vCPosition: DoubleArray = doubleArrayOf(0.0, 0.0, 0.0)
 
         //
         open lateinit var vDriver: JiviX.Driver
@@ -118,7 +120,6 @@ open class MineVKR : ModInitializer {
     @Override
     override fun onInitialize() {
         MineVKR.vDriver = JiviX.Driver()
-        MineVKR.vCPosition = doubleArrayOf(0.0, 0.0, 0.0)
     }
 
 }
