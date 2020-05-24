@@ -15,17 +15,21 @@ import org.bytedeco.javacpp.indexer.*;
 }, link = {"vulkan-1", "glfw", "glbinding", "glbinding-aux"}, define = {"ENABLE_OPENGL_INTEROP", "WIN32", "OS_WIN", "VK_ENABLE_BETA_EXTENSIONS", "VK_USE_PLATFORM_WIN32_KHR", "VMA_IMPLEMENTATION", "SHARED_PTR_NAMESPACE std", "UNIQUE_PTR_NAMESPACE std"})
 @Name("") //
 public class JiviXBase extends Pointer {
-    static {
-        Loader.load();
-    }
+    static { Loader.load(); }
 
     //
     public static native @Name("vkt::initializeGL")
     void initializeGL(@Cast("GLFWglproc(*)(const char*)") long GetProcAddress);
 
+    //
     public static native @Name("vkt::initializeGL")
     void initializeGL();
 
+    //
+    public static native @Name("vkt::createSemaphore")
+    void createSemaphore(JiviXCore.Device device, @Cast("VkSemaphore*") long[] vkSemaphore, @Cast("unsigned*") int[] glSemaphore, @Cast("const void*") long pNext);
+
+    //
     @Name("vkt::ImageRegion") //
     public static class ImageRegion extends Pointer {
         static { Loader.load(); }
@@ -153,7 +157,7 @@ public class JiviXBase extends Pointer {
         }
 
         //
-        @Name("operator=") public native @ByRef ShortVector put(@ByRef UShortVector x);
+        @Name("operator=") public native @ByRef ShortVector put(@ByRef ShortVector x);
         @Name("operator[]") public native @ByRef ShortPointer at(long n);
 
         // map buffer data
@@ -261,7 +265,7 @@ public class JiviXBase extends Pointer {
         }
 
         //
-        @Name("operator=") public native @ByRef FloatVector put(@ByRef IntVector x);
+        @Name("operator=") public native @ByRef FloatVector put(@ByRef FloatVector x);
         @Name("operator[]") public native @ByRef FloatPointer at(long n);
 
         // map buffer data

@@ -16,7 +16,13 @@ abstract class JiviX {
     // Core is UnWrapped Java or Wrapped Native Interface between with Kotlin
     // JavaCPP Have NO ULong, so NEEDS BI-DIRECTIONAL PER-BITS Conversion Between LONG and ULONG! (i.e. ULONG -> LONG -> ULONG WITHOUT any data loss)
     // Here is GLOBAL Methods, Variables...
-    companion object;
+    companion object {
+        fun createSemaphore(device: Device, vkSemaphore: LongArray, glSemaphore: IntArray, pNext: ULong) { // UN-Able to Convert As Pointer, so used Signed
+            JiviXBase.createSemaphore(device.core, vkSemaphore, glSemaphore, pNext.toLong())
+        }
+        fun initializeGL(procAddress: ULong) { JiviXBase.initializeGL(procAddress.toLong()); }
+        fun initializeGL() { JiviXBase.initializeGL(); }
+    }
 
     //
     open class Device() {

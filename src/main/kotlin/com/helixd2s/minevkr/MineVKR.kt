@@ -12,7 +12,11 @@ import net.minecraft.client.util.math.MatrixStack
 import net.minecraft.util.math.BlockPos
 import net.minecraft.util.math.Matrix4f
 import org.lwjgl.opengl.GL20.*
+import org.lwjgl.opengl.GL30
+import org.lwjgl.opengl.GL30.glBeginTransformFeedback
+import org.lwjgl.opengl.GL30.glEndTransformFeedback
 import org.lwjgl.opengl.GL32.GL_GEOMETRY_SHADER
+import org.lwjgl.opengl.GL32.GL_RASTERIZER_DISCARD
 import org.lwjgl.vulkan.VkDevice
 import org.lwjgl.vulkan.VkInstance
 import org.lwjgl.vulkan.VkPhysicalDevice
@@ -119,13 +123,25 @@ open class MineVKR : ModInitializer {
             matrixStack.pop()
             */
 
-            // EXPERIMENTAL ONLY!
+            val vertexBuffer: VertexBuffer = MineVKR.CurrentChunk.vCurrentChunk.getBuffer(renderLayer)
+
+            glEnable(GL_RASTERIZER_DISCARD)
+            glUseProgram(GLStuff.vTransformFeedbackProgram[0].toInt())
+
+            vertexBuffer.bind() // EXPERIMENTAL ONLY!
             for (id in 0 until MineVKR.CurrentChunk.vVertexFormat.elements.size) {
                 var element = MineVKR.CurrentChunk.vVertexFormat.elements[id];
                 var offset = (MineVKR.CurrentChunk.vVertexFormat as IEFormat).offsets().getInt(id);
                 if (element.type.name == "Position") { glVertexAttribPointer(0, (element as IEFormatElement).count(), element.format.glId, false, MineVKR.CurrentChunk.vVertexFormat.vertexSize, offset.toLong()) }
                 if (element.type.name == "UV"      ) { glVertexAttribPointer(1, (element as IEFormatElement).count(), element.format.glId, false, MineVKR.CurrentChunk.vVertexFormat.vertexSize, offset.toLong()) }
             }
+
+            glBeginTransformFeedback(GL_TRIANGLES)
+            vertexBuffer.draw(matrixStack.peek().model, 7)
+            glEndTransformFeedback()
+
+            glUseProgram(0)
+            glDisable(GL_RASTERIZER_DISCARD)
 
         }
 
