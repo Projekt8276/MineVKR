@@ -12,8 +12,7 @@ import net.minecraft.client.util.Window
 import net.minecraft.client.util.math.MatrixStack
 import net.minecraft.util.math.BlockPos
 import net.minecraft.util.math.Matrix4f
-import org.lwjgl.opengl.GL20.*
-import org.lwjgl.opengl.GL30
+import org.bytedeco.javacpp.Pointer
 import org.lwjgl.opengl.GL30.glBeginTransformFeedback
 import org.lwjgl.opengl.GL30.glEndTransformFeedback
 import org.lwjgl.opengl.GL32.*
@@ -249,6 +248,10 @@ open class MineVKR : ModInitializer {
                 glGenBuffers(vGLTestBuffer)
                 glBindBuffer(GL_TRANSFORM_FEEDBACK_BUFFER, vGLTestBuffer[0])
                 glBufferStorage(GL_TRANSFORM_FEEDBACK_BUFFER, 80 * 128 * 6, GL_CLIENT_STORAGE_BIT.or(GL_DYNAMIC_STORAGE_BIT))
+
+                // For Save...
+                // JavaCPP Pointer For Kotlin (By Address)
+                //val p: Pointer = object : Pointer() { init { address = 0xDEADBEEFL } }
             }
         }
     }
