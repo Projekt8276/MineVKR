@@ -178,10 +178,12 @@ abstract class JiviX {
         constructor(allocation: VmaBufferAllocation, offset: ULong, range: ULong, stride: ULong = 1UL) : this() {
             this.core = JiviXBase.Vector(allocation.core, offset.toLong(), range.toLong(), stride.toLong()) }
 
+        //
         open fun size(): ULong { return this.core.size().toULong(); }
         open fun range(): ULong { return this.core.range().toULong(); }
         open fun address(): ULong { return core.address().toULong(); }
         open fun deviceAddress(): ULong { return core.deviceAddress().toULong(); }
+        open fun mapv(offset: ULong = 0UL): ULong { return core.mapv(offset.toLong()).toULong(); } // Used For Wrap with `Pointer{address}` or LWJGL-3 structures
     }
 
 
@@ -198,7 +200,10 @@ abstract class JiviX {
         open operator fun get(index: Long): Byte { return (core as JiviXBase.ByteVector).data().get(index) }
         open operator fun set(index: Long, value: Byte) { (core as JiviXBase.ByteVector).data().put(index, value) }
 
-        open fun data(): BytePointer { return (core as JiviXBase.ByteVector).data() }
+        //
+        open fun data(offset: ULong = 0UL): BytePointer { return (core as JiviXBase.ByteVector).data(offset.toLong()) }
+        open fun map(offset: ULong = 0UL): BytePointer { return (core as JiviXBase.ByteVector).map(offset.toLong()) }
+        open fun mapped(offset: ULong = 0UL): BytePointer { return (core as JiviXBase.ByteVector).mapped(offset.toLong()) }
     }
 
     // SHOULD TO BE LOSSLESS (Bit In Bit!)
@@ -214,7 +219,10 @@ abstract class JiviX {
         open operator fun get(index: Long): UByte { return (core as JiviXBase.UByteVector).data().get(index).toUByte() }
         open operator fun set(index: Long, value: UByte) { (core as JiviXBase.UByteVector).data().put(index, value.toByte()) }
 
-        open fun data(): BytePointer { return (core as JiviXBase.UByteVector).data() }
+        //
+        open fun data(offset: ULong = 0UL): BytePointer { return (core as JiviXBase.UByteVector).data(offset.toLong()) }
+        open fun map(offset: ULong = 0UL): BytePointer { return (core as JiviXBase.UByteVector).map(offset.toLong()) }
+        open fun mapped(offset: ULong = 0UL): BytePointer { return (core as JiviXBase.UByteVector).mapped(offset.toLong()) }
     }
 
 
@@ -231,7 +239,10 @@ abstract class JiviX {
         open operator fun get(index: Long): Short { return (core as JiviXBase.ShortVector).data().get(index) }
         open operator fun set(index: Long, value: Short) { (core as JiviXBase.ShortVector).data().put(index, value) }
 
-        open fun data(): ShortPointer { return (core as JiviXBase.ShortVector).data() }
+        //
+        open fun data(offset: ULong = 0UL): ShortPointer { return (core as JiviXBase.ShortVector).data(offset.toLong()) }
+        open fun map(offset: ULong = 0UL): ShortPointer { return (core as JiviXBase.ShortVector).map(offset.toLong()) }
+        open fun mapped(offset: ULong = 0UL): ShortPointer { return (core as JiviXBase.ShortVector).mapped(offset.toLong()) }
     }
 
     // SHOULD TO BE LOSSLESS (Bit In Bit!)
@@ -247,7 +258,10 @@ abstract class JiviX {
         open operator fun get(index: Long): UShort { return (core as JiviXBase.UShortVector).data().get(index).toUShort() }
         open operator fun set(index: Long, value: UShort) { (core as JiviXBase.UShortVector).data().put(index, value.toShort()) }
 
-        open fun data(): ShortPointer { return (core as JiviXBase.UShortVector).data() }
+        //
+        open fun data(offset: ULong = 0UL): ShortPointer { return (core as JiviXBase.UShortVector).data(offset.toLong()) }
+        open fun map(offset: ULong = 0UL): ShortPointer { return (core as JiviXBase.UShortVector).map(offset.toLong()) }
+        open fun mapped(offset: ULong = 0UL): ShortPointer { return (core as JiviXBase.UShortVector).mapped(offset.toLong()) }
     }
 
 
@@ -266,7 +280,10 @@ abstract class JiviX {
         open operator fun get(index: Long): Int { return (core as JiviXBase.IntVector).data().get(index) }
         open operator fun set(index: Long, value: Int) { (core as JiviXBase.IntVector).data().put(index, value) }
 
-        open fun data(): IntPointer { return (core as JiviXBase.IntVector).data() }
+        //
+        open fun data(offset: ULong = 0UL): IntPointer { return (core as JiviXBase.IntVector).data(offset.toLong()) }
+        open fun map(offset: ULong = 0UL): IntPointer { return (core as JiviXBase.IntVector).map(offset.toLong()) }
+        open fun mapped(offset: ULong = 0UL): IntPointer { return (core as JiviXBase.IntVector).mapped(offset.toLong()) }
     }
 
     // SHOULD TO BE LOSSLESS (Bit In Bit!), FOR USE:
@@ -284,7 +301,10 @@ abstract class JiviX {
         open operator fun get(index: Long): UInt { return (core as JiviXBase.UIntVector).data().get(index).toUInt() }
         open operator fun set(index: Long, value: UInt) { (core as JiviXBase.UIntVector).data().put(index, value.toInt()) }
 
-        open fun data(): IntPointer { return (core as JiviXBase.UIntVector).data() }
+        //
+        open fun data(offset: ULong = 0UL): IntPointer { return (core as JiviXBase.UIntVector).data(offset.toLong()) }
+        open fun map(offset: ULong = 0UL): IntPointer { return (core as JiviXBase.UIntVector).map(offset.toLong()) }
+        open fun mapped(offset: ULong = 0UL): IntPointer { return (core as JiviXBase.UIntVector).mapped(offset.toLong()) }
     }
 
     //
@@ -300,7 +320,10 @@ abstract class JiviX {
         open operator fun get(index: Long): Float { return (core as JiviXBase.FloatVector).data().get(index) }
         open operator fun set(index: Long, value: Float) { (core as JiviXBase.FloatVector).data().put(index, value) }
 
-        open fun data(): FloatPointer { return (core as JiviXBase.FloatVector).data() }
+        //
+        open fun data(offset: ULong = 0UL): FloatPointer { return (core as JiviXBase.FloatVector).data(offset.toLong()) }
+        open fun map(offset: ULong = 0UL): FloatPointer { return (core as JiviXBase.FloatVector).map(offset.toLong()) }
+        open fun mapped(offset: ULong = 0UL): FloatPointer { return (core as JiviXBase.FloatVector).mapped(offset.toLong()) }
     }
 
 

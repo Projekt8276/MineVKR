@@ -249,8 +249,8 @@ open class MineVKR : ModInitializer {
                 glBindBuffer(GL_TRANSFORM_FEEDBACK_BUFFER, vGLTestBuffer[0])
                 glBufferStorage(GL_TRANSFORM_FEEDBACK_BUFFER, 80 * 128 * 6, GL_CLIENT_STORAGE_BIT.or(GL_DYNAMIC_STORAGE_BIT))
 
-                // For Save...
-                // JavaCPP Pointer For Kotlin (By Address)
+                // For Save... JavaCPP Pointer For Kotlin (By Address)
+                // Also, ULong still needs to convert to Long, so needs bit-lossless conversion
                 //val p: Pointer = object : Pointer() { init { address = 0xDEADBEEFL } }
             }
         }
