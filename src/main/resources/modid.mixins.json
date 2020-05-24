@@ -9,7 +9,8 @@
     "MixinWorldRenderer",
     "MixinWindow",
     "MixinMatrix4f",
-    "MixinVector4f"
+    "MixinVector4f",
+    "MixinVertexFormatElement"
   ],
   "injectors": {
     "defaultRequire": 1

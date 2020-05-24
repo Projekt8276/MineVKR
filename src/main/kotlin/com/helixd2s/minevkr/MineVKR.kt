@@ -1,6 +1,8 @@
 package com.helixd2s.minevkr
 
 import com.helixd2s.jivix.JiviX
+import com.helixd2s.minevkr.ducks.IEFormat
+import com.helixd2s.minevkr.mixin.MixinVertexFormatElement
 import net.fabricmc.api.ModInitializer
 import net.minecraft.client.gl.VertexBuffer
 import net.minecraft.client.render.*
@@ -9,10 +11,13 @@ import net.minecraft.client.util.Window
 import net.minecraft.client.util.math.MatrixStack
 import net.minecraft.util.math.BlockPos
 import net.minecraft.util.math.Matrix4f
+import org.lwjgl.opengl.GL20.*
+import org.lwjgl.opengl.GL32.GL_GEOMETRY_SHADER
 import org.lwjgl.vulkan.VkDevice
 import org.lwjgl.vulkan.VkInstance
 import org.lwjgl.vulkan.VkPhysicalDevice
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo
+import java.io.File
 
 open class MineVKR : ModInitializer {
 
@@ -22,6 +27,32 @@ open class MineVKR : ModInitializer {
         open lateinit var vCurrentChunk: ChunkBuilder.BuiltChunk
         open lateinit var vVertexFormat: VertexFormat
         open var vCPosition: DoubleArray = doubleArrayOf(0.0, 0.0, 0.0)
+    }
+
+    object GLStuff { // For OpenGL needs pointable objects
+        open var vTransformFeedbackVertexShader: UIntArray = uintArrayOf(0u);
+        open var vTransformFeedbackGeometryShader: UIntArray = uintArrayOf(0u);
+        open var vTransformFeedbackProgram: UIntArray = uintArrayOf(0u);
+
+        open var vQuadTransformFeedbackVertexShader: UIntArray = uintArrayOf(0u);
+        open var vQuadTransformFeedbackGeometryShader: UIntArray = uintArrayOf(0u);
+        open var vQuadTransformFeedbackProgram: UIntArray = uintArrayOf(0u);
+
+        open fun vCreateShader(shader: UIntArray, type: Int, path: String): UIntArray {
+            var success = intArrayOf(0)
+            return shader
+                    .also { it[0] = glCreateShader(type).toUInt() }
+                    .also {
+                        glShaderSource(it[0].toInt(), File(path).readText())
+                        glCompileShader(it[0].toInt())
+                        var success = intArrayOf(0).also { ms -> glGetShaderiv(it[0].toInt(), GL_COMPILE_STATUS, ms) }
+                        if (success[0] == 0) {
+                            println(glGetShaderInfoLog(it[0].toInt(), 512))
+                            error("LOL")
+                        }
+                    }
+            // glGetShaderiv(vertexShader, GL_COMPILE_STATUS, &success);
+        }
     }
 
     companion object {
@@ -62,6 +93,7 @@ open class MineVKR : ModInitializer {
         const val vMaxEntityBindings = 16
         const val vMaxEntityParts = 16
 
+
         //
         open fun vRenderBegin(matrices: MatrixStack?, tickDelta: Float, limitTime: Long, renderBlockOutline: Boolean, camera: Camera?, gameRenderer: GameRenderer?, lightmapTextureManager: LightmapTextureManager?, matrix4f: Matrix4f?, ci: CallbackInfo) {
             MineVKR.vMaterials.resetMaterials()     // TODO: Static Material
@@ -86,6 +118,13 @@ open class MineVKR : ModInitializer {
             vertexBuffer.draw(matrixStack.peek().model, 7)
             matrixStack.pop()
             */
+
+            // EXPERIMENTAL ONLY!
+            for (element in MineVKR.CurrentChunk.vVertexFormat.elements) {
+                if (element.type.name == "Position") { glVertexAttribPointer(0, (element as IEFormat).count(), element.format.glId, false, MineVKR.CurrentChunk.vVertexFormat.vertexSize, 0L) }
+                if (element.type.name == "UV"      ) { glVertexAttribPointer(1, (element as IEFormat).count(), element.format.glId, false, MineVKR.CurrentChunk.vVertexFormat.vertexSize, 0L) }
+            }
+
         }
 
         @JvmStatic
@@ -141,6 +180,38 @@ open class MineVKR : ModInitializer {
                 //
                 for (element in vBindingsEntity) MineVKR.vNode[0].pushMesh(element)
                 println("Add entity bindings into Node...")
+
+/*
+                //
+                GLStuff.vCreateShader(GLStuff.vTransformFeedbackVertexShader, GL_VERTEX_SHADER, "./gl-shaders/tf.vert")
+                GLStuff.vCreateShader(GLStuff.vTransformFeedbackGeometryShader, GL_GEOMETRY_SHADER, "./gl-shaders/tf.geom")
+
+                //
+                GLStuff.vTransformFeedbackProgram[0] = glCreateProgram().toUInt()
+                var programID = GLStuff.vTransformFeedbackProgram[0].toInt()
+                glAttachShader(programID, GLStuff.vTransformFeedbackVertexShader[0].toInt())
+                glAttachShader(programID, GLStuff.vTransformFeedbackGeometryShader[0].toInt())
+                glLinkProgram(programID)
+                var success = intArrayOf(0).also { glGetProgramiv(programID, GL_LINK_STATUS, it) }
+                if (success[0] == 0) { println(glGetProgramInfoLog(programID, 512)); error("LOL") }
+*/
+
+                //
+                GLStuff.vCreateShader(GLStuff.vQuadTransformFeedbackVertexShader, GL_VERTEX_SHADER, "./gl-shaders/tf-quad.vert")
+                GLStuff.vCreateShader(GLStuff.vQuadTransformFeedbackGeometryShader, GL_GEOMETRY_SHADER, "./gl-shaders/tf-quad.geom")
+                println("GL Transform Feedback Shaders Created!")
+
+                //
+                var programID = 0; var success = intArrayOf(0); // used only for debug
+                GLStuff.vQuadTransformFeedbackProgram[0] = glCreateProgram().toUInt()
+                programID = GLStuff.vQuadTransformFeedbackProgram[0].toInt()
+                glAttachShader(programID, GLStuff.vQuadTransformFeedbackVertexShader[0].toInt())
+                glAttachShader(programID, GLStuff.vQuadTransformFeedbackGeometryShader[0].toInt())
+                glLinkProgram(programID)
+                success = intArrayOf(0).also { glGetProgramiv(programID, GL_LINK_STATUS, it) }
+                if (success[0] == 0) { println(glGetProgramInfoLog(programID, 512)); error("LOL") }
+                println("GL Transform Feedback Programs Created!")
+
             }
         }
     }
