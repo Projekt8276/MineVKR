@@ -8,7 +8,7 @@ import org.spongepowered.asm.mixin.Shadow
 
 //mojang does not provide a method to load numbers into matrix
 @Mixin(Matrix4f::class)
-class MixinMatrix4f : IEMatrix4f {
+abstract class MixinMatrix4f : IEMatrix4f {
     @Shadow var a00 = 0f
     @Shadow var a01 = 0f
     @Shadow var a02 = 0f

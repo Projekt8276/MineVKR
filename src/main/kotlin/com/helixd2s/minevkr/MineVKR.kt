@@ -3,6 +3,7 @@ package com.helixd2s.minevkr
 import com.helixd2s.jivix.JiviX
 import com.helixd2s.minevkr.ducks.IEFormat
 import com.helixd2s.minevkr.ducks.IEFormatElement
+import com.helixd2s.minevkr.ducks.IEVBuffer
 import net.fabricmc.api.ModInitializer
 import net.minecraft.client.gl.VertexBuffer
 import net.minecraft.client.render.*
@@ -15,8 +16,10 @@ import org.lwjgl.opengl.GL20.*
 import org.lwjgl.opengl.GL30
 import org.lwjgl.opengl.GL30.glBeginTransformFeedback
 import org.lwjgl.opengl.GL30.glEndTransformFeedback
-import org.lwjgl.opengl.GL32.GL_GEOMETRY_SHADER
-import org.lwjgl.opengl.GL32.GL_RASTERIZER_DISCARD
+import org.lwjgl.opengl.GL32.*
+import org.lwjgl.opengl.GL44.GL_CLIENT_STORAGE_BIT
+import org.lwjgl.opengl.GL44.GL_DYNAMIC_STORAGE_BIT
+import org.lwjgl.opengl.GL44.glBufferStorage
 import org.lwjgl.vulkan.VkDevice
 import org.lwjgl.vulkan.VkInstance
 import org.lwjgl.vulkan.VkPhysicalDevice
@@ -81,6 +84,9 @@ open class MineVKR : ModInitializer {
         open var vInitialized: Boolean = false
 
         //
+        open var vGLTestBuffer = intArrayOf(0);
+
+        //
         open lateinit var vDriver: JiviX.Driver
         open lateinit var vContext: JiviX.Context
         open lateinit var vMaterials: JiviX.Material
@@ -136,13 +142,19 @@ open class MineVKR : ModInitializer {
                 if (element.type.name == "UV"      ) { glVertexAttribPointer(1, (element as IEFormatElement).count(), element.format.glId, false, MineVKR.CurrentChunk.vVertexFormat.vertexSize, offset.toLong()) }
             }
 
+            // TODO: Correct Working `I` of `vBindingsChunksOpaque[I]`
+            //println("What is: GL-Buffers[" + vBindingsChunksOpaque[0].bindingBufferGL().toInt() + "] ?") // Only For DEBUG!
+            glBindBufferRange(GL_TRANSFORM_FEEDBACK_BUFFER, 0, vBindingsChunksOpaque[0].bindingBufferGL().toInt(), 0L, 80L*(vertexBuffer as IEVBuffer).vertexCount())
+            //glBindBufferRange(GL_TRANSFORM_FEEDBACK_BUFFER, 0, vGLTestBuffer[0], 0L, 80L*(vertexBuffer as IEVBuffer).vertexCount())
+
+            //
             glBeginTransformFeedback(GL_TRIANGLES)
-            vertexBuffer.draw(matrixStack.peek().model, 7)
+            vertexBuffer.draw(matrixStack.peek().model, GL_LINES_ADJACENCY)
             glEndTransformFeedback()
 
-            glUseProgram(0)
+            //
             glDisable(GL_RASTERIZER_DISCARD)
-
+            glUseProgram(0)
         }
 
         @JvmStatic
@@ -230,6 +242,10 @@ open class MineVKR : ModInitializer {
                 if (success[0] == 0) { println(glGetProgramInfoLog(programID, 512)); error("LOL") }
                 println("GL Transform Feedback Programs Created!")
 
+                // For Test ONLY!
+                glGenBuffers(vGLTestBuffer)
+                glBindBuffer(GL_TRANSFORM_FEEDBACK_BUFFER, vGLTestBuffer[0])
+                glBufferStorage(GL_TRANSFORM_FEEDBACK_BUFFER, 80 * 128 * 6, GL_CLIENT_STORAGE_BIT.or(GL_DYNAMIC_STORAGE_BIT))
             }
         }
     }

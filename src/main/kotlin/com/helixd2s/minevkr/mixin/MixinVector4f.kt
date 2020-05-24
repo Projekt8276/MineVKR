@@ -9,7 +9,7 @@ import org.spongepowered.asm.mixin.Mixin
 import org.spongepowered.asm.mixin.Shadow
 
 @Mixin(Vector4f::class)
-class MixinVector4f : IEVector4f {
+abstract class MixinVector4f : IEVector4f {
     @Shadow var x = 0f
     @Shadow var y = 0f
     @Shadow var z = 0f

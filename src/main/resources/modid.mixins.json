@@ -11,7 +11,8 @@
     "MixinMatrix4f",
     "MixinVector4f",
     "MixinVertexFormatElement",
-    "MixinVertexFormat"
+    "MixinVertexFormat",
+    "MixinVertexBuffer"
   ],
   "injectors": {
     "defaultRequire": 1
