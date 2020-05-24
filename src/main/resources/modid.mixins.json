@@ -10,7 +10,8 @@
     "MixinWindow",
     "MixinMatrix4f",
     "MixinVector4f",
-    "MixinVertexFormatElement"
+    "MixinVertexFormatElement",
+    "MixinVertexFormat"
   ],
   "injectors": {
     "defaultRequire": 1

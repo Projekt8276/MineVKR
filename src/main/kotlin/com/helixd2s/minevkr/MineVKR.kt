@@ -2,7 +2,7 @@ package com.helixd2s.minevkr
 
 import com.helixd2s.jivix.JiviX
 import com.helixd2s.minevkr.ducks.IEFormat
-import com.helixd2s.minevkr.mixin.MixinVertexFormatElement
+import com.helixd2s.minevkr.ducks.IEFormatElement
 import net.fabricmc.api.ModInitializer
 import net.minecraft.client.gl.VertexBuffer
 import net.minecraft.client.render.*
@@ -120,9 +120,11 @@ open class MineVKR : ModInitializer {
             */
 
             // EXPERIMENTAL ONLY!
-            for (element in MineVKR.CurrentChunk.vVertexFormat.elements) {
-                if (element.type.name == "Position") { glVertexAttribPointer(0, (element as IEFormat).count(), element.format.glId, false, MineVKR.CurrentChunk.vVertexFormat.vertexSize, 0L) }
-                if (element.type.name == "UV"      ) { glVertexAttribPointer(1, (element as IEFormat).count(), element.format.glId, false, MineVKR.CurrentChunk.vVertexFormat.vertexSize, 0L) }
+            for (id in 0 until MineVKR.CurrentChunk.vVertexFormat.elements.size) {
+                var element = MineVKR.CurrentChunk.vVertexFormat.elements[id];
+                var offset = (MineVKR.CurrentChunk.vVertexFormat as IEFormat).offsets().getInt(id);
+                if (element.type.name == "Position") { glVertexAttribPointer(0, (element as IEFormatElement).count(), element.format.glId, false, MineVKR.CurrentChunk.vVertexFormat.vertexSize, offset.toLong()) }
+                if (element.type.name == "UV"      ) { glVertexAttribPointer(1, (element as IEFormatElement).count(), element.format.glId, false, MineVKR.CurrentChunk.vVertexFormat.vertexSize, offset.toLong()) }
             }
 
         }
