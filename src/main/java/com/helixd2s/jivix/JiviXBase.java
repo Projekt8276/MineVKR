@@ -30,6 +30,15 @@ public class JiviXBase extends Pointer {
     void createSemaphore(JiviXCore.Device device, @Cast("VkSemaphore*") long[] vkSemaphore, @Cast("unsigned*") int[] glSemaphore, @Cast("const void*") long pNext);
 
     //
+    public static native @Name("vkt::submitCmd")
+    void submitCmd(JiviXCore.Device device, @Cast("VkQueue") long queue, @StdVector @Cast("VkCommandBuffer*") long[] cmds, @Cast("vkh::VkSubmitInfo*") long smbi);
+
+    //
+    public static native @Name("vkt::submitCmdAsync")
+    void submitCmdAsync(JiviXCore.Device device, @Cast("VkQueue") long queue, @StdVector @Cast("VkCommandBuffer*") long[] cmds, @Cast("vkh::VkSubmitInfo*") long smbi);
+
+
+    //
     @Name("vkt::ImageRegion") //
     public static class ImageRegion extends Pointer {
         static { Loader.load(); }

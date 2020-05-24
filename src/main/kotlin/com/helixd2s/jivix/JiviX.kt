@@ -20,8 +20,17 @@ abstract class JiviX {
         fun createSemaphore(device: Device, vkSemaphore: LongArray, glSemaphore: IntArray, pNext: ULong) { // UN-Able to Convert As Pointer, so used Signed
             JiviXBase.createSemaphore(device.core, vkSemaphore, glSemaphore, pNext.toLong())
         }
-        fun initializeGL(procAddress: ULong) { JiviXBase.initializeGL(procAddress.toLong()); }
-        fun initializeGL() { JiviXBase.initializeGL(); }
+
+        fun initializeGL(procAddress: ULong) { JiviXBase.initializeGL(procAddress.toLong()) }
+        fun initializeGL() { JiviXBase.initializeGL() }
+
+        fun submitCmd(device: Device, queue: ULong, cmds: ULongArray, smbi: VkSubmitInfo) {
+            JiviXBase.submitCmd(device.core, queue.toLong(), cmds.toLongArray(), smbi.address())
+        }
+
+        fun submitCmdAsync(device: Device, queue: ULong, cmds: ULongArray, smbi: VkSubmitInfo) {
+            JiviXBase.submitCmdAsync(device.core, queue.toLong(), cmds.toLongArray(), smbi.address())
+        }
     }
 
     //
