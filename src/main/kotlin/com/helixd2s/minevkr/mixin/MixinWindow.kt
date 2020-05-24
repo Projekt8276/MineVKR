@@ -38,13 +38,7 @@ abstract class MixinWindow {
     @Redirect(at = At(value = "INVOKE", target = "Lorg/lwjgl/glfw/GLFW;glfwCreateWindow(IILjava/lang/CharSequence;JJ)J", remap = false), method = ["<init>"])
     private fun OnGlfwCreateWindow(width: Int, height: Int, title: CharSequence, monitor: Long, share: Long): Long {
         MineVKR.vWidth = width; MineVKR.vHeight = height
+        println("GLFW Create Window Redirected...")
         return GLFW.glfwCreateWindow(MineVKR.vWidth, MineVKR.vHeight, title, monitor, share)
     }
-
-    /*// Not Found
-    @Redirect(at = At(value = "INVOKE", target = "Lorg/lwjgl/glfw/GLFW;glfwCreateWindow(IILjava/nio/ByteBuffer;JJ)J", remap = false), method = ["<init>"])
-    private fun OnGlfwCreateWindow(width: Int, height: Int, title: ByteBuffer, monitor: Long, share: Long): Long {
-        MineVKR.width = width; MineVKR.height = height;
-        return GLFW.glfwCreateWindow(width, height, title, monitor, share);
-    }*/
 }

@@ -3,14 +3,16 @@ package com.helixd2s.minevkr
 import com.helixd2s.jivix.JiviX
 import net.fabricmc.api.ModInitializer
 import net.minecraft.client.gl.VertexBuffer
-import net.minecraft.client.render.VertexFormat
-import net.minecraft.client.render.WorldRenderer
+import net.minecraft.client.render.*
 import net.minecraft.client.render.chunk.ChunkBuilder
 import net.minecraft.client.util.Window
+import net.minecraft.client.util.math.MatrixStack
 import net.minecraft.util.math.BlockPos
+import net.minecraft.util.math.Matrix4f
 import org.lwjgl.vulkan.VkDevice
 import org.lwjgl.vulkan.VkInstance
 import org.lwjgl.vulkan.VkPhysicalDevice
+import org.spongepowered.asm.mixin.injection.callback.CallbackInfo
 
 open class MineVKR : ModInitializer {
 
@@ -59,6 +61,32 @@ open class MineVKR : ModInitializer {
         const val vMaxChunkBindings = 16
         const val vMaxEntityBindings = 16
         const val vMaxEntityParts = 16
+
+        //
+        open fun vRenderBegin(matrices: MatrixStack?, tickDelta: Float, limitTime: Long, renderBlockOutline: Boolean, camera: Camera?, gameRenderer: GameRenderer?, lightmapTextureManager: LightmapTextureManager?, matrix4f: Matrix4f?, ci: CallbackInfo) {
+            MineVKR.vMaterials.resetMaterials()     // TODO: Static Material
+            MineVKR.vMaterials.resetSampledImages() // TODO: Static Texture
+        }
+
+        //
+        open fun vRenderEnd(matrices: MatrixStack?, tickDelta: Float, limitTime: Long, renderBlockOutline: Boolean, camera: Camera?, gameRenderer: GameRenderer?, lightmapTextureManager: LightmapTextureManager?, matrix4f: Matrix4f?, ci: CallbackInfo) {
+
+        }
+
+        //
+        open fun vChunkDraw(renderLayer: RenderLayer, matrixStack: MatrixStack, d: Double, e: Double, f: Double, ci: CallbackInfo) {
+            // For View Only
+            /*
+            val vertexBuffer: VertexBuffer = MineVKR.CurrentChunk.vCurrentChunk.getBuffer(renderLayer)
+            matrixStack.push()
+            val blockPos: BlockPos = MineVKR.CurrentChunk.vCurrentChunk.getOrigin()
+            matrixStack.translate(blockPos.x.toDouble() - d, blockPos.y.toDouble() - e, blockPos.z.toDouble() - f)
+            vertexBuffer.bind()
+            MineVKR.CurrentChunk.vVertexFormat.startDrawing(0L)
+            vertexBuffer.draw(matrixStack.peek().model, 7)
+            matrixStack.pop()
+            */
+        }
 
         @JvmStatic
         open fun vInitializeRenderer() {
