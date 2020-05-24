@@ -131,8 +131,8 @@ open class MineVKR : ModInitializer {
 
             val vertexBuffer: VertexBuffer = MineVKR.CurrentChunk.vCurrentChunk.getBuffer(renderLayer)
 
-            glEnable(GL_RASTERIZER_DISCARD)
-            glUseProgram(GLStuff.vTransformFeedbackProgram[0].toInt())
+
+            glUseProgram(GLStuff.vQuadTransformFeedbackProgram[0].toInt())
 
             vertexBuffer.bind() // EXPERIMENTAL ONLY!
             for (id in 0 until MineVKR.CurrentChunk.vVertexFormat.elements.size) {
@@ -149,11 +149,13 @@ open class MineVKR : ModInitializer {
 
             //
             glBeginTransformFeedback(GL_TRIANGLES)
+            glEnable(GL_RASTERIZER_DISCARD)
             vertexBuffer.draw(matrixStack.peek().model, GL_LINES_ADJACENCY)
+            glDisable(GL_RASTERIZER_DISCARD)
             glEndTransformFeedback()
 
             //
-            glDisable(GL_RASTERIZER_DISCARD)
+            //glDisable(GL_RASTERIZER_DISCARD)
             glUseProgram(0)
         }
 
@@ -211,20 +213,20 @@ open class MineVKR : ModInitializer {
                 for (element in vBindingsEntity) MineVKR.vNode[0].pushMesh(element)
                 println("Add entity bindings into Node...")
 
-/*
                 //
+                var varyings = arrayOf<CharSequence>("fPosition", "fTexcoord", "fNormal", "fTangent", "fBinormal");
                 GLStuff.vCreateShader(GLStuff.vTransformFeedbackVertexShader, GL_VERTEX_SHADER, "./gl-shaders/tf.vert")
                 GLStuff.vCreateShader(GLStuff.vTransformFeedbackGeometryShader, GL_GEOMETRY_SHADER, "./gl-shaders/tf.geom")
 
                 //
                 GLStuff.vTransformFeedbackProgram[0] = glCreateProgram().toUInt()
                 var programID = GLStuff.vTransformFeedbackProgram[0].toInt()
+                glTransformFeedbackVaryings(programID, varyings, GL_INTERLEAVED_ATTRIBS)
                 glAttachShader(programID, GLStuff.vTransformFeedbackVertexShader[0].toInt())
                 glAttachShader(programID, GLStuff.vTransformFeedbackGeometryShader[0].toInt())
                 glLinkProgram(programID)
                 var success = intArrayOf(0).also { glGetProgramiv(programID, GL_LINK_STATUS, it) }
                 if (success[0] == 0) { println(glGetProgramInfoLog(programID, 512)); error("LOL") }
-*/
 
                 //
                 GLStuff.vCreateShader(GLStuff.vQuadTransformFeedbackVertexShader, GL_VERTEX_SHADER, "./gl-shaders/tf-quad.vert")
@@ -232,9 +234,10 @@ open class MineVKR : ModInitializer {
                 println("GL Transform Feedback Shaders Created!")
 
                 //
-                var programID = 0; var success = intArrayOf(0); // used only for debug
+                //var programID = 0; var success = intArrayOf(0); // used only for debug
                 GLStuff.vQuadTransformFeedbackProgram[0] = glCreateProgram().toUInt()
                 programID = GLStuff.vQuadTransformFeedbackProgram[0].toInt()
+                glTransformFeedbackVaryings(programID, varyings, GL_INTERLEAVED_ATTRIBS)
                 glAttachShader(programID, GLStuff.vQuadTransformFeedbackVertexShader[0].toInt())
                 glAttachShader(programID, GLStuff.vQuadTransformFeedbackGeometryShader[0].toInt())
                 glLinkProgram(programID)
