@@ -37,6 +37,18 @@ public class JiviXBase extends Pointer {
     public static native @Name("vkt::submitCmdAsync")
     void submitCmdAsync(JiviXCore.Device device, @Cast("VkQueue") long queue, @StdVector @Cast("VkCommandBuffer*") long[] cmds, @Cast("vkh::VkSubmitInfo*") long smbi);
 
+    //
+    public static native @Name("vkt::createCommandBuffer") @Cast("VkCommandBuffer")
+    long createCommandBuffer(JiviXCore.Device device, @Cast("VkCommandPool") long commandPool, byte secondary, byte once);
+
+    //
+    public static native @Name("vkt::createCompute") @Cast("VkPipeline")
+    long createCompute(JiviXCore.Device device, @StdString String path, @Cast("VkPipelineLayout") long layout, @Cast("VkPipelineCache") long cache, @Cast("uint32_t") int subgroupSize);
+
+    //
+    public static native @Name("vkt::createCompute") @Cast("VkPipeline")
+    long createCompute(JiviXCore.Device device, @StdVector @Cast("uint32_t*") int[] code, @Cast("VkPipelineLayout") long layout, @Cast("VkPipelineCache") long cache, @Cast("uint32_t") int subgroupSize);
+
 
     //
     @Name("vkt::ImageRegion") //
@@ -679,6 +691,8 @@ public class JiviXBase extends Pointer {
 
         //
         public native JiviXCore.Renderer setupCommands(@Cast("VkCommandBuffer") long cmd, byte once, int options);
+        public native @Cast("VkCommandBuffer") long refCommandBuffer();
+
         //public native void createDescriptorSet();
     }
 

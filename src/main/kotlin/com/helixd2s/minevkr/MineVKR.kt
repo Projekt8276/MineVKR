@@ -36,13 +36,17 @@ open class MineVKR : ModInitializer {
     }
 
     object GLStuff { // For OpenGL needs pointable objects
-        open var vTransformFeedbackVertexShader: UIntArray = uintArrayOf(0u);
-        open var vTransformFeedbackGeometryShader: UIntArray = uintArrayOf(0u);
-        open var vTransformFeedbackProgram: UIntArray = uintArrayOf(0u);
+        open var vShowVertexShader: UIntArray = uintArrayOf(0u)
+        open var vShowFragmentShader: UIntArray = uintArrayOf(0u)
+        open var vShowProgram: UIntArray = uintArrayOf(0u)
 
-        open var vQuadTransformFeedbackVertexShader: UIntArray = uintArrayOf(0u);
-        open var vQuadTransformFeedbackGeometryShader: UIntArray = uintArrayOf(0u);
-        open var vQuadTransformFeedbackProgram: UIntArray = uintArrayOf(0u);
+        open var vTransformFeedbackVertexShader: UIntArray = uintArrayOf(0u)
+        open var vTransformFeedbackGeometryShader: UIntArray = uintArrayOf(0u)
+        open var vTransformFeedbackProgram: UIntArray = uintArrayOf(0u)
+
+        open var vQuadTransformFeedbackVertexShader: UIntArray = uintArrayOf(0u)
+        open var vQuadTransformFeedbackGeometryShader: UIntArray = uintArrayOf(0u)
+        open var vQuadTransformFeedbackProgram: UIntArray = uintArrayOf(0u)
 
         open fun vCreateShader(shader: UIntArray, type: Int, path: String): UIntArray {
             var success = intArrayOf(0)
@@ -252,6 +256,7 @@ open class MineVKR : ModInitializer {
                 var varyings = arrayOf<CharSequence>("fPosition", "fTexcoord", "fNormal", "fTangent", "fBinormal");
                 GLStuff.vCreateShader(GLStuff.vTransformFeedbackVertexShader, GL_VERTEX_SHADER, "./gl-shaders/tf.vert")
                 GLStuff.vCreateShader(GLStuff.vTransformFeedbackGeometryShader, GL_GEOMETRY_SHADER, "./gl-shaders/tf.geom")
+                println("GL Transform Feedback Shaders Created!")
 
                 //
                 GLStuff.vTransformFeedbackProgram[0] = glCreateProgram().toUInt()
@@ -262,11 +267,12 @@ open class MineVKR : ModInitializer {
                 glLinkProgram(programID)
                 var success = intArrayOf(0).also { glGetProgramiv(programID, GL_LINK_STATUS, it) }
                 if (success[0] == 0) { println(glGetProgramInfoLog(programID, 512)); error("LOL") }
+                println("GL Transform Feedback Program Created!")
 
                 //
                 GLStuff.vCreateShader(GLStuff.vQuadTransformFeedbackVertexShader, GL_VERTEX_SHADER, "./gl-shaders/tf-quad.vert")
                 GLStuff.vCreateShader(GLStuff.vQuadTransformFeedbackGeometryShader, GL_GEOMETRY_SHADER, "./gl-shaders/tf-quad.geom")
-                println("GL Transform Feedback Shaders Created!")
+                println("GL Quad Transform Feedback Shaders Created!")
 
                 //
                 //var programID = 0; var success = intArrayOf(0); // used only for debug
@@ -278,7 +284,22 @@ open class MineVKR : ModInitializer {
                 glLinkProgram(programID)
                 success = intArrayOf(0).also { glGetProgramiv(programID, GL_LINK_STATUS, it) }
                 if (success[0] == 0) { println(glGetProgramInfoLog(programID, 512)); error("LOL") }
-                println("GL Transform Feedback Programs Created!")
+                println("GL Quad Transform Feedback Programs Created!")
+
+                //
+                GLStuff.vCreateShader(GLStuff.vShowVertexShader, GL_VERTEX_SHADER, "./gl-shaders/render.vert")
+                GLStuff.vCreateShader(GLStuff.vShowFragmentShader, GL_FRAGMENT_SHADER, "./gl-shaders/render.frag")
+                println("Show Result Shaders Created!")
+
+                //var programID = 0; var success = intArrayOf(0); // used only for debug
+                GLStuff.vShowProgram[0] = glCreateProgram().toUInt()
+                programID = GLStuff.vShowProgram[0].toInt()
+                glAttachShader(programID, GLStuff.vShowVertexShader[0].toInt())
+                glAttachShader(programID, GLStuff.vShowFragmentShader[0].toInt())
+                glLinkProgram(programID)
+                success = intArrayOf(0).also { glGetProgramiv(programID, GL_LINK_STATUS, it) }
+                if (success[0] == 0) { println(glGetProgramInfoLog(programID, 512)); error("LOL") }
+                println("Show Result Program Created!")
 
                 // For Test ONLY!
                 glGenBuffers(vGLTestBuffer)

@@ -31,6 +31,18 @@ abstract class JiviX {
         fun submitCmdAsync(device: Device, queue: ULong, cmds: ULongArray, smbi: VkSubmitInfo) {
             JiviXBase.submitCmdAsync(device.core, queue.toLong(), cmds.toLongArray(), smbi.address())
         }
+
+        fun createCommandBuffer(device: Device, commandPool: ULong, secondary: Byte, once: Byte) : ULong {
+            return JiviXBase.createCommandBuffer(device.core, commandPool.toLong(), secondary, once).toULong()
+        }
+
+        fun createCompute(device: Device, path: String, layout: ULong = 0UL, cache: ULong = 0UL, subgroupSize: UInt = 0U): ULong {
+            return JiviXBase.createCompute(device.core, path, layout.toLong(), cache.toLong(), subgroupSize.toInt()).toULong()
+        }
+
+        fun createCompute(device: Device, code: UIntArray, layout: ULong = 0UL, cache: ULong = 0UL, subgroupSize: UInt = 0U): ULong {
+            return JiviXBase.createCompute(device.core, code.toIntArray(), layout.toLong(), cache.toLong(), subgroupSize.toInt()).toULong()
+        }
     }
 
     //
@@ -651,6 +663,10 @@ abstract class JiviX {
 
         open fun setupCommands(cmd: ULong = 0UL, once: Byte = 1, options: UInt = 0xFFFFFFFFU): Renderer {
             return Renderer(this.core.setupCommands(cmd.toLong(), once, options.toInt())); }
+
+        open fun refCommandBuffer(): ULong {
+            return this.core.refCommandBuffer().toULong()
+        }
     }
 
     //
