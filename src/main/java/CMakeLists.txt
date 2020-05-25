@@ -71,7 +71,7 @@ pkg_search_module(GLFW QUIET renderdoc)
 #include(UseJava)
 
 # Set libs and include dirs of projects
-set (LIBS glfw3)
+set (LIBS "")
 set (LIB_DIR ${PROJECT_SOURCE_DIR} "${DEP_DIR}/lib")
 set (INC_DIR 
     "${DEP_DIR}/include/*/"

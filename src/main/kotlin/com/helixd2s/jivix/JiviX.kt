@@ -22,7 +22,7 @@ abstract class JiviX {
         }
 
         fun initializeGL(procAddress: ULong) { JiviXBase.initializeGL(procAddress.toLong()) }
-        fun initializeGL() { JiviXBase.initializeGL() }
+        //fun initializeGL() { JiviXBase.initializeGL() }
 
         fun submitCmd(device: Device, queue: ULong, cmds: ULongArray, smbi: VkSubmitInfo) {
             JiviXBase.submitCmd(device.core, queue.toLong(), cmds.toLongArray(), smbi.address())

@@ -21,9 +21,9 @@ public class JiviXBase extends Pointer {
     public static native @Name("vkt::initializeGL")
     void initializeGL(@Cast("GLFWglproc(*)(const char*)") long GetProcAddress);
 
-    //
-    public static native @Name("vkt::initializeGL")
-    void initializeGL();
+    // Required Linked
+    //public static native @Name("vkt::initializeGL")
+    //void initializeGL();
 
     //
     public static native @Name("vkt::createSemaphore")
