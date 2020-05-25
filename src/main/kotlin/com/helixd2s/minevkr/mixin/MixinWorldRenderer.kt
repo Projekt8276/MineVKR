@@ -41,6 +41,18 @@ abstract class MixinWorldRenderer {
         MineVKR.vRenderEnd(matrices, tickDelta, limitTime, renderBlockOutline, camera, gameRenderer, lightmapTextureManager, matrix4f, ci);
     }
 
+    //
+    @Inject(method = ["renderLayer"], at = [At(value = "HEAD")])
+    open fun onRenderLayerBegin(renderLayer: RenderLayer, matrixStack: MatrixStack, d: Double, e: Double, f: Double, ci: CallbackInfo) {
+        MineVKR.vRenderLayerBegin(renderLayer, matrixStack, d, e, f, ci)
+    }
+
+    //
+    @Inject(method = ["renderLayer"], at = [At(value = "TAIL")])
+    open fun onRenderLayerEnd(renderLayer: RenderLayer, matrixStack: MatrixStack, d: Double, e: Double, f: Double, ci: CallbackInfo) {
+        MineVKR.vRenderLayerEnd(renderLayer, matrixStack, d, e, f, ci)
+    }
+
     // Will used for rendering chunk in ray-tracing as instance!
     @Inject(method = ["renderLayer"], at = [At(value = "INVOKE", target = "Lnet/minecraft/client/util/math/MatrixStack;pop()V", shift = At.Shift.AFTER)])
     open fun onRenderLayerPop(renderLayer: RenderLayer, matrixStack: MatrixStack, d: Double, e: Double, f: Double, ci: CallbackInfo) {

@@ -135,6 +135,17 @@ open class MineVKR : ModInitializer {
         }
 
         //
+        open fun vRenderLayerBegin(renderLayer: RenderLayer, matrixStack: MatrixStack, d: Double, e: Double, f: Double, ci: CallbackInfo) {
+            MineVKR.vChunkCounter = 0
+            MineVKR.vIndexCounter = 0
+        }
+
+        //
+        open fun vRenderLayerEnd(renderLayer: RenderLayer, matrixStack: MatrixStack, d: Double, e: Double, f: Double, ci: CallbackInfo) {
+
+        }
+
+        //
         open fun vChunkDraw(renderLayer: RenderLayer, matrixStack: MatrixStack, d: Double, e: Double, f: Double, ci: CallbackInfo) {
             vIndexCounter = 0
 
@@ -153,7 +164,7 @@ open class MineVKR : ModInitializer {
 
             val vertexBuffer: VertexBuffer = MineVKR.CurrentChunk.vCurrentChunk.getBuffer(renderLayer)
             val chunkIndex = MineVKR.vChunkCounter++;
-            val indexOffset = vIndexCounter; vIndexCounter += (vertexBuffer as IEVBuffer).vertexCount();
+            val indexOffset = vIndexCounter //; vIndexCounter += (vertexBuffer as IEVBuffer).vertexCount();
 
             glUseProgram(GLStuff.vQuadTransformFeedbackProgram[0].toInt())
 
