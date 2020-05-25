@@ -3,6 +3,7 @@ package com.helixd2s.minevkr
 import com.helixd2s.jivix.JiviX
 import com.helixd2s.minevkr.ducks.IEFormat
 import com.helixd2s.minevkr.ducks.IEFormatElement
+import com.helixd2s.minevkr.ducks.IEMatrix4f
 import com.helixd2s.minevkr.ducks.IEVBuffer
 import net.fabricmc.api.ModInitializer
 import net.minecraft.client.gl.VertexBuffer
@@ -12,7 +13,6 @@ import net.minecraft.client.util.Window
 import net.minecraft.client.util.math.MatrixStack
 import net.minecraft.util.math.BlockPos
 import net.minecraft.util.math.Matrix4f
-import org.bytedeco.javacpp.Pointer
 import org.lwjgl.opengl.GL30.glBeginTransformFeedback
 import org.lwjgl.opengl.GL30.glEndTransformFeedback
 import org.lwjgl.opengl.GL32.*
@@ -102,20 +102,39 @@ open class MineVKR : ModInitializer {
         const val vMaxEntityBindings = 16
         const val vMaxEntityParts = 16
 
+        //
+        open var vChunkCounter = 0;
+        open var vIndexCounter = 0; // For Entity!
+
 
         //
         open fun vRenderBegin(matrices: MatrixStack?, tickDelta: Float, limitTime: Long, renderBlockOutline: Boolean, camera: Camera?, gameRenderer: GameRenderer?, lightmapTextureManager: LightmapTextureManager?, matrix4f: Matrix4f?, ci: CallbackInfo) {
             MineVKR.vMaterials.resetMaterials()     // TODO: Static Material
             MineVKR.vMaterials.resetSampledImages() // TODO: Static Texture
+            MineVKR.vNode[0].resetInstances()
+            MineVKR.vChunkCounter = 0
+            MineVKR.vIndexCounter = 0
+
+            // Test Material
+            var material = JiviX.MaterialUnit();
+            material.diffuse = floatArrayOf(1.0F, 1.0F, 1.0F, 1.0F)
+            material.emission = floatArrayOf(0.0F, 0.0F, 0.0F, 1.0F)
+            material.normals = floatArrayOf(0.0F, 0.0F, 1.0F, 1.0F)
+
+            //
+            MineVKR.vMaterials.pushMaterial(material)
         }
 
         //
         open fun vRenderEnd(matrices: MatrixStack?, tickDelta: Float, limitTime: Long, renderBlockOutline: Boolean, camera: Camera?, gameRenderer: GameRenderer?, lightmapTextureManager: LightmapTextureManager?, matrix4f: Matrix4f?, ci: CallbackInfo) {
-
+            MineVKR.vRenderer.setupCommands();
         }
 
         //
         open fun vChunkDraw(renderLayer: RenderLayer, matrixStack: MatrixStack, d: Double, e: Double, f: Double, ci: CallbackInfo) {
+            vIndexCounter = 0
+
+
             // For View Only
             /*
             val vertexBuffer: VertexBuffer = MineVKR.CurrentChunk.vCurrentChunk.getBuffer(renderLayer)
@@ -129,7 +148,8 @@ open class MineVKR : ModInitializer {
             */
 
             val vertexBuffer: VertexBuffer = MineVKR.CurrentChunk.vCurrentChunk.getBuffer(renderLayer)
-
+            val chunkIndex = MineVKR.vChunkCounter++;
+            val indexOffset = vIndexCounter; vIndexCounter += (vertexBuffer as IEVBuffer).vertexCount();
 
             glUseProgram(GLStuff.vQuadTransformFeedbackProgram[0].toInt())
 
@@ -143,7 +163,7 @@ open class MineVKR : ModInitializer {
 
             // TODO: Correct Working `I` of `vBindingsChunksOpaque[I]`
             //println("What is: GL-Buffers[" + vBindingsChunksOpaque[0].bindingBufferGL().toInt() + "] ?") // Only For DEBUG!
-            glBindBufferRange(GL_TRANSFORM_FEEDBACK_BUFFER, 0, vBindingsChunksOpaque[0].bindingBufferGL().toInt(), 0L, 80L*(vertexBuffer as IEVBuffer).vertexCount())
+            glBindBufferRange(GL_TRANSFORM_FEEDBACK_BUFFER, 0, vBindingsChunksOpaque[chunkIndex].bindingBufferGL().toInt(), indexOffset * 80L, 80L*(vertexBuffer as IEVBuffer).vertexCount()*6/4)
             //glBindBufferRange(GL_TRANSFORM_FEEDBACK_BUFFER, 0, vGLTestBuffer[0], 0L, 80L*(vertexBuffer as IEVBuffer).vertexCount())
 
             //
@@ -152,10 +172,26 @@ open class MineVKR : ModInitializer {
             vertexBuffer.draw(matrixStack.peek().model, GL_LINES_ADJACENCY)
             glDisable(GL_RASTERIZER_DISCARD)
             glEndTransformFeedback()
+            glUseProgram(0)
 
             //
-            //glDisable(GL_RASTERIZER_DISCARD)
-            glUseProgram(0)
+            vBindingsChunksOpaque[chunkIndex].addRangeInput(MineVKR.CurrentChunk.vVertexFormat.vertexSize.toULong() / 2U, 0u)
+
+            //
+            var instanceInfo = JiviX.VsGeometryInstance()
+            instanceInfo.mask = 0xFFU
+            instanceInfo.instanceId = chunkIndex.toUInt() // TODO: Translucent Blocks
+            instanceInfo.instanceOffset = 0U
+            instanceInfo.flags = 0x00000004U
+
+            //
+            val blockPos: BlockPos = MineVKR.CurrentChunk.vCurrentChunk.getOrigin()
+            matrixStack.push()
+            matrixStack.translate(blockPos.x.toDouble() - d, blockPos.y.toDouble() - e, blockPos.z.toDouble() - f)
+            instanceInfo.transform = (matrixStack.peek().model as IEMatrix4f).toArray();
+            MineVKR.vNode[0].pushInstance(instanceInfo)
+            matrixStack.pop()
+
         }
 
         @JvmStatic

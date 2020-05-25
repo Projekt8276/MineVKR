@@ -49,7 +49,7 @@ abstract class JiviX {
 
     // MOST HARDCORE!
     open class MaterialUnit() {
-        open lateinit var core: JiviXCore.MaterialUnit
+        open var core: JiviXCore.MaterialUnit = JiviXCore.MaterialUnit()
 
         constructor(core: JiviXCore.MaterialUnit) : this() { this.core = core; }
 
@@ -624,6 +624,9 @@ abstract class JiviX {
 
         open fun pushMesh(binding: MeshBinding): ULong {
             return core.pushMesh(binding.core).toULong() }
+
+        open fun resetInstances(): Node {
+            return Node(core.resetInstances()); }
     }
 
     //
@@ -645,6 +648,9 @@ abstract class JiviX {
 
         open fun linkNode(node: Node): Renderer {
             return Renderer(this.core.linkNode(node.core)); }
+
+        open fun setupCommands(cmd: ULong = 0UL, once: Byte = 1, options: UInt = 0xFFFFFFFFU): Renderer {
+            return Renderer(this.core.setupCommands(cmd.toLong(), once, options.toInt())); }
     }
 
     //

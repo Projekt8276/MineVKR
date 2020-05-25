@@ -607,6 +607,7 @@ public class JiviXBase extends Pointer {
         public native @SharedPtr JiviXCore.Node sharedPtr();
         public native JiviXCore.Node pushInstance(@Cast("vkh::VsGeometryInstance*") long address);
         public native JiviXCore.Node pushInstance(JiviXCore.VsGeometryInstance geometry);
+        public native JiviXCore.Node resetInstances();
         public native long pushMesh(@ByRef MeshBinding binding);
         public native void createDescriptorSet();
     }
@@ -675,6 +676,9 @@ public class JiviXBase extends Pointer {
         //
         public native JiviXCore.Renderer linkMaterial(@ByRef Material material);
         public native JiviXCore.Renderer linkNode(@ByRef Node node);
+
+        //
+        public native JiviXCore.Renderer setupCommands(@Cast("VkCommandBuffer") long cmd, byte once, int options);
         //public native void createDescriptorSet();
     }
 
