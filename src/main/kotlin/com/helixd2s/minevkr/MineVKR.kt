@@ -1,10 +1,7 @@
 package com.helixd2s.minevkr
 
 import com.helixd2s.jivix.JiviX
-import com.helixd2s.minevkr.ducks.IEFormat
-import com.helixd2s.minevkr.ducks.IEFormatElement
-import com.helixd2s.minevkr.ducks.IEMatrix4f
-import com.helixd2s.minevkr.ducks.IEVBuffer
+import com.helixd2s.minevkr.ducks.*
 import net.fabricmc.api.ModInitializer
 import net.minecraft.client.gl.VertexBuffer
 import net.minecraft.client.render.*
@@ -143,6 +140,16 @@ open class MineVKR : ModInitializer {
         //
         open fun vRenderLayerEnd(renderLayer: RenderLayer, matrixStack: MatrixStack, d: Double, e: Double, f: Double, ci: CallbackInfo) {
 
+        }
+
+        // Used For Entity! USED WITH `THIS`
+        open fun onRenderLayerDraw(renderLayer: RenderLayer, buffer: BufferBuilder, cameraX: Int, cameraY: Int, cameraZ: Int, ci: CallbackInfo) {
+            // getting texture identifier for access from vulkan textures
+            var phases = (renderLayer as IERenderLayer)?.phases()?:null
+            var texture = (phases as IEMultiPhase)?.texture()?:null
+            var indentifier = (texture as IETexture)?.id()?:null
+
+            
         }
 
         //

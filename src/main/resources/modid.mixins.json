@@ -13,7 +13,10 @@
     "MixinVertexFormatElement",
     "MixinVertexFormat",
     "MixinVertexBuffer",
-    "MixinRenderPhase"
+    "MixinRenderPhase",
+    "MixinRenderLayer",
+    "MixinRenderMultiPhase",
+    "MixinRenderPhaseTexture"
   ],
   "injectors": {
     "defaultRequire": 1

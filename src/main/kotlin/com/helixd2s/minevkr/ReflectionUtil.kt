@@ -1,6 +1,6 @@
 package com.helixd2s.minevkr
 
-import net.minecraft.util.math.Matrix4f
+import net.minecraft.client.render.RenderLayer
 
 import java.lang.reflect.Field
 import java.lang.reflect.Modifier
@@ -23,9 +23,18 @@ object ReflectionUtil {
     }
 
     @Throws(NoSuchFieldException::class, IllegalAccessException::class)
-    fun getFieldFValue(obj: Matrix4f, name: String?): Float {
-        val field = getField(obj.javaClass, name)
-        makeAccessible(field)
-        return field.getFloat(obj)
+    fun getFieldFValue(obj: Any, name: String?): Float {
+        val field = obj?.javaClass?.let { getField(it, name) }
+        if (field != null) { makeAccessible(field) }
+        if (field != null) { return field.getFloat(obj) }
+        return 0.0F
+    }
+
+    @Throws(NoSuchFieldException::class, IllegalAccessException::class)
+    fun <T> getFieldValue(obj: Any, name: String?): T? {
+        val field = obj?.javaClass?.let { getField(it, name) }
+        if (field != null) { makeAccessible(field) }
+        if (field != null) { return field.get(obj) as T }
+        return null
     }
 }
