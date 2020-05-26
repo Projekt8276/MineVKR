@@ -59,3 +59,6 @@ Also...
 # Texture.class 
 # TextureManager.class  
 # Identifier.class      
+# TextureUtil.class
+# OverlayTexture.class
+# NativeImage.class

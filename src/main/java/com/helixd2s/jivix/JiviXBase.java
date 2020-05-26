@@ -17,6 +17,8 @@ import org.bytedeco.javacpp.indexer.*;
 public class JiviXBase extends Pointer {
     static { Loader.load(); }
 
+
+
     //
     public static native @Name("vkt::initializeGL")
     void initializeGL(@Cast("GLFWglproc(*)(const char*)") long GetProcAddress);
@@ -448,6 +450,9 @@ public class JiviXBase extends Pointer {
         //
         public native @SharedPtr JiviXCore.Device getDeviceDispatch();
         public native @SharedPtr JiviXCore.Instance getInstanceDispatch();
+
+        //
+        public native @ByRef JiviXCore.MemoryAllocationInfo memoryAllocationInfo();
     }
 
     @Name("jvx::BufferViewSet")
@@ -692,6 +697,8 @@ public class JiviXBase extends Pointer {
         //
         public native JiviXCore.Renderer setupCommands(@Cast("VkCommandBuffer") long cmd, byte once, int options);
         public native @Cast("VkCommandBuffer") long refCommandBuffer();
+
+
 
         //public native void createDescriptorSet();
     }

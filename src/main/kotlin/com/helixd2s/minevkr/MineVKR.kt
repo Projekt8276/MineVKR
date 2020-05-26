@@ -1,7 +1,10 @@
 package com.helixd2s.minevkr
 
+import com.google.common.collect.Maps
 import com.helixd2s.jivix.JiviX
 import com.helixd2s.minevkr.ducks.*
+import com.mojang.blaze3d.platform.GlStateManager
+import com.mojang.blaze3d.systems.RenderSystem
 import net.fabricmc.api.ModInitializer
 import net.minecraft.client.gl.VertexBuffer
 import net.minecraft.client.render.*
@@ -10,17 +13,18 @@ import net.minecraft.client.util.Window
 import net.minecraft.client.util.math.MatrixStack
 import net.minecraft.util.math.BlockPos
 import net.minecraft.util.math.Matrix4f
+import org.lwjgl.opengl.GL11
 import org.lwjgl.opengl.GL30.glBeginTransformFeedback
 import org.lwjgl.opengl.GL30.glEndTransformFeedback
 import org.lwjgl.opengl.GL32.*
 import org.lwjgl.opengl.GL44.GL_CLIENT_STORAGE_BIT
 import org.lwjgl.opengl.GL44.GL_DYNAMIC_STORAGE_BIT
 import org.lwjgl.opengl.GL44.glBufferStorage
-import org.lwjgl.vulkan.VkDevice
-import org.lwjgl.vulkan.VkInstance
-import org.lwjgl.vulkan.VkPhysicalDevice
+import org.lwjgl.vulkan.*
+import org.lwjgl.vulkan.VK10.*
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo
 import java.io.File
+import java.nio.IntBuffer
 
 open class MineVKR : ModInitializer {
 
@@ -33,6 +37,9 @@ open class MineVKR : ModInitializer {
     }
 
     object GLStuff { // For OpenGL needs pointable objects
+        open var vTexVkMap: Map<Int, JiviX.ImageRegion> = Maps.newHashMap<Int, JiviX.ImageRegion>()
+        open var vTexMtMap: Map<Int, Int> = Maps.newHashMap<Int, Int>()
+
         open var vShowVertexShader: UIntArray = uintArrayOf(0u)
         open var vShowFragmentShader: UIntArray = uintArrayOf(0u)
         open var vShowProgram: UIntArray = uintArrayOf(0u)
@@ -109,9 +116,58 @@ open class MineVKR : ModInitializer {
 
 
         //
+        open fun uTextureInit(gLFormat: net.minecraft.client.texture.NativeImage.GLFormat, i: Int, j: Int, k: Int, l: Int) {
+            RenderSystem.assertThread { RenderSystem.isOnRenderThreadOrInit() }
+            GlStateManager.bindTexture(i)
+
+            var glformat = (gLFormat as GLFormat).glConstant();
+            var vkformat = VK10.VK_FORMAT_R8G8B8A8_UNORM;
+
+            var imageCreateInfo = VkImageCreateInfo.calloc()
+                .sType(VK10.VK_STRUCTURE_TYPE_IMAGE_CREATE_INFO)
+                .imageType(VK10.VK_IMAGE_TYPE_2D)
+                .format(vkformat)
+                .extent(VkExtent3D.calloc().also { it.width(k).height(l).depth(1) })
+                .mipLevels(1) // TODO: Mip Levels Support
+                .arrayLayers(1)
+                .samples(VK10.VK_SAMPLE_COUNT_1_BIT)
+                .tiling(VK10.VK_IMAGE_TILING_OPTIMAL)
+                .usage(VK10.VK_IMAGE_USAGE_SAMPLED_BIT.or(VK10.VK_IMAGE_USAGE_TRANSFER_DST_BIT).or(VK10.VK_IMAGE_USAGE_TRANSFER_SRC_BIT))
+                .sharingMode(VK10.VK_SHARING_MODE_EXCLUSIVE)
+                .initialLayout(VK10.VK_IMAGE_LAYOUT_UNDEFINED)
+
+            var imageViewCreateInfo = VkImageViewCreateInfo.calloc()
+                .sType(VK10.VK_STRUCTURE_TYPE_IMAGE_VIEW_CREATE_INFO)
+                .viewType(VK10.VK_IMAGE_VIEW_TYPE_2D)
+                .format(vkformat)
+                .components(VkComponentMapping.calloc().also{it.r(VK_COMPONENT_SWIZZLE_R).g(VK_COMPONENT_SWIZZLE_G).b(VK_COMPONENT_SWIZZLE_B).a(VK_COMPONENT_SWIZZLE_A)}) //VK_COMPONENT_SWIZZLE_R
+                .subresourceRange(VkImageSubresourceRange.calloc().also{it.aspectMask(VK_IMAGE_ASPECT_COLOR_BIT).baseMipLevel(0).levelCount(1).baseArrayLayer(0).layerCount(1)})
+
+            // Create With GL memory
+            var imageAllocation = JiviX.ImageAllocation(imageCreateInfo, MineVKR.vDriver.memoryAllocationInfo().also { it.glID = i })
+            var imageView = JiviX.ImageRegion(imageAllocation, imageViewCreateInfo)
+
+            //MineVKR.GLStuff.vTexVkMap.plus(Pair<Int, JiviX.ImageRegion>(i, imageView))
+            //MineVKR.GLStuff.vTexMtMap.plus(Pair<Int, Int>(i, MineVKR.vMaterials.pushSampledImage(imageView.descriptor()))) // TODO: Descriptor
+            //GlStateManager.texSubImage2D(3553, 0, 0,0, k, l, glformat, GL_UNSIGNED_BYTE, 0L)
+
+
+            if (j >= 0) {
+                GlStateManager.texParameter(3553, 33085, j)
+                GlStateManager.texParameter(3553, 33082, 0)
+                GlStateManager.texParameter(3553, 33083, j)
+                GlStateManager.texParameter(3553, 34049, 0.0f)
+            }
+
+            for (m in 0..j) {
+                GlStateManager.texImage2D(3553, m, (gLFormat as GLFormat).glConstant(), k shr m, l shr m, 0, 6408, 5121, null as IntBuffer?)
+            }
+        }
+
+        //
         open fun vRenderBegin(matrices: MatrixStack?, tickDelta: Float, limitTime: Long, renderBlockOutline: Boolean, camera: Camera?, gameRenderer: GameRenderer?, lightmapTextureManager: LightmapTextureManager?, matrix4f: Matrix4f?, ci: CallbackInfo) {
             MineVKR.vMaterials.resetMaterials()     // TODO: Static Material
-            MineVKR.vMaterials.resetSampledImages() // TODO: Static Texture
+            //MineVKR.vMaterials.resetSampledImages() // TODO: Static Texture
             MineVKR.vNode[0].resetInstances()
             MineVKR.vChunkCounter = 0
             MineVKR.vIndexCounter = 0
@@ -149,7 +205,10 @@ open class MineVKR : ModInitializer {
             var texture = (phases as IEMultiPhase)?.texture()?:null
             var indentifier = (texture as IETexture)?.id()?:null
 
-            
+            // Make Sure That Object Is Real
+            if (phases != null) {
+
+            }
         }
 
         //

@@ -12,25 +12,19 @@ import org.bytedeco.javacpp.annotation.*;
 }, link = {"vulkan-1", "glfw", "glbinding", "glbinding-aux"}, define = {"ENABLE_OPENGL_INTEROP", "WIN32", "OS_WIN", "VK_ENABLE_BETA_EXTENSIONS", "VK_USE_PLATFORM_WIN32_KHR", "VMA_IMPLEMENTATION", "SHARED_PTR_NAMESPACE std", "UNIQUE_PTR_NAMESPACE std"})
 @Name("") //
 public class JiviXCore extends Pointer {
-    static {
-        Loader.load();
-    }
+    static { Loader.load(); }
 
     // Pointer for xvk::Device
     @Name("xvk::Device")
     public static class Device extends Pointer {
-        static {
-            Loader.load();
-        }
+        static { Loader.load(); }
 
         public Device(Pointer p) {
             super(p);
         }
-
         public Device() {
             allocate();
         }
-
         private native void allocate();
     }
 
@@ -44,20 +38,16 @@ public class JiviXCore extends Pointer {
         public Instance(Pointer p) {
             super(p);
         }
-
         public Instance() {
             allocate();
         }
-
         private native void allocate();
     }
 
 
     @Name("vkt::VmaMemoryInfo")
     public static class VmaMemoryInfo extends Pointer {
-        static {
-            Loader.load();
-        }
+        static { Loader.load(); }
 
         public VmaMemoryInfo(Pointer p) {
             super(p);
@@ -67,48 +57,57 @@ public class JiviXCore extends Pointer {
         public VmaMemoryInfo() {
             allocate();
         }
-
         private native void allocate();
 
         // 
         public native @Cast("VmaMemoryUsage*")
-        @ValueGetter
-        @ByRef
-        IntPointer memUsage();
+        @ValueGetter @ByRef IntPointer memUsage();
 
         //
         public native @ByRef
-        @SharedPtr
-        JiviXCore.Device getDeviceDispatch();
+        @SharedPtr JiviXCore.Device getDeviceDispatch();
 
         public native @ByRef
         VmaMemoryInfo setDeviceDispatch(@SharedPtr JiviXCore.Device device);
 
         public native @ByRef
-        @SharedPtr
-        JiviXCore.Instance getInstanceDispatch();
+        @SharedPtr JiviXCore.Instance getInstanceDispatch();
 
         public native @ByRef
         VmaMemoryInfo setInstanceDispatch(@SharedPtr JiviXCore.Instance instance);
     }
 
 
+    @Name("vkt::MemoryAllocationInfo")
+    public static class MemoryAllocationInfo extends Pointer {
+        static { Loader.load(); }
+
+        public MemoryAllocationInfo(Pointer p) {
+            super(p);
+        }
+        public MemoryAllocationInfo() {
+            allocate();
+        }
+
+        private native void allocate();
+
+        //
+        public native @Cast("int*") @ValueGetter @ByRef IntPointer glID();
+    };
+
+
     @Name("vkt::ImageAllocation")
     public static class ImageAllocation extends Pointer {
-        static {
-            Loader.load();
-        }
+        static { Loader.load(); }
 
         public ImageAllocation(Pointer p) {
             super(p);
         }
-
         public ImageAllocation(@SharedPtr ImageAllocation alloc) {
             allocate(alloc);
         }
-
-        public ImageAllocation(@Cast("vkt::MemoryAllocationInfo*") long allocationInfoAddress, @Cast("vkh::VkImageCreateInfo*") long createInfoAddress) {
-            allocate(allocationInfoAddress, createInfoAddress);
+        public ImageAllocation(@Cast("vkh::VkImageCreateInfo*") long createInfoAddress, MemoryAllocationInfo allocationInfoAddress) {
+            allocate(createInfoAddress, allocationInfoAddress);
         }
 
         public ImageAllocation() {
@@ -116,87 +115,67 @@ public class JiviXCore extends Pointer {
         }
 
         private native void allocate(@SharedPtr ImageAllocation alloc);
-
-        private native void allocate(@Cast("vkt::MemoryAllocationInfo*") long allocationInfoAddress, @Cast("vkh::VkImageCreateInfo*") long createInfoAddress);
-
+        private native void allocate(@Cast("vkh::VkImageCreateInfo*") long createInfoAddress, MemoryAllocationInfo allocationInfoAddress);
         private native void allocate();
 
         //private native @SharedPtr ImageAllocation uniPtr();
 
         public native int getGLImage();
-
         public native int getGLMemory();
     }
 
 
     @Name("vkt::VmaImageAllocation")
     public static class VmaImageAllocation extends Pointer {
-        static {
-            Loader.load();
-        }
+        static { Loader.load(); }
 
         public VmaImageAllocation(Pointer p) {
             super(p);
         }
-
         public VmaImageAllocation() {
             allocate();
         }
-
         public VmaImageAllocation(@SharedPtr ImageAllocation alloc) {
             allocate(alloc);
         }
-
         public VmaImageAllocation(@Cast("VmaAllocator*") long vmaAllocator, @Cast("vkh::VkImageCreateInfo*") long createInfo, @Cast("vkt::VmaMemoryInfo*") long memInfoPtr) {
             allocate(vmaAllocator, createInfo, memInfoPtr);
         }
-
         public VmaImageAllocation(@Cast("VmaAllocator*") long vmaAllocator, @Cast("vkh::VkImageCreateInfo*") long createInfo, VmaMemoryInfo memInfo) {
             allocate(vmaAllocator, createInfo, memInfo);
         }
 
         private native void allocate();
-
         private native void allocate(@SharedPtr ImageAllocation alloc);
-
         private native void allocate(@Cast("VmaAllocator*") long vmaAllocator, @Cast("vkh::VkImageCreateInfo*") long createInfo, @Cast("vkt::VmaMemoryInfo*") long memInfoPtr);
-
         private native void allocate(@Cast("VmaAllocator*") long vmaAllocator, @Cast("vkh::VkImageCreateInfo*") long createInfo, VmaMemoryInfo memInfo);
 
         //private native @SharedPtr ImageAllocation uniPtr();
 
         public native int getGLImage();
-
         public native int getGLMemory();
     }
 
 
     @Name("vkt::BufferAllocation")
     public static class BufferAllocation extends Pointer {
-        static {
-            Loader.load();
-        }
+        static { Loader.load(); }
 
         public BufferAllocation(Pointer p) {
             super(p);
         }
-
         public BufferAllocation(@SharedPtr BufferAllocation alloc) {
             allocate(alloc);
         }
-
-        public BufferAllocation(@Cast("vkt::MemoryAllocationInfo*") long allocationInfoAddress, @Cast("vkh::VkBufferCreateInfo*") long createInfoAddress) {
-            allocate(allocationInfoAddress, createInfoAddress);
+        public BufferAllocation(@Cast("vkh::VkBufferCreateInfo*") long createInfoAddress, MemoryAllocationInfo allocationInfoAddress) {
+            allocate(createInfoAddress, allocationInfoAddress);
         }
-
         public BufferAllocation() {
             allocate();
         }
 
         private native void allocate(@SharedPtr BufferAllocation alloc);
-
-        private native void allocate(@Cast("vkt::MemoryAllocationInfo*") long allocationInfoAddress, @Cast("vkh::VkBufferCreateInfo*") long createInfoAddress);
-
+        private native void allocate(@Cast("vkh::VkBufferCreateInfo*") long createInfoAddress, MemoryAllocationInfo allocationInfoAddress);
         private native void allocate();
 
         //private native @SharedPtr BufferAllocation uniPtr();
@@ -205,52 +184,39 @@ public class JiviXCore extends Pointer {
 
     @Name("vkt::VmaBufferAllocation")
     public static class VmaBufferAllocation extends Pointer {
-        static {
-            Loader.load();
-        }
+        static { Loader.load(); }
 
         public VmaBufferAllocation(Pointer p) {
             super(p);
         }
-
         public VmaBufferAllocation() {
             allocate();
         }
-
         public VmaBufferAllocation(@SharedPtr BufferAllocation alloc) {
             allocate(alloc);
         }
-
         public VmaBufferAllocation(@Cast("VmaAllocator*") long vmaAllocator, @Cast("vkh::VkBufferCreateInfo*") long createInfo, @Cast("vkt::VmaMemoryInfo*") long memInfoPtr) {
             allocate(vmaAllocator, createInfo, memInfoPtr);
         }
-
         public VmaBufferAllocation(@Cast("VmaAllocator*") long vmaAllocator, @Cast("vkh::VkBufferCreateInfo*") long createInfo, VmaMemoryInfo memInfo) {
             allocate(vmaAllocator, createInfo, memInfo);
         }
 
         private native void allocate();
-
         private native void allocate(@SharedPtr BufferAllocation alloc);
-
         private native void allocate(@Cast("VmaAllocator*") long vmaAllocator, @Cast("vkh::VkBufferCreateInfo*") long createInfo, @Cast("vkt::VmaMemoryInfo*") long memInfoPtr);
-
         private native void allocate(@Cast("VmaAllocator*") long vmaAllocator, @Cast("vkh::VkBufferCreateInfo*") long createInfo, VmaMemoryInfo memInfo);
-
         //private native @SharedPtr BufferAllocation uniPtr();
     }
 
 
     @Name("jvi::Context")
     public static class Context extends Pointer {
-        static {
-            Loader.load();
-        }
+        static { Loader.load(); }
 
         public Context(Pointer p) {
             super(p);
         }
-
         public Context() {
             allocate();
         }
@@ -261,14 +227,11 @@ public class JiviXCore extends Pointer {
 
     @Name("jvi::Thread")
     public static class Thread extends Pointer {
-        static {
-            Loader.load();
-        }
+        static { Loader.load(); }
 
         public Thread(Pointer p) {
             super(p);
         }
-
         public Thread() {
             allocate();
         }
@@ -279,14 +242,11 @@ public class JiviXCore extends Pointer {
 
     @Name("jvi::Driver")
     public static class Driver extends Pointer {
-        static {
-            Loader.load();
-        }
+        static { Loader.load(); }
 
         public Driver(Pointer p) {
             super(p);
         }
-
         public Driver() {
             allocate();
         }
@@ -297,158 +257,125 @@ public class JiviXCore extends Pointer {
 
     @Name("jvi::BufferViewSet")
     public static class BufferViewSet extends Pointer {
-        static {
-            Loader.load();
-        }
+        static { Loader.load(); }
 
         public BufferViewSet(Pointer p) {
             super(p);
         }
-
         public BufferViewSet() {
             allocate();
         }
-
         public BufferViewSet(Context context) {
             allocate(context);
         }
 
         private native void allocate();
-
         private native void allocate(Context context);
     }
 
 
     @Name("jvi::MeshInput")
     public static class MeshInput extends Pointer {
-        static {
-            Loader.load();
-        }
+        static { Loader.load(); }
 
         public MeshInput(Pointer p) {
             super(p);
         }
-
         public MeshInput(Context context) {
             allocate(context);
         }
-
         public MeshInput() {
             allocate();
         }
 
         private native void allocate(Context context);
-
         private native void allocate();
     }
 
 
     @Name("jvi::MeshBinding")
     public static class MeshBinding extends Pointer {
-        static {
-            Loader.load();
-        }
+        static { Loader.load(); }
 
         public MeshBinding(Pointer p) {
             super(p);
         }
-
         public MeshBinding() {
             allocate();
         }
-
         public MeshBinding(Context context) {
             allocate(context);
         }
 
         private native void allocate();
-
         private native void allocate(Context context);
     }
 
 
     @Name("jvi::Node")
     public static class Node extends Pointer {
-        static {
-            Loader.load();
-        }
+        static { Loader.load(); }
 
         public Node(Pointer p) {
             super(p);
         }
-
         public Node() {
             allocate();
         }
-
         public Node(Context context) {
             allocate(context);
         }
 
         private native void allocate();
-
         private native void allocate(Context context);
     }
 
 
     @Name("jvi::Material")
     public static class Material extends Pointer {
-        static {
-            Loader.load();
-        }
+        static { Loader.load(); }
 
         public Material(Pointer p) {
             super(p);
         }
-
         public Material() {
             allocate();
         }
-
         public Material(Context context) {
             allocate(context);
         }
 
         private native void allocate();
-
         private native void allocate(Context context);
     }
 
 
     @Name("jvi::Renderer")
     public static class Renderer extends Pointer {
-        static {
-            Loader.load();
-        }
+        static { Loader.load(); }
 
         public Renderer(Pointer p) {
             super(p);
         }
-
         public Renderer() {
             allocate();
         }
-
         public Renderer(Context context) {
             allocate(context);
         }
 
         private native void allocate();
-
         private native void allocate(Context context);
     }
 
+
     @Name("jvi::MaterialUnit")
     public static class MaterialUnit extends Pointer {
-        static {
-            Loader.load();
-        }
+        static { Loader.load(); }
 
         public MaterialUnit(Pointer p) {
             super(p);
         }
-
-        // 
         public MaterialUnit() {
             allocate();
         }
@@ -457,45 +384,29 @@ public class JiviXCore extends Pointer {
 
         // Channels
         public native @Cast("float*")
-        @ValueGetter
-        @ByRef
-        FloatPointer diffuse();
+        @ValueGetter @ByRef FloatPointer diffuse();
 
         public native @Cast("float*")
-        @ValueGetter
-        @ByRef
-        FloatPointer specular();
+        @ValueGetter @ByRef FloatPointer specular();
 
         public native @Cast("float*")
-        @ValueGetter
-        @ByRef
-        FloatPointer normals();
+        @ValueGetter @ByRef FloatPointer normals();
 
         public native @Cast("float*")
-        @ValueGetter
-        @ByRef
-        FloatPointer emission();
+        @ValueGetter @ByRef FloatPointer emission();
 
         // Channels
         public native @Cast("int*")
-        @ValueGetter
-        @ByRef
-        IntPointer diffuseTexture();
+        @ValueGetter @ByRef IntPointer diffuseTexture();
 
         public native @Cast("int*")
-        @ValueGetter
-        @ByRef
-        IntPointer specularTexture();
+        @ValueGetter @ByRef IntPointer specularTexture();
 
         public native @Cast("int*")
-        @ValueGetter
-        @ByRef
-        IntPointer normalsTexture();
+        @ValueGetter @ByRef IntPointer normalsTexture();
 
         public native @Cast("int*")
-        @ValueGetter
-        @ByRef
-        IntPointer emissionTexture();
+        @ValueGetter @ByRef IntPointer emissionTexture();
     }
 
     @Name("vkh::VsGeometryInstance")
@@ -517,36 +428,18 @@ public class JiviXCore extends Pointer {
 
         // Transform
         public native @Cast("float*")
-        @ValueGetter
-        @ByRef
-        FloatPointer transform();
+        @ValueGetter @ByRef FloatPointer transform();
 
         // 
-        public native @Cast("byte*")
-        @ValueGetter
-        @ByRef
-        BytePointer mask();
-
-        public native @Cast("byte*")
-        @ValueGetter
-        @ByRef
-        BytePointer flags();
-
-        public native @Cast("int*")
-        @ValueGetter
-        @ByRef
-        IntPointer instanceId();
-
-        public native @Cast("int*")
-        @ValueGetter
-        @ByRef
-        IntPointer instanceOffset();
+        public native @Cast("byte*") @ValueGetter @ByRef BytePointer mask();
+        public native @Cast("byte*") @ValueGetter @ByRef BytePointer flags();
+        public native @Cast("int*") @ValueGetter @ByRef IntPointer instanceId();
+        public native @Cast("int*") @ValueGetter @ByRef IntPointer instanceOffset();
 
         // 
-        public native @Cast("int64_t*")
-        @ValueGetter
-        @ByRef
-        LongPointer accelerationStructureHandle();
+        public native @Cast("int64_t*") @ValueGetter @ByRef LongPointer accelerationStructureHandle();
     }
+
+
 
 }

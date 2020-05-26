@@ -6,6 +6,7 @@ import org.bytedeco.javacpp.IntPointer
 import org.bytedeco.javacpp.ShortPointer
 import org.bytedeco.javacpp.indexer.*
 import org.lwjgl.vulkan.*
+import org.lwjgl.vulkan.VK10.VK_IMAGE_LAYOUT_GENERAL
 import java.lang.Integer.min
 
 // TODO: Reduce Native Layers count and make more thin
@@ -98,6 +99,18 @@ abstract class JiviX {
             set(value) { this.core.emissionTexture().put(0L, value.toInt()) }
     }
 
+    //
+    open class MemoryAllocationInfo() {
+        open var core: JiviXCore.MemoryAllocationInfo = JiviXCore.MemoryAllocationInfo()
+
+        constructor(core: JiviXCore.MemoryAllocationInfo) : this() {
+            this.core = core; }
+
+        open var glID: Int
+            get() { return this.core.glID().get(0).toInt() }
+            set(value) { this.core.glID().put(0L, value.toInt()) }
+    }
+
     // TODO: Add Minecraft Matrix4f to FloatArrray[12] Convert!
     open class VsGeometryInstance() {
         open var core: JiviXCore.VsGeometryInstance = JiviXCore.VsGeometryInstance()
@@ -149,6 +162,32 @@ abstract class JiviX {
             set(value) { core.instanceDispatch = value.core; }
     }
 
+
+    //
+    open class BufferAllocation() {
+        open lateinit var core: JiviXCore.BufferAllocation
+
+        //
+        constructor(allocation: JiviXCore.BufferAllocation) : this() { this.core = allocation }
+
+        // LWJGL-3 here is now used!
+        constructor(bufferCreateInfo: VkBufferCreateInfo, memAlloc: MemoryAllocationInfo) : this() {
+            this.core = JiviXCore.BufferAllocation(bufferCreateInfo.address(), memAlloc.core) }
+    }
+
+    //
+    open class ImageAllocation() {
+        open lateinit var core: JiviXCore.ImageAllocation
+
+        //
+        constructor(allocation: JiviXCore.ImageAllocation) : this() { this.core = allocation }
+
+        // LWJGL-3 here is now used!
+        constructor(imageCreateInfo: VkImageCreateInfo, memAlloc: MemoryAllocationInfo) : this() {
+            this.core = JiviXCore.ImageAllocation(imageCreateInfo.address(), memAlloc.core) }
+    }
+
+
     //
     open class VmaBufferAllocation() {
         open lateinit var core: JiviXCore.VmaBufferAllocation
@@ -183,7 +222,9 @@ abstract class JiviX {
         constructor(region: JiviXBase.ImageRegion) : this() { this.core = region }
 
         // JavaCPP Have NO ULong, so NEEDS BI-DIRECTIONAL PER-BITS Conversion Between LONG and ULONG! (i.e. ULONG -> LONG -> ULONG WITHOUT any data loss)
-        constructor(allocation: VmaImageAllocation, imageCreateInfo: VkImageCreateInfo, layout: UInt) : this() {
+        constructor(allocation: VmaImageAllocation, imageCreateInfo: VkImageViewCreateInfo, layout: UInt = VK_IMAGE_LAYOUT_GENERAL.toUInt()) : this() {
+            this.core = JiviXBase.ImageRegion(allocation.core, imageCreateInfo.address(), layout.toInt()) }
+        constructor(allocation: ImageAllocation, imageCreateInfo: VkImageViewCreateInfo, layout: UInt = VK_IMAGE_LAYOUT_GENERAL.toUInt()) : this() {
             this.core = JiviXBase.ImageRegion(allocation.core, imageCreateInfo.address(), layout.toInt()) }
     }
 
@@ -197,6 +238,8 @@ abstract class JiviX {
 
         // JavaCPP Have NO ULong, so NEEDS BI-DIRECTIONAL PER-BITS Conversion Between LONG and ULONG! (i.e. ULONG -> LONG -> ULONG WITHOUT any data loss)
         constructor(allocation: VmaBufferAllocation, offset: ULong, range: ULong, stride: ULong = 1UL) : this() {
+            this.core = JiviXBase.Vector(allocation.core, offset.toLong(), range.toLong(), stride.toLong()) }
+        constructor(allocation: BufferAllocation, offset: ULong, range: ULong, stride: ULong = 1UL) : this() {
             this.core = JiviXBase.Vector(allocation.core, offset.toLong(), range.toLong(), stride.toLong()) }
 
         //
@@ -429,6 +472,9 @@ abstract class JiviX {
 
         open fun deviceCreateInfo(): VkDeviceCreateInfo? {
             return VkDeviceCreateInfo.createSafe(this.core.deviceCreateInfoAddress) }
+
+        open fun memoryAllocationInfo(): MemoryAllocationInfo {
+            return MemoryAllocationInfo(this.core.memoryAllocationInfo()) }
     }
 
     //
