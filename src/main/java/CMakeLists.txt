@@ -18,8 +18,6 @@ set (CMAKE_C_STANDARD 11)
 
 # Set source directories
 set (SOURCES_LIST 
-    "./include/*.h"
-    "./include/*.hpp"
 
     "./include/JiviX/*.hpp"
     "./include/JiviX/*/*.hpp"
@@ -41,21 +39,6 @@ set (SOURCES_LIST
     "./include/spirv/*/*"
     "./include/glbinding/*"
     "./include/glbinding/*/*"
-    
-    "./source/*.hpp"
-    "./source/*.h"
-    "./source/*.cpp"
-    "./source/*.c"
-    "./source/*/*.hpp"
-    "./source/*/*.c"
-    "./source/*/*.h"
-    "./source/*/*/*.hpp"
-    "./source/*/*/*.c"
-    "./source/*/*/*.h"
-    "./source/include/*.hpp"
-    "./source/include/*.h"
-    "./source/include/*/*.hpp"
-    "./source/include/*/*.h"
 )
 
 # Find packages (Linux Prior)
@@ -159,7 +142,7 @@ file (GLOB RSOURCES RELATIVE ${CMAKE_CURRENT_SOURCE_DIR} ${SOURCES_LIST})
 # Base
 set (LIBRARY_NAME "jniJiviXBase") #
 add_definitions(${DEFINES})
-add_library(${LIBRARY_NAME} SHARED source/jnijavacpp.cpp source/jniJiviXBase.cpp)
+add_library(${LIBRARY_NAME} SHARED source/jnijavacpp.cpp source/jniJiviXBase.cpp ${RSOURCES})
 add_custom_command(PRE_BUILD COMMAND "./generate.bat" OUTPUT "./log.txt")
 target_link_libraries(${LIBRARY_NAME} PRIVATE ${LIBS} ${JNI_LIBRARIES} Vulkan::Vulkan glbinding::glbinding glbinding::glbinding-aux)
 
@@ -175,7 +158,7 @@ endforeach()
 # Core
 set (LIBRARY_NAME "jniJiviXCore") #
 add_definitions(${DEFINES})
-add_library(${LIBRARY_NAME} SHARED source/jnijavacpp.cpp source/jniJiviXCore.cpp)
+add_library(${LIBRARY_NAME} SHARED source/jnijavacpp.cpp source/jniJiviXCore.cpp ${RSOURCES})
 add_custom_command(PRE_BUILD COMMAND "./generate.bat" OUTPUT "./log.txt")
 target_link_libraries(${LIBRARY_NAME} PRIVATE ${LIBS} ${JNI_LIBRARIES} Vulkan::Vulkan glbinding::glbinding glbinding::glbinding-aux)
 
