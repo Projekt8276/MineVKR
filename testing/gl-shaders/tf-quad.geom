@@ -1,6 +1,8 @@
 #version 460 compatibility
 
 layout (location = 0) in vec3 oPos[];
+layout (location = 1) in vec2 oTexcoord[];
+layout (location = 2) in vec4 oNormal[];
 
 layout (location = 0, xfb_buffer = 0, xfb_stride = 80, xfb_offset = 0 ) out vec4 fPosition;
 layout (location = 1, xfb_buffer = 0, xfb_stride = 80, xfb_offset = 16) out vec4 fTexcoord;
@@ -15,8 +17,9 @@ void main() {
     const vec3 normal = normalize(cross(oPos[1] - oPos[0], oPos[2] - oPos[0]));
     for (int i=0;i<4;i++) {
        gl_Position = vec4(oPos[i].xyz, 1.f);
-       fNormal = vec4(normal, 1.f);
+       fNormal = vec4(normal, oNormal[i].w);
        fPosition = vec4(oPos[i].xyz, 1.0f);
+       fTexcoord = vec4(oTexcoord[i], 0.f.xx);
        EmitVertex();
     }
     EndPrimitive();
