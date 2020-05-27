@@ -10,8 +10,4 @@ import java.util.*
 @Mixin(RenderPhase::class)
 abstract class MixinRenderPhase {
 
-
-
-
-
 }

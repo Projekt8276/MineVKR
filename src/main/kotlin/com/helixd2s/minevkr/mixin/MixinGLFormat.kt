@@ -9,5 +9,5 @@ import org.spongepowered.asm.mixin.Shadow
 abstract class MixinGLFormat : GLFormat {
     @Shadow private val glConstant = 0
 
-    override fun glConstant(): Int { return glConstant }
+    override fun getGlConstant(): Int { return glConstant }
 }

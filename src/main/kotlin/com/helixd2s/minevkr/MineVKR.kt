@@ -124,7 +124,7 @@ open class MineVKR : ModInitializer {
             RenderSystem.assertThread { RenderSystem.isOnRenderThreadOrInit() }
             GlStateManager.bindTexture(i)
 
-            var glformat = (gLFormat as GLFormat).glConstant()
+            var glformat = (gLFormat as GLFormat).getGlConstant()
             var vkformat = VK10.VK_FORMAT_R8G8B8A8_UNORM
 
             var imageCreateInfo = VkImageCreateInfo.create()
@@ -208,9 +208,9 @@ open class MineVKR : ModInitializer {
         // Used For Entity! USED WITH `THIS`
         open fun onRenderLayerDraw(renderLayer: RenderLayer, buffer: BufferBuilder, cameraX: Int, cameraY: Int, cameraZ: Int, ci: CallbackInfo) {
             // getting texture identifier for access from vulkan textures
-            var phases = (renderLayer as IERenderLayer)?.phases()?:null
-            var texture = (phases as IEMultiPhase)?.texture()?:null
-            var indentifier = (texture as IETexture)?.id()?:null
+            var phases = (renderLayer as IERenderLayer)?.getPhases()?:null
+            var texture = (phases as IEMultiPhase)?.getTexture()?:null
+            var indentifier = (texture as IETexture)?.getId()?:null
 
             // Make Sure That Object Is Real
             if (phases != null) {
@@ -244,9 +244,9 @@ open class MineVKR : ModInitializer {
             vertexBuffer.bind() // EXPERIMENTAL ONLY!
             for (id in 0 until MineVKR.CurrentChunk.vVertexFormat.elements.size) {
                 var element = MineVKR.CurrentChunk.vVertexFormat.elements[id]
-                var offset = (MineVKR.CurrentChunk.vVertexFormat as IEFormat).offsets().getInt(id)
-                if (element.type.name == "Position") { glVertexAttribPointer(0, (element as IEFormatElement).count(), element.format.glId, false, MineVKR.CurrentChunk.vVertexFormat.vertexSize, offset.toLong()) }
-                if (element.type.name == "UV"      ) { glVertexAttribPointer(1, (element as IEFormatElement).count(), element.format.glId, false, MineVKR.CurrentChunk.vVertexFormat.vertexSize, offset.toLong()) }
+                var offset = (MineVKR.CurrentChunk.vVertexFormat as IEFormat).getOffsets().getInt(id)
+                if (element.type.name == "Position") { glVertexAttribPointer(0, (element as IEFormatElement).getCount(), element.format.glId, false, MineVKR.CurrentChunk.vVertexFormat.vertexSize, offset.toLong()) }
+                if (element.type.name == "UV"      ) { glVertexAttribPointer(1, (element as IEFormatElement).getCount(), element.format.glId, false, MineVKR.CurrentChunk.vVertexFormat.vertexSize, offset.toLong()) }
             }
 
 
@@ -258,7 +258,7 @@ open class MineVKR : ModInitializer {
             // TODO: Correct Working `I` of `vBindingsChunksOpaque[I]`
             //println("What is: GL-Buffers[" + vBindingsChunksOpaque[0].bindingBufferGL().toInt() + "] ?") // Only For DEBUG!
             glUseProgram(GLStuff.vQuadTransformFeedbackProgram[0].toInt())
-            glBindBufferRange(GL_TRANSFORM_FEEDBACK_BUFFER, 0, vBindingsChunksOpaque[chunkIndex].bindingBufferGL().toInt(), indexOffset * 80L, 80L*(vertexBuffer as IEVBuffer).vertexCount()*6/4)
+            glBindBufferRange(GL_TRANSFORM_FEEDBACK_BUFFER, 0, vBindingsChunksOpaque[chunkIndex].bindingBufferGL().toInt(), indexOffset * 80L, 80L*(vertexBuffer as IEVBuffer).getVertexCount()*6/4)
             //glBindBufferRange(GL_TRANSFORM_FEEDBACK_BUFFER, 0, vGLTestBuffer[0], 0L, 80L*(vertexBuffer as IEVBuffer).vertexCount())
 
             // transform feedback required for form Vulkan API generalized buffer (i.e. blizzard tracing)

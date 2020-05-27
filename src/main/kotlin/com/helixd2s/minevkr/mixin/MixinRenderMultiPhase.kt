@@ -9,7 +9,7 @@ import org.spongepowered.asm.mixin.Shadow
 //
 @Mixin(RenderLayer.MultiPhaseParameters::class)
 abstract class MixinRenderMultiPhase : IEMultiPhase {
-    @Shadow open var texture: RenderPhase.Texture? = null
+    @Shadow private var texture: RenderPhase.Texture? = null
 
-    override fun texture(): RenderPhase.Texture? { return texture; }
+    override fun getTexture(): RenderPhase.Texture? { return texture; }
 }

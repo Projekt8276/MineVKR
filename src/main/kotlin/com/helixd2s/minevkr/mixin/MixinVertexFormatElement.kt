@@ -9,7 +9,7 @@ import org.spongepowered.asm.mixin.Shadow
 abstract class MixinVertexFormatElement : IEFormatElement {
     @Shadow private var count = 0;
 
-    override fun count(): Int {
+    override fun getCount(): Int {
         return this.count;
     }
 }

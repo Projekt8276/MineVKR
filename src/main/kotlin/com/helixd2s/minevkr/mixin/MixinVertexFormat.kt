@@ -10,7 +10,7 @@ import org.spongepowered.asm.mixin.Shadow
 abstract class MixinVertexFormat : IEFormat {
     @Shadow private lateinit var offsets: IntList
 
-    override fun offsets(): IntList {
+    override fun getOffsets(): IntList {
         return offsets;
     }
 }
