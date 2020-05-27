@@ -31,9 +31,7 @@ public class JiviXCore extends Pointer {
     // Pointer for xvk::Instance
     @Name("xvk::Instance")
     public static class Instance extends Pointer {
-        static {
-            Loader.load();
-        }
+        static { Loader.load(); }
 
         public Instance(Pointer p) {
             super(p);
@@ -52,29 +50,20 @@ public class JiviXCore extends Pointer {
         public VmaMemoryInfo(Pointer p) {
             super(p);
         }
-
-        // 
         public VmaMemoryInfo() {
             allocate();
         }
-        private native void allocate();
-
-        // 
-        public native @Cast("VmaMemoryUsage*")
-        @ValueGetter @ByRef IntPointer memUsage();
 
         //
-        public native @ByRef
-        @SharedPtr JiviXCore.Device getDeviceDispatch();
+        private native void allocate();
 
-        public native @ByRef
-        VmaMemoryInfo setDeviceDispatch(@SharedPtr JiviXCore.Device device);
+        //
+        public native @ByRef @SharedPtr JiviXCore.Device getDeviceDispatch();
+        public native @ByRef @SharedPtr JiviXCore.Instance getInstanceDispatch();
 
-        public native @ByRef
-        @SharedPtr JiviXCore.Instance getInstanceDispatch();
-
-        public native @ByRef
-        VmaMemoryInfo setInstanceDispatch(@SharedPtr JiviXCore.Instance instance);
+        //
+        public native @ByRef VmaMemoryInfo setDeviceDispatch(@SharedPtr JiviXCore.Device device);
+        public native @ByRef VmaMemoryInfo setInstanceDispatch(@SharedPtr JiviXCore.Instance instance);
     }
 
 
@@ -90,9 +79,6 @@ public class JiviXCore extends Pointer {
         }
 
         private native void allocate();
-
-        //
-        public native @Cast("int*") @ValueGetter @ByRef IntPointer glID();
     };
 
 
@@ -109,7 +95,6 @@ public class JiviXCore extends Pointer {
         public ImageAllocation(@Cast("vkh::VkImageCreateInfo*") long createInfoAddress, MemoryAllocationInfo allocationInfoAddress) {
             allocate(createInfoAddress, allocationInfoAddress);
         }
-
         public ImageAllocation() {
             allocate();
         }
@@ -381,65 +366,17 @@ public class JiviXCore extends Pointer {
         }
 
         private native void allocate();
-
-        // Channels
-        public native @Cast("float*")
-        @ValueGetter @ByRef FloatPointer diffuse();
-
-        public native @Cast("float*")
-        @ValueGetter @ByRef FloatPointer specular();
-
-        public native @Cast("float*")
-        @ValueGetter @ByRef FloatPointer normals();
-
-        public native @Cast("float*")
-        @ValueGetter @ByRef FloatPointer emission();
-
-        // Channels
-        public native @Cast("int*")
-        @ValueGetter @ByRef IntPointer diffuseTexture();
-
-        public native @Cast("int*")
-        @ValueGetter @ByRef IntPointer specularTexture();
-
-        public native @Cast("int*")
-        @ValueGetter @ByRef IntPointer normalsTexture();
-
-        public native @Cast("int*")
-        @ValueGetter @ByRef IntPointer emissionTexture();
     }
 
     @Name("vkh::VsGeometryInstance")
     public static class VsGeometryInstance extends Pointer {
-        static {
-            Loader.load();
-        }
+        static { Loader.load(); }
 
-        public VsGeometryInstance(Pointer p) {
-            super(p);
-        }
+        //
+        public VsGeometryInstance(Pointer p) { super(p); }
+        public VsGeometryInstance() { allocate(); }
 
-        // 
-        public VsGeometryInstance() {
-            allocate();
-        }
-
+        //
         private native void allocate();
-
-        // Transform
-        public native @Cast("float*")
-        @ValueGetter @ByRef FloatPointer transform();
-
-        // 
-        public native @Cast("byte*") @ValueGetter @ByRef BytePointer mask();
-        public native @Cast("byte*") @ValueGetter @ByRef BytePointer flags();
-        public native @Cast("int*") @ValueGetter @ByRef IntPointer instanceId();
-        public native @Cast("int*") @ValueGetter @ByRef IntPointer instanceOffset();
-
-        // 
-        public native @Cast("int64_t*") @ValueGetter @ByRef LongPointer accelerationStructureHandle();
     }
-
-
-
 }

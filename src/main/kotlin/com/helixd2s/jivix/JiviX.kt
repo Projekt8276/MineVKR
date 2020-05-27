@@ -67,36 +67,36 @@ abstract class JiviX {
         constructor(core: JiviXCore.MaterialUnit) : this() { this.core = core; }
 
         open var diffuse: FloatArray
-            get() { return FloatArray(4).also { this.core.diffuse().get(it, 0, 4) } }
-            set(value) { this.core.diffuse().put(value, 0, min(value.size,4)) }
+            get() { return FloatArray(4).also { FloatPointer(this.core).get(it, 0, 4) } }
+            set(value) { FloatPointer(this.core).put(value, 0, min(value.size,4)) }
 
         open var specular: FloatArray
-            get() { return FloatArray(4).also { this.core.specular().get(it, 0, 4) } }
-            set(value) { this.core.specular().put(value, 0, min(value.size,4)) }
+            get() { return FloatArray(4).also { FloatPointer(this.core).get(it, 16, 4) } }
+            set(value) { FloatPointer(this.core).put(value, 16, min(value.size,4)) }
 
         open var normals: FloatArray
-            get() { return FloatArray(4).also { this.core.normals().get(it, 0, 4) } }
-            set(value) { this.core.normals().put(value, 0, min(value.size,4)) }
+            get() { return FloatArray(4).also { FloatPointer(this.core).get(it, 32, 4) } }
+            set(value) { FloatPointer(this.core).put(value, 32, min(value.size,4)) }
 
         open var emission: FloatArray
-            get() { return FloatArray(4).also { this.core.emission().get(it, 0, 4) } }
-            set(value) { this.core.emission().put(value, 0, min(value.size,4)) }
+            get() { return FloatArray(4).also { FloatPointer(this.core).get(it, 48, 4) } }
+            set(value) { FloatPointer(this.core).put(value, 48, min(value.size,4)) }
 
         open var diffuseTexture: Int
-            get() { return this.core.diffuseTexture().get(0).toInt() }
-            set(value) { this.core.diffuseTexture().put(0L, value.toInt()) }
+            get() { return IntPointer(this.core).get(16).toInt() }
+            set(value) { IntPointer(this.core).put(16L, value.toInt()) }
 
         open var specularTexture: Int
-            get() { return this.core.specularTexture().get(0).toInt() }
-            set(value) { this.core.specularTexture().put(0L, value.toInt()) }
+            get() { return IntPointer(this.core).get(17).toInt() }
+            set(value) { IntPointer(this.core).put(17L, value.toInt()) }
 
         open var normalsTexture: Int
-            get() { return this.core.normalsTexture().get(0).toInt() }
-            set(value) { this.core.normalsTexture().put(0L, value.toInt()) }
+            get() { return IntPointer(this.core).get(18).toInt() }
+            set(value) { IntPointer(this.core).put(18L, value.toInt()) }
 
         open var emissionTexture: Int
-            get() { return this.core.emissionTexture().get(0).toInt() }
-            set(value) { this.core.emissionTexture().put(0L, value.toInt()) }
+            get() { return IntPointer(this.core).get(19).toInt() }
+            set(value) { IntPointer(this.core).put(19L, value.toInt()) }
     }
 
     //
@@ -107,8 +107,8 @@ abstract class JiviX {
             this.core = core; }
 
         open var glID: Int
-            get() { return this.core.glID().get(0).toInt() }
-            set(value) { this.core.glID().put(0L, value.toInt()) }
+            get() { return IntPointer(this.core).get(0).toInt() }
+            set(value) { IntPointer(this.core).put(0L, value.toInt()) }
     }
 
     // TODO: Add Minecraft Matrix4f to FloatArrray[12] Convert!
@@ -123,24 +123,36 @@ abstract class JiviX {
 
         // ...
         open var transform: FloatArray
-            get() { return floatArrayOf(1.0F, 0.0F, 0.0F, 0.0F, 0.0F, 1.0F, 0.0F, 0.0F, 0.0F, 0.0F, 1.0F, 0.0F).also { this.core.transform().get(it, 0, 12) } } // UNSAFE!
-            set(value) { this.core.transform().put(value, 0, min(12,value.size)) } // UNSAFE!
+            get() { return floatArrayOf(1.0F, 0.0F, 0.0F, 0.0F, 0.0F, 1.0F, 0.0F, 0.0F, 0.0F, 0.0F, 1.0F, 0.0F).also { FloatPointer(this.core).get(it, 0, 12) } } // UNSAFE!
+            set(value) { FloatPointer(this.core).put(value, 0, min(12,value.size)) } // UNSAFE!
 
         open var mask: UByte
-            get() { return this.core.mask().get(0).toUByte() }
-            set(value) { this.core.mask().put(0L, value.toByte()) }
+            get() { return BytePointer(this.core).get(51).toUByte() }
+            set(value) { BytePointer(this.core).put(51L, value.toByte()) }
 
         open var flags: UByte
-            get() { return this.core.flags().get(0).toUByte() }
-            set(value) { this.core.flags().put(0L, value.toByte()) }
+            get() { return BytePointer(this.core).get(55).toUByte() }
+            set(value) { BytePointer(this.core).put(55L, value.toByte()) }
 
         open var instanceId: UInt
-            get() { return this.core.instanceId().get(0).toUInt().and(0xFFFFFFU) }
-            set(value) { this.core.instanceId().put(0L, value.and(0xFFFFFFU).toInt()) }
+            get() { return IntPointer(this.core).get(12).toUInt().and(0xFFFFFFU) }
+            set(value) {
+                BytePointer(this.core).put(ubyteArrayOf(
+                    (value shr 0).and(0xFFU).toUByte(),
+                    (value shr 8).and(0xFFU).toUByte(),
+                    (value shr 16).and(0xFFU).toUByte()
+                ).toByteArray(), 48, 3)
+            }
 
         open var instanceOffset: UInt
-            get() { return this.core.instanceOffset().get(0).toUInt().and(0xFFFFFFU) }
-            set(value) { this.core.instanceOffset().put(0L, value.and(0xFFFFFFU).toInt()) }
+            get() { return IntPointer(this.core).get(13).toUInt().and(0xFFFFFFU) }
+            set(value) {
+                BytePointer(this.core).put(ubyteArrayOf(
+                    (value shr 0).and(0xFFU).toUByte(),
+                    (value shr 8).and(0xFFU).toUByte(),
+                    (value shr 16).and(0xFFU).toUByte()
+                ).toByteArray(), 52, 3)
+            }
     }
 
     // WARNING! ANY STRUCT SHOULD TO BE ALREADY INITIALIZED!
@@ -150,8 +162,8 @@ abstract class JiviX {
         constructor(info: JiviXCore.VmaMemoryInfo) : this() { this.core = info }
 
         open var memUsage: UInt
-            set(value) { core.memUsage().put(0, value.toInt()) }
-            get() { return core.memUsage().get(0).toUInt(); }
+            set(value) { IntPointer(this.core).put(0, value.toInt()) }
+            get() { return IntPointer(this.core).get(0).toUInt(); }
 
         open var deviceDispatch: Device
             get() { return Device(core.deviceDispatch); }

@@ -143,7 +143,11 @@ open class MineVKR : ModInitializer {
                 .format(vkformat)
                 .components(VkComponentMapping.calloc().also{it.r(VK_COMPONENT_SWIZZLE_R).g(VK_COMPONENT_SWIZZLE_G).b(VK_COMPONENT_SWIZZLE_B).a(VK_COMPONENT_SWIZZLE_A)}) //VK_COMPONENT_SWIZZLE_R
                 .subresourceRange(VkImageSubresourceRange.calloc().also{it.aspectMask(VK_IMAGE_ASPECT_COLOR_BIT).baseMipLevel(0).levelCount(1).baseArrayLayer(0).layerCount(1)})
-            
+
+            var ptr = MineVKR.vDriver.memoryAllocationInfo()
+            var adr = ptr.core.address()
+            var gla = ptr.glID
+
             // Create With GL memory
             var imageAllocation = JiviX.ImageAllocation(imageCreateInfo, MineVKR.vDriver.memoryAllocationInfo().also{it.glID = i})
             var imageView = JiviX.ImageRegion(imageAllocation, imageViewCreateInfo)
