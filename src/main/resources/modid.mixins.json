@@ -19,7 +19,8 @@
     "MixinRenderPhaseTexture",
     "MixinTextureUtil",
     "MixinGLFormat",
-    "MixinGlStateManager"
+    "MixinGlStateManager",
+    "MixinTextureManager"
   ],
   "injectors": {
     "defaultRequire": 1

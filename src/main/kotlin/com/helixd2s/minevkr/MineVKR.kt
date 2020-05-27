@@ -11,6 +11,7 @@ import net.minecraft.client.render.*
 import net.minecraft.client.render.chunk.ChunkBuilder
 import net.minecraft.client.util.Window
 import net.minecraft.client.util.math.MatrixStack
+import net.minecraft.util.Identifier
 import net.minecraft.util.math.BlockPos
 import net.minecraft.util.math.Matrix4f
 import org.lwjgl.opengl.GL11
@@ -38,8 +39,8 @@ open class MineVKR : ModInitializer {
     }
 
     object GLStuff { // For OpenGL needs pointable objects
-        open var vTexVkMap: Map<Int, JiviX.ImageRegion> = Maps.newHashMap<Int, JiviX.ImageRegion>()
-        open var vTexMtMap: Map<Int, Int> = Maps.newHashMap<Int, Int>()
+        open var vTexVkMap: HashMap<Integer, JiviX.ImageRegion> = Maps.newHashMap<Integer, JiviX.ImageRegion>()
+        open var vIdxMtMap: HashMap<Identifier, Int> = Maps.newHashMap<Identifier, Int>() // Second are ID from vMaterial
 
         open var vShowVertexShader: UIntArray = uintArrayOf(0u)
         open var vShowFragmentShader: UIntArray = uintArrayOf(0u)
@@ -90,6 +91,7 @@ open class MineVKR : ModInitializer {
 
         //open var vInitialized by Delegates.notNull<Boolean>();
         open var vInitialized: Boolean = false
+        open var vPreInitialized: Boolean = false
 
         //
         open var vGLTestBuffer = intArrayOf(0);
@@ -124,7 +126,7 @@ open class MineVKR : ModInitializer {
             var glformat = (gLFormat as GLFormat).glConstant();
             var vkformat = VK10.VK_FORMAT_R8G8B8A8_UNORM;
 
-            var imageCreateInfo = VkImageCreateInfo.calloc()
+            var imageCreateInfo = VkImageCreateInfo.create()
                 .sType(VK10.VK_STRUCTURE_TYPE_IMAGE_CREATE_INFO)
                 .imageType(VK10.VK_IMAGE_TYPE_2D)
                 .format(vkformat)
@@ -137,16 +139,12 @@ open class MineVKR : ModInitializer {
                 .sharingMode(VK10.VK_SHARING_MODE_EXCLUSIVE)
                 .initialLayout(VK10.VK_IMAGE_LAYOUT_UNDEFINED)
 
-            var imageViewCreateInfo = VkImageViewCreateInfo.calloc()
+            var imageViewCreateInfo = VkImageViewCreateInfo.create()
                 .sType(VK10.VK_STRUCTURE_TYPE_IMAGE_VIEW_CREATE_INFO)
                 .viewType(VK10.VK_IMAGE_VIEW_TYPE_2D)
                 .format(vkformat)
-                .components(VkComponentMapping.calloc().also{it.r(VK_COMPONENT_SWIZZLE_R).g(VK_COMPONENT_SWIZZLE_G).b(VK_COMPONENT_SWIZZLE_B).a(VK_COMPONENT_SWIZZLE_A)}) //VK_COMPONENT_SWIZZLE_R
-                .subresourceRange(VkImageSubresourceRange.calloc().also{it.aspectMask(VK_IMAGE_ASPECT_COLOR_BIT).baseMipLevel(0).levelCount(1).baseArrayLayer(0).layerCount(1)})
-
-            var ptr = MineVKR.vDriver.memoryAllocationInfo()
-            var adr = ptr.core.address()
-            var gla = ptr.glID
+                .components(VkComponentMapping.create().also{it.r(VK_COMPONENT_SWIZZLE_R).g(VK_COMPONENT_SWIZZLE_G).b(VK_COMPONENT_SWIZZLE_B).a(VK_COMPONENT_SWIZZLE_A)}) //VK_COMPONENT_SWIZZLE_R
+                .subresourceRange(VkImageSubresourceRange.create().also{it.aspectMask(VK_IMAGE_ASPECT_COLOR_BIT).baseMipLevel(0).levelCount(1).baseArrayLayer(0).layerCount(1)})
 
             // Create With GL memory
             var imageAllocation = JiviX.ImageAllocation(imageCreateInfo, MineVKR.vDriver.memoryAllocationInfo().also{it.glID = i})
@@ -154,8 +152,9 @@ open class MineVKR : ModInitializer {
 
             //
             //glTextureSubImage2D(i, 0, 0,0, k, l, 6408, 5121, 0L)
-            MineVKR.GLStuff.vTexVkMap.plus(Pair<Int, JiviX.ImageRegion>(i, imageView))
-            //MineVKR.GLStuff.vTexMtMap.plus(Pair<Int, Int>(i, MineVKR.vMaterials.pushSampledImage(imageView.descriptor()))) // TODO: Descriptor
+            println("Mapping OpenGL Texture[$i]...")
+            MineVKR.GLStuff.vTexVkMap.put(Integer(i), imageView)
+            //MineVKR.GLStuff.vTexMtMap.plus(Pair(i, MineVKR.vMaterials.pushSampledImage(imageView.descriptor().address().toULong()))) // TODO: Descriptor
 
             /*
             if (j >= 0) {
@@ -283,37 +282,42 @@ open class MineVKR : ModInitializer {
         }
 
         open fun vInitializeDriver() { //
-            MineVKR.vInstanceHandle = MineVKR.vDriver.createInstance()
-            MineVKR.vInstance = MineVKR.vDriver.instanceClass()
+            if (!vPreInitialized) {
+                vPreInitialized = true
 
-            // TODO: Support Other GPU's
-            MineVKR.vPhysicalDevice = MineVKR.vDriver.physicalDeviceClass()
-            MineVKR.vPhysicalDeviceHandle = MineVKR.vDriver.physicalDevice()
+                //
+                MineVKR.vInstanceHandle = MineVKR.vDriver.createInstance()
+                MineVKR.vInstance = MineVKR.vDriver.instanceClass()
 
-            //
-            MineVKR.vDevice = MineVKR.vDriver.createDevice(MineVKR.vPhysicalDevice)
-            MineVKR.vDeviceHandle = MineVKR.vDriver.device()
+                // TODO: Support Other GPU's
+                MineVKR.vPhysicalDevice = MineVKR.vDriver.physicalDeviceClass()
+                MineVKR.vPhysicalDeviceHandle = MineVKR.vDriver.physicalDevice()
 
-            //
-            println("Initialize Context...")
-        }
+                //
+                MineVKR.vDevice = MineVKR.vDriver.createDevice(MineVKR.vPhysicalDevice)
+                MineVKR.vDeviceHandle = MineVKR.vDriver.device()
 
-        @JvmStatic
-        open fun vInitializeRenderer() {
-            if (!vInitialized) {
-                vInitialized = true
-                println("This line is printed by an example mod mixin!")
+                //
+                println("Initialize Context...")
 
                 //
                 MineVKR.vContext = JiviX.Context(MineVKR.vDriver)
                 MineVKR.vMaterials = JiviX.Material(MineVKR.vContext)
                 MineVKR.vNode = arrayOf(JiviX.Node(MineVKR.vContext)) // TODO: Node Max Instance Count Support
                 MineVKR.vRenderer = JiviX.Renderer(MineVKR.vContext)
+                println("Pre-Initialize Renderer")
 
                 //
                 MineVKR.vRenderer.linkMaterial(MineVKR.vMaterials)
                 MineVKR.vRenderer.linkNode(MineVKR.vNode[0])
                 println("Link Node and Materials...")
+            }
+        }
+
+        @JvmStatic
+        open fun vInitializeRenderer() {
+            if (!vInitialized) {
+                vInitialized = true
 
                 //
                 MineVKR.vContext.initialize(MineVKR.vWidth.toUInt(), MineVKR.vHeight.toUInt())

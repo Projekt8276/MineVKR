@@ -77,6 +77,9 @@ public class JiviXBase extends Pointer {
         //
         public native int getGLImage();
         public native int getGLMemory();
+
+        //
+        public native @Cast("uintptr_t") long getDescriptorPtr();
     }
 
     @Name("vkt::VectorBase") // TODO: Untyped Vector in Native
@@ -109,6 +112,9 @@ public class JiviXBase extends Pointer {
         public native int getGL();
         public native int getGLBuffer();
         public native int getGLMemory();
+
+        //
+        public native @Cast("uintptr_t") long getDescriptorPtr();
     };
 
     // For JAVA only
@@ -655,7 +661,7 @@ public class JiviXBase extends Pointer {
         public native void createDescriptorSet();
         public native long pushMaterial(JiviXCore.MaterialUnit materialAddress);
 
-        public native JiviXCore.Material pushSampledImage(@Cast("vkh::VkDescriptorImageInfo*") long imageDescAddress);
+        public native int pushSampledImage(@Cast("vkh::VkDescriptorImageInfo*") long imageDescAddress);
         public native JiviXCore.Material setRawMaterials(@Cast("vkt::Vector<jvi::MaterialUnit>*") UByteVector rawMaterials, long materialCount);
         public native JiviXCore.Material setGpuMaterials(@Cast("vkt::Vector<jvi::MaterialUnit>*") UByteVector rawMaterials);
         public native JiviXCore.Material resetMaterials();

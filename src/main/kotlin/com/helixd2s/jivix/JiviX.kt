@@ -238,6 +238,10 @@ abstract class JiviX {
             this.core = JiviXBase.ImageRegion(allocation.core, imageCreateInfo.address(), layout.toInt()) }
         constructor(allocation: ImageAllocation, imageCreateInfo: VkImageViewCreateInfo, layout: UInt = VK_IMAGE_LAYOUT_GENERAL.toUInt()) : this() {
             this.core = JiviXBase.ImageRegion(allocation.core, imageCreateInfo.address(), layout.toInt()) }
+
+        //
+        fun descriptor(): VkDescriptorImageInfo {
+            return VkDescriptorImageInfo.create(this.core.descriptorPtr) }
     }
 
 
@@ -260,6 +264,10 @@ abstract class JiviX {
         open fun address(): ULong { return core.address().toULong(); }
         open fun deviceAddress(): ULong { return core.deviceAddress().toULong(); }
         open fun mapv(offset: ULong = 0UL): ULong { return core.mapv(offset.toLong()).toULong(); } // Used For Wrap with `Pointer{address}` or LWJGL-3 structures
+
+        //
+        fun descriptor(): VkDescriptorBufferInfo {
+            return VkDescriptorBufferInfo.create(this.core.descriptorPtr) }
     }
 
 
@@ -744,8 +752,11 @@ abstract class JiviX {
         // 
         open fun pushMaterial(unit: MaterialUnit): Long { return core.pushMaterial(unit.core) }
 
-        open fun pushSampledImage(imageDescAddress: ULong): Material {
-            return Material(core.pushSampledImage(imageDescAddress.toLong())) }
+        open fun pushSampledImage(imageDescAddress: ULong): Int {
+            return core.pushSampledImage(imageDescAddress.toLong()) }
+
+        open fun pushSampledImage(imageDesc: VkDescriptorImageInfo): Int {
+            return core.pushSampledImage(imageDesc.address()) }
 
         open fun setRawMaterials(rawMaterials: UByteVector, materialCount: ULong): Material {
             return Material(this.core.setRawMaterials(rawMaterials.core as JiviXBase.UByteVector?, materialCount.toLong())) }
@@ -758,6 +769,7 @@ abstract class JiviX {
 
         open fun resetSampledImages(): Material {
             return Material(this.core.resetSampledImages()) }
+
     }
 
 }
