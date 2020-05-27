@@ -15,6 +15,7 @@ import net.minecraft.util.Identifier
 import net.minecraft.util.math.BlockPos
 import net.minecraft.util.math.Matrix4f
 import org.lwjgl.opengl.GL11
+import org.lwjgl.opengl.GL20
 import org.lwjgl.opengl.GL30.glBeginTransformFeedback
 import org.lwjgl.opengl.GL30.glEndTransformFeedback
 import org.lwjgl.opengl.GL32.*
@@ -123,8 +124,8 @@ open class MineVKR : ModInitializer {
             RenderSystem.assertThread { RenderSystem.isOnRenderThreadOrInit() }
             GlStateManager.bindTexture(i)
 
-            var glformat = (gLFormat as GLFormat).glConstant();
-            var vkformat = VK10.VK_FORMAT_R8G8B8A8_UNORM;
+            var glformat = (gLFormat as GLFormat).glConstant()
+            var vkformat = VK10.VK_FORMAT_R8G8B8A8_UNORM
 
             var imageCreateInfo = VkImageCreateInfo.create()
                 .sType(VK10.VK_STRUCTURE_TYPE_IMAGE_CREATE_INFO)
@@ -238,24 +239,37 @@ open class MineVKR : ModInitializer {
             val chunkIndex = MineVKR.vChunkCounter++;
             val indexOffset = vIndexCounter //; vIndexCounter += (vertexBuffer as IEVBuffer).vertexCount();
 
-            glUseProgram(GLStuff.vQuadTransformFeedbackProgram[0].toInt())
+
 
             vertexBuffer.bind() // EXPERIMENTAL ONLY!
             for (id in 0 until MineVKR.CurrentChunk.vVertexFormat.elements.size) {
-                var element = MineVKR.CurrentChunk.vVertexFormat.elements[id];
-                var offset = (MineVKR.CurrentChunk.vVertexFormat as IEFormat).offsets().getInt(id);
+                var element = MineVKR.CurrentChunk.vVertexFormat.elements[id]
+                var offset = (MineVKR.CurrentChunk.vVertexFormat as IEFormat).offsets().getInt(id)
                 if (element.type.name == "Position") { glVertexAttribPointer(0, (element as IEFormatElement).count(), element.format.glId, false, MineVKR.CurrentChunk.vVertexFormat.vertexSize, offset.toLong()) }
                 if (element.type.name == "UV"      ) { glVertexAttribPointer(1, (element as IEFormatElement).count(), element.format.glId, false, MineVKR.CurrentChunk.vVertexFormat.vertexSize, offset.toLong()) }
             }
 
+
+
+            // minecraft used texcoord transform
+            var texMatrix = floatArrayOf(1F,0F,0F,0F,0F,1F,0F,0F,0F,0F,1F,0F,0F,0F,0F,1F)
+            glGetFloatv(GL_TEXTURE_MATRIX, texMatrix)
+
             // TODO: Correct Working `I` of `vBindingsChunksOpaque[I]`
             //println("What is: GL-Buffers[" + vBindingsChunksOpaque[0].bindingBufferGL().toInt() + "] ?") // Only For DEBUG!
+            glUseProgram(GLStuff.vQuadTransformFeedbackProgram[0].toInt())
             glBindBufferRange(GL_TRANSFORM_FEEDBACK_BUFFER, 0, vBindingsChunksOpaque[chunkIndex].bindingBufferGL().toInt(), indexOffset * 80L, 80L*(vertexBuffer as IEVBuffer).vertexCount()*6/4)
             //glBindBufferRange(GL_TRANSFORM_FEEDBACK_BUFFER, 0, vGLTestBuffer[0], 0L, 80L*(vertexBuffer as IEVBuffer).vertexCount())
 
-            //
+            // transform feedback required for form Vulkan API generalized buffer (i.e. blizzard tracing)
+            // NO! You can'T to make parallax occlusion mapping here...
             glBeginTransformFeedback(GL_TRIANGLES)
             glEnable(GL_RASTERIZER_DISCARD)
+            matrixStack.push()
+            glUniformMatrix4fv(10, true, (matrixStack.peek().model as IEMatrix4f).toArray())
+            glUniformMatrix3fv(12, true, (matrixStack.peek().normal as IEMatrix3f).toArray())
+            glUniformMatrix4fv(11, true, texMatrix) // MOST Important!
+            matrixStack.pop()
             vertexBuffer.draw(matrixStack.peek().model, GL_LINES_ADJACENCY)
             glDisable(GL_RASTERIZER_DISCARD)
             glEndTransformFeedback()
@@ -271,14 +285,14 @@ open class MineVKR : ModInitializer {
             instanceInfo.instanceOffset = 0U
             instanceInfo.flags = 0x00000004U
 
-            //
-            val blockPos: BlockPos = MineVKR.CurrentChunk.vCurrentChunk.getOrigin()
+            // required transposed matrix
+            val blockPos: BlockPos = MineVKR.CurrentChunk.vCurrentChunk.origin
             matrixStack.push()
             matrixStack.translate(blockPos.x.toDouble() - d, blockPos.y.toDouble() - e, blockPos.z.toDouble() - f)
-            instanceInfo.transform = (matrixStack.peek().model as IEMatrix4f).toArray();
+            instanceInfo.transform = (matrixStack.peek().model.also{it.transpose()} as IEMatrix4f).toArray()
+            matrixStack.peek().model.transpose()
             MineVKR.vNode[0].pushInstance(instanceInfo)
             matrixStack.pop()
-
         }
 
         open fun vInitializeDriver() { //

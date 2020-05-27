@@ -9,6 +9,7 @@
     "MixinWorldRenderer",
     "MixinWindow",
     "MixinMatrix4f",
+    "MixinMatrix3f",
     "MixinVector4f",
     "MixinVertexFormatElement",
     "MixinVertexFormat",
