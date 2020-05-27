@@ -1,4 +1,4 @@
-F:/Data/Projects/MineVKR/src/main/java/build/CMakeFiles/jniJiviXBase.dir
-F:/Data/Projects/MineVKR/src/main/java/build/CMakeFiles/jniJiviXCore.dir
-F:/Data/Projects/MineVKR/src/main/java/build/CMakeFiles/ALL_BUILD.dir
-F:/Data/Projects/MineVKR/src/main/java/build/CMakeFiles/ZERO_CHECK.dir
+F:/Data/Projects/MineVKR/src/main/java/windows-x86_64/CMakeFiles/jniJiviXBase.dir
+F:/Data/Projects/MineVKR/src/main/java/windows-x86_64/CMakeFiles/jniJiviXCore.dir
+F:/Data/Projects/MineVKR/src/main/java/windows-x86_64/CMakeFiles/ALL_BUILD.dir
+F:/Data/Projects/MineVKR/src/main/java/windows-x86_64/CMakeFiles/ZERO_CHECK.dir

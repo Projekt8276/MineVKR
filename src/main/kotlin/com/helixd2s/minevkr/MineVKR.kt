@@ -20,6 +20,7 @@ import org.lwjgl.opengl.GL32.*
 import org.lwjgl.opengl.GL44.GL_CLIENT_STORAGE_BIT
 import org.lwjgl.opengl.GL44.GL_DYNAMIC_STORAGE_BIT
 import org.lwjgl.opengl.GL44.glBufferStorage
+import org.lwjgl.opengl.GL45.glTextureSubImage2D
 import org.lwjgl.vulkan.*
 import org.lwjgl.vulkan.VK10.*
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo
@@ -142,16 +143,17 @@ open class MineVKR : ModInitializer {
                 .format(vkformat)
                 .components(VkComponentMapping.calloc().also{it.r(VK_COMPONENT_SWIZZLE_R).g(VK_COMPONENT_SWIZZLE_G).b(VK_COMPONENT_SWIZZLE_B).a(VK_COMPONENT_SWIZZLE_A)}) //VK_COMPONENT_SWIZZLE_R
                 .subresourceRange(VkImageSubresourceRange.calloc().also{it.aspectMask(VK_IMAGE_ASPECT_COLOR_BIT).baseMipLevel(0).levelCount(1).baseArrayLayer(0).layerCount(1)})
-
+            
             // Create With GL memory
-            var imageAllocation = JiviX.ImageAllocation(imageCreateInfo, MineVKR.vDriver.memoryAllocationInfo().also { it.glID = i })
+            var imageAllocation = JiviX.ImageAllocation(imageCreateInfo, MineVKR.vDriver.memoryAllocationInfo().also{it.glID = i})
             var imageView = JiviX.ImageRegion(imageAllocation, imageViewCreateInfo)
 
-            //MineVKR.GLStuff.vTexVkMap.plus(Pair<Int, JiviX.ImageRegion>(i, imageView))
+            //
+            //glTextureSubImage2D(i, 0, 0,0, k, l, 6408, 5121, 0L)
+            MineVKR.GLStuff.vTexVkMap.plus(Pair<Int, JiviX.ImageRegion>(i, imageView))
             //MineVKR.GLStuff.vTexMtMap.plus(Pair<Int, Int>(i, MineVKR.vMaterials.pushSampledImage(imageView.descriptor()))) // TODO: Descriptor
-            //GlStateManager.texSubImage2D(3553, 0, 0,0, k, l, glformat, GL_UNSIGNED_BYTE, 0L)
 
-
+            /*
             if (j >= 0) {
                 GlStateManager.texParameter(3553, 33085, j)
                 GlStateManager.texParameter(3553, 33082, 0)
@@ -162,6 +164,7 @@ open class MineVKR : ModInitializer {
             for (m in 0..j) {
                 GlStateManager.texImage2D(3553, m, (gLFormat as GLFormat).glConstant(), k shr m, l shr m, 0, 6408, 5121, null as IntBuffer?)
             }
+            */
         }
 
         //
@@ -275,23 +278,27 @@ open class MineVKR : ModInitializer {
 
         }
 
+        open fun vInitializeDriver() { //
+            MineVKR.vInstanceHandle = MineVKR.vDriver.createInstance()
+            MineVKR.vInstance = MineVKR.vDriver.instanceClass()
+
+            // TODO: Support Other GPU's
+            MineVKR.vPhysicalDevice = MineVKR.vDriver.physicalDeviceClass()
+            MineVKR.vPhysicalDeviceHandle = MineVKR.vDriver.physicalDevice()
+
+            //
+            MineVKR.vDevice = MineVKR.vDriver.createDevice(MineVKR.vPhysicalDevice)
+            MineVKR.vDeviceHandle = MineVKR.vDriver.device()
+
+            //
+            println("Initialize Context...")
+        }
+
         @JvmStatic
         open fun vInitializeRenderer() {
             if (!vInitialized) {
                 vInitialized = true
                 println("This line is printed by an example mod mixin!")
-
-                //
-                MineVKR.vInstanceHandle = MineVKR.vDriver.createInstance()
-                MineVKR.vInstance = MineVKR.vDriver.instanceClass()
-
-                // TODO: Support Other GPU's
-                MineVKR.vPhysicalDevice = MineVKR.vDriver.physicalDeviceClass()
-                MineVKR.vPhysicalDeviceHandle = MineVKR.vDriver.physicalDevice()
-
-                //
-                MineVKR.vDevice = MineVKR.vDriver.createDevice(MineVKR.vPhysicalDevice)
-                MineVKR.vDeviceHandle = MineVKR.vDriver.device()
 
                 //
                 MineVKR.vContext = JiviX.Context(MineVKR.vDriver)

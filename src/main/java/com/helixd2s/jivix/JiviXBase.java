@@ -452,7 +452,7 @@ public class JiviXBase extends Pointer {
         public native @SharedPtr JiviXCore.Instance getInstanceDispatch();
 
         //
-        public native @ByRef JiviXCore.MemoryAllocationInfo memoryAllocationInfo();
+        public native long memoryAllocationInfoPtr();
     }
 
     @Name("jvx::BufferViewSet")

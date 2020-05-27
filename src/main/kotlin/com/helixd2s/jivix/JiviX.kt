@@ -474,7 +474,8 @@ abstract class JiviX {
             return VkDeviceCreateInfo.createSafe(this.core.deviceCreateInfoAddress) }
 
         open fun memoryAllocationInfo(): MemoryAllocationInfo {
-            return MemoryAllocationInfo(this.core.memoryAllocationInfo()) }
+            val ptr = this.core.memoryAllocationInfoPtr()
+            return MemoryAllocationInfo(object : JiviXCore.MemoryAllocationInfo() { init { address = ptr } }) }
     }
 
     //

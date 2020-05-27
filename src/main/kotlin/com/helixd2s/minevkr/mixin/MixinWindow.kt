@@ -20,8 +20,9 @@ abstract class MixinWindow {
     @Redirect(at = At(value = "INVOKE", target = "Lorg/lwjgl/opengl/GL;createCapabilities()Lorg/lwjgl/opengl/GLCapabilities;", remap = false), method = ["<init>"]) // doesn't work...
     private fun OnGlCreateCapabilities(): GLCapabilities {
         println("Try Inject Before GL.createCapabilities")
-        MineVKR.vWindow = this as Window;
+        MineVKR.vWindow = this as Window
         JiviXBase.initializeGL(GetProcAddress) // GetProcAddress
+        MineVKR.vInitializeDriver()
         return GL.createCapabilities()
     }
 
