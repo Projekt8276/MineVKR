@@ -23,11 +23,11 @@ class MixinTextureManager {
         if (image != null) {
             var sampler = longArrayOf(0)
             vkCreateSampler(MineVKR.vDevice, VkSamplerCreateInfo.create().also{
-                it.magFilter(VK_FILTER_LINEAR)
-                it.minFilter(VK_FILTER_LINEAR)
-                it.addressModeU(VK_SAMPLER_ADDRESS_MODE_CLAMP_TO_EDGE)
-                it.addressModeV(VK_SAMPLER_ADDRESS_MODE_CLAMP_TO_EDGE)
-                it.unnormalizedCoordinates(true)
+                it.magFilter(VK_FILTER_NEAREST)
+                it.minFilter(VK_FILTER_NEAREST)
+                it.addressModeU(VK_SAMPLER_ADDRESS_MODE_REPEAT)
+                it.addressModeV(VK_SAMPLER_ADDRESS_MODE_REPEAT)
+                it.unnormalizedCoordinates(false)
             }, null, sampler)
             
             println("Managed Texture Mapped with Materials Hub")
