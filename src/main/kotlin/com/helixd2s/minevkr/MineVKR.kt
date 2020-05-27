@@ -187,6 +187,9 @@ open class MineVKR : ModInitializer {
 
             //
             MineVKR.vMaterials.pushMaterial(material)
+
+            //
+            MineVKR.vContext.setPerspective((matrix4f as IEMatrix4f).toArray())
         }
 
         //
@@ -198,6 +201,8 @@ open class MineVKR : ModInitializer {
         open fun vRenderLayerBegin(renderLayer: RenderLayer, matrixStack: MatrixStack, d: Double, e: Double, f: Double, ci: CallbackInfo) {
             MineVKR.vChunkCounter = 0
             MineVKR.vIndexCounter = 0
+
+
         }
 
         //
@@ -222,25 +227,22 @@ open class MineVKR : ModInitializer {
         open fun vChunkDraw(renderLayer: RenderLayer, matrixStack: MatrixStack, d: Double, e: Double, f: Double, ci: CallbackInfo) {
             vIndexCounter = 0
 
+            // getting texture identifier for access from vulkan textures
+            var phases = (renderLayer as IERenderLayer)?.getPhases()?:null
+            var texture = (phases as IEMultiPhase)?.getTexture()?:null
+            var indentifier = (texture as IETexture)?.getId()?:null
 
-            // For View Only
-            /*
-            val vertexBuffer: VertexBuffer = MineVKR.CurrentChunk.vCurrentChunk.getBuffer(renderLayer)
-            matrixStack.push()
-            val blockPos: BlockPos = MineVKR.CurrentChunk.vCurrentChunk.getOrigin()
-            matrixStack.translate(blockPos.x.toDouble() - d, blockPos.y.toDouble() - e, blockPos.z.toDouble() - f)
-            vertexBuffer.bind()
-            MineVKR.CurrentChunk.vVertexFormat.startDrawing(0L)
-            vertexBuffer.draw(matrixStack.peek().model, 7)
-            matrixStack.pop()
-            */
+            // Make Sure That Object Is Real
+            if (indentifier != null) {
+                //println("Chunk Atlas Found")
+            }
 
+            //
             val vertexBuffer: VertexBuffer = MineVKR.CurrentChunk.vCurrentChunk.getBuffer(renderLayer)
             val chunkIndex = MineVKR.vChunkCounter++;
             val indexOffset = vIndexCounter //; vIndexCounter += (vertexBuffer as IEVBuffer).vertexCount();
 
-
-
+            //
             vertexBuffer.bind() // EXPERIMENTAL ONLY!
             for (id in 0 until MineVKR.CurrentChunk.vVertexFormat.elements.size) {
                 var element = MineVKR.CurrentChunk.vVertexFormat.elements[id]
@@ -249,50 +251,51 @@ open class MineVKR : ModInitializer {
                 if (element.type.name == "UV"      ) { glVertexAttribPointer(1, (element as IEFormatElement).getCount(), element.format.glId, false, MineVKR.CurrentChunk.vVertexFormat.vertexSize, offset.toLong()) }
             }
 
-
-
-            // minecraft used texcoord transform
-            var texMatrix = floatArrayOf(1F,0F,0F,0F,0F,1F,0F,0F,0F,0F,1F,0F,0F,0F,0F,1F)
-            glGetFloatv(GL_TEXTURE_MATRIX, texMatrix)
-
-            // TODO: Correct Working `I` of `vBindingsChunksOpaque[I]`
-            //println("What is: GL-Buffers[" + vBindingsChunksOpaque[0].bindingBufferGL().toInt() + "] ?") // Only For DEBUG!
-            glUseProgram(GLStuff.vQuadTransformFeedbackProgram[0].toInt())
-            glBindBufferRange(GL_TRANSFORM_FEEDBACK_BUFFER, 0, vBindingsChunksOpaque[chunkIndex].bindingBufferGL().toInt(), indexOffset * 80L, 80L*(vertexBuffer as IEVBuffer).getVertexCount()*6/4)
-            //glBindBufferRange(GL_TRANSFORM_FEEDBACK_BUFFER, 0, vGLTestBuffer[0], 0L, 80L*(vertexBuffer as IEVBuffer).vertexCount())
-
-            // transform feedback required for form Vulkan API generalized buffer (i.e. blizzard tracing)
-            // NO! You can'T to make parallax occlusion mapping here...
-            glBeginTransformFeedback(GL_TRIANGLES)
-            glEnable(GL_RASTERIZER_DISCARD)
-            matrixStack.push()
-            glUniformMatrix4fv(10, true, (matrixStack.peek().model as IEMatrix4f).toArray())
-            glUniformMatrix3fv(12, true, (matrixStack.peek().normal as IEMatrix3f).toArray())
-            glUniformMatrix4fv(11, true, texMatrix) // MOST Important!
-            matrixStack.pop()
-            vertexBuffer.draw(matrixStack.peek().model, GL_LINES_ADJACENCY)
-            glDisable(GL_RASTERIZER_DISCARD)
-            glEndTransformFeedback()
-            glUseProgram(0)
-
             //
-            vBindingsChunksOpaque[chunkIndex].addRangeInput(MineVKR.CurrentChunk.vVertexFormat.vertexSize.toULong() / 2U, 0u)
+            if (chunkIndex < vMaxChunkBindings) {
+                // minecraft used texcoord transform
+                var texMatrix = floatArrayOf(1F, 0F, 0F, 0F, 0F, 1F, 0F, 0F, 0F, 0F, 1F, 0F, 0F, 0F, 0F, 1F)
+                glGetFloatv(GL_TEXTURE_MATRIX, texMatrix)
 
-            //
-            var instanceInfo = JiviX.VsGeometryInstance()
-            instanceInfo.mask = 0xFFU
-            instanceInfo.instanceId = chunkIndex.toUInt() // TODO: Translucent Blocks
-            instanceInfo.instanceOffset = 0U
-            instanceInfo.flags = 0x00000004U
+                // TODO: Correct Working `I` of `vBindingsChunksOpaque[I]`
+                //println("What is: GL-Buffers[" + vBindingsChunksOpaque[0].bindingBufferGL().toInt() + "] ?") // Only For DEBUG!
+                glUseProgram(GLStuff.vQuadTransformFeedbackProgram[0].toInt())
+                glBindBufferRange(GL_TRANSFORM_FEEDBACK_BUFFER, 0, vBindingsChunksOpaque[chunkIndex].bindingBufferGL().toInt(), indexOffset * 80L, 80L * (vertexBuffer as IEVBuffer).getVertexCount() * 6 / 4)
+                //glBindBufferRange(GL_TRANSFORM_FEEDBACK_BUFFER, 0, vGLTestBuffer[0], 0L, 80L*(vertexBuffer as IEVBuffer).vertexCount())
 
-            // required transposed matrix
-            val blockPos: BlockPos = MineVKR.CurrentChunk.vCurrentChunk.origin
-            matrixStack.push()
-            matrixStack.translate(blockPos.x.toDouble() - d, blockPos.y.toDouble() - e, blockPos.z.toDouble() - f)
-            instanceInfo.transform = (matrixStack.peek().model.also{it.transpose()} as IEMatrix4f).toArray()
-            matrixStack.peek().model.transpose()
-            MineVKR.vNode[0].pushInstance(instanceInfo)
-            matrixStack.pop()
+                // transform feedback required for form Vulkan API generalized buffer (i.e. blizzard tracing)
+                // NO! You can'T to make parallax occlusion mapping here...
+                glBeginTransformFeedback(GL_TRIANGLES)
+                glEnable(GL_RASTERIZER_DISCARD)
+                matrixStack.push()
+                glUniformMatrix4fv(0, true, (matrixStack.peek().model as IEMatrix4f).toArray())
+                glUniformMatrix3fv(2, true, (matrixStack.peek().normal as IEMatrix3f).toArray())
+                glUniformMatrix4fv(1, true, texMatrix) // MOST Important!
+                matrixStack.pop()
+                vertexBuffer.draw(matrixStack.peek().model, GL_LINES_ADJACENCY)
+                glDisable(GL_RASTERIZER_DISCARD)
+                glEndTransformFeedback()
+                glUseProgram(0)
+
+                //
+                vBindingsChunksOpaque[chunkIndex].addRangeInput(MineVKR.CurrentChunk.vVertexFormat.vertexSize.toULong() / 2U, 0u)
+
+                //
+                var instanceInfo = JiviX.VsGeometryInstance()
+                instanceInfo.mask = 0xFFU
+                instanceInfo.instanceId = chunkIndex.toUInt() // TODO: Translucent Blocks
+                instanceInfo.instanceOffset = 0U
+                instanceInfo.flags = 0x00000004U
+
+                // required transposed matrix
+                val blockPos: BlockPos = MineVKR.CurrentChunk.vCurrentChunk.origin
+                matrixStack.push()
+                matrixStack.translate(blockPos.x.toDouble() - d, blockPos.y.toDouble() - e, blockPos.z.toDouble() - f)
+                instanceInfo.transform = (matrixStack.peek().model.also { it.transpose() } as IEMatrix4f).toArray()
+                matrixStack.peek().model.transpose()
+                MineVKR.vNode[0].pushInstance(instanceInfo)
+                matrixStack.pop()
+            }
         }
 
         open fun vInitializeDriver() { //

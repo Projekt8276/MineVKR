@@ -34,7 +34,7 @@ abstract class MixinWindow {
         if (hint == 139267) { glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 6) } else
         if (hint == 139272) {
             glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_COMPAT_PROFILE)
-            glfwWindowHint(GLFW_CONTEXT_CREATION_API, GLFW_NATIVE_CONTEXT_API)
+            //glfwWindowHint(GLFW_CONTEXT_CREATION_API, GLFW_NATIVE_CONTEXT_API)
         } else
         { glfwWindowHint(hint, value) }
     }
