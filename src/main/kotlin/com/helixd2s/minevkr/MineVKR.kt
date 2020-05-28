@@ -116,6 +116,13 @@ open class MineVKR : ModInitializer {
         open var vIndexCounter = 0; // For Entity!
 
 
+        // TODO: Improved First Person support...
+        // Player Control
+        open lateinit var vCamera: Camera;
+        open lateinit var vGameRenderer: GameRenderer;
+        open lateinit var vMatrix4f: Matrix4f;
+
+
         // октюбинск...
         open fun uTextureInit(gLFormat: net.minecraft.client.texture.NativeImage.GLFormat, i: Int, j: Int, k: Int, l: Int) {
             RenderSystem.assertThread { RenderSystem.isOnRenderThreadOrInit() }
@@ -157,8 +164,12 @@ open class MineVKR : ModInitializer {
 
         //
         open fun vRenderBegin(matrices: MatrixStack?, tickDelta: Float, limitTime: Long, renderBlockOutline: Boolean, camera: Camera?, gameRenderer: GameRenderer?, lightmapTextureManager: LightmapTextureManager?, matrix4f: Matrix4f?, ci: CallbackInfo) {
-            MineVKR.vMaterials.resetMaterials()     // TODO: Static Material
-            //MineVKR.vMaterials.resetSampledImages() // TODO: Static Texture
+            if (gameRenderer != null) { MineVKR.vGameRenderer = gameRenderer }
+            if (matrix4f != null) { MineVKR.vMatrix4f = matrix4f }
+            if (camera != null) { MineVKR.vCamera = camera }
+
+            //
+            MineVKR.vMaterials.resetMaterials()
             MineVKR.vNode[0].resetInstances()
             MineVKR.vChunkCounter = 0
             MineVKR.vIndexCounter = 0
