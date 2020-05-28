@@ -169,6 +169,11 @@ open class MineVKR : ModInitializer {
             if (camera != null) { MineVKR.vCamera = camera }
 
             //
+            for (element in vBindingsChunksOpaque) element.resetGeometry()
+            for (element in vBindingsChunksCutout) element.resetGeometry()
+            for (element in vBindingsChunksTranslucent) element.resetGeometry()
+
+            //
             MineVKR.vMaterials.resetMaterials()
             MineVKR.vNode[0].resetInstances()
             MineVKR.vChunkCounter = 0
@@ -179,12 +184,18 @@ open class MineVKR : ModInitializer {
             material.diffuse = floatArrayOf(1.0F, 1.0F, 1.0F, 1.0F)
             material.emission = floatArrayOf(0.0F, 0.0F, 0.0F, 1.0F)
             material.normals = floatArrayOf(0.0F, 0.0F, 1.0F, 1.0F)
-
-            //
             MineVKR.vMaterials.pushMaterial(material)
 
+            // TODO: Fix Hand Rendering
+            var perspective = MineVKR.vGameRenderer.getBasicProjectionMatrix(camera, tickDelta, false)
+            MineVKR.vContext.setPerspective((perspective.also{it.transpose()} as IEMatrix4f).toArray())
+
             //
-            MineVKR.vContext.setPerspective((matrix4f as IEMatrix4f).toArray())
+            if (matrices != null) {
+                matrices.push()
+                MineVKR.vContext.setModelView((matrices.peek().model.also{it.transpose()} as IEMatrix4f).toArray())
+                matrices.pop()
+            }
         }
 
         //
@@ -265,8 +276,8 @@ open class MineVKR : ModInitializer {
                 glBeginTransformFeedback(GL_TRIANGLES)
                 glEnable(GL_RASTERIZER_DISCARD)
                 matrixStack.push()
-                glUniformMatrix4fv(0, true, (matrixStack.peek().model as IEMatrix4f).toArray())
-                glUniformMatrix3fv(2, true, (matrixStack.peek().normal as IEMatrix3f).toArray())
+                glUniformMatrix4fv(0, false, (matrixStack.peek().model as IEMatrix4f).toArray())
+                glUniformMatrix3fv(2, false, (matrixStack.peek().normal as IEMatrix3f).toArray())
                 glUniformMatrix4fv(1, true, texMatrix) // MOST Important!
                 matrixStack.pop()
                 vertexBuffer.draw(matrixStack.peek().model, GL_LINES_ADJACENCY)
@@ -286,10 +297,10 @@ open class MineVKR : ModInitializer {
 
                 // required transposed matrix
                 val blockPos: BlockPos = MineVKR.CurrentChunk.vCurrentChunk.origin
+                var matrixStack = MatrixStack() // Re-Define Matrix Stack
                 matrixStack.push()
                 matrixStack.translate(blockPos.x.toDouble() - d, blockPos.y.toDouble() - e, blockPos.z.toDouble() - f)
-                instanceInfo.transform = (matrixStack.peek().model.also { it.transpose() } as IEMatrix4f).toArray()
-                matrixStack.peek().model.transpose()
+                instanceInfo.transform = (matrixStack.peek().model as IEMatrix4f).toArray()
                 MineVKR.vNode[0].pushInstance(instanceInfo)
                 matrixStack.pop()
             }

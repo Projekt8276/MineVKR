@@ -586,6 +586,7 @@ public class JiviXBase extends Pointer {
         public native int getBindingBufferGL(long i);
         public native int getIndexBufferGL();
 
+        public native JiviXCore.MeshBinding resetGeometry();
         public native JiviXCore.MeshBinding setIndexCount(@Cast("VkDeviceSize") long count);
         public native JiviXCore.MeshBinding setPrimitiveCount(@Cast("VkDeviceSize") long count);
         public native JiviXCore.MeshBinding setTransformData(@Cast("vkt::Vector<glm::mat3x4>*") long address, int stride);
@@ -600,7 +601,6 @@ public class JiviXBase extends Pointer {
         public native JiviXCore.MeshBinding addRangeInput(long range, int materialID, long instances);
         public native JiviXCore.MeshBinding addRangeInput(long range, int materialID);
         public native JiviXCore.MeshBinding addRangeInput(long range, @StdVector int[] materialIDs);
-        public native JiviXCore.MeshBinding resetMeshInputs();
 
         //public native @ByRef JiviXCore.MeshBinding addMeshInput(@ByRef MeshInput input, @StdVector int materialIDs[]);
     }

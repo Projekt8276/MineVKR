@@ -71,16 +71,16 @@ abstract class JiviX {
             set(value) { FloatPointer(this.core).put(value, 0, min(value.size,4)) }
 
         open var specular: FloatArray
-            get() { return FloatArray(4).also { FloatPointer(this.core).get(it, 16, 4) } }
-            set(value) { FloatPointer(this.core).put(value, 16, min(value.size,4)) }
+            get() { return FloatArray(4).also { FloatPointer(this.core).position(16L shr 2).get(it, 0, 4) } }
+            set(value) { FloatPointer(this.core).position(16L shr 2).put(value, 0, min(value.size,4)) }
 
         open var normals: FloatArray
-            get() { return FloatArray(4).also { FloatPointer(this.core).get(it, 32, 4) } }
-            set(value) { FloatPointer(this.core).put(value, 32, min(value.size,4)) }
+            get() { return FloatArray(4).also { FloatPointer(this.core).position(32L shr 2).get(it, 0, 4) } }
+            set(value) { FloatPointer(this.core).position(32L shr 2).put(value, 0, min(value.size,4)) }
 
         open var emission: FloatArray
-            get() { return FloatArray(4).also { FloatPointer(this.core).get(it, 48, 4) } }
-            set(value) { FloatPointer(this.core).put(value, 48, min(value.size,4)) }
+            get() { return FloatArray(4).also { FloatPointer(this.core).position(48L shr 2).get(it, 0, 4) } }
+            set(value) { FloatPointer(this.core).position(48L shr 2).put(value, 0, min(value.size,4)) }
 
         open var diffuseTexture: Int
             get() { return IntPointer(this.core).get(16).toInt() }
@@ -137,21 +137,21 @@ abstract class JiviX {
         open var instanceId: UInt
             get() { return IntPointer(this.core).get(12).toUInt().and(0xFFFFFFU) }
             set(value) {
-                BytePointer(this.core).put(ubyteArrayOf(
+                BytePointer(this.core).position(48L).put(ubyteArrayOf(
                     (value shr 0).and(0xFFU).toUByte(),
                     (value shr 8).and(0xFFU).toUByte(),
                     (value shr 16).and(0xFFU).toUByte()
-                ).toByteArray(), 48, 3)
+                ).toByteArray(), 0, 3)
             }
 
         open var instanceOffset: UInt
             get() { return IntPointer(this.core).get(13).toUInt().and(0xFFFFFFU) }
             set(value) {
-                BytePointer(this.core).put(ubyteArrayOf(
+                BytePointer(this.core).position(52L).put(ubyteArrayOf(
                     (value shr 0).and(0xFFU).toUByte(),
                     (value shr 8).and(0xFFU).toUByte(),
                     (value shr 16).and(0xFFU).toUByte()
-                ).toByteArray(), 52, 3)
+                ).toByteArray(), 0, 3)
             }
     }
 
@@ -669,6 +669,10 @@ abstract class JiviX {
 
         constructor(context: Context, maxPrimitiveCount: ULong, perGeometryCount: ULongArray) : this() {
             this.core = JiviXBase.MeshBinding(context.core, maxPrimitiveCount.toLong(), perGeometryCount.toLongArray()) }
+
+        //
+        open fun resetGeometry(): MeshBinding {
+            return MeshBinding(this.core.resetGeometry()) }
 
         //
         open fun bindingBuffer(idx: ULong = 0UL): UByteVector {
