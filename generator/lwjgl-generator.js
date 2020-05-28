@@ -80,6 +80,10 @@ let lwjglLibraries = [
             "osx": "natives-macos",
             "windows": "natives-windows"
         }
+    },
+    {
+        "name": `org.javacpp:javacpp:1.5.3`,
+        "natives": {}
     }
 ];
 
