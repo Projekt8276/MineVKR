@@ -16,6 +16,7 @@ import net.minecraft.util.math.BlockPos
 import net.minecraft.util.math.Matrix4f
 import org.lwjgl.opengl.GL11
 import org.lwjgl.opengl.GL20
+import org.lwjgl.opengl.GL30
 import org.lwjgl.opengl.GL30.glBeginTransformFeedback
 import org.lwjgl.opengl.GL30.glEndTransformFeedback
 import org.lwjgl.opengl.GL32.*
@@ -23,6 +24,7 @@ import org.lwjgl.opengl.GL44.GL_CLIENT_STORAGE_BIT
 import org.lwjgl.opengl.GL44.GL_DYNAMIC_STORAGE_BIT
 import org.lwjgl.opengl.GL44.glBufferStorage
 import org.lwjgl.opengl.GL45.glTextureSubImage2D
+import org.lwjgl.system.MemoryUtil
 import org.lwjgl.vulkan.*
 import org.lwjgl.vulkan.VK10.*
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo
@@ -223,11 +225,29 @@ open class MineVKR : ModInitializer {
             var phases = (renderLayer as IERenderLayer)?.phases?:null
             var texture = (phases as IEMultiPhase)?.texture?:null
             var indentifier = (texture as IETexture)?.id?:null
+            var vertexFormat = renderLayer.vertexFormat
 
             // Make Sure That Object Is Real
             if (indentifier != null && phases != null) {
 
             }
+
+            // Use Host Pointer
+            glBindBuffer(GL_ARRAY_BUFFER, 0)
+            glBindVertexArray(0)
+
+            //
+            var ptr = MemoryUtil.memAddress((buffer as IEBufferBuilder).buffer)
+            for (id in 0 until vertexFormat.elements.size) {
+                var element = vertexFormat.elements[id]
+                var offset = (vertexFormat as IEFormat).offsets.getInt(id)
+                if (element.type.name == "Position"     ) { glVertexAttribPointer(0, (element as IEFormatElement).count, element.format.glId, false, vertexFormat.vertexSize, offset.toLong()+ptr) }
+                if (element.type.name == "UV"           ) { glVertexAttribPointer(1, (element as IEFormatElement).count, element.format.glId, false, vertexFormat.vertexSize, offset.toLong()+ptr) }
+                if (element.type.name == "Normal"       ) { glVertexAttribPointer(2, (element as IEFormatElement).count, element.format.glId, false, vertexFormat.vertexSize, offset.toLong()+ptr) }
+                if (element.type.name == "Vertex Color" ) { glVertexAttribPointer(3, (element as IEFormatElement).count, element.format.glId, false, vertexFormat.vertexSize, offset.toLong()+ptr) }
+            }
+
+            // TODO: Rendering entity, unified method...
         }
 
         //
@@ -250,15 +270,16 @@ open class MineVKR : ModInitializer {
             val indexOffset = vIndexCounter //; vIndexCounter += (vertexBuffer as IEVBuffer).vertexCount();
 
             // Long Pinus
+            var vertexFormat = MineVKR.CurrentChunk.vVertexFormat
             if (chunkIndex < vMaxChunkBindings) {
                 vertexBuffer.bind() // EXPERIMENTAL ONLY!
-                for (id in 0 until MineVKR.CurrentChunk.vVertexFormat.elements.size) {
-                    var element = MineVKR.CurrentChunk.vVertexFormat.elements[id]
-                    var offset = (MineVKR.CurrentChunk.vVertexFormat as IEFormat).offsets.getInt(id)
-                    if (element.type.name == "Position"     ) { glVertexAttribPointer(0, (element as IEFormatElement).count, element.format.glId, false, MineVKR.CurrentChunk.vVertexFormat.vertexSize, offset.toLong()) }
-                    if (element.type.name == "UV"           ) { glVertexAttribPointer(1, (element as IEFormatElement).count, element.format.glId, false, MineVKR.CurrentChunk.vVertexFormat.vertexSize, offset.toLong()) }
-                    if (element.type.name == "Normal"       ) { glVertexAttribPointer(2, (element as IEFormatElement).count, element.format.glId, false, MineVKR.CurrentChunk.vVertexFormat.vertexSize, offset.toLong()) }
-                    if (element.type.name == "Vertex Color" ) { glVertexAttribPointer(3, (element as IEFormatElement).count, element.format.glId, false, MineVKR.CurrentChunk.vVertexFormat.vertexSize, offset.toLong()) }
+                for (id in 0 until vertexFormat.elements.size) {
+                    var element = vertexFormat.elements[id]
+                    var offset = (vertexFormat as IEFormat).offsets.getInt(id)
+                    if (element.type.name == "Position"     ) { glVertexAttribPointer(0, (element as IEFormatElement).count, element.format.glId, false, vertexFormat.vertexSize, offset.toLong()) }
+                    if (element.type.name == "UV"           ) { glVertexAttribPointer(1, (element as IEFormatElement).count, element.format.glId, false, vertexFormat.vertexSize, offset.toLong()) }
+                    if (element.type.name == "Normal"       ) { glVertexAttribPointer(2, (element as IEFormatElement).count, element.format.glId, false, vertexFormat.vertexSize, offset.toLong()) }
+                    if (element.type.name == "Vertex Color" ) { glVertexAttribPointer(3, (element as IEFormatElement).count, element.format.glId, false, vertexFormat.vertexSize, offset.toLong()) }
                 }
 
                 // minecraft used texcoord transform

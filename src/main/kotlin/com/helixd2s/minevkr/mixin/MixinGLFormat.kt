@@ -7,5 +7,5 @@ import org.spongepowered.asm.mixin.Shadow
 
 @Mixin(NativeImage.GLFormat::class)
 abstract class MixinGLFormat : GLFormat {
-    @Shadow override var glConstant: Int = 0;
+    @Shadow override var glConstant: Int = 0
 }

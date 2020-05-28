@@ -22,7 +22,8 @@
     "MixinGLFormat",
     "MixinGlStateManager",
     "MixinTextureManager",
-    "MixinFrustum"
+    "MixinFrustum",
+    "MixinBufferBuilder"
   ],
   "injectors": {
     "defaultRequire": 1

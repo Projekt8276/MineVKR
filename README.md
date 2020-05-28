@@ -101,7 +101,7 @@ It will take me a lot of time to do the assembly instructions for this item...
 - [ ] Correct instanced managment
 - [ ] Lightmaps support
 - [ ] Materials support
-- [ ] Entity support
+- [ ] Entities support
 - [ ] Using semaphore
 - [ ] Final rendering
 - [ ] Block identifier (needs for water or emission)
