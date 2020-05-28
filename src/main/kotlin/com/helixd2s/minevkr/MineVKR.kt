@@ -58,16 +58,16 @@ open class MineVKR : ModInitializer {
         open fun vCreateShader(shader: UIntArray, type: Int, path: String): UIntArray {
             var success = intArrayOf(0)
             return shader
-                    .also { it[0] = glCreateShader(type).toUInt() }
-                    .also {
-                        glShaderSource(it[0].toInt(), File(path).readText())
-                        glCompileShader(it[0].toInt())
-                        var success = intArrayOf(0).also { ms -> glGetShaderiv(it[0].toInt(), GL_COMPILE_STATUS, ms) }
-                        if (success[0] == 0) {
-                            println(glGetShaderInfoLog(it[0].toInt(), 512))
-                            error("LOL")
-                        }
+                .also { it[0] = glCreateShader(type).toUInt() }
+                .also {
+                    glShaderSource(it[0].toInt(), File(path).readText())
+                    glCompileShader(it[0].toInt())
+                    var success = intArrayOf(0).also { ms -> glGetShaderiv(it[0].toInt(), GL_COMPILE_STATUS, ms) }
+                    if (success[0] == 0) {
+                        println(glGetShaderInfoLog(it[0].toInt(), 512))
+                        error("LOL")
                     }
+                }
             // glGetShaderiv(vertexShader, GL_COMPILE_STATUS, &success);
         }
     }
@@ -76,21 +76,21 @@ open class MineVKR : ModInitializer {
         open lateinit var vWindow: Window;
         open lateinit var vWorldRenderer: WorldRenderer;
         open lateinit var vRenderer: JiviX.Renderer
+        open lateinit var vDriver: JiviX.Driver
+        open lateinit var vContext: JiviX.Context
+        open lateinit var vMaterials: JiviX.Material
+        open lateinit var vInstance: VkInstance
+        open lateinit var vPhysicalDevice: VkPhysicalDevice
+        open lateinit var vDevice: VkDevice
 
         ///open lateinit var window: Window;
         open var vWidth = 1600
         open var vHeight = 1200
 
         open var vPhysicalDeviceHandle = 0UL
-        open lateinit var vPhysicalDevice: VkPhysicalDevice
-
         open var vDeviceHandle = 0UL
-        open lateinit var vDevice: VkDevice
-
         open var vInstanceHandle = 0UL
-        open lateinit var vInstance: VkInstance
 
-        //open var vInitialized by Delegates.notNull<Boolean>();
         open var vInitialized: Boolean = false
         open var vPreInitialized: Boolean = false
 
@@ -98,9 +98,6 @@ open class MineVKR : ModInitializer {
         open var vGLTestBuffer = intArrayOf(0);
 
         //
-        open lateinit var vDriver: JiviX.Driver
-        open lateinit var vContext: JiviX.Context
-        open lateinit var vMaterials: JiviX.Material
         open var vBindingsEntity = arrayOf<JiviX.MeshBinding>()
         open var vBindingsChunksOpaque = arrayOf<JiviX.MeshBinding>()
         open var vBindingsChunksTranslucent = arrayOf<JiviX.MeshBinding>()
@@ -149,32 +146,13 @@ open class MineVKR : ModInitializer {
 
             // Create With GL memory
             var imageAllocation = MineVKR.vDriver.memoryAllocationInfo.also{
-                if (it != null) {
-                    it.glID = i
-                }
+                if (it != null) { it.glID = i }
             }?.let { JiviX.ImageAllocation(imageCreateInfo, it) }
             var imageView = imageAllocation?.let { JiviX.ImageRegion(it, imageViewCreateInfo) }
 
             //
-            //glTextureSubImage2D(i, 0, 0,0, k, l, 6408, 5121, 0L)
             println("Mapping OpenGL Texture[$i]...")
-            if (imageView != null) {
-                MineVKR.GLStuff.vTexVkMap.put(Integer(i), imageView)
-            }
-            //MineVKR.GLStuff.vTexMtMap.plus(Pair(i, MineVKR.vMaterials.pushSampledImage(imageView.descriptor().address().toULong()))) // TODO: Descriptor
-
-            /*
-            if (j >= 0) {
-                GlStateManager.texParameter(3553, 33085, j)
-                GlStateManager.texParameter(3553, 33082, 0)
-                GlStateManager.texParameter(3553, 33083, j)
-                GlStateManager.texParameter(3553, 34049, 0.0f)
-            }
-
-            for (m in 0..j) {
-                GlStateManager.texImage2D(3553, m, (gLFormat as GLFormat).glConstant(), k shr m, l shr m, 0, 6408, 5121, null as IntBuffer?)
-            }
-            */
+            if (imageView != null) { MineVKR.GLStuff.vTexVkMap.put(Integer(i), imageView) }
         }
 
         //
@@ -200,7 +178,7 @@ open class MineVKR : ModInitializer {
 
         //
         open fun vRenderEnd(matrices: MatrixStack?, tickDelta: Float, limitTime: Long, renderBlockOutline: Boolean, camera: Camera?, gameRenderer: GameRenderer?, lightmapTextureManager: LightmapTextureManager?, matrix4f: Matrix4f?, ci: CallbackInfo) {
-            var fullCommand = MineVKR.vRenderer.setupCommands()
+            var fullCommand = MineVKR.vRenderer.setupCommands().refCommandBuffer()
 
         }
 
@@ -249,17 +227,18 @@ open class MineVKR : ModInitializer {
             val chunkIndex = MineVKR.vChunkCounter++;
             val indexOffset = vIndexCounter //; vIndexCounter += (vertexBuffer as IEVBuffer).vertexCount();
 
-            //
-            vertexBuffer.bind() // EXPERIMENTAL ONLY!
-            for (id in 0 until MineVKR.CurrentChunk.vVertexFormat.elements.size) {
-                var element = MineVKR.CurrentChunk.vVertexFormat.elements[id]
-                var offset = (MineVKR.CurrentChunk.vVertexFormat as IEFormat).offsets.getInt(id)
-                if (element.type.name == "Position") { glVertexAttribPointer(0, (element as IEFormatElement).count, element.format.glId, false, MineVKR.CurrentChunk.vVertexFormat.vertexSize, offset.toLong()) }
-                if (element.type.name == "UV"      ) { glVertexAttribPointer(1, (element as IEFormatElement).count, element.format.glId, false, MineVKR.CurrentChunk.vVertexFormat.vertexSize, offset.toLong()) }
-            }
-
-            //
+            // Long Pinus
             if (chunkIndex < vMaxChunkBindings) {
+                vertexBuffer.bind() // EXPERIMENTAL ONLY!
+                for (id in 0 until MineVKR.CurrentChunk.vVertexFormat.elements.size) {
+                    var element = MineVKR.CurrentChunk.vVertexFormat.elements[id]
+                    var offset = (MineVKR.CurrentChunk.vVertexFormat as IEFormat).offsets.getInt(id)
+                    if (element.type.name == "Position"     ) { glVertexAttribPointer(0, (element as IEFormatElement).count, element.format.glId, false, MineVKR.CurrentChunk.vVertexFormat.vertexSize, offset.toLong()) }
+                    if (element.type.name == "UV"           ) { glVertexAttribPointer(1, (element as IEFormatElement).count, element.format.glId, false, MineVKR.CurrentChunk.vVertexFormat.vertexSize, offset.toLong()) }
+                    if (element.type.name == "Normal"       ) { glVertexAttribPointer(2, (element as IEFormatElement).count, element.format.glId, false, MineVKR.CurrentChunk.vVertexFormat.vertexSize, offset.toLong()) }
+                    if (element.type.name == "Vertex Color" ) { glVertexAttribPointer(3, (element as IEFormatElement).count, element.format.glId, false, MineVKR.CurrentChunk.vVertexFormat.vertexSize, offset.toLong()) }
+                }
+
                 // minecraft used texcoord transform
                 var texMatrix = floatArrayOf(1F, 0F, 0F, 0F, 0F, 1F, 0F, 0F, 0F, 0F, 1F, 0F, 0F, 0F, 0F, 1F)
                 glGetFloatv(GL_TEXTURE_MATRIX, texMatrix)
