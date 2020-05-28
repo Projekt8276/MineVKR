@@ -9,8 +9,5 @@ import java.util.*
 
 @Mixin(RenderPhase.Texture::class)
 abstract class MixinRenderPhaseTexture : IETexture {
-    @Shadow private var id: Optional<Identifier>? = null
-
-    // Identifier now can be return by `RenderLayer as IETexture`
-    override fun getId(): Optional<Identifier>? { return id; }
+    @Shadow override var id: Optional<Identifier>? = null
 }

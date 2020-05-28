@@ -31,7 +31,7 @@ class MixinTextureManager {
             }, null, sampler)
             
             println("Managed Texture Mapped with Materials Hub")
-            MineVKR.GLStuff.vIdxMtMap.plus(Pair(identifier, MineVKR.vMaterials.pushSampledImage(image.descriptor().sampler(sampler[0]).address().toULong())))
+            MineVKR.GLStuff.vIdxMtMap.plus(Pair(identifier, MineVKR.vMaterials.pushSampledImage(image.getDescriptor().sampler(sampler[0]).address().toULong())))
         } else {
             println("Not Managed Texture By Vulkan API")
         }

@@ -8,9 +8,6 @@ import org.spongepowered.asm.mixin.Shadow
 
 @Mixin(VertexFormat::class)
 abstract class MixinVertexFormat : IEFormat {
-    @Shadow private lateinit var offsets: IntList
+    @Shadow override lateinit var offsets: IntList
 
-    override fun getOffsets(): IntList {
-        return offsets;
-    }
 }

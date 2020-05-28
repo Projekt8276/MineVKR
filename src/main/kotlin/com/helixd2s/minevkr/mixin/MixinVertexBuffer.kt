@@ -7,7 +7,5 @@ import org.spongepowered.asm.mixin.Shadow
 
 @Mixin(VertexBuffer::class)
 abstract class MixinVertexBuffer : IEVBuffer {
-    @Shadow private var vertexCount = 0
-
-    override fun getVertexCount(): Int { return vertexCount }
+    @Shadow override var vertexCount = 0
 }

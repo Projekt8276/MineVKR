@@ -240,7 +240,7 @@ abstract class JiviX {
             this.core = JiviXBase.ImageRegion(allocation.core, imageCreateInfo.address(), layout.toInt()) }
 
         //
-        fun descriptor(): VkDescriptorImageInfo {
+        fun getDescriptor(): VkDescriptorImageInfo {
             return VkDescriptorImageInfo.create(this.core.descriptorPtr) }
     }
 
@@ -266,7 +266,7 @@ abstract class JiviX {
         open fun mapv(offset: ULong = 0UL): ULong { return core.mapv(offset.toLong()).toULong(); } // Used For Wrap with `Pointer{address}` or LWJGL-3 structures
 
         //
-        fun descriptor(): VkDescriptorBufferInfo {
+        fun getDescriptor(): VkDescriptorBufferInfo {
             return VkDescriptorBufferInfo.create(this.core.descriptorPtr) }
     }
 
@@ -278,7 +278,7 @@ abstract class JiviX {
             this.core = JiviXBase.ByteVector(allocation.core, offset.toLong(), range.toLong()) }
 
         // TODO: Indexer Wrapper For Kotlin!
-        open fun indexer(): ByteBufferIndexer { return (core as JiviXBase.ByteVector).indexer }
+        open fun getIndexer(): ByteBufferIndexer { return (core as JiviXBase.ByteVector).indexer }
 
         // TODO: FULL REFERENCE SUPPORT
         open operator fun get(index: Long): Byte { return (core as JiviXBase.ByteVector).data().get(index) }
@@ -297,7 +297,7 @@ abstract class JiviX {
             this.core = JiviXBase.UByteVector(allocation.core, offset.toLong(), range.toLong()) }
 
         // TODO: Indexer Wrapper For Kotlin!
-        open fun indexer(): UByteBufferIndexer { return (core as JiviXBase.UByteVector).indexer }
+        open fun getIndexer(): UByteBufferIndexer { return (core as JiviXBase.UByteVector).indexer }
 
         // TODO: FULL REFERENCE SUPPORT
         open operator fun get(index: Long): UByte { return (core as JiviXBase.UByteVector).data().get(index).toUByte() }
@@ -317,7 +317,7 @@ abstract class JiviX {
             this.core = JiviXBase.ShortVector(allocation.core, offset.toLong(), range.toLong()) }
 
         // TODO: Indexer Wrapper For Kotlin!
-        open fun indexer(): ShortBufferIndexer { return (core as JiviXBase.ShortVector).indexer }
+        open fun getIndexer(): ShortBufferIndexer { return (core as JiviXBase.ShortVector).indexer }
 
         // TODO: FULL REFERENCE SUPPORT
         open operator fun get(index: Long): Short { return (core as JiviXBase.ShortVector).data().get(index) }
@@ -336,7 +336,7 @@ abstract class JiviX {
             this.core = JiviXBase.UShortVector(allocation.core, offset.toLong(), range.toLong()) }
 
         // TODO: Indexer Wrapper For Kotlin!
-        open fun indexer(): UShortBufferIndexer { return (core as JiviXBase.UShortVector).indexer }
+        open fun getIndexer(): UShortBufferIndexer { return (core as JiviXBase.UShortVector).indexer }
 
         // TODO: FULL REFERENCE SUPPORT
         open operator fun get(index: Long): UShort { return (core as JiviXBase.UShortVector).data().get(index).toUShort() }
@@ -358,7 +358,7 @@ abstract class JiviX {
             this.core = JiviXBase.IntVector(allocation.core, offset.toLong(), range.toLong()) }
 
         // TODO: Indexer Wrapper For Kotlin!
-        open fun indexer(): IntBufferIndexer { return (core as JiviXBase.IntVector).indexer }
+        open fun getIndexer(): IntBufferIndexer { return (core as JiviXBase.IntVector).indexer }
 
         // TODO: FULL REFERENCE SUPPORT
         open operator fun get(index: Long): Int { return (core as JiviXBase.IntVector).data().get(index) }
@@ -379,7 +379,7 @@ abstract class JiviX {
             this.core = JiviXBase.UIntVector(allocation.core, offset.toLong(), range.toLong()) }
 
         // TODO: Indexer Wrapper For Kotlin!
-        open fun indexer(): UIntBufferIndexer { return (core as JiviXBase.UIntVector).indexer }
+        open fun getIndexer(): UIntBufferIndexer { return (core as JiviXBase.UIntVector).indexer }
 
         // TODO: FULL REFERENCE SUPPORT
         open operator fun get(index: Long): UInt { return (core as JiviXBase.UIntVector).data().get(index).toUInt() }
@@ -398,7 +398,7 @@ abstract class JiviX {
             this.core = JiviXBase.FloatVector(allocation.core, offset.toLong(), range.toLong()) }
 
         // TODO: Indexer Wrapper For Kotlin!
-        open fun indexer(): FloatBufferIndexer { return (core as JiviXBase.FloatVector).indexer }
+        open fun getIndexer(): FloatBufferIndexer { return (core as JiviXBase.FloatVector).indexer }
 
         // TODO: FULL REFERENCE SUPPORT
         open operator fun get(index: Long): Float { return (core as JiviXBase.FloatVector).data().get(index) }
@@ -422,9 +422,11 @@ abstract class JiviX {
 
         constructor(obj: JiviXCore.Driver) { this.core = JiviXBase.Driver(obj); }
 
-        open fun allocator(): ULong { return this.core._getAllocator().address().toULong(); }
+        open var allocator: ULong = 0UL
+            get() { return this.core._getAllocator().address().toULong(); }
 
-        open fun memoryProperties(): ULong { return this.core._getMemoryProperties().address().toULong(); }
+        open var memoryProperties: ULong = 0UL
+            get() { return this.core._getMemoryProperties().address().toULong(); }
 
         open val deviceDispatch: Device //= Device()
             get() { return Device(core.deviceDispatch); }
@@ -436,48 +438,52 @@ abstract class JiviX {
 
         open fun physicalDevice(idx: UInt): ULong { return this.core.getPhysicalDevice(idx.toInt()).toULong(); }
 
-        open fun physicalDevice(): ULong { return this.core.physicalDevice.toULong(); }
+        open var physicalDevice: ULong = 0UL
+            get() { return this.core.physicalDevice.toULong(); }
 
-        open fun device(): ULong {
-            //if (this.core.device != 0L) {
-                return this.core.device.toULong();
-            //} else {
-            //    return this.core.createDevice().toULong();
-            //}
-        }
+        open var device: ULong = 0UL
+            get() { return this.core.device.toULong(); }
 
-        open fun queue(): ULong { return this.core.queue.toULong(); }
+        open var queue: ULong = 0UL
+            get(){ return this.core.queue.toULong(); }
 
-        open fun fence(): ULong { return this.core.fence.toULong(); }
+        open var fence: ULong = 0UL
+            get(){ return this.core.fence.toULong(); }
 
-        open fun instance(): ULong { // Automatically create when null found
-            if (this.core.instance != 0L) {
-                return this.core.instance.toULong();
-            } else {
-                return this.core.createInstance().toULong();
+        open var instance: ULong = 0UL
+            get() { // Automatically create when null found
+                if (this.core.instance != 0L) {
+                    return this.core.instance.toULong();
+                } else {
+                    return this.core.createInstance().toULong();
+                }
             }
-        }
 
-        open fun commandPool(): ULong { return this.core.commandPool.toULong(); }
+        open var commandPool: ULong = 0UL
+            get() { return this.core.commandPool.toULong(); }
 
-        open fun pipelineCache(): ULong { return this.core.pipelineCache.toULong(); }
+        open var pipelineCache: ULong = 0UL
+            get() { return this.core.pipelineCache.toULong(); }
 
-        open fun descriptorPool(): ULong { return this.core.descriptorPool.toULong(); }
+        open var descriptorPool: ULong = 0UL
+            get() { return this.core.descriptorPool.toULong(); }
 
-        open fun depthImageView(): ULong { return this.core.depthImageView.toULong(); }
+        open var depthImageView: ULong = 0UL
+            get() { return this.core.depthImageView.toULong(); }
 
-        open fun depthImage(): ULong { return this.core.depthImage.toULong(); }
+        open var depthImage: ULong = 0UL
+            get() { return this.core.depthImage.toULong(); }
 
         open fun createInstance(): ULong { return this.core.createInstance().toULong(); }
 
-        open fun instanceClass(): VkInstance { // TODO: Null-Safe
-            return VkInstance(this.instance().toLong(), this.instanceCreateInfo()); }
+        open var instanceClass: VkInstance? = null
+            get(){ return VkInstance(this.instance.toLong(), this.instanceCreateInfo); }  // TODO: Null-Safe
 
-        open fun physicalDeviceClass(): VkPhysicalDevice { // TODO: Null-Safe
-            return VkPhysicalDevice(this.physicalDevice().toLong(), this.instanceClass()) }
+        open var physicalDeviceClass: VkPhysicalDevice? = null
+            get(){ return VkPhysicalDevice(this.physicalDevice.toLong(), this.instanceClass) } // TODO: Null-Safe
 
         open fun physicalDeviceClass(idx: UInt): VkPhysicalDevice { // TODO: Null-Safe
-            return VkPhysicalDevice(this.physicalDevice(idx).toLong(), this.instanceClass()) }
+            return VkPhysicalDevice(this.physicalDevice(idx).toLong(), this.instanceClass) }
 
         open fun createDevice(): ULong { return this.core.createDevice().toULong(); }
 
@@ -485,16 +491,16 @@ abstract class JiviX {
             return this.core.createDevice(physicalDeviceHandle.toLong()).toULong(); }
 
         open fun createDevice(physicalDevice: VkPhysicalDevice): VkDevice { // TODO: Null-Safe
-            return VkDevice(this.createDevice().toLong(), physicalDevice, this.deviceCreateInfo()); }
+            return VkDevice(this.createDevice().toLong(), physicalDevice, this.deviceCreateInfo); }
 
-        open fun instanceCreateInfo(): VkInstanceCreateInfo? {
-            return VkInstanceCreateInfo.createSafe(this.core.instanceCreateInfoAddress) }
+        open var instanceCreateInfo: VkInstanceCreateInfo? = null
+            get() { return VkInstanceCreateInfo.createSafe(this.core.instanceCreateInfoAddress) }
 
-        open fun deviceCreateInfo(): VkDeviceCreateInfo? {
-            return VkDeviceCreateInfo.createSafe(this.core.deviceCreateInfoAddress) }
+        open var deviceCreateInfo: VkDeviceCreateInfo? = null
+            get() { return VkDeviceCreateInfo.createSafe(this.core.deviceCreateInfoAddress) }
 
-        open fun memoryAllocationInfo(): MemoryAllocationInfo {
-            val ptr = this.core.memoryAllocationInfoPtr()
+        open var memoryAllocationInfo: MemoryAllocationInfo? = null
+            get() { val ptr = this.core.memoryAllocationInfoPtr()
             return MemoryAllocationInfo(object : JiviXCore.MemoryAllocationInfo() { init { address = ptr } }) }
     }
 
@@ -515,13 +521,13 @@ abstract class JiviX {
             return Context(core.initialize(width.toInt(), height.toInt())); }
 
         //
-        open fun getFrameBuffer(idx: UInt): ImageRegion {
+        open fun frameBuffer(idx: UInt): ImageRegion {
             return ImageRegion(this.core.getFrameBuffer(idx.toInt())); }
 
-        open fun getFlip0Buffer(idx: UInt): ImageRegion {
+        open fun flip0Buffer(idx: UInt): ImageRegion {
             return ImageRegion(this.core.getFlip0Buffer(idx.toInt())); }
 
-        open fun getFlip1Buffer(idx: UInt): ImageRegion {
+        open fun flip1Buffer(idx: UInt): ImageRegion {
             return ImageRegion(this.core.getFlip1Buffer(idx.toInt())); }
 
         open fun setModelView(mv: FloatArray): Context {
@@ -564,7 +570,8 @@ abstract class JiviX {
         // Core Value
         open fun sharedPtr(): JiviXCore.BufferViewSet { return core.sharedPtr(); }
 
-        open fun bufferCount(): ULong { return this.core.bufferCount.toULong(); }
+        open var bufferCount: ULong = 0UL
+            get() { return this.core.bufferCount.toULong(); }
 
         //
         open operator fun get(index: Long): JiviXBase.UByteVector? { return core.get(index.toInt()) }  // TODO: Fix Index Type
@@ -573,9 +580,11 @@ abstract class JiviX {
         open fun pushBufferView(buf: JiviXBase.UByteVector?): Long { return core.pushBufferView(buf) }
 
         //
-        open fun descriptorSet(): ULong { return core.descriptorSet.toULong(); }
+        open var descriptorSet: ULong = 0UL
+            get() { return core.descriptorSet.toULong(); }
 
-        open fun descriptorLayout(): ULong { return core.descriptorLayout.toULong(); }
+        open var descriptorLayout: ULong = 0UL
+            get() { return core.descriptorLayout.toULong(); }
     }
 
     //
@@ -732,8 +741,7 @@ abstract class JiviX {
             return Renderer(this.core.setupCommands(cmd.toLong(), once, options.toInt())); }
 
         open fun refCommandBuffer(): ULong {
-            return this.core.refCommandBuffer().toULong()
-        }
+            return this.core.refCommandBuffer().toULong() }
     }
 
     //
@@ -748,8 +756,6 @@ abstract class JiviX {
 
         // Core Value
         open fun sharedPtr(): Material { return Material(core.sharedPtr()); }
-
-        // 
         open fun pushMaterial(unit: MaterialUnit): Long { return core.pushMaterial(unit.core) }
 
         open fun pushSampledImage(imageDescAddress: ULong): Int {

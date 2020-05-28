@@ -119,12 +119,12 @@ open class MineVKR : ModInitializer {
         open var vIndexCounter = 0; // For Entity!
 
 
-        //
+        // октюбинск...
         open fun uTextureInit(gLFormat: net.minecraft.client.texture.NativeImage.GLFormat, i: Int, j: Int, k: Int, l: Int) {
             RenderSystem.assertThread { RenderSystem.isOnRenderThreadOrInit() }
             GlStateManager.bindTexture(i)
 
-            var glformat = (gLFormat as GLFormat).getGlConstant()
+            var glformat = (gLFormat as GLFormat).glConstant
             var vkformat = VK10.VK_FORMAT_R8G8B8A8_UNORM
 
             var imageCreateInfo = VkImageCreateInfo.create()
@@ -148,13 +148,19 @@ open class MineVKR : ModInitializer {
                 .subresourceRange(VkImageSubresourceRange.create().also{it.aspectMask(VK_IMAGE_ASPECT_COLOR_BIT).baseMipLevel(0).levelCount(1).baseArrayLayer(0).layerCount(1)})
 
             // Create With GL memory
-            var imageAllocation = JiviX.ImageAllocation(imageCreateInfo, MineVKR.vDriver.memoryAllocationInfo().also{it.glID = i})
-            var imageView = JiviX.ImageRegion(imageAllocation, imageViewCreateInfo)
+            var imageAllocation = MineVKR.vDriver.memoryAllocationInfo.also{
+                if (it != null) {
+                    it.glID = i
+                }
+            }?.let { JiviX.ImageAllocation(imageCreateInfo, it) }
+            var imageView = imageAllocation?.let { JiviX.ImageRegion(it, imageViewCreateInfo) }
 
             //
             //glTextureSubImage2D(i, 0, 0,0, k, l, 6408, 5121, 0L)
             println("Mapping OpenGL Texture[$i]...")
-            MineVKR.GLStuff.vTexVkMap.put(Integer(i), imageView)
+            if (imageView != null) {
+                MineVKR.GLStuff.vTexVkMap.put(Integer(i), imageView)
+            }
             //MineVKR.GLStuff.vTexMtMap.plus(Pair(i, MineVKR.vMaterials.pushSampledImage(imageView.descriptor().address().toULong()))) // TODO: Descriptor
 
             /*
@@ -194,7 +200,8 @@ open class MineVKR : ModInitializer {
 
         //
         open fun vRenderEnd(matrices: MatrixStack?, tickDelta: Float, limitTime: Long, renderBlockOutline: Boolean, camera: Camera?, gameRenderer: GameRenderer?, lightmapTextureManager: LightmapTextureManager?, matrix4f: Matrix4f?, ci: CallbackInfo) {
-            MineVKR.vRenderer.setupCommands();
+            var fullCommand = MineVKR.vRenderer.setupCommands()
+
         }
 
         //
@@ -213,12 +220,12 @@ open class MineVKR : ModInitializer {
         // Used For Entity! USED WITH `THIS`
         open fun onRenderLayerDraw(renderLayer: RenderLayer, buffer: BufferBuilder, cameraX: Int, cameraY: Int, cameraZ: Int, ci: CallbackInfo) {
             // getting texture identifier for access from vulkan textures
-            var phases = (renderLayer as IERenderLayer)?.getPhases()?:null
-            var texture = (phases as IEMultiPhase)?.getTexture()?:null
-            var indentifier = (texture as IETexture)?.getId()?:null
+            var phases = (renderLayer as IERenderLayer)?.phases?:null
+            var texture = (phases as IEMultiPhase)?.texture?:null
+            var indentifier = (texture as IETexture)?.id?:null
 
             // Make Sure That Object Is Real
-            if (phases != null) {
+            if (indentifier != null && phases != null) {
 
             }
         }
@@ -228,12 +235,12 @@ open class MineVKR : ModInitializer {
             vIndexCounter = 0
 
             // getting texture identifier for access from vulkan textures
-            var phases = (renderLayer as IERenderLayer)?.getPhases()?:null
-            var texture = (phases as IEMultiPhase)?.getTexture()?:null
-            var indentifier = (texture as IETexture)?.getId()?:null
+            var phases = (renderLayer as IERenderLayer)?.phases?:null
+            var texture = (phases as IEMultiPhase)?.texture?:null
+            var indentifier = (texture as IETexture)?.id?:null
 
             // Make Sure That Object Is Real
-            if (indentifier != null) {
+            if (indentifier != null && phases != null) {
                 //println("Chunk Atlas Found")
             }
 
@@ -246,9 +253,9 @@ open class MineVKR : ModInitializer {
             vertexBuffer.bind() // EXPERIMENTAL ONLY!
             for (id in 0 until MineVKR.CurrentChunk.vVertexFormat.elements.size) {
                 var element = MineVKR.CurrentChunk.vVertexFormat.elements[id]
-                var offset = (MineVKR.CurrentChunk.vVertexFormat as IEFormat).getOffsets().getInt(id)
-                if (element.type.name == "Position") { glVertexAttribPointer(0, (element as IEFormatElement).getCount(), element.format.glId, false, MineVKR.CurrentChunk.vVertexFormat.vertexSize, offset.toLong()) }
-                if (element.type.name == "UV"      ) { glVertexAttribPointer(1, (element as IEFormatElement).getCount(), element.format.glId, false, MineVKR.CurrentChunk.vVertexFormat.vertexSize, offset.toLong()) }
+                var offset = (MineVKR.CurrentChunk.vVertexFormat as IEFormat).offsets.getInt(id)
+                if (element.type.name == "Position") { glVertexAttribPointer(0, (element as IEFormatElement).count, element.format.glId, false, MineVKR.CurrentChunk.vVertexFormat.vertexSize, offset.toLong()) }
+                if (element.type.name == "UV"      ) { glVertexAttribPointer(1, (element as IEFormatElement).count, element.format.glId, false, MineVKR.CurrentChunk.vVertexFormat.vertexSize, offset.toLong()) }
             }
 
             //
@@ -260,7 +267,7 @@ open class MineVKR : ModInitializer {
                 // TODO: Correct Working `I` of `vBindingsChunksOpaque[I]`
                 //println("What is: GL-Buffers[" + vBindingsChunksOpaque[0].bindingBufferGL().toInt() + "] ?") // Only For DEBUG!
                 glUseProgram(GLStuff.vQuadTransformFeedbackProgram[0].toInt())
-                glBindBufferRange(GL_TRANSFORM_FEEDBACK_BUFFER, 0, vBindingsChunksOpaque[chunkIndex].bindingBufferGL().toInt(), indexOffset * 80L, 80L * (vertexBuffer as IEVBuffer).getVertexCount() * 6 / 4)
+                glBindBufferRange(GL_TRANSFORM_FEEDBACK_BUFFER, 0, vBindingsChunksOpaque[chunkIndex].bindingBufferGL().toInt(), indexOffset * 80L, 80L * (vertexBuffer as IEVBuffer).vertexCount * 6 / 4)
                 //glBindBufferRange(GL_TRANSFORM_FEEDBACK_BUFFER, 0, vGLTestBuffer[0], 0L, 80L*(vertexBuffer as IEVBuffer).vertexCount())
 
                 // transform feedback required for form Vulkan API generalized buffer (i.e. blizzard tracing)
@@ -304,15 +311,15 @@ open class MineVKR : ModInitializer {
 
                 //
                 MineVKR.vInstanceHandle = MineVKR.vDriver.createInstance()
-                MineVKR.vInstance = MineVKR.vDriver.instanceClass()
+                MineVKR.vInstance = MineVKR.vDriver.instanceClass!!
 
                 // TODO: Support Other GPU's
-                MineVKR.vPhysicalDevice = MineVKR.vDriver.physicalDeviceClass()
-                MineVKR.vPhysicalDeviceHandle = MineVKR.vDriver.physicalDevice()
+                MineVKR.vPhysicalDevice = MineVKR.vDriver.physicalDeviceClass!!
+                MineVKR.vPhysicalDeviceHandle = MineVKR.vDriver.physicalDevice
 
                 //
                 MineVKR.vDevice = MineVKR.vDriver.createDevice(MineVKR.vPhysicalDevice)
-                MineVKR.vDeviceHandle = MineVKR.vDriver.device()
+                MineVKR.vDeviceHandle = MineVKR.vDriver.device
 
                 //
                 println("Initialize Context...")

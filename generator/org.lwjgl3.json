@@ -388,6 +388,26 @@
 					}
 				}
 			}
+		},
+		{
+			"name": "org.javacpp:javacpp:1.5.3",
+			"downloads": {
+				"sha1": "668ab99959670d883e6bce8d3dcc754c9e5f6a45",
+				"size": 447435,
+				"url": "file://F:/Games/MultiMC/libraries/org/javacpp/javacpp/1.5.3/javacpp-1.5.3.jar"
+			}
+		},
+		{
+			"name": "org.javacpp:javacpp:1.5.3",
+			"natives": {},
+			"downloads": {
+				"artifact": {
+					"sha1": "668ab99959670d883e6bce8d3dcc754c9e5f6a45",
+					"size": 447435,
+					"url": "file://F:/Games/MultiMC/libraries/org/javacpp/javacpp/1.5.3/javacpp-1.5.3.jar"
+				},
+				"classifiers": {}
+			}
 		}
 	],
 	"name": "LWJGL 3",

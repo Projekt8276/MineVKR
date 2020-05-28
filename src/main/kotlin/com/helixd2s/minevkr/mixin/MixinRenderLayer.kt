@@ -23,8 +23,7 @@ abstract class MixinRenderLayer : IERenderLayer {
     }
 
     // i.e. need to forced access (used `RenderLayer.MultiPhase` as `RenderLayer`, use as `IERenderLayer`, get access by reflection)
-    override fun getPhases(): RenderLayer.MultiPhaseParameters? {
-        return ReflectionUtil.getFieldValue(this, "phases");
-    }
+    override var phases: RenderLayer.MultiPhaseParameters? = null
+        get() { return ReflectionUtil.getFieldValue(this, "phases"); }
 
 }
