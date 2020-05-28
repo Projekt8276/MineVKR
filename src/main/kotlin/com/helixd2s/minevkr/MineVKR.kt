@@ -193,7 +193,7 @@ open class MineVKR : ModInitializer {
             //
             if (matrices != null) {
                 matrices.push()
-                MineVKR.vContext.setModelView((matrices.peek().model.also{it.transpose()} as IEMatrix4f).toArray())
+                MineVKR.vContext.setModelView((matrices.peek().model as IEMatrix4f).toArray())
                 matrices.pop()
             }
         }
