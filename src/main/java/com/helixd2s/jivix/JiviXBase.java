@@ -696,9 +696,9 @@ public class JiviXBase extends Pointer {
         public native JiviXCore.Renderer linkMaterial(@SharedPtr JiviXCore.Material material);
         public native JiviXCore.Renderer linkNode(@SharedPtr JiviXCore.Node node);
 
-        //
-        public native JiviXCore.Renderer linkMaterial(@ByRef Material material);
-        public native JiviXCore.Renderer linkNode(@ByRef Node node);
+        // Deprecated Due sKotlin
+        //public native JiviXCore.Renderer linkMaterial(@ByRef Material material);
+        //public native JiviXCore.Renderer linkNode(@ByRef Node node);
 
         //
         public native JiviXCore.Renderer setupCommands(@Cast("VkCommandBuffer") long cmd, byte once, int options);

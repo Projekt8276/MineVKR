@@ -240,8 +240,8 @@ abstract class JiviX {
             this.core = JiviXBase.ImageRegion(allocation.core, imageCreateInfo.address(), layout.toInt()) }
 
         //
-        fun getDescriptor(): VkDescriptorImageInfo {
-            return VkDescriptorImageInfo.create(this.core.descriptorPtr) }
+        open var descriptor: VkDescriptorImageInfo? = null
+            get(){ return VkDescriptorImageInfo.create(this.core.descriptorPtr) }
     }
 
 
@@ -266,8 +266,8 @@ abstract class JiviX {
         open fun mapv(offset: ULong = 0UL): ULong { return core.mapv(offset.toLong()).toULong(); } // Used For Wrap with `Pointer{address}` or LWJGL-3 structures
 
         //
-        fun getDescriptor(): VkDescriptorBufferInfo {
-            return VkDescriptorBufferInfo.create(this.core.descriptorPtr) }
+        open var descriptor: VkDescriptorBufferInfo? = null
+            get(){ return VkDescriptorBufferInfo.create(this.core.descriptorPtr) }
     }
 
 
@@ -278,7 +278,8 @@ abstract class JiviX {
             this.core = JiviXBase.ByteVector(allocation.core, offset.toLong(), range.toLong()) }
 
         // TODO: Indexer Wrapper For Kotlin!
-        open fun getIndexer(): ByteBufferIndexer { return (core as JiviXBase.ByteVector).indexer }
+        open var indexer: ByteBufferIndexer? = null
+            get() { return (core as JiviXBase.ByteVector).indexer }
 
         // TODO: FULL REFERENCE SUPPORT
         open operator fun get(index: Long): Byte { return (core as JiviXBase.ByteVector).data().get(index) }
@@ -297,7 +298,8 @@ abstract class JiviX {
             this.core = JiviXBase.UByteVector(allocation.core, offset.toLong(), range.toLong()) }
 
         // TODO: Indexer Wrapper For Kotlin!
-        open fun getIndexer(): UByteBufferIndexer { return (core as JiviXBase.UByteVector).indexer }
+        open var indexer: UByteBufferIndexer? = null
+            get() { return (core as JiviXBase.UByteVector).indexer }
 
         // TODO: FULL REFERENCE SUPPORT
         open operator fun get(index: Long): UByte { return (core as JiviXBase.UByteVector).data().get(index).toUByte() }
@@ -317,7 +319,8 @@ abstract class JiviX {
             this.core = JiviXBase.ShortVector(allocation.core, offset.toLong(), range.toLong()) }
 
         // TODO: Indexer Wrapper For Kotlin!
-        open fun getIndexer(): ShortBufferIndexer { return (core as JiviXBase.ShortVector).indexer }
+        open var indexer: ShortBufferIndexer? = null
+            get() { return (core as JiviXBase.ShortVector).indexer }
 
         // TODO: FULL REFERENCE SUPPORT
         open operator fun get(index: Long): Short { return (core as JiviXBase.ShortVector).data().get(index) }
@@ -336,7 +339,8 @@ abstract class JiviX {
             this.core = JiviXBase.UShortVector(allocation.core, offset.toLong(), range.toLong()) }
 
         // TODO: Indexer Wrapper For Kotlin!
-        open fun getIndexer(): UShortBufferIndexer { return (core as JiviXBase.UShortVector).indexer }
+        open var indexer: UShortBufferIndexer? = null
+            get() { return (core as JiviXBase.UShortVector).indexer }
 
         // TODO: FULL REFERENCE SUPPORT
         open operator fun get(index: Long): UShort { return (core as JiviXBase.UShortVector).data().get(index).toUShort() }
@@ -358,7 +362,8 @@ abstract class JiviX {
             this.core = JiviXBase.IntVector(allocation.core, offset.toLong(), range.toLong()) }
 
         // TODO: Indexer Wrapper For Kotlin!
-        open fun getIndexer(): IntBufferIndexer { return (core as JiviXBase.IntVector).indexer }
+        open var indexer: IntBufferIndexer? = null
+            get() { return (core as JiviXBase.IntVector).indexer }
 
         // TODO: FULL REFERENCE SUPPORT
         open operator fun get(index: Long): Int { return (core as JiviXBase.IntVector).data().get(index) }
@@ -379,7 +384,8 @@ abstract class JiviX {
             this.core = JiviXBase.UIntVector(allocation.core, offset.toLong(), range.toLong()) }
 
         // TODO: Indexer Wrapper For Kotlin!
-        open fun getIndexer(): UIntBufferIndexer { return (core as JiviXBase.UIntVector).indexer }
+        open var indexer: UIntBufferIndexer? = null
+            get() { return (core as JiviXBase.UIntVector).indexer }
 
         // TODO: FULL REFERENCE SUPPORT
         open operator fun get(index: Long): UInt { return (core as JiviXBase.UIntVector).data().get(index).toUInt() }
@@ -398,7 +404,8 @@ abstract class JiviX {
             this.core = JiviXBase.FloatVector(allocation.core, offset.toLong(), range.toLong()) }
 
         // TODO: Indexer Wrapper For Kotlin!
-        open fun getIndexer(): FloatBufferIndexer { return (core as JiviXBase.FloatVector).indexer }
+        open var indexer: FloatBufferIndexer? = null
+            get() { return (core as JiviXBase.FloatVector).indexer }
 
         // TODO: FULL REFERENCE SUPPORT
         open operator fun get(index: Long): Float { return (core as JiviXBase.FloatVector).data().get(index) }
@@ -732,10 +739,10 @@ abstract class JiviX {
 
         //
         open fun linkMaterial(material: Material): Renderer {
-            return Renderer(this.core.linkMaterial(material.core)); }
+            return Renderer(this.core.linkMaterial(material.core.sharedPtr())); }
 
         open fun linkNode(node: Node): Renderer {
-            return Renderer(this.core.linkNode(node.core)); }
+            return Renderer(this.core.linkNode(node.core.sharedPtr())); }
 
         open fun setupCommands(cmd: ULong = 0UL, once: Byte = 1, options: UInt = 0xFFFFFFFFU): Renderer {
             return Renderer(this.core.setupCommands(cmd.toLong(), once, options.toInt())); }

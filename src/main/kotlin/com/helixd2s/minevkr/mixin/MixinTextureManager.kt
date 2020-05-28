@@ -29,9 +29,11 @@ class MixinTextureManager {
                 it.addressModeV(VK_SAMPLER_ADDRESS_MODE_REPEAT)
                 it.unnormalizedCoordinates(false)
             }, null, sampler)
-            
+
             println("Managed Texture Mapped with Materials Hub")
-            MineVKR.GLStuff.vIdxMtMap.plus(Pair(identifier, MineVKR.vMaterials.pushSampledImage(image.getDescriptor().sampler(sampler[0]).address().toULong())))
+            if (image.descriptor != null) {
+                MineVKR.GLStuff.vIdxMtMap.plus(Pair(identifier, image.descriptor?.sampler(sampler[0])?.address()?.toULong()?.let { MineVKR.vMaterials.pushSampledImage(it) }))
+            }
         } else {
             println("Not Managed Texture By Vulkan API")
         }
