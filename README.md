@@ -93,7 +93,7 @@ It will take me a lot of time to do the assembly instructions for this item...
 
 ### Work in progress...
 
-- [x] Basic texture managment (with `registerTexture` with Vulkan API version one)
+- [x] Basic texture managment (`registerTexture` with Vulkan API version one)
 - [x] Fix aligment issues (such as `MaterialUnit`)
 - [x] Transform Feedback with correct `modelView`, `projection`, `texcoord` matrices... 
 - [x] Descriptor getters from `ImageRegion` or `Vector`... 
@@ -105,6 +105,7 @@ It will take me a lot of time to do the assembly instructions for this item...
 - [ ] Using semaphore
 - [ ] Final rendering
 - [ ] Block identifier (needs for water or emission)
+- [ ] Unified render code
 
 
 ## Authors P.S.
