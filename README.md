@@ -94,10 +94,17 @@ It will take me a lot of time to do the assembly instructions for this item...
 ### Work in progress...
 
 - [x] Basic texture managment (with `registerTexture` with Vulkan API version one)
-- [ ] Correct instances managment
-- [ ] Fix aligment issues (such as `MaterialUnit`)
-- [ ] Transform Feedback with correct `modelView`, `projection`, `texcoord` matrices... 
-- [ ] Descriptor getters from `ImageRegion` or `Vector`... 
+- [x] Fix aligment issues (such as `MaterialUnit`)
+- [x] Transform Feedback with correct `modelView`, `projection`, `texcoord` matrices... 
+- [x] Descriptor getters from `ImageRegion` or `Vector`... 
+- [ ] Opaque, translucent and cutout specifier
+- [ ] Correct instanced managment
+- [ ] Lightmaps support
+- [ ] Materials support
+- [ ] Entity support
+- [ ] Using semaphore
+- [ ] Final rendering
+- [ ] Block identifier (needs for water or emission)
 
 
 ## Authors P.S.
