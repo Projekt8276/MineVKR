@@ -213,19 +213,12 @@ open class MineVKR : ModInitializer {
             material.normals = floatArrayOf(0.0F, 0.0F, 1.0F, 1.0F)
             MineVKR.vMaterials?.pushMaterial(material)
 
-            // TODO: Fix Hand Rendering
-            var perspective = matrix4f//MineVKR.vGameRenderer.getBasicProjectionMatrix(camera, tickDelta, false)
-            MineVKR.vContext?.setPerspective((perspective.also{ it?.transpose() } as IEMatrix4f).toArray())
-
-            //
-            if (matrices != null) {
-                matrices.push()
-                MineVKR.vContext?.setModelView((matrices.peek().model as IEMatrix4f).toArray())
-                matrices.pop()
-            }
+            //var testProjection = MineVKR.vGameRenderer?.getBasicProjectionMatrix(camera, tickDelta, false)
+            MineVKR.vContext?.setPerspective((Matrix4f(matrix4f).also{ it?.transpose() } as IEMatrix4f).toArray())
+            MineVKR.vContext?.setModelView((MineVKR.Player.vMatrix4f as IEMatrix4f).toArray())
         }
 
-        //
+        // TODO: Finally Rendering
         open fun vRenderEnd(matrices: MatrixStack?, tickDelta: Float, limitTime: Long, renderBlockOutline: Boolean, camera: Camera?, gameRenderer: GameRenderer?, lightmapTextureManager: LightmapTextureManager?, matrix4f: Matrix4f?, ci: CallbackInfo) {
             var fullCommand = MineVKR.vRenderer?.setupCommands()?.refCommandBuffer()
 
@@ -256,7 +249,7 @@ open class MineVKR : ModInitializer {
             var indentifier = (texture as IETexture)?.id?:null
 
             //
-            var name = (renderLayer as IERenderPhase).name; var type = -1
+            var name = (renderLayer as IERenderPhase).name;                                                              var type = -1
             if (name == "entity_solid")                                                                                      type = 0
             if (name == "entity_translucent" || name == "entity_translucent_cull")                                           type = 2
             if (name == "entity_cutout"      || name == "entity_cutout_no_cull" || name == "entity_cutout_no_cull_z_offset") type = 1
@@ -359,7 +352,7 @@ open class MineVKR : ModInitializer {
             val vAddingInstance = true
 
             //
-            var name = (renderLayer as IERenderPhase).name; var type = -1
+            var name = (renderLayer as IERenderPhase).name;              var type = -1
             if (name == "solid")                                             type = 0
             if (name == "translucent" || name == "translucent_no_crumbling") type = 2
             if (name == "cutout"      || name == "cutout_mipped")            type = 1
