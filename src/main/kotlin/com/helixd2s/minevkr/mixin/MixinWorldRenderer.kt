@@ -8,6 +8,7 @@ import net.minecraft.client.render.*
 import net.minecraft.client.render.chunk.ChunkBuilder.BuiltChunk
 import net.minecraft.client.texture.TextureManager
 import net.minecraft.client.util.math.MatrixStack
+import net.minecraft.entity.Entity
 import net.minecraft.util.math.BlockPos
 import net.minecraft.util.math.Matrix4f
 import org.spongepowered.asm.mixin.Final
@@ -100,4 +101,27 @@ abstract class MixinWorldRenderer {
             MineVKR.vInitializeRenderer()
         }
     }
+
+
+
+    //
+    @Shadow
+    protected abstract fun renderEntity(entity_1: Entity?, double_1: Double, double_2: Double, double_3: Double, float_1: Float, matrixStack_1: MatrixStack?, vertexConsumerProvider_1: VertexConsumerProvider?)
+
+    //
+    @Inject(method = ["renderEntity"], at = [At(value="TAIL")])
+    open fun onRenderEntityStatic(entity: Entity, cameraX: Double, cameraY: Double, cameraZ: Double, tickDelta: Float, matrices: MatrixStack, vertexConsumers: VertexConsumerProvider, ci: CallbackInfo) {
+        MineVKR.Entity.vEntity = entity
+        MineVKR.Entity.vMatrices = matrices
+        MineVKR.Entity.vTickDelta = tickDelta
+        MineVKR.Entity.vVertexConsumers = vertexConsumers
+        MineVKR.Entity.vCameraXYZ = doubleArrayOf(cameraX, cameraY, cameraZ)
+    }
+
+    //
+    @Redirect(method = ["render"], at = At(value = "INVOKE", target = "Lnet/minecraft/client/render/WorldRenderer;renderEntity(Lnet/minecraft/entity/Entity;DDDFLnet/minecraft/client/util/math/MatrixStack;Lnet/minecraft/client/render/VertexConsumerProvider;)V"))
+    open fun onRedirectRenderEntity(worldRenderer: WorldRenderer, entity: Entity, cameraX: Double, cameraY: Double, cameraZ: Double, tickDelta: Float, matrices: MatrixStack, vertexConsumers: VertexConsumerProvider) {
+        this.renderEntity(entity, cameraX, cameraY, cameraZ, tickDelta, matrices, vertexConsumers)
+    }
+
 }

@@ -13,32 +13,36 @@ import net.minecraft.client.util.Window
 import net.minecraft.client.util.math.MatrixStack
 import net.minecraft.util.Identifier
 import net.minecraft.util.math.BlockPos
+//import net.minecraft.util.math.MathHelper // BROKEN PACKAGE!
 import net.minecraft.util.math.Matrix4f
-import org.lwjgl.opengl.GL11
-import org.lwjgl.opengl.GL20
-import org.lwjgl.opengl.GL30
 import org.lwjgl.opengl.GL30.glBeginTransformFeedback
 import org.lwjgl.opengl.GL30.glEndTransformFeedback
 import org.lwjgl.opengl.GL32.*
 import org.lwjgl.opengl.GL44.GL_CLIENT_STORAGE_BIT
 import org.lwjgl.opengl.GL44.GL_DYNAMIC_STORAGE_BIT
 import org.lwjgl.opengl.GL44.glBufferStorage
-import org.lwjgl.opengl.GL45.glTextureSubImage2D
 import org.lwjgl.system.MemoryUtil
 import org.lwjgl.vulkan.*
 import org.lwjgl.vulkan.VK10.*
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo
 import java.io.File
-import java.nio.IntBuffer
 
 open class MineVKR : ModInitializer {
 
     object CurrentChunk {
-        open lateinit var vVertexBuffer: VertexBuffer
-        open lateinit var vBlockPos: BlockPos
-        open lateinit var vCurrentChunk: ChunkBuilder.BuiltChunk
-        open lateinit var vVertexFormat: VertexFormat
+        open var vVertexBuffer: VertexBuffer? = null
+        open var vBlockPos: BlockPos? = null
+        open var vCurrentChunk: ChunkBuilder.BuiltChunk? = null
+        open var vVertexFormat: VertexFormat? = null
         open var vCPosition: DoubleArray = doubleArrayOf(0.0, 0.0, 0.0)
+    }
+
+    object Entity {
+        open var vVertexConsumers: VertexConsumerProvider? = null
+        open var vEntity: net.minecraft.entity.Entity? = null
+        open var vMatrices: MatrixStack? = null
+        open var vCameraXYZ: DoubleArray = doubleArrayOf(0.0, 0.0, 0.0)
+        open var vTickDelta: Float = 0F
     }
 
     object GLStuff { // For OpenGL needs pointable objects
@@ -120,10 +124,10 @@ open class MineVKR : ModInitializer {
 
         // TODO: Improved First Person support...
         // Player Control
-        open lateinit var vCamera: Camera;
-        open lateinit var vGameRenderer: GameRenderer;
-        open lateinit var vMatrix4f: Matrix4f;
-
+        open var vCamera: Camera? = null
+        open var vGameRenderer: GameRenderer? = null
+        open var vMatrix4f: Matrix4f? = null
+        open var vMatrixStack: MatrixStack? = null
 
         // октюбинск...
         open fun uTextureInit(gLFormat: net.minecraft.client.texture.NativeImage.GLFormat, i: Int, j: Int, k: Int, l: Int) {
@@ -167,7 +171,7 @@ open class MineVKR : ModInitializer {
         //
         open fun vRenderBegin(matrices: MatrixStack?, tickDelta: Float, limitTime: Long, renderBlockOutline: Boolean, camera: Camera?, gameRenderer: GameRenderer?, lightmapTextureManager: LightmapTextureManager?, matrix4f: Matrix4f?, ci: CallbackInfo) {
             if (gameRenderer != null) { MineVKR.vGameRenderer = gameRenderer }
-            if (matrix4f != null) { MineVKR.vMatrix4f = matrix4f }
+            if (matrices != null) { MineVKR.vMatrix4f = Matrix4f(matrices.peek().model) }
             if (camera != null) { MineVKR.vCamera = camera }
 
             //
@@ -189,8 +193,8 @@ open class MineVKR : ModInitializer {
             MineVKR.vMaterials.pushMaterial(material)
 
             // TODO: Fix Hand Rendering
-            var perspective = MineVKR.vGameRenderer.getBasicProjectionMatrix(camera, tickDelta, false)
-            MineVKR.vContext.setPerspective((perspective.also{it.transpose()} as IEMatrix4f).toArray())
+            var perspective = matrix4f//MineVKR.vGameRenderer.getBasicProjectionMatrix(camera, tickDelta, false)
+            MineVKR.vContext.setPerspective((perspective.also{ it?.transpose() } as IEMatrix4f).toArray())
 
             //
             if (matrices != null) {
@@ -210,7 +214,7 @@ open class MineVKR : ModInitializer {
         open fun vRenderLayerBegin(renderLayer: RenderLayer, matrixStack: MatrixStack, d: Double, e: Double, f: Double, ci: CallbackInfo) {
             MineVKR.vChunkCounter = 0
             MineVKR.vIndexCounter = 0
-
+            MineVKR.vMatrixStack = matrixStack
 
         }
 
@@ -248,6 +252,26 @@ open class MineVKR : ModInitializer {
             }
 
             // TODO: Rendering entity, unified method...
+            var tickDelta = MineVKR.Entity.vTickDelta
+            var entity = MineVKR.Entity.vEntity
+
+            // BROKEN!
+            //val d = MathHelper.lerp(tickDelta as Double, entity.lastRenderX, entity.getX())
+            //val e = MathHelper.lerp(tickDelta as Double, entity.lastRenderY, entity.getY())
+            //val f = MathHelper.lerp(tickDelta as Double, entity.lastRenderZ, entity.getZ())
+            //val g = MathHelper.lerp(tickDelta, entity.prevYaw, entity.yaw).toFloat()
+
+            // Get Transformation Without Camera Transform
+            if (MineVKR.vMatrix4f != null) {
+                var matrixStack = MineVKR.Entity.vMatrices
+                var transformed = Matrix4f(MineVKR.vMatrix4f).also { it.invert() }.also {
+                    if (matrixStack != null) {
+                        it.multiply(matrixStack.peek().model)
+                    }
+                }
+
+
+            }
         }
 
         //
@@ -265,21 +289,24 @@ open class MineVKR : ModInitializer {
             }
 
             //
-            val vertexBuffer: VertexBuffer = MineVKR.CurrentChunk.vCurrentChunk.getBuffer(renderLayer)
+            val vertexBuffer = MineVKR.CurrentChunk.vCurrentChunk?.getBuffer(renderLayer) ?: null
             val chunkIndex = MineVKR.vChunkCounter++;
             val indexOffset = vIndexCounter //; vIndexCounter += (vertexBuffer as IEVBuffer).vertexCount();
+            var binding = vBindingsChunksOpaque[chunkIndex]
 
             // Long Pinus
             var vertexFormat = MineVKR.CurrentChunk.vVertexFormat
             if (chunkIndex < vMaxChunkBindings) {
-                vertexBuffer.bind() // EXPERIMENTAL ONLY!
-                for (id in 0 until vertexFormat.elements.size) {
-                    var element = vertexFormat.elements[id]
-                    var offset = (vertexFormat as IEFormat).offsets.getInt(id)
-                    if (element.type.name == "Position"     ) { glVertexAttribPointer(0, (element as IEFormatElement).count, element.format.glId, false, vertexFormat.vertexSize, offset.toLong()) }
-                    if (element.type.name == "UV"           ) { glVertexAttribPointer(1, (element as IEFormatElement).count, element.format.glId, false, vertexFormat.vertexSize, offset.toLong()) }
-                    if (element.type.name == "Normal"       ) { glVertexAttribPointer(2, (element as IEFormatElement).count, element.format.glId, false, vertexFormat.vertexSize, offset.toLong()) }
-                    if (element.type.name == "Vertex Color" ) { glVertexAttribPointer(3, (element as IEFormatElement).count, element.format.glId, false, vertexFormat.vertexSize, offset.toLong()) }
+                if (vertexBuffer != null) { vertexBuffer.bind() }
+                if (vertexFormat != null) {
+                    for (id in 0 until vertexFormat.elements.size) {
+                        var element = vertexFormat.elements[id]
+                        var offset = (vertexFormat as IEFormat).offsets.getInt(id)
+                        if (element.type.name == "Position"     ) { glVertexAttribPointer(0, (element as IEFormatElement).count, element.format.glId, false, vertexFormat.vertexSize, offset.toLong()) }
+                        if (element.type.name == "UV"           ) { glVertexAttribPointer(1, (element as IEFormatElement).count, element.format.glId, false, vertexFormat.vertexSize, offset.toLong()) }
+                        if (element.type.name == "Normal"       ) { glVertexAttribPointer(2, (element as IEFormatElement).count, element.format.glId, false, vertexFormat.vertexSize, offset.toLong()) }
+                        if (element.type.name == "Vertex Color" ) { glVertexAttribPointer(3, (element as IEFormatElement).count, element.format.glId, false, vertexFormat.vertexSize, offset.toLong()) }
+                    }
                 }
 
                 // minecraft used texcoord transform
@@ -289,15 +316,18 @@ open class MineVKR : ModInitializer {
                 // TODO: Correct Working `I` of `vBindingsChunksOpaque[I]`
                 //println("What is: GL-Buffers[" + vBindingsChunksOpaque[0].bindingBufferGL().toInt() + "] ?") // Only For DEBUG!
                 glUseProgram(GLStuff.vQuadTransformFeedbackProgram[0].toInt())
-                glBindBufferRange(GL_TRANSFORM_FEEDBACK_BUFFER, 0, vBindingsChunksOpaque[chunkIndex].bindingBufferGL().toInt(), indexOffset * 80L, 80L * (vertexBuffer as IEVBuffer).vertexCount * 6 / 4)
+                glBindBufferRange(GL_TRANSFORM_FEEDBACK_BUFFER, 0, binding.bindingBufferGL().toInt(), indexOffset * 80L, 80L * (vertexBuffer as IEVBuffer).vertexCount * 6 / 4)
                 //glBindBufferRange(GL_TRANSFORM_FEEDBACK_BUFFER, 0, vGLTestBuffer[0], 0L, 80L*(vertexBuffer as IEVBuffer).vertexCount())
+
+                // Get Transformation Without Camera Transform
+                var transformed = Matrix4f(MineVKR.vMatrix4f).also{it.invert()}.also{it.multiply(matrixStack.peek().model)}
 
                 // transform feedback required for form Vulkan API generalized buffer (i.e. blizzard tracing)
                 // NO! You can'T to make parallax occlusion mapping here...
                 glBeginTransformFeedback(GL_TRIANGLES)
                 glEnable(GL_RASTERIZER_DISCARD)
                 matrixStack.push()
-                glUniformMatrix4fv(0, false, (matrixStack.peek().model as IEMatrix4f).toArray())
+                glUniformMatrix4fv(0, false, (transformed as IEMatrix4f).toArray())
                 glUniformMatrix3fv(2, false, (matrixStack.peek().normal as IEMatrix3f).toArray())
                 glUniformMatrix4fv(1, true, texMatrix) // MOST Important!
                 matrixStack.pop()
@@ -307,7 +337,9 @@ open class MineVKR : ModInitializer {
                 glUseProgram(0)
 
                 //
-                vBindingsChunksOpaque[chunkIndex].addRangeInput(MineVKR.CurrentChunk.vVertexFormat.vertexSize.toULong() / 2U, 0u)
+                binding.addRangeInput((MineVKR.CurrentChunk.vVertexFormat?.vertexSize?.toULong() ?: 0UL) / 2U, 0u)
+
+
 
                 //
                 var instanceInfo = JiviX.VsGeometryInstance()
@@ -317,12 +349,20 @@ open class MineVKR : ModInitializer {
                 instanceInfo.flags = 0x00000004U
 
                 // required transposed matrix
-                val blockPos: BlockPos = MineVKR.CurrentChunk.vCurrentChunk.origin
-                var matrixStack = MatrixStack() // Re-Define Matrix Stack
-                matrixStack.push()
-                matrixStack.translate(blockPos.x.toDouble() - d, blockPos.y.toDouble() - e, blockPos.z.toDouble() - f)
-                instanceInfo.transform = (matrixStack.peek().model as IEMatrix4f).toArray()
-                MineVKR.vNode[0].pushInstance(instanceInfo)
+                val blockPos = MineVKR.CurrentChunk.vCurrentChunk?.origin ?: null
+                var matrixStack = MatrixStack().also{it.push()}
+
+                //
+                if (blockPos != null) { matrixStack.translate(blockPos.x.toDouble() - d, blockPos.y.toDouble() - e, blockPos.z.toDouble() - f) }
+
+                //
+                MineVKR.vNode[0].pushInstance(instanceInfo.also{
+                    var instanceMatrix = Matrix4f(transformed).also{ mt -> mt.multiply(matrixStack.peek().model) }
+
+                    it.transform = (instanceMatrix as IEMatrix4f).toArray()
+                })
+
+                //
                 matrixStack.pop()
             }
         }

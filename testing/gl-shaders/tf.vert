@@ -14,8 +14,9 @@ layout (location = 0) uniform mat4 modelView;
 layout (location = 1) uniform mat4 texmatric;
 layout (location = 2) uniform mat3 normalmat;
 
+// 
 void main() {
-    gl_Position = vec4(oPos = aPos, 1.f);
+    gl_Position = vec4(oPos = (vec4(aPos,1.f)*modelView).xyz, 1.f);
     oTexcoord = (vec4(aTexcoord,0.f,1.f) * texmatric).xy;
     oNormal = vec4(aNormal,uintBitsToFloat(packUnorm4x8(aColor))); // Do NOT interpolate W for Fragment Shader, because needs `unpackUnorm4x8(floatBitsToUint())`
 }

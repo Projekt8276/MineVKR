@@ -19,6 +19,7 @@ void main() {
        gl_Position = vec4(oPos[i].xyz, 1.f);
        fNormal = vec4(normal, oNormal[i].w);
        fPosition = vec4(oPos[i].xyz, 1.0f);
+       fTexcoord = vec4(oTexcoord[i], 0.f.xx);
        EmitVertex();
     }
     EndPrimitive();
