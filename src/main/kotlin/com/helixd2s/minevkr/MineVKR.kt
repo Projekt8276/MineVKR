@@ -185,12 +185,14 @@ open class MineVKR : ModInitializer {
             for (element in vBindingsChunksOpaque) element.resetGeometry()
             for (element in vBindingsChunksCutout) element.resetGeometry()
             for (element in vBindingsChunksTranslucent) element.resetGeometry()
+            for (element in vBindingsEntity) element.resetGeometry()
 
             //
             MineVKR.vMaterials?.resetMaterials()
             MineVKR.vNode[0].resetInstances()
             MineVKR.vChunkCounter = 0
             MineVKR.vIndexCounter = 0
+            MineVKR.vEntityCounter = 0
 
             // Test Material
             var material = JiviX.MaterialUnit();
@@ -222,6 +224,7 @@ open class MineVKR : ModInitializer {
             MineVKR.Player.vMatrixStack = matrixStack
             MineVKR.vChunkCounter = 0
             MineVKR.vIndexCounter = 0
+            MineVKR.vEntityCounter = 0
         }
 
         //
@@ -229,12 +232,22 @@ open class MineVKR : ModInitializer {
 
         }
 
-        // Used For Entity! USED WITH `THIS`
+        // Mostly, Used For Entity! USED WITH `THIS`
         open fun onRenderLayerDraw(renderLayer: RenderLayer, buffer: BufferBuilder, cameraX: Int, cameraY: Int, cameraZ: Int, ci: CallbackInfo) {
+            // Debug Options
+            val vAddingGeometry = true
+            val vAddingInstance = true
+
             // getting texture identifier for access from vulkan textures
             var phases = (renderLayer as IERenderLayer)?.phases?:null
             var texture = (phases as IEMultiPhase)?.texture?:null
             var indentifier = (texture as IETexture)?.id?:null
+
+            //
+            var name = renderLayer.toString(); var type = -1
+            if (name == "entity_solid")                                                                                      type = 0
+            if (name == "entity_translucent" || name == "entity_translucent_cull")                                           type = 2
+            if (name == "entity_cutout"      || name == "entity_cutout_no_cull" || name == "entity_cutout_no_cull_z_offset") type = 1
 
             //
             var tickDelta = MineVKR.Entity.vTickDelta
@@ -248,58 +261,114 @@ open class MineVKR : ModInitializer {
                 g = MathHelper.lerp(tickDelta, entity.prevYaw, entity.yaw)
             }
 
-            // Get Transformation Without Camera Transform
-            if (MineVKR.Player.vMatrix4f != null) {
-                var matrixStack = MineVKR.Entity.vMatrices
-                var transformed = Matrix4f(MineVKR.Player.vMatrix4f).also{it.invert()}.also{
-                    if (matrixStack != null) { it.multiply(matrixStack.peek().model) } }
-            }
-
-            // Use Host Pointer
-            glBindBuffer(GL_ARRAY_BUFFER, 0)
-            glBindVertexArray(0)
-
-            //
-            var vertexFormat = renderLayer.vertexFormat
-            var ptr = MemoryUtil.memAddress((buffer as IEBufferBuilder).buffer)
-            for (id in 0 until vertexFormat.elements.size) {
-                var element = vertexFormat.elements[id]
-                var offset = (vertexFormat as IEFormat).offsets.getInt(id)
-                if (element.type.name == "Position"     ) { glVertexAttribPointer(0, (element as IEFormatElement).count, element.format.glId, false, vertexFormat.vertexSize, offset.toLong()+ptr) }
-                if (element.type.name == "UV"           ) { glVertexAttribPointer(1, (element as IEFormatElement).count, element.format.glId, false, vertexFormat.vertexSize, offset.toLong()+ptr) }
-                if (element.type.name == "Normal"       ) { glVertexAttribPointer(2, (element as IEFormatElement).count, element.format.glId, false, vertexFormat.vertexSize, offset.toLong()+ptr) }
-                if (element.type.name == "Vertex Color" ) { glVertexAttribPointer(3, (element as IEFormatElement).count, element.format.glId, false, vertexFormat.vertexSize, offset.toLong()+ptr) }
-            }
-
             // Make Sure That Object Is Real
-            if (entity != null && indentifier != null && phases != null && MineVKR.vEntityCounter < MineVKR.vMaxEntityBindings) {
+            if (entity != null && indentifier != null && phases != null && MineVKR.vEntityCounter < MineVKR.vMaxEntityBindings && type >= 0) { //
                 val vertexBuffer = MineVKR.CurrentChunk.vCurrentChunk?.getBuffer(renderLayer) ?: null
-                val chunkIndex = MineVKR.vEntityCounter++;
+                val entityIndex = MineVKR.vEntityCounter++;
                 val indexOffset = vIndexCounter
-                var binding = vBindingsEntity[chunkIndex]
+                var binding = vBindingsEntity[entityIndex]
 
-                // TODO: Rendering entity, unified method...
+                // Use Host Pointer
+                glBindBuffer(GL_ARRAY_BUFFER, 0)
+                glBindVertexArray(0)
+
+                //
+                var vertexFormat = renderLayer.vertexFormat
+                var ptr = MemoryUtil.memAddress((buffer as IEBufferBuilder).buffer)
+                for (id in 0 until vertexFormat.elements.size) {
+                    var element = vertexFormat.elements[id]
+                    var offset = (vertexFormat as IEFormat).offsets.getInt(id)
+                    if (element.type.name == "Position"     ) { glVertexAttribPointer(0, (element as IEFormatElement).count, element.format.glId, false, vertexFormat.vertexSize, offset.toLong()+ptr) }
+                    if (element.type.name == "UV"           ) { glVertexAttribPointer(1, (element as IEFormatElement).count, element.format.glId, false, vertexFormat.vertexSize, offset.toLong()+ptr) }
+                    if (element.type.name == "Normal"       ) { glVertexAttribPointer(2, (element as IEFormatElement).count, element.format.glId, false, vertexFormat.vertexSize, offset.toLong()+ptr) }
+                    if (element.type.name == "Vertex Color" ) { glVertexAttribPointer(3, (element as IEFormatElement).count, element.format.glId, false, vertexFormat.vertexSize, offset.toLong()+ptr) }
+                }
+
+                // Get Transformation Without Camera Transform
+                var transformed = Matrix4f()
+                var texMatrix = floatArrayOf(1F, 0F, 0F, 0F, 0F, 1F, 0F, 0F, 0F, 0F, 1F, 0F, 0F, 0F, 0F, 1F)
+                var matrixStack = MineVKR.Entity.vMatrices
+                if (MineVKR.Player.vMatrix4f != null) {
+                    glGetFloatv(GL_TEXTURE_MATRIX, texMatrix) // minecraft used texcoord transform
+                    transformed = Matrix4f(MineVKR.Player.vMatrix4f).also{ it.invert() }.also{
+                        if (matrixStack != null) { it.multiply(matrixStack!!.peek().model) } }
+                }
+
+                if (vAddingGeometry) { //
+                    //var instanceMatrix = Matrix4f(MineVKR.Player.vMatrix4f).also{ it.invert() }.also { mt -> mt.multiply(matrixStack.peek().model) }
+                      var instanceMatrix = Matrix4f.translate(
+                          (cameraPos[0]-entityPos[0]).toFloat(),
+                          (cameraPos[1]-entityPos[1]).toFloat(),
+                          (cameraPos[2]-entityPos[2]).toFloat()).also { mt -> mt.multiply(Matrix4f(MineVKR.Player.vMatrix4f).also{ it.invert() }) }
+
+                    //println("What is: GL-Buffers[" + vBindingsChunksOpaque[0].bindingBufferGL().toInt() + "] ?") // Only For DEBUG!
+                    glUseProgram(GLStuff.vQuadTransformFeedbackProgram[0].toInt())
+                    glBindBufferRange(GL_TRANSFORM_FEEDBACK_BUFFER, 0, binding.bindingBufferGL().toInt(), indexOffset * 80L, 80L * (vertexBuffer as IEVBuffer).vertexCount * 6 / 4)
+
+                    // transform feedback required for form Vulkan API generalized buffer (i.e. blizzard tracing)
+                    // NO! You can'T to make parallax occlusion mapping here...
+                    glBeginTransformFeedback(GL_TRIANGLES)
+                    glEnable(GL_RASTERIZER_DISCARD)
+                    glUniformMatrix4fv(0, false, (instanceMatrix as IEMatrix4f).toArray())
+                    glUniformMatrix4fv(1, true, texMatrix) // MOST Important!
+                    vertexBuffer.draw(transformed, GL_LINES_ADJACENCY)
+                    glDisable(GL_RASTERIZER_DISCARD)
+                    glEndTransformFeedback()
+                    glUseProgram(0)
+
+                    //
+                    binding.addRangeInput((vertexFormat?.vertexSize?.toULong() ?: 0UL) / 2U, 0u)
+                }
+
+                //
+                if (vAddingInstance) {
+                    var instanceInfo = JiviX.VsGeometryInstance()
+                    instanceInfo.mask = 0xFFU
+                    instanceInfo.instanceId = (3 * MineVKR.vMaxChunkBindings).toUInt() + entityIndex.toUInt()
+                    instanceInfo.instanceOffset = 0U
+                    instanceInfo.flags = 0x00000004U
+
+                    //
+                    var translation = Matrix4f.translate((entityPos[0] - cameraPos[0]).toFloat(), (entityPos[1] - cameraPos[1]).toFloat(), (entityPos[2] - cameraPos[2]).toFloat())
+                    MineVKR.vNode[0].pushInstance(instanceInfo.also {
+                        it.transform = (Matrix4f(transformed).also { mt -> mt.multiply(translation) } as IEMatrix4f).toArray()
+                    })
+                }
 
             }
-
         }
 
         //
         open fun vChunkDraw(renderLayer: RenderLayer, matrixStack: MatrixStack, d: Double, e: Double, f: Double, ci: CallbackInfo) {
             vIndexCounter = 0
 
+            // Debug Options
+            val vAddingGeometry = true
+            val vAddingInstance = true
+
+            //
+            var name = renderLayer.toString(); var type = -1
+            if (name == "solid")                                             type = 0
+            if (name == "translucent" || name == "translucent_no_crumbling") type = 2
+            if (name == "cutout"      || name == "cutout_mipped")            type = 1
+
             // getting texture identifier for access from vulkan textures
             var phases = (renderLayer as IERenderLayer)?.phases?:null
             var texture = (phases as IEMultiPhase)?.texture?:null
             var indentifier = (texture as IETexture)?.id?:null
 
+            //
+            var bindingArray = vBindingsChunksOpaque
+            if (type == 1) bindingArray = vBindingsChunksCutout
+            if (type == 2) bindingArray = vBindingsChunksTranslucent
+
             // Long Pinus
             val vertexBuffer = MineVKR.CurrentChunk.vCurrentChunk?.getBuffer(renderLayer) ?: null
             var vertexFormat = MineVKR.CurrentChunk.vVertexFormat
-            if (indentifier != null && phases != null && MineVKR.vChunkCounter < vMaxChunkBindings) {
+            if (indentifier != null && phases != null && MineVKR.vChunkCounter < vMaxChunkBindings && type >= 0) {
                 val chunkIndex = MineVKR.vChunkCounter++;
                 val indexOffset = vIndexCounter //; vIndexCounter += (vertexBuffer as IEVBuffer).vertexCount();
-                var binding = vBindingsChunksOpaque[chunkIndex]
+                var binding = bindingArray[chunkIndex]
 
                 //
                 vertexBuffer?.bind()
@@ -318,54 +387,51 @@ open class MineVKR : ModInitializer {
                 var texMatrix = floatArrayOf(1F, 0F, 0F, 0F, 0F, 1F, 0F, 0F, 0F, 0F, 1F, 0F, 0F, 0F, 0F, 1F)
                 glGetFloatv(GL_TEXTURE_MATRIX, texMatrix)
 
-                // TODO: Correct Working `I` of `vBindingsChunksOpaque[I]`
-                //println("What is: GL-Buffers[" + vBindingsChunksOpaque[0].bindingBufferGL().toInt() + "] ?") // Only For DEBUG!
-                glUseProgram(GLStuff.vQuadTransformFeedbackProgram[0].toInt())
-                glBindBufferRange(GL_TRANSFORM_FEEDBACK_BUFFER, 0, binding.bindingBufferGL().toInt(), indexOffset * 80L, 80L * (vertexBuffer as IEVBuffer).vertexCount * 6 / 4)
-
                 // Get Transformation Without Camera Transform
                 var transformed = Matrix4f(MineVKR.Player.vMatrix4f).also{it.invert()}.also{it.multiply(matrixStack.peek().model)}
 
-                // transform feedback required for form Vulkan API generalized buffer (i.e. blizzard tracing)
-                // NO! You can'T to make parallax occlusion mapping here...
-                glBeginTransformFeedback(GL_TRIANGLES)
-                glEnable(GL_RASTERIZER_DISCARD)
-                matrixStack.push()
-                glUniformMatrix4fv(0, false, (transformed as IEMatrix4f).toArray())
-                glUniformMatrix3fv(2, false, (matrixStack.peek().normal as IEMatrix3f).toArray())
-                glUniformMatrix4fv(1, true, texMatrix) // MOST Important!
-                matrixStack.pop()
-                vertexBuffer.draw(matrixStack.peek().model, GL_LINES_ADJACENCY)
-                glDisable(GL_RASTERIZER_DISCARD)
-                glEndTransformFeedback()
-                glUseProgram(0)
+                if (vAddingGeometry) { //
+                    //println("What is: GL-Buffers[" + vBindingsChunksOpaque[0].bindingBufferGL().toInt() + "] ?") // Only For DEBUG!
+                    glUseProgram(GLStuff.vQuadTransformFeedbackProgram[0].toInt())
+                    glBindBufferRange(GL_TRANSFORM_FEEDBACK_BUFFER, 0, binding.bindingBufferGL().toInt(), indexOffset * 80L, 80L * (vertexBuffer as IEVBuffer).vertexCount * 6 / 4)
+
+                    // transform feedback required for form Vulkan API generalized buffer (i.e. blizzard tracing)
+                    // NO! You can'T to make parallax occlusion mapping here...
+                    glBeginTransformFeedback(GL_TRIANGLES)
+                    glEnable(GL_RASTERIZER_DISCARD)
+                    glUniformMatrix4fv(0, false, (transformed as IEMatrix4f).toArray())
+                    glUniformMatrix4fv(1, true, texMatrix) // MOST Important!
+                    vertexBuffer.draw(transformed, GL_LINES_ADJACENCY)
+                    glDisable(GL_RASTERIZER_DISCARD)
+                    glEndTransformFeedback()
+                    glUseProgram(0)
+
+                    //
+                    binding.addRangeInput((MineVKR.CurrentChunk.vVertexFormat?.vertexSize?.toULong() ?: 0UL) / 2U, 0u)
+                }
 
                 //
-                binding.addRangeInput((MineVKR.CurrentChunk.vVertexFormat?.vertexSize?.toULong() ?: 0UL) / 2U, 0u)
+                if (vAddingInstance) {
+                    var instanceInfo = JiviX.VsGeometryInstance()
+                    instanceInfo.mask = 0xFFU
+                    instanceInfo.instanceId = (type * MineVKR.vMaxChunkBindings).toUInt() + chunkIndex.toUInt()
+                    instanceInfo.instanceOffset = 0U
+                    instanceInfo.flags = 0x00000004U
 
-                //
-                var instanceInfo = JiviX.VsGeometryInstance()
-                instanceInfo.mask = 0xFFU
-                instanceInfo.instanceId = chunkIndex.toUInt() // TODO: Translucent Blocks
-                instanceInfo.instanceOffset = 0U
-                instanceInfo.flags = 0x00000004U
+                    // required transposed matrix
+                    val blockPos = MineVKR.CurrentChunk.vCurrentChunk?.origin ?: null
 
-                // required transposed matrix
-                val blockPos = MineVKR.CurrentChunk.vCurrentChunk?.origin ?: null
-                var matrixStack = MatrixStack().also { it.push() }
+                    //
+                    var translation = Matrix4f()
+                    if (blockPos != null) {
+                        translation = Matrix4f.translate((blockPos.x.toDouble() - d).toFloat(), (blockPos.y.toDouble() - e).toFloat(), (blockPos.z.toDouble() - f).toFloat()) }
 
-                // 
-                if (blockPos != null) { matrixStack.translate(blockPos.x.toDouble() - d, blockPos.y.toDouble() - e, blockPos.z.toDouble() - f) }
-
-                //
-                MineVKR.vNode[0].pushInstance(instanceInfo.also {
-                    var instanceMatrix = Matrix4f(transformed).also { mt -> mt.multiply(matrixStack.peek().model) }
-
-                    it.transform = (instanceMatrix as IEMatrix4f).toArray()
-                })
-
-                //
-                matrixStack.pop()
+                    //
+                    MineVKR.vNode[0].pushInstance(instanceInfo.also {
+                        var instanceMatrix = Matrix4f(transformed).also { mt -> mt.multiply(translation) }
+                        it.transform = (instanceMatrix as IEMatrix4f).toArray()
+                    })
+                }
             }
         }
 
