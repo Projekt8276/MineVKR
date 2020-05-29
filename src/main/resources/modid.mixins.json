@@ -23,7 +23,8 @@
     "MixinGlStateManager",
     "MixinTextureManager",
     "MixinFrustum",
-    "MixinBufferBuilder"
+    "MixinBufferBuilder",
+    "MixinBufferRenderer"
   ],
   "injectors": {
     "defaultRequire": 1

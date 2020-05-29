@@ -5,9 +5,11 @@ import com.helixd2s.jivix.JiviX
 import com.helixd2s.minevkr.ducks.*
 import com.mojang.blaze3d.platform.GlStateManager
 import com.mojang.blaze3d.systems.RenderSystem
+import com.mojang.datafixers.util.Pair
 import net.fabricmc.api.ModInitializer
 import net.minecraft.client.gl.VertexBuffer
 import net.minecraft.client.render.*
+import net.minecraft.client.render.BufferBuilder.DrawArrayParameters
 import net.minecraft.client.render.chunk.ChunkBuilder
 import net.minecraft.client.util.Window
 import net.minecraft.client.util.math.MatrixStack
@@ -27,8 +29,18 @@ import org.lwjgl.vulkan.*
 import org.lwjgl.vulkan.VK10.*
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo
 import java.io.File
+import java.nio.ByteBuffer
+import kotlin.properties.Delegates
 
 open class MineVKR : ModInitializer {
+
+    object BufferRendering {
+        open lateinit var renderer: BufferRenderer
+        open lateinit var buffer: ByteBuffer
+        open lateinit var mode: Integer
+        open lateinit var vertexFormat: VertexFormat
+        open lateinit var count: Integer
+    }
 
     object CurrentChunk {
         open var vVertexBuffer: VertexBuffer? = null
@@ -244,7 +256,7 @@ open class MineVKR : ModInitializer {
             var indentifier = (texture as IETexture)?.id?:null
 
             //
-            var name = renderLayer.toString(); var type = -1
+            var name = (renderLayer as IERenderPhase).name; var type = -1
             if (name == "entity_solid")                                                                                      type = 0
             if (name == "entity_translucent" || name == "entity_translucent_cull")                                           type = 2
             if (name == "entity_cutout"      || name == "entity_cutout_no_cull" || name == "entity_cutout_no_cull_z_offset") type = 1
@@ -263,7 +275,6 @@ open class MineVKR : ModInitializer {
 
             // Make Sure That Object Is Real
             if (entity != null && indentifier != null && phases != null && MineVKR.vEntityCounter < MineVKR.vMaxEntityBindings && type >= 0) { //
-                val vertexBuffer = MineVKR.CurrentChunk.vCurrentChunk?.getBuffer(renderLayer) ?: null
                 val entityIndex = MineVKR.vEntityCounter++;
                 val indexOffset = vIndexCounter
                 var binding = vBindingsEntity[entityIndex]
@@ -303,7 +314,7 @@ open class MineVKR : ModInitializer {
 
                     //println("What is: GL-Buffers[" + vBindingsChunksOpaque[0].bindingBufferGL().toInt() + "] ?") // Only For DEBUG!
                     glUseProgram(GLStuff.vQuadTransformFeedbackProgram[0].toInt())
-                    glBindBufferRange(GL_TRANSFORM_FEEDBACK_BUFFER, 0, binding.bindingBufferGL().toInt(), indexOffset * 80L, 80L * (vertexBuffer as IEVBuffer).vertexCount * 6 / 4)
+                    glBindBufferRange(GL_TRANSFORM_FEEDBACK_BUFFER, 0, binding.bindingBufferGL().toInt(), indexOffset * 80L, (BufferRendering.count.toInt() * 80 * 6 / 4).toLong())
 
                     // transform feedback required for form Vulkan API generalized buffer (i.e. blizzard tracing)
                     // NO! You can'T to make parallax occlusion mapping here...
@@ -311,13 +322,14 @@ open class MineVKR : ModInitializer {
                     glEnable(GL_RASTERIZER_DISCARD)
                     glUniformMatrix4fv(0, false, (instanceMatrix as IEMatrix4f).toArray())
                     glUniformMatrix4fv(1, true, texMatrix) // MOST Important!
-                    vertexBuffer.draw(transformed, GL_LINES_ADJACENCY)
+                    glDrawArrays(/*BufferRendering.mode.toInt()*/ GL_LINES_ADJACENCY, 0, BufferRendering.count.toInt())
                     glDisable(GL_RASTERIZER_DISCARD)
                     glEndTransformFeedback()
                     glUseProgram(0)
 
                     //
-                    binding.addRangeInput((vertexFormat?.vertexSize?.toULong() ?: 0UL) / 2U, 0u)
+                    //binding.addRangeInput((vertexFormat?.vertexSize?.toULong() ?: 0UL) / 2U, 0u)
+                    binding.addRangeInput((BufferRendering.count.toInt() * 6 / 4).div(3L).toULong(), 0U)
                 }
 
                 //
@@ -347,7 +359,7 @@ open class MineVKR : ModInitializer {
             val vAddingInstance = true
 
             //
-            var name = renderLayer.toString(); var type = -1
+            var name = (renderLayer as IERenderPhase).name; var type = -1
             if (name == "solid")                                             type = 0
             if (name == "translucent" || name == "translucent_no_crumbling") type = 2
             if (name == "cutout"      || name == "cutout_mipped")            type = 1
@@ -407,7 +419,8 @@ open class MineVKR : ModInitializer {
                     glUseProgram(0)
 
                     //
-                    binding.addRangeInput((MineVKR.CurrentChunk.vVertexFormat?.vertexSize?.toULong() ?: 0UL) / 2U, 0u)
+                    //binding.addRangeInput((MineVKR.CurrentChunk.vVertexFormat?.vertexSize?.toULong() ?: 0UL) / 2U, 0u)
+                    binding.addRangeInput(((vertexBuffer as IEVBuffer).vertexCount * 6 / 4).div(3L).toULong(), 0U)
                 }
 
                 //
