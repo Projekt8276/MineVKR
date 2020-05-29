@@ -42,8 +42,8 @@ abstract class MixinWindow {
     // TODO: Add operable Int, UInt, Long, ULong referenced type for Kotlin
     @Redirect(at = At(value = "INVOKE", target = "Lorg/lwjgl/glfw/GLFW;glfwCreateWindow(IILjava/lang/CharSequence;JJ)J", remap = false), method = ["<init>"])
     private fun OnGlfwCreateWindow(width: Int, height: Int, title: CharSequence, monitor: Long, share: Long): Long {
-        MineVKR.vWidth = width; MineVKR.vHeight = height
+        //MineVKR.vWidth = width; MineVKR.vHeight = height
         println("GLFW Create Window Redirected...")
-        return glfwCreateWindow(MineVKR.vWidth, MineVKR.vHeight, title, monitor, share)
+        return glfwCreateWindow(width, height, title, monitor, share)
     }
 }

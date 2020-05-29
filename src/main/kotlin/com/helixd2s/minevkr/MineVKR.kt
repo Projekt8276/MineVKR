@@ -62,6 +62,8 @@ open class MineVKR : ModInitializer {
         open var vQuadTransformFeedbackGeometryShader: UIntArray = uintArrayOf(0u)
         open var vQuadTransformFeedbackProgram: UIntArray = uintArrayOf(0u)
 
+        open var vGLTestBuffer = intArrayOf(0);
+
         open fun vCreateShader(shader: UIntArray, type: Int, path: String): UIntArray {
             var success = intArrayOf(0)
             return shader
@@ -79,30 +81,37 @@ open class MineVKR : ModInitializer {
         }
     }
 
+    // TODO: Improved First Person support...
+    object Player {
+        open var vCamera: Camera? = null
+        open var vMatrix4f: Matrix4f? = null
+        open var vMatrixStack: MatrixStack? = null
+    }
+
     companion object {
-        open lateinit var vWindow: Window;
-        open lateinit var vWorldRenderer: WorldRenderer;
-        open lateinit var vRenderer: JiviX.Renderer
-        open lateinit var vDriver: JiviX.Driver
-        open lateinit var vContext: JiviX.Context
-        open lateinit var vMaterials: JiviX.Material
-        open lateinit var vInstance: VkInstance
-        open lateinit var vPhysicalDevice: VkPhysicalDevice
-        open lateinit var vDevice: VkDevice
+        open var vWindow: Window? = null
+        open var vWorldRenderer: WorldRenderer? = null
+        open var vGameRenderer: GameRenderer? = null
+        open var vRenderer: JiviX.Renderer? = null
+        open var vDriver: JiviX.Driver? = null
+        open var vContext: JiviX.Context? = null
+        open var vMaterials: JiviX.Material? = null
+        open var vInstance: VkInstance? = null
+        open var vPhysicalDevice: VkPhysicalDevice? = null
+        open var vDevice: VkDevice? = null
 
-        ///open lateinit var window: Window;
-        open var vWidth = 1600
-        open var vHeight = 1200
+        //
+        //open var vWidth = 1600
+        //open var vHeight = 1200
 
+        //
         open var vPhysicalDeviceHandle = 0UL
         open var vDeviceHandle = 0UL
         open var vInstanceHandle = 0UL
 
+        //
         open var vInitialized: Boolean = false
         open var vPreInitialized: Boolean = false
-
-        //
-        open var vGLTestBuffer = intArrayOf(0);
 
         //
         open var vBindingsEntity = arrayOf<JiviX.MeshBinding>()
@@ -119,16 +128,13 @@ open class MineVKR : ModInitializer {
         const val vMaxEntityParts = 16
 
         //
-        open var vChunkCounter = 0;
-        open var vIndexCounter = 0; // For Entity!
+        open var vChunkCounter = 0
+
+        // For Entity!
+        open var vIndexCounter = 0
+        open var vEntityCounter = 0
 
 
-        // TODO: Improved First Person support...
-        // Player Control
-        open var vCamera: Camera? = null
-        open var vGameRenderer: GameRenderer? = null
-        open var vMatrix4f: Matrix4f? = null
-        open var vMatrixStack: MatrixStack? = null
 
         // октюбинск...
         open fun uTextureInit(gLFormat: net.minecraft.client.texture.NativeImage.GLFormat, i: Int, j: Int, k: Int, l: Int) {
@@ -159,7 +165,7 @@ open class MineVKR : ModInitializer {
                 .subresourceRange(VkImageSubresourceRange.create().also{it.aspectMask(VK_IMAGE_ASPECT_COLOR_BIT).baseMipLevel(0).levelCount(1).baseArrayLayer(0).layerCount(1)})
 
             // Create With GL memory
-            var imageAllocation = MineVKR.vDriver.memoryAllocationInfo.also{
+            var imageAllocation = MineVKR.vDriver?.memoryAllocationInfo.also{
                 if (it != null) { it.glID = i }
             }?.let { JiviX.ImageAllocation(imageCreateInfo, it) }
             var imageView = imageAllocation?.let { JiviX.ImageRegion(it, imageViewCreateInfo) }
@@ -172,8 +178,8 @@ open class MineVKR : ModInitializer {
         //
         open fun vRenderBegin(matrices: MatrixStack?, tickDelta: Float, limitTime: Long, renderBlockOutline: Boolean, camera: Camera?, gameRenderer: GameRenderer?, lightmapTextureManager: LightmapTextureManager?, matrix4f: Matrix4f?, ci: CallbackInfo) {
             if (gameRenderer != null) { MineVKR.vGameRenderer = gameRenderer }
-            if (matrices != null) { MineVKR.vMatrix4f = Matrix4f(matrices.peek().model) }
-            if (camera != null) { MineVKR.vCamera = camera }
+            if (matrices != null) { MineVKR.Player.vMatrix4f = Matrix4f(matrices.peek().model) }
+            if (camera != null) { MineVKR.Player.vCamera = camera }
 
             //
             for (element in vBindingsChunksOpaque) element.resetGeometry()
@@ -181,7 +187,7 @@ open class MineVKR : ModInitializer {
             for (element in vBindingsChunksTranslucent) element.resetGeometry()
 
             //
-            MineVKR.vMaterials.resetMaterials()
+            MineVKR.vMaterials?.resetMaterials()
             MineVKR.vNode[0].resetInstances()
             MineVKR.vChunkCounter = 0
             MineVKR.vIndexCounter = 0
@@ -191,32 +197,31 @@ open class MineVKR : ModInitializer {
             material.diffuse = floatArrayOf(1.0F, 1.0F, 1.0F, 1.0F)
             material.emission = floatArrayOf(0.0F, 0.0F, 0.0F, 1.0F)
             material.normals = floatArrayOf(0.0F, 0.0F, 1.0F, 1.0F)
-            MineVKR.vMaterials.pushMaterial(material)
+            MineVKR.vMaterials?.pushMaterial(material)
 
             // TODO: Fix Hand Rendering
             var perspective = matrix4f//MineVKR.vGameRenderer.getBasicProjectionMatrix(camera, tickDelta, false)
-            MineVKR.vContext.setPerspective((perspective.also{ it?.transpose() } as IEMatrix4f).toArray())
+            MineVKR.vContext?.setPerspective((perspective.also{ it?.transpose() } as IEMatrix4f).toArray())
 
             //
             if (matrices != null) {
                 matrices.push()
-                MineVKR.vContext.setModelView((matrices.peek().model as IEMatrix4f).toArray())
+                MineVKR.vContext?.setModelView((matrices.peek().model as IEMatrix4f).toArray())
                 matrices.pop()
             }
         }
 
         //
         open fun vRenderEnd(matrices: MatrixStack?, tickDelta: Float, limitTime: Long, renderBlockOutline: Boolean, camera: Camera?, gameRenderer: GameRenderer?, lightmapTextureManager: LightmapTextureManager?, matrix4f: Matrix4f?, ci: CallbackInfo) {
-            var fullCommand = MineVKR.vRenderer.setupCommands().refCommandBuffer()
+            var fullCommand = MineVKR.vRenderer?.setupCommands()?.refCommandBuffer()
 
         }
 
         //
         open fun vRenderLayerBegin(renderLayer: RenderLayer, matrixStack: MatrixStack, d: Double, e: Double, f: Double, ci: CallbackInfo) {
+            MineVKR.Player.vMatrixStack = matrixStack
             MineVKR.vChunkCounter = 0
             MineVKR.vIndexCounter = 0
-            MineVKR.vMatrixStack = matrixStack
-
         }
 
         //
@@ -230,33 +235,10 @@ open class MineVKR : ModInitializer {
             var phases = (renderLayer as IERenderLayer)?.phases?:null
             var texture = (phases as IEMultiPhase)?.texture?:null
             var indentifier = (texture as IETexture)?.id?:null
-            var vertexFormat = renderLayer.vertexFormat
-
-            // Make Sure That Object Is Real
-            if (indentifier != null && phases != null) {
-
-            }
-
-            // Use Host Pointer
-            glBindBuffer(GL_ARRAY_BUFFER, 0)
-            glBindVertexArray(0)
 
             //
-            var ptr = MemoryUtil.memAddress((buffer as IEBufferBuilder).buffer)
-            for (id in 0 until vertexFormat.elements.size) {
-                var element = vertexFormat.elements[id]
-                var offset = (vertexFormat as IEFormat).offsets.getInt(id)
-                if (element.type.name == "Position"     ) { glVertexAttribPointer(0, (element as IEFormatElement).count, element.format.glId, false, vertexFormat.vertexSize, offset.toLong()+ptr) }
-                if (element.type.name == "UV"           ) { glVertexAttribPointer(1, (element as IEFormatElement).count, element.format.glId, false, vertexFormat.vertexSize, offset.toLong()+ptr) }
-                if (element.type.name == "Normal"       ) { glVertexAttribPointer(2, (element as IEFormatElement).count, element.format.glId, false, vertexFormat.vertexSize, offset.toLong()+ptr) }
-                if (element.type.name == "Vertex Color" ) { glVertexAttribPointer(3, (element as IEFormatElement).count, element.format.glId, false, vertexFormat.vertexSize, offset.toLong()+ptr) }
-            }
-
-            // TODO: Rendering entity, unified method...
             var tickDelta = MineVKR.Entity.vTickDelta
             var entity = MineVKR.Entity.vEntity
-
-            //
             var cameraPos = MineVKR.Entity.vCameraXYZ
             var entityPos = doubleArrayOf(0.0,0.0,0.0); var g = 0.0F
             if (entity != null) {
@@ -267,15 +249,38 @@ open class MineVKR : ModInitializer {
             }
 
             // Get Transformation Without Camera Transform
-            if (MineVKR.vMatrix4f != null) {
+            if (MineVKR.Player.vMatrix4f != null) {
                 var matrixStack = MineVKR.Entity.vMatrices
-                var transformed = Matrix4f(MineVKR.vMatrix4f).also{it.invert()}.also{
-                    if (matrixStack != null) { it.multiply(matrixStack.peek().model) }
-                }
-
-
+                var transformed = Matrix4f(MineVKR.Player.vMatrix4f).also{it.invert()}.also{
+                    if (matrixStack != null) { it.multiply(matrixStack.peek().model) } }
             }
 
+            // Use Host Pointer
+            glBindBuffer(GL_ARRAY_BUFFER, 0)
+            glBindVertexArray(0)
+
+            //
+            var vertexFormat = renderLayer.vertexFormat
+            var ptr = MemoryUtil.memAddress((buffer as IEBufferBuilder).buffer)
+            for (id in 0 until vertexFormat.elements.size) {
+                var element = vertexFormat.elements[id]
+                var offset = (vertexFormat as IEFormat).offsets.getInt(id)
+                if (element.type.name == "Position"     ) { glVertexAttribPointer(0, (element as IEFormatElement).count, element.format.glId, false, vertexFormat.vertexSize, offset.toLong()+ptr) }
+                if (element.type.name == "UV"           ) { glVertexAttribPointer(1, (element as IEFormatElement).count, element.format.glId, false, vertexFormat.vertexSize, offset.toLong()+ptr) }
+                if (element.type.name == "Normal"       ) { glVertexAttribPointer(2, (element as IEFormatElement).count, element.format.glId, false, vertexFormat.vertexSize, offset.toLong()+ptr) }
+                if (element.type.name == "Vertex Color" ) { glVertexAttribPointer(3, (element as IEFormatElement).count, element.format.glId, false, vertexFormat.vertexSize, offset.toLong()+ptr) }
+            }
+
+            // Make Sure That Object Is Real
+            if (entity != null && indentifier != null && phases != null && MineVKR.vEntityCounter < MineVKR.vMaxEntityBindings) {
+                val vertexBuffer = MineVKR.CurrentChunk.vCurrentChunk?.getBuffer(renderLayer) ?: null
+                val chunkIndex = MineVKR.vEntityCounter++;
+                val indexOffset = vIndexCounter
+                var binding = vBindingsEntity[chunkIndex]
+
+                // TODO: Rendering entity, unified method...
+
+            }
 
         }
 
@@ -288,21 +293,16 @@ open class MineVKR : ModInitializer {
             var texture = (phases as IEMultiPhase)?.texture?:null
             var indentifier = (texture as IETexture)?.id?:null
 
-            // Make Sure That Object Is Real
-            if (indentifier != null && phases != null) {
-                //println("Chunk Atlas Found")
-            }
-
-            //
-            val vertexBuffer = MineVKR.CurrentChunk.vCurrentChunk?.getBuffer(renderLayer) ?: null
-            val chunkIndex = MineVKR.vChunkCounter++;
-            val indexOffset = vIndexCounter //; vIndexCounter += (vertexBuffer as IEVBuffer).vertexCount();
-            var binding = vBindingsChunksOpaque[chunkIndex]
-
             // Long Pinus
+            val vertexBuffer = MineVKR.CurrentChunk.vCurrentChunk?.getBuffer(renderLayer) ?: null
             var vertexFormat = MineVKR.CurrentChunk.vVertexFormat
-            if (chunkIndex < vMaxChunkBindings) {
-                if (vertexBuffer != null) { vertexBuffer.bind() }
+            if (indentifier != null && phases != null && MineVKR.vChunkCounter < vMaxChunkBindings) {
+                val chunkIndex = MineVKR.vChunkCounter++;
+                val indexOffset = vIndexCounter //; vIndexCounter += (vertexBuffer as IEVBuffer).vertexCount();
+                var binding = vBindingsChunksOpaque[chunkIndex]
+
+                //
+                vertexBuffer?.bind()
                 if (vertexFormat != null) {
                     for (id in 0 until vertexFormat.elements.size) {
                         var element = vertexFormat.elements[id]
@@ -322,10 +322,9 @@ open class MineVKR : ModInitializer {
                 //println("What is: GL-Buffers[" + vBindingsChunksOpaque[0].bindingBufferGL().toInt() + "] ?") // Only For DEBUG!
                 glUseProgram(GLStuff.vQuadTransformFeedbackProgram[0].toInt())
                 glBindBufferRange(GL_TRANSFORM_FEEDBACK_BUFFER, 0, binding.bindingBufferGL().toInt(), indexOffset * 80L, 80L * (vertexBuffer as IEVBuffer).vertexCount * 6 / 4)
-                //glBindBufferRange(GL_TRANSFORM_FEEDBACK_BUFFER, 0, vGLTestBuffer[0], 0L, 80L*(vertexBuffer as IEVBuffer).vertexCount())
 
                 // Get Transformation Without Camera Transform
-                var transformed = Matrix4f(MineVKR.vMatrix4f).also{it.invert()}.also{it.multiply(matrixStack.peek().model)}
+                var transformed = Matrix4f(MineVKR.Player.vMatrix4f).also{it.invert()}.also{it.multiply(matrixStack.peek().model)}
 
                 // transform feedback required for form Vulkan API generalized buffer (i.e. blizzard tracing)
                 // NO! You can'T to make parallax occlusion mapping here...
@@ -344,8 +343,6 @@ open class MineVKR : ModInitializer {
                 //
                 binding.addRangeInput((MineVKR.CurrentChunk.vVertexFormat?.vertexSize?.toULong() ?: 0UL) / 2U, 0u)
 
-
-
                 //
                 var instanceInfo = JiviX.VsGeometryInstance()
                 instanceInfo.mask = 0xFFU
@@ -355,14 +352,14 @@ open class MineVKR : ModInitializer {
 
                 // required transposed matrix
                 val blockPos = MineVKR.CurrentChunk.vCurrentChunk?.origin ?: null
-                var matrixStack = MatrixStack().also{it.push()}
+                var matrixStack = MatrixStack().also { it.push() }
 
-                //
+                // 
                 if (blockPos != null) { matrixStack.translate(blockPos.x.toDouble() - d, blockPos.y.toDouble() - e, blockPos.z.toDouble() - f) }
 
                 //
-                MineVKR.vNode[0].pushInstance(instanceInfo.also{
-                    var instanceMatrix = Matrix4f(transformed).also{ mt -> mt.multiply(matrixStack.peek().model) }
+                MineVKR.vNode[0].pushInstance(instanceInfo.also {
+                    var instanceMatrix = Matrix4f(transformed).also { mt -> mt.multiply(matrixStack.peek().model) }
 
                     it.transform = (instanceMatrix as IEMatrix4f).toArray()
                 })
@@ -377,30 +374,30 @@ open class MineVKR : ModInitializer {
                 vPreInitialized = true
 
                 //
-                MineVKR.vInstanceHandle = MineVKR.vDriver.createInstance()
-                MineVKR.vInstance = MineVKR.vDriver.instanceClass!!
+                MineVKR.vInstanceHandle = MineVKR.vDriver?.createInstance() ?: 0U
+                MineVKR.vInstance = MineVKR.vDriver?.instanceClass!!
 
                 // TODO: Support Other GPU's
-                MineVKR.vPhysicalDevice = MineVKR.vDriver.physicalDeviceClass!!
-                MineVKR.vPhysicalDeviceHandle = MineVKR.vDriver.physicalDevice
+                MineVKR.vPhysicalDevice = MineVKR.vDriver!!.physicalDeviceClass!!
+                MineVKR.vPhysicalDeviceHandle = MineVKR.vDriver!!.physicalDevice
 
                 //
-                MineVKR.vDevice = MineVKR.vDriver.createDevice(MineVKR.vPhysicalDevice)
-                MineVKR.vDeviceHandle = MineVKR.vDriver.device
+                MineVKR.vDevice = MineVKR.vDriver!!.createDevice(MineVKR.vPhysicalDevice!!)
+                MineVKR.vDeviceHandle = MineVKR.vDriver!!.device
 
                 //
                 println("Initialize Context...")
 
                 //
-                MineVKR.vContext = JiviX.Context(MineVKR.vDriver)
-                MineVKR.vMaterials = JiviX.Material(MineVKR.vContext)
-                MineVKR.vNode = arrayOf(JiviX.Node(MineVKR.vContext)) // TODO: Node Max Instance Count Support
-                MineVKR.vRenderer = JiviX.Renderer(MineVKR.vContext)
+                MineVKR.vContext = JiviX.Context(MineVKR.vDriver!!)
+                MineVKR.vMaterials = JiviX.Material(MineVKR.vContext!!)
+                MineVKR.vNode = arrayOf(JiviX.Node(MineVKR.vContext!!)) // TODO: Node Max Instance Count Support
+                MineVKR.vRenderer = JiviX.Renderer(MineVKR.vContext!!)
                 println("Pre-Initialize Renderer")
 
                 //
-                MineVKR.vRenderer.linkMaterial(MineVKR.vMaterials)
-                MineVKR.vRenderer.linkNode(MineVKR.vNode[0])
+                MineVKR.vRenderer!!.linkMaterial(MineVKR.vMaterials!!)
+                MineVKR.vRenderer!!.linkNode(MineVKR.vNode[0])
                 println("Link Node and Materials...")
             }
         }
@@ -411,13 +408,13 @@ open class MineVKR : ModInitializer {
                 vInitialized = true
 
                 //
-                MineVKR.vContext.initialize(MineVKR.vWidth.toUInt(), MineVKR.vHeight.toUInt())
+                MineVKR.vContext?.initialize(MineVKR.vWindow?.width?.toUInt()?:0U, MineVKR.vWindow?.height?.toUInt()?:0U)
                 println("Initialize Context...")
 
                 //
-                MineVKR.vBindingsChunksOpaque = Array<JiviX.MeshBinding>(vMaxChunkBindings) { _ -> JiviX.MeshBinding(MineVKR.vContext, 2048UL); }
-                MineVKR.vBindingsChunksCutout = Array<JiviX.MeshBinding>(vMaxChunkBindings) { _ -> JiviX.MeshBinding(MineVKR.vContext, 2048UL); }
-                MineVKR.vBindingsChunksTranslucent = Array<JiviX.MeshBinding>(vMaxChunkBindings) { _ -> JiviX.MeshBinding(MineVKR.vContext, 2048UL); }
+                MineVKR.vBindingsChunksOpaque = Array<JiviX.MeshBinding>(vMaxChunkBindings) { _ -> MineVKR.vContext?.let { JiviX.MeshBinding(it, 2048UL) }!!; }
+                MineVKR.vBindingsChunksCutout = Array<JiviX.MeshBinding>(vMaxChunkBindings) { _ -> MineVKR.vContext?.let { JiviX.MeshBinding(it, 2048UL) }!!; }
+                MineVKR.vBindingsChunksTranslucent = Array<JiviX.MeshBinding>(vMaxChunkBindings) { _ -> MineVKR.vContext?.let { JiviX.MeshBinding(it, 2048UL) }!!; }
                 println("Create chunk bindings itself...")
 
                 //
@@ -427,8 +424,8 @@ open class MineVKR : ModInitializer {
                 println("Add chunk bindings into Node...")
 
                 //
-                var vPartsSize = ULongArray(vMaxEntityParts) { _ -> 32UL }
-                MineVKR.vBindingsEntity = Array<JiviX.MeshBinding>(vMaxEntityBindings) { _ -> JiviX.MeshBinding(MineVKR.vContext, 512UL, vPartsSize) }
+                var vPartsSize = ULongArray(vMaxEntityParts) { _ -> 512UL }
+                MineVKR.vBindingsEntity = Array<JiviX.MeshBinding>(vMaxEntityBindings) { _ -> MineVKR.vContext?.let { JiviX.MeshBinding(it, 512UL, vPartsSize) }!! }
                 println("Create entity bindings itself...")
 
                 //
@@ -436,57 +433,71 @@ open class MineVKR : ModInitializer {
                 println("Add entity bindings into Node...")
 
                 //
-                var varyings = arrayOf<CharSequence>("fPosition", "fTexcoord", "fNormal", "fTangent", "fBinormal");
-                GLStuff.vCreateShader(GLStuff.vTransformFeedbackVertexShader, GL_VERTEX_SHADER, "./gl-shaders/tf.vert")
-                GLStuff.vCreateShader(GLStuff.vTransformFeedbackGeometryShader, GL_GEOMETRY_SHADER, "./gl-shaders/tf.geom")
-                println("GL Transform Feedback Shaders Created!")
+                var vTransformFeedbackProgramBuild = true
+                var vQuadTransformFeedbackProgramBuild = true
+                var vShowProgramBuild = true
 
                 //
-                GLStuff.vTransformFeedbackProgram[0] = glCreateProgram().toUInt()
-                var programID = GLStuff.vTransformFeedbackProgram[0].toInt()
-                glTransformFeedbackVaryings(programID, varyings, GL_INTERLEAVED_ATTRIBS)
-                glAttachShader(programID, GLStuff.vTransformFeedbackVertexShader[0].toInt())
-                glAttachShader(programID, GLStuff.vTransformFeedbackGeometryShader[0].toInt())
-                glLinkProgram(programID)
-                var success = intArrayOf(0).also { glGetProgramiv(programID, GL_LINK_STATUS, it) }
-                if (success[0] == 0) { println(glGetProgramInfoLog(programID, 512)); error("LOL") }
-                println("GL Transform Feedback Program Created!")
+                if (vTransformFeedbackProgramBuild) {
+                    GLStuff.vCreateShader(GLStuff.vTransformFeedbackVertexShader, GL_VERTEX_SHADER, "./gl-shaders/tf.vert")
+                    GLStuff.vCreateShader(GLStuff.vTransformFeedbackGeometryShader, GL_GEOMETRY_SHADER, "./gl-shaders/tf.geom")
+                    println("GL Transform Feedback Shaders Created!")
+
+                    //
+                    if (true) {
+                        var varyings = arrayOf<CharSequence>("fPosition", "fTexcoord", "fNormal", "fTangent", "fBinormal");
+                        var programID = GLStuff.vTransformFeedbackProgram.also { it[0] = glCreateProgram().toUInt() }[0].toInt()
+                        glTransformFeedbackVaryings(programID, varyings, GL_INTERLEAVED_ATTRIBS)
+                        glAttachShader(programID, GLStuff.vTransformFeedbackVertexShader[0].toInt())
+                        glAttachShader(programID, GLStuff.vTransformFeedbackGeometryShader[0].toInt())
+                        glLinkProgram(programID)
+                        var success = intArrayOf(0).also { glGetProgramiv(programID, GL_LINK_STATUS, it) }
+                        if (success[0] == 0) { println(glGetProgramInfoLog(programID, 512)); error("LOL") }
+                        println("GL Transform Feedback Program Created!")
+                    }
+                }
 
                 //
-                GLStuff.vCreateShader(GLStuff.vQuadTransformFeedbackVertexShader, GL_VERTEX_SHADER, "./gl-shaders/tf-quad.vert")
-                GLStuff.vCreateShader(GLStuff.vQuadTransformFeedbackGeometryShader, GL_GEOMETRY_SHADER, "./gl-shaders/tf-quad.geom")
-                println("GL Quad Transform Feedback Shaders Created!")
+                if (vQuadTransformFeedbackProgramBuild) {
+                    GLStuff.vCreateShader(GLStuff.vQuadTransformFeedbackVertexShader, GL_VERTEX_SHADER, "./gl-shaders/tf-quad.vert")
+                    GLStuff.vCreateShader(GLStuff.vQuadTransformFeedbackGeometryShader, GL_GEOMETRY_SHADER, "./gl-shaders/tf-quad.geom")
+                    println("GL Quad Transform Feedback Shaders Created!")
+
+                    //
+                    if (true) {
+                        var varyings = arrayOf<CharSequence>("fPosition", "fTexcoord", "fNormal", "fTangent", "fBinormal");
+                        var programID = GLStuff.vQuadTransformFeedbackProgram.also { it[0] = glCreateProgram().toUInt() }[0].toInt()
+                        glTransformFeedbackVaryings(programID, varyings, GL_INTERLEAVED_ATTRIBS)
+                        glAttachShader(programID, GLStuff.vQuadTransformFeedbackVertexShader[0].toInt())
+                        glAttachShader(programID, GLStuff.vQuadTransformFeedbackGeometryShader[0].toInt())
+                        glLinkProgram(programID)
+                        var success = intArrayOf(0).also { glGetProgramiv(programID, GL_LINK_STATUS, it) }
+                        if (success[0] == 0) { println(glGetProgramInfoLog(programID, 512)); error("LOL") }
+                        println("GL Quad Transform Feedback Programs Created!")
+                    }
+                }
 
                 //
-                //var programID = 0; var success = intArrayOf(0); // used only for debug
-                GLStuff.vQuadTransformFeedbackProgram[0] = glCreateProgram().toUInt()
-                programID = GLStuff.vQuadTransformFeedbackProgram[0].toInt()
-                glTransformFeedbackVaryings(programID, varyings, GL_INTERLEAVED_ATTRIBS)
-                glAttachShader(programID, GLStuff.vQuadTransformFeedbackVertexShader[0].toInt())
-                glAttachShader(programID, GLStuff.vQuadTransformFeedbackGeometryShader[0].toInt())
-                glLinkProgram(programID)
-                success = intArrayOf(0).also { glGetProgramiv(programID, GL_LINK_STATUS, it) }
-                if (success[0] == 0) { println(glGetProgramInfoLog(programID, 512)); error("LOL") }
-                println("GL Quad Transform Feedback Programs Created!")
+                if (vShowProgramBuild) {
+                    GLStuff.vCreateShader(GLStuff.vShowVertexShader, GL_VERTEX_SHADER, "./gl-shaders/render.vert")
+                    GLStuff.vCreateShader(GLStuff.vShowFragmentShader, GL_FRAGMENT_SHADER, "./gl-shaders/render.frag")
+                    println("Show Result Shaders Created!")
 
-                //
-                GLStuff.vCreateShader(GLStuff.vShowVertexShader, GL_VERTEX_SHADER, "./gl-shaders/render.vert")
-                GLStuff.vCreateShader(GLStuff.vShowFragmentShader, GL_FRAGMENT_SHADER, "./gl-shaders/render.frag")
-                println("Show Result Shaders Created!")
-
-                //var programID = 0; var success = intArrayOf(0); // used only for debug
-                GLStuff.vShowProgram[0] = glCreateProgram().toUInt()
-                programID = GLStuff.vShowProgram[0].toInt()
-                glAttachShader(programID, GLStuff.vShowVertexShader[0].toInt())
-                glAttachShader(programID, GLStuff.vShowFragmentShader[0].toInt())
-                glLinkProgram(programID)
-                success = intArrayOf(0).also { glGetProgramiv(programID, GL_LINK_STATUS, it) }
-                if (success[0] == 0) { println(glGetProgramInfoLog(programID, 512)); error("LOL") }
-                println("Show Result Program Created!")
+                    //
+                    if (true) {
+                        var programID = GLStuff.vShowProgram.also { it[0] = glCreateProgram().toUInt() }[0].toInt()
+                        glAttachShader(programID, GLStuff.vShowVertexShader[0].toInt())
+                        glAttachShader(programID, GLStuff.vShowFragmentShader[0].toInt())
+                        glLinkProgram(programID)
+                        var success = intArrayOf(0).also { glGetProgramiv(programID, GL_LINK_STATUS, it) }
+                        if (success[0] == 0) { println(glGetProgramInfoLog(programID, 512)); error("LOL") }
+                        println("Show Result Program Created!")
+                    }
+                }
 
                 // For Test ONLY!
-                glGenBuffers(vGLTestBuffer)
-                glBindBuffer(GL_TRANSFORM_FEEDBACK_BUFFER, vGLTestBuffer[0])
+                glGenBuffers(GLStuff.vGLTestBuffer)
+                glBindBuffer(GL_TRANSFORM_FEEDBACK_BUFFER, GLStuff.vGLTestBuffer[0])
                 glBufferStorage(GL_TRANSFORM_FEEDBACK_BUFFER, 80 * 128 * 6, GL_CLIENT_STORAGE_BIT.or(GL_DYNAMIC_STORAGE_BIT))
 
                 // For Save... JavaCPP Pointer For Kotlin (By Address)
