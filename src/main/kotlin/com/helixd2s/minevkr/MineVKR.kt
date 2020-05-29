@@ -13,6 +13,7 @@ import net.minecraft.client.util.Window
 import net.minecraft.client.util.math.MatrixStack
 import net.minecraft.util.Identifier
 import net.minecraft.util.math.BlockPos
+import net.minecraft.util.math.MathHelper
 //import net.minecraft.util.math.MathHelper // BROKEN PACKAGE!
 import net.minecraft.util.math.Matrix4f
 import org.lwjgl.opengl.GL30.glBeginTransformFeedback
@@ -255,23 +256,27 @@ open class MineVKR : ModInitializer {
             var tickDelta = MineVKR.Entity.vTickDelta
             var entity = MineVKR.Entity.vEntity
 
-            // BROKEN!
-            //val d = MathHelper.lerp(tickDelta as Double, entity.lastRenderX, entity.getX())
-            //val e = MathHelper.lerp(tickDelta as Double, entity.lastRenderY, entity.getY())
-            //val f = MathHelper.lerp(tickDelta as Double, entity.lastRenderZ, entity.getZ())
-            //val g = MathHelper.lerp(tickDelta, entity.prevYaw, entity.yaw).toFloat()
+            //
+            var cameraPos = MineVKR.Entity.vCameraXYZ
+            var entityPos = doubleArrayOf(0.0,0.0,0.0); var g = 0.0F
+            if (entity != null) {
+                entityPos[0] = MathHelper.lerp(tickDelta.toDouble(), entity.lastRenderX, entity.x)
+                entityPos[1] = MathHelper.lerp(tickDelta.toDouble(), entity.lastRenderY, entity.y)
+                entityPos[2] = MathHelper.lerp(tickDelta.toDouble(), entity.lastRenderZ, entity.z)
+                g = MathHelper.lerp(tickDelta, entity.prevYaw, entity.yaw)
+            }
 
             // Get Transformation Without Camera Transform
             if (MineVKR.vMatrix4f != null) {
                 var matrixStack = MineVKR.Entity.vMatrices
-                var transformed = Matrix4f(MineVKR.vMatrix4f).also { it.invert() }.also {
-                    if (matrixStack != null) {
-                        it.multiply(matrixStack.peek().model)
-                    }
+                var transformed = Matrix4f(MineVKR.vMatrix4f).also{it.invert()}.also{
+                    if (matrixStack != null) { it.multiply(matrixStack.peek().model) }
                 }
 
 
             }
+
+
         }
 
         //
