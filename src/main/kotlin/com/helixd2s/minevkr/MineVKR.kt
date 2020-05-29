@@ -299,11 +299,14 @@ open class MineVKR : ModInitializer {
                 }
 
                 if (vAddingGeometry) { //
-                    //var instanceMatrix = Matrix4f(MineVKR.Player.vMatrix4f).also{ it.invert() }.also { mt -> mt.multiply(matrixStack.peek().model) }
-                      var instanceMatrix = Matrix4f.translate(
-                          (cameraPos[0]-entityPos[0]).toFloat(),
-                          (cameraPos[1]-entityPos[1]).toFloat(),
-                          (cameraPos[2]-entityPos[2]).toFloat()).also { mt -> mt.multiply(Matrix4f(MineVKR.Player.vMatrix4f).also{ it.invert() }) }
+                    //var instanceMatrix = Matrix4f(MineVKR.Player.vMatrix4f).also{ it.invert() }.also { mt -> mt.multiply(Matrix4f.translate(
+                    //    (cameraPos[0]-entityPos[0]).toFloat(),
+                    //    (cameraPos[1]-entityPos[1]).toFloat(),
+                    //    (cameraPos[2]-entityPos[2]).toFloat())) }
+                    var instanceMatrix = Matrix4f.translate(
+                      (cameraPos[0]-entityPos[0]).toFloat(),
+                      (cameraPos[1]-entityPos[1]).toFloat(),
+                      (cameraPos[2]-entityPos[2]).toFloat()).also { mt -> mt.multiply(Matrix4f(MineVKR.Player.vMatrix4f).also{ it.invert() }) }
 
                     //println("What is: GL-Buffers[" + vBindingsChunksOpaque[0].bindingBufferGL().toInt() + "] ?") // Only For DEBUG!
                     glUseProgram(GLStuff.vQuadTransformFeedbackProgram[0].toInt())
