@@ -22,7 +22,6 @@ Planned REAL ray-tracing for Minecraft 1.16 and higher...
 
 ```MD
 - RHI             : Yes, Vulkan-HPP
-- Support OS      : Windows 10 (2004 or Newer)
 - Support HW      : RTX 2070 or familiar...
 - Extensions      : WIP
 - Project Type    : Experimental, Personal
@@ -30,7 +29,7 @@ Planned REAL ray-tracing for Minecraft 1.16 and higher...
 - Ray-Tracing     : Planned
 - Path-Tracing    : For Diffuse Only, (almost) noiseless
 - Role/Target     : Simplify Vulkan API, alternate of Vookoo...
-- License         : BSD-3 (Currently)
+- License         : Apache-2.0 (Currently)
 - Graphical API   : Vulkan, DirectX 12 (Vulkan-HPP over D3D12)
 - DirectX Support : Planned
 - Target Games    : Minecraft Java Edition
@@ -41,7 +40,7 @@ Planned REAL ray-tracing for Minecraft 1.16 and higher...
 - General To Do   : Rewrite Vulkan and D3D12 library set...
 - Testing On GPU  : NVIDIA GeForce RTX 2070 (Gigabyte)
 
-Date:[21.02.2020]:[helix.d@IMN]
+Date:[22.06.2020]:[helix.d@IMN]
 ```
 
 
