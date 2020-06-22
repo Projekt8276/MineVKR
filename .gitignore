@@ -128,6 +128,7 @@ Cargo.lock
 *.exe
 *.out
 *.app
+*.pdb
 
 # TOO BIG!
 *.pdb
