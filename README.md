@@ -8,6 +8,16 @@
 Planned REAL ray-tracing for Minecraft 1.16 and higher...
 
 
+### Developers instructions 
+
+TODO...
+
+
+### Install instructions
+
+Only after first beta... 
+
+
 ## Additional Links
 
 - [ValerA](https://github.com/hyperearth/ValerA), based-on project
